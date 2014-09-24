@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -40,6 +41,7 @@ public class Handler extends AbstractHandler {
       Class<?> controllerClass = Class.forName(className);
       Method method = controllerClass.getMethod(baseRequest.getMethod().toLowerCase());
       Object controller = controllerClass.newInstance();
+      bindRequest(controller, request);
       method.invoke(controller);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
@@ -69,11 +71,23 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  public String getTemplateName(String path) {
+  void bindRequest(Object controller, HttpServletRequest request) {
+    try {
+      for (Field field : controller.getClass().getFields()) {
+        if (!field.getType().equals(HttpServletRequest.class)) continue;
+        field.set(controller, request);
+        break;
+      }
+    }
+    catch (IllegalAccessException ignored) {
+    }
+  }
+
+  String getTemplateName(String path) {
     return path.substring(1) + ".ftl";
   }
 
-  public String getClassName(String path) {
+  String getClassName(String path) {
     path = path.substring(1);
     int i = path.lastIndexOf('/');
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";

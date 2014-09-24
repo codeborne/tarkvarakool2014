@@ -4,8 +4,12 @@ import org.eclipse.jetty.server.Request;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class HandlerTest {
 
@@ -40,5 +44,33 @@ public class HandlerTest {
     assertThat(handler.getTemplateName("/foo"), is("foo.ftl"));
     assertThat(handler.getTemplateName("/foo-bar-baz"), is("foo-bar-baz.ftl"));
     assertThat(handler.getTemplateName("/foo/bar/baz"), is("foo/bar/baz.ftl"));
+  }
+
+  @Test
+  public void bindRequestWithoutRequestField() throws Exception {
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    handler.bindRequest(new Object(), request);
+  }
+
+  @Test
+  public void bindRequestWithRequestField() throws Exception {
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    class Foo {
+      public HttpServletRequest request;
+    }
+    Foo foo = new Foo();
+    handler.bindRequest(foo, request);
+    assertThat(foo.request, sameInstance(request));
+  }
+
+  @Test
+  public void bindRequestWithRequestFieldWithDifferentName() throws Exception {
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    class Foo {
+      public HttpServletRequest httpRequest;
+    }
+    Foo foo = new Foo();
+    handler.bindRequest(foo, request);
+    assertThat(foo.httpRequest, sameInstance(request));
   }
 }

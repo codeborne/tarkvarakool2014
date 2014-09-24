@@ -1,4 +1,5 @@
-Names:
-<#list names as name>
-  ${name}
-</#list>
+<html>
+<body>
+<h1>Hello world!</h1>
+</body>
+</html>
