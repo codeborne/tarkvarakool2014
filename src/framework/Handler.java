@@ -38,16 +38,16 @@ public class Handler extends AbstractHandler {
     long t = -System.currentTimeMillis();
     try {
       Object controller = createController(target);
+      baseRequest.setHandled(true);
       bindRequest(controller, request);
       invokeController(controller, request);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
       response.setContentType("text/html");
       template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
-      baseRequest.setHandled(true);
     }
     catch (ClassNotFoundException ignored) {
-      redirectIfPossible(target, response);
+      redirectIfPossible(target, baseRequest, response);
     }
     catch (InstantiationException|IllegalAccessException|NoSuchMethodException e) {
       LOG.warn("Failed to create controller: " + e);
@@ -92,19 +92,20 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  void redirectIfPossible(String target, HttpServletResponse response) throws IOException {
+  void redirectIfPossible(String target, Request baseRequest, HttpServletResponse response) throws IOException {
     if (target.endsWith("/")) {
-      if (!redirectIfExists(target + "home", response))
-        redirectIfExists(target.substring(0, target.length() - 1), response);
+      if (!redirectIfExists(target + "home", baseRequest, response))
+        redirectIfExists(target.substring(0, target.length() - 1), baseRequest, response);
     }
     else
-      redirectIfExists(target + "/home", response);
+      redirectIfExists(target + "/home", baseRequest, response);
   }
 
-  private boolean redirectIfExists(String withHomeSuffix, HttpServletResponse response) throws IOException {
+  private boolean redirectIfExists(String withHomeSuffix, Request baseRequest, HttpServletResponse response) throws IOException {
     try {
       Class.forName(getClassName(withHomeSuffix));
       response.sendRedirect(withHomeSuffix);
+      baseRequest.setHandled(true);
       return true;
     }
     catch (ClassNotFoundException e) {

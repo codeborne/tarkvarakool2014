@@ -85,7 +85,7 @@ public class HandlerTest {
   public void redirectIfPossibleTriesHomeFromRoot() throws Exception {
     doReturn("java.lang.Object").when(handler).getClassName("/home");
 
-    handler.redirectIfPossible("/", response);
+    handler.redirectIfPossible("/", baseRequest, response);
 
     verify(response).sendRedirect("/home");
   }
@@ -94,7 +94,7 @@ public class HandlerTest {
   public void redirectIfPossibleTriesHomeOnTrailingSlash() throws Exception {
     doReturn("java.lang.Object").when(handler).getClassName("/bar/home");
 
-    handler.redirectIfPossible("/bar/", response);
+    handler.redirectIfPossible("/bar/", baseRequest, response);
     verify(response).sendRedirect("/bar/home");
   }
 
@@ -102,7 +102,7 @@ public class HandlerTest {
   public void redirectIfPossibleTriesWithoutTrailingSlash() throws Exception {
     doReturn("java.lang.Object").when(handler).getClassName("/foo");
 
-    handler.redirectIfPossible("/foo/", response);
+    handler.redirectIfPossible("/foo/", baseRequest, response);
 
     verify(response).sendRedirect("/foo");
   }
@@ -111,7 +111,7 @@ public class HandlerTest {
   public void redirectIfPossibleTriesWithTrailingSlashAndHome() throws Exception {
     doReturn("java.lang.Object").when(handler).getClassName("/foo/home");
 
-    handler.redirectIfPossible("/foo", response);
+    handler.redirectIfPossible("/foo", baseRequest, response);
 
     verify(response).sendRedirect("/foo/home");
   }
@@ -119,7 +119,7 @@ public class HandlerTest {
   @Test
   public void redirectIfPossible() throws Exception {
 
-    handler.redirectIfPossible("/foo", response);
+    handler.redirectIfPossible("/foo", baseRequest, response);
 
     verifyNoMoreInteractions(response);
   }
