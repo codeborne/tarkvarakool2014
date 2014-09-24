@@ -143,5 +143,6 @@ public class Handler extends AbstractHandler {
     freemarker.setDefaultEncoding("UTF-8");
     freemarker.setTemplateExceptionHandler(RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
+    freemarker.addAutoInclude("decorator.ftl");
   }
 }
