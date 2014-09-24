@@ -2,6 +2,8 @@ package framework;
 
 import freemarker.template.*;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 
@@ -22,6 +24,8 @@ import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 
 public class Handler extends AbstractHandler {
 
+  private final static Logger LOG = LogManager.getLogger();
+
   private Configuration freemarker = new Configuration();
 
   public Handler() throws IOException {
@@ -31,6 +35,7 @@ public class Handler extends AbstractHandler {
   @Override
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     try {
+      long t = -System.currentTimeMillis();
       String className = getClassName(target);
       Class<?> controllerClass = Class.forName(className);
       Method method = controllerClass.getMethod(baseRequest.getMethod().toLowerCase());
@@ -41,23 +46,25 @@ public class Handler extends AbstractHandler {
       response.setContentType("text/html");
       template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
       baseRequest.setHandled(true);
+      t += System.currentTimeMillis();
+      LOG.info(target + " " + t + " ms");
     }
     catch (ClassNotFoundException ignored) {
     }
     catch (InstantiationException|IllegalAccessException|NoSuchMethodException e) {
-      System.err.println("Failed to create controller: " + e);
+      LOG.warn("Failed to create controller: " + e);
       response.sendError(SC_INTERNAL_SERVER_ERROR);
     }
     catch (InvocationTargetException e) {
-      System.err.println("Controller failure: " + e.getCause());
+      LOG.warn("Controller failure: " + e.getCause());
       response.sendError(SC_INTERNAL_SERVER_ERROR);
     }
     catch (FileNotFoundException e) {
-      System.err.println(e.toString());
+      LOG.warn(e.toString());
       response.sendError(SC_INTERNAL_SERVER_ERROR);
     }
     catch (TemplateException e) {
-      System.err.println("Template failure: " + e);
+      LOG.warn("Template failure: " + e);
       response.sendError(SC_INTERNAL_SERVER_ERROR);
     }
   }
