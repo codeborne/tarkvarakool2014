@@ -69,7 +69,7 @@ public class Handler extends AbstractHandler {
     }
     finally {
       t += System.currentTimeMillis();
-      LOG.info(target + " " + t + " ms");
+      LOG.info(baseRequest.getMethod() + " " + target + " " + t + " ms");
     }
   }
 
