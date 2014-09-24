@@ -8,6 +8,5 @@ guice service injection
 vähem urli maagiat (hiljem saab lisada)
 
 security lisada CSRF, XSS
-freemarker html escaping?
 
 apache mod_security?

@@ -1,6 +1,8 @@
 package framework;
 
+import freemarker.cache.FileTemplateLoader;
 import freemarker.template.*;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,10 +12,7 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -139,11 +138,18 @@ public class Handler extends AbstractHandler {
   }
 
   private void initializeFreemarker() throws IOException {
-    freemarker.setDirectoryForTemplateLoading(new File("templates"));
     freemarker.setObjectWrapper(new DefaultObjectWrapper());
     freemarker.setDefaultEncoding("UTF-8");
     freemarker.setTemplateExceptionHandler(RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
+    freemarker.setTemplateLoader(new FileTemplateLoader(new File("templates")) {
+      @Override public Reader getReader(Object templateSource, String encoding) throws IOException {
+        Reader reader = super.getReader(templateSource, encoding);
+        String template = IOUtils.toString(reader);
+        reader.close();
+        return new StringReader("<#escape value as value?html>" + template + "</#escape>");
+      }
+    });
     freemarker.addAutoInclude("decorator.ftl");
   }
 }
