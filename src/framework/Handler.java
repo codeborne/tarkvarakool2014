@@ -38,20 +38,20 @@ public class Handler extends AbstractHandler {
     long t = -System.currentTimeMillis();
     try {
       Object controller = createController(target);
-      baseRequest.setHandled(true);
       bindRequest(controller, request);
-      invokeController(controller, request);
+      invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
       response.setContentType("text/html");
       template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
     }
-    catch (ClassNotFoundException ignored) {
+    catch (ClassNotFoundException|NoSuchMethodException ignored) {
       redirectIfPossible(target, baseRequest, response);
     }
-    catch (InstantiationException|IllegalAccessException|NoSuchMethodException e) {
+    catch (InstantiationException|IllegalAccessException e) {
       LOG.warn("Failed to create controller: " + e);
       response.sendError(SC_INTERNAL_SERVER_ERROR);
+      baseRequest.setHandled(true);
     }
     catch (InvocationTargetException e) {
       handleException(e, response);
@@ -70,8 +70,9 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  void invokeController(Object controller, HttpServletRequest request) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    Method method = controller.getClass().getMethod(request.getMethod().toLowerCase());
+  void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
+    baseRequest.setHandled(true);
     method.invoke(controller);
   }
 

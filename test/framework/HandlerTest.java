@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 public class HandlerTest {
 
   private Handler handler;
-  Request baseRequest = new Request(null, null);
+  Request baseRequest = mock(Request.class);
   private HttpServletRequest request = mock(HttpServletRequest.class);
   private HttpServletResponse response = mock(HttpServletResponse.class);
 
@@ -144,8 +144,8 @@ public class HandlerTest {
   public void invokeController() throws Exception {
     class Controller { public void get() {} }
     Controller controller = spy(new Controller());
-    when(request.getMethod()).thenReturn("GET");
-    handler.invokeController(controller, request);
+    when(baseRequest.getMethod()).thenReturn("GET");
+    handler.invokeController(controller, baseRequest);
     verify(controller).get();
   }
 
