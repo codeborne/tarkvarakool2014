@@ -2,7 +2,7 @@ package controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Index {
+public class Home {
 
   public HttpServletRequest request;
 

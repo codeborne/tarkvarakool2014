@@ -52,6 +52,7 @@ public class Handler extends AbstractHandler {
       LOG.info(target + " " + t + " ms");
     }
     catch (ClassNotFoundException ignored) {
+      redirectIfPossible(target, response);
     }
     catch (InstantiationException|IllegalAccessException|NoSuchMethodException e) {
       LOG.warn("Failed to create controller: " + e);
@@ -71,6 +72,26 @@ public class Handler extends AbstractHandler {
     }
   }
 
+  void redirectIfPossible(String target, HttpServletResponse response) throws IOException {
+    if (target.endsWith("/")) {
+      if (!redirectIfExists(target + "home", response))
+        redirectIfExists(target.substring(0, target.length() - 1), response);
+    }
+    else
+      redirectIfExists(target + "/home", response);
+  }
+
+  private boolean redirectIfExists(String withHomeSuffix, HttpServletResponse response) throws IOException {
+    try {
+      Class.forName(getClassName(withHomeSuffix));
+      response.sendRedirect(withHomeSuffix);
+      return true;
+    }
+    catch (ClassNotFoundException e) {
+      return false;
+    }
+  }
+
   void bindRequest(Object controller, HttpServletRequest request) {
     try {
       for (Field field : controller.getClass().getFields()) {
@@ -84,9 +105,7 @@ public class Handler extends AbstractHandler {
   }
 
   String getTemplateName(String path) {
-    path = path.substring(1);
-    if (path.length() == 0 || path.endsWith("/")) path += "index";
-    return path + ".ftl";
+    return path.substring(1) + ".ftl";
   }
 
   String getClassName(String path) {
@@ -94,7 +113,6 @@ public class Handler extends AbstractHandler {
     int i = path.lastIndexOf('/');
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";
     path = path.substring(i + 1);
-    if (path.length() == 0) path = "Index";
     return "controllers." + packagePrefix + asList(path.split("-")).stream().map(StringUtils::capitalize).collect(joining());
   }
 
