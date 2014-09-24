@@ -37,12 +37,9 @@ public class Handler extends AbstractHandler {
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     long t = -System.currentTimeMillis();
     try {
-      String className = getClassName(target);
-      Class<?> controllerClass = Class.forName(className);
-      Method method = controllerClass.getMethod(baseRequest.getMethod().toLowerCase());
-      Object controller = controllerClass.newInstance();
+      Object controller = createController(target);
       bindRequest(controller, request);
-      method.invoke(controller);
+      invokeController(controller, request);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
       response.setContentType("text/html");
@@ -69,8 +66,19 @@ public class Handler extends AbstractHandler {
     }
     finally {
       t += System.currentTimeMillis();
-      LOG.info(baseRequest.getMethod() + " " + target + " " + t + " ms");
+      LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
+  }
+
+  void invokeController(Object controller, HttpServletRequest request) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    Method method = controller.getClass().getMethod(request.getMethod().toLowerCase());
+    method.invoke(controller);
+  }
+
+  Object createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    String className = getClassName(target);
+    Class controllerClass = Class.forName(className);
+    return controllerClass.newInstance();
   }
 
   void handleException(InvocationTargetException exception, HttpServletResponse response) throws IOException {

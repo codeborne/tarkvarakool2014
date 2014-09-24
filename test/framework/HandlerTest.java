@@ -1,5 +1,6 @@
 package framework;
 
+import controllers.MockController;
 import org.eclipse.jetty.server.Request;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
 
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -18,6 +20,8 @@ import static org.mockito.Mockito.*;
 public class HandlerTest {
 
   private Handler handler;
+  Request baseRequest = new Request(null, null);
+  private HttpServletRequest request = mock(HttpServletRequest.class);
   private HttpServletResponse response = mock(HttpServletResponse.class);
 
   @Before
@@ -39,8 +43,7 @@ public class HandlerTest {
 
   @Test
   public void handleWithUnknownUrl() throws Exception {
-    Request baseRequest = new Request(null, null);
-    handler.handle("/foo/bar", baseRequest, null, null);
+    handler.handle("/foo/bar", baseRequest, request, response);
     assertThat(baseRequest.isHandled(), is(false));
   }
 
@@ -53,7 +56,6 @@ public class HandlerTest {
 
   @Test
   public void bindRequestWithoutRequestField() throws Exception {
-    HttpServletRequest request = mock(HttpServletRequest.class);
     handler.bindRequest(new Object(), request);
   }
 
@@ -136,5 +138,20 @@ public class HandlerTest {
 
     verify(response).sendError(SC_INTERNAL_SERVER_ERROR);
     verifyNoMoreInteractions(response);
+  }
+
+  @Test
+  public void invokeController() throws Exception {
+    class Controller { public void get() {} }
+    Controller controller = spy(new Controller());
+    when(request.getMethod()).thenReturn("GET");
+    handler.invokeController(controller, request);
+    verify(controller).get();
+  }
+
+  @Test
+  public void createController() throws Exception {
+    Object controller = handler.createController("/mock-controller");
+    assertThat(controller, instanceOf(MockController.class));
   }
 }
