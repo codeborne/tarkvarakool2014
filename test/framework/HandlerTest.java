@@ -7,6 +7,9 @@ import org.junit.Test;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.lang.reflect.InvocationTargetException;
+
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -116,6 +119,22 @@ public class HandlerTest {
 
     handler.redirectIfPossible("/foo", response);
 
+    verifyNoMoreInteractions(response);
+  }
+
+  @Test
+  public void handleExceptionWithRedirect() throws Exception {
+    handler.handleException(new InvocationTargetException(new Redirect("/another/url")), response);
+
+    verify(response).sendRedirect("/another/url");
+    verifyNoMoreInteractions(response);
+  }
+
+  @Test
+  public void handleException() throws Exception {
+    handler.handleException(new InvocationTargetException(new RuntimeException()), response);
+
+    verify(response).sendError(SC_INTERNAL_SERVER_ERROR);
     verifyNoMoreInteractions(response);
   }
 }

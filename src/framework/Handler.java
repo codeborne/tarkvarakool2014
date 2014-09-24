@@ -35,8 +35,8 @@ public class Handler extends AbstractHandler {
 
   @Override
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    long t = -System.currentTimeMillis();
     try {
-      long t = -System.currentTimeMillis();
       String className = getClassName(target);
       Class<?> controllerClass = Class.forName(className);
       Method method = controllerClass.getMethod(baseRequest.getMethod().toLowerCase());
@@ -48,8 +48,6 @@ public class Handler extends AbstractHandler {
       response.setContentType("text/html");
       template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
       baseRequest.setHandled(true);
-      t += System.currentTimeMillis();
-      LOG.info(target + " " + t + " ms");
     }
     catch (ClassNotFoundException ignored) {
       redirectIfPossible(target, response);
@@ -59,8 +57,7 @@ public class Handler extends AbstractHandler {
       response.sendError(SC_INTERNAL_SERVER_ERROR);
     }
     catch (InvocationTargetException e) {
-      LOG.warn("Controller failure: " + e.getCause());
-      response.sendError(SC_INTERNAL_SERVER_ERROR);
+      handleException(e, response);
     }
     catch (FileNotFoundException e) {
       LOG.warn(e.toString());
@@ -68,6 +65,21 @@ public class Handler extends AbstractHandler {
     }
     catch (TemplateException e) {
       LOG.warn("Template failure: " + e);
+      response.sendError(SC_INTERNAL_SERVER_ERROR);
+    }
+    finally {
+      t += System.currentTimeMillis();
+      LOG.info(target + " " + t + " ms");
+    }
+  }
+
+  void handleException(InvocationTargetException exception, HttpServletResponse response) throws IOException {
+    Throwable cause = exception.getCause();
+    if (cause instanceof Redirect) {
+      response.sendRedirect(cause.getMessage());
+    }
+    else {
+      LOG.warn("Controller failure: " + cause);
       response.sendError(SC_INTERNAL_SERVER_ERROR);
     }
   }
