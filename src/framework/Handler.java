@@ -84,7 +84,9 @@ public class Handler extends AbstractHandler {
   }
 
   String getTemplateName(String path) {
-    return path.substring(1) + ".ftl";
+    path = path.substring(1);
+    if (path.length() == 0 || path.endsWith("/")) path += "index";
+    return path + ".ftl";
   }
 
   String getClassName(String path) {
@@ -92,6 +94,7 @@ public class Handler extends AbstractHandler {
     int i = path.lastIndexOf('/');
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";
     path = path.substring(i + 1);
+    if (path.length() == 0) path = "Index";
     return "controllers." + packagePrefix + asList(path.split("-")).stream().map(StringUtils::capitalize).collect(joining());
   }
 

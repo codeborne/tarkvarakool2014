@@ -33,6 +33,12 @@ public class HandlerTest {
   }
 
   @Test
+  public void classNameWithEmptyPath() throws Exception {
+    assertThat(handler.getClassName("/"), is("controllers.Index"));
+    assertThat(handler.getClassName("/foo/bar/"), is("controllers.foo.bar.Index"));
+  }
+
+  @Test
   public void handleWithUnknownUrl() throws Exception {
     Request baseRequest = new Request(null, null);
     handler.handle("/foo/bar", baseRequest, null, null);
@@ -44,6 +50,8 @@ public class HandlerTest {
     assertThat(handler.getTemplateName("/foo"), is("foo.ftl"));
     assertThat(handler.getTemplateName("/foo-bar-baz"), is("foo-bar-baz.ftl"));
     assertThat(handler.getTemplateName("/foo/bar/baz"), is("foo/bar/baz.ftl"));
+    assertThat(handler.getTemplateName("/"), is("index.ftl"));
+    assertThat(handler.getTemplateName("/bar/"), is("bar/index.ftl"));
   }
 
   @Test
