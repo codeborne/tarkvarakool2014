@@ -2,9 +2,7 @@ package controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Home {
-
-  public HttpServletRequest request;
+public class Home extends Controller {
 
   public void get() {
   }

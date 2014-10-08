@@ -1,6 +1,8 @@
 package controllers.admin;
 
-public class Home {
+import controllers.Controller;
+
+public class Home extends Controller {
   public void get() {
   }
 }

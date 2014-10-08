@@ -4,7 +4,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class Hello {
+public class Hello extends Controller {
 
   public void get() {
   }
