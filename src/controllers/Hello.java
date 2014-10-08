@@ -10,6 +10,6 @@ public class Hello {
   }
 
   public List<String> getNames() {
-    return asList("<b>Foo</b>", "Bar", "Baz");
+    return asList("Foo", "Bar", "Baz");
   }
 }
