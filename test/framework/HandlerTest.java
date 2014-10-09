@@ -56,7 +56,7 @@ public class HandlerTest {
 
   @Test
   public void bindRequestWithoutRequestField() throws Exception {
-    handler.bindRequest(new Object(), request);
+    handler.bindFrameworkFields(new Object(), request);
   }
 
   @Test
@@ -66,7 +66,7 @@ public class HandlerTest {
       public HttpServletRequest request;
     }
     Foo foo = new Foo();
-    handler.bindRequest(foo, request);
+    handler.bindFrameworkFields(foo, request);
     assertThat(foo.request, sameInstance(request));
   }
 
@@ -77,7 +77,7 @@ public class HandlerTest {
       public HttpServletRequest httpRequest;
     }
     Foo foo = new Foo();
-    handler.bindRequest(foo, request);
+    handler.bindFrameworkFields(foo, request);
     assertThat(foo.httpRequest, sameInstance(request));
   }
 

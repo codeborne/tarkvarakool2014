@@ -1,5 +1,7 @@
 package controllers;
 
+import framework.Controller;
+
 import java.util.List;
 
 import static java.util.Arrays.asList;

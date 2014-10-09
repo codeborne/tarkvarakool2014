@@ -1,6 +1,6 @@
 package controllers;
 
-import javax.servlet.http.HttpServletRequest;
+import framework.Controller;
 
 public class Home extends Controller {
 

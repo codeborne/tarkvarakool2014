@@ -1,9 +1,11 @@
-package controllers;
+package framework;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public abstract class Controller {
-  public HttpServletRequest request;
+  protected HttpServletRequest request;
+  protected HttpServletResponse response;
 
   public void get() {
   }

@@ -1,5 +1,6 @@
 package controllers;
 
+import framework.Controller;
 import framework.Redirect;
 
 public class Submit extends Controller {
