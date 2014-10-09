@@ -4,14 +4,15 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static java.util.Collections.singletonMap;
+import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class BinderTest {
-  Binder binder = new Binder();
+  Binder binder = new Binder("dd.MM.yyyy");
 
   @Test
   public void bindRequestParametersToFields() throws Exception {
@@ -63,7 +64,18 @@ public class BinderTest {
     assertEquals(date("11.07.2013"), controller.date);
   }
 
+  @Test
+  public void bindErrorsAreReported() throws Exception {
+    class Foo extends Controller {
+      private Integer number;
+    }
+    Foo controller = new Foo();
+    binder.bindRequestParameters(controller, singletonMap("number", new String[]{"zzz"}));
+    assertNull(controller.number);
+    assertEquals(NumberFormatException.class, controller.errors.get("number").getClass());
+  }
+
   public static Date date(String ddMMyyyy) throws ParseException {
-    return new SimpleDateFormat("dd.MM.yyyy").parse(ddMMyyyy);
+    return parseDate(ddMMyyyy, "dd.MM.yyyy");
   }
 }

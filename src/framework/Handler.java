@@ -27,7 +27,7 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
-  private Binder binder = new Binder();
+  private Binder binder = new Binder("dd.MM.yyyy");
 
   private boolean devMode = true;
 
