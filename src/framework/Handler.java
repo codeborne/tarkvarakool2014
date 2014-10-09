@@ -1,6 +1,5 @@
 package framework;
 
-import controllers.Controller;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.template.*;
 import freemarker.template.Configuration;
@@ -11,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -169,6 +167,7 @@ public class Handler extends AbstractHandler {
   }
 
   private void initializeHibernate() {
+    //noinspection deprecation
     hibernateSessionFactory = new org.hibernate.cfg.Configuration().buildSessionFactory();
   }
 }
