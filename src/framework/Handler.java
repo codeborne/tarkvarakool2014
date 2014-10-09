@@ -16,6 +16,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
 import static java.util.Arrays.asList;
@@ -143,7 +144,9 @@ public class Handler extends AbstractHandler {
   }
 
   private void initializeFreemarker() throws IOException {
-    freemarker.setObjectWrapper(new DefaultObjectWrapper());
+    DefaultObjectWrapper wrapper = (DefaultObjectWrapper) freemarker.getObjectWrapper();
+    wrapper.setExposeFields(true);
+    wrapper.setNullModel(TemplateScalarModel.EMPTY_STRING);
     freemarker.setDefaultEncoding("UTF-8");
     freemarker.setTemplateExceptionHandler(RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
