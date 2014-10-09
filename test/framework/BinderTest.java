@@ -3,6 +3,9 @@ package framework;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static java.util.Collections.singletonMap;
 import static org.junit.Assert.assertEquals;
@@ -48,5 +51,19 @@ public class BinderTest {
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("amount", new String[]{"123.45"}));
     assertEquals(new BigDecimal("123.45"), controller.amount);
+  }
+
+  @Test
+  public void bindDate() throws Exception {
+    class Foo extends Controller {
+      private Date date;
+    }
+    Foo controller = new Foo();
+    binder.bindRequestParameters(controller, singletonMap("date", new String[]{"11.07.2013"}));
+    assertEquals(date("11.07.2013"), controller.date);
+  }
+
+  public static Date date(String ddMMyyyy) throws ParseException {
+    return new SimpleDateFormat("dd.MM.yyyy").parse(ddMMyyyy);
   }
 }
