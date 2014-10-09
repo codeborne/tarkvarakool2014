@@ -18,6 +18,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
+import static freemarker.template.TemplateExceptionHandler.DEBUG_HANDLER;
+import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
@@ -144,7 +146,7 @@ public class Handler extends AbstractHandler {
     DefaultObjectWrapper wrapper = (DefaultObjectWrapper) freemarker.getObjectWrapper();
     wrapper.setExposeFields(true);
     freemarker.setDefaultEncoding("UTF-8");
-    freemarker.setTemplateExceptionHandler(RETHROW_HANDLER);
+    freemarker.setTemplateExceptionHandler(devMode ? HTML_DEBUG_HANDLER : RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
     freemarker.setTemplateLoader(new FileTemplateLoader(new File("views")) {
       @Override public Reader getReader(Object templateSource, String encoding) throws IOException {
