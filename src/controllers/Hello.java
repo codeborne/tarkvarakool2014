@@ -11,7 +11,6 @@ public class Hello extends Controller {
 
   @Override
   public void post() {
-    name = request.getParameter("name");
   }
 
   public List<String> getNames() {
