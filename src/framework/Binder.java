@@ -4,10 +4,7 @@ import org.apache.commons.lang3.ClassUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.time.DateUtils.parseDate;
@@ -37,13 +34,15 @@ public class Binder {
       Class<?> type = field.getType();
       Object value;
 
-      if (String.class.isAssignableFrom(type))
+      if (String.class == type)
         value = values[0];
-      else if (String[].class.isAssignableFrom(type))
+      else if (String[].class == type)
         value = values;
-      else if (List.class.isAssignableFrom(type) || Collection.class.isAssignableFrom(type) || Iterable.class.isAssignableFrom(type))
+      else if (List.class == type || Collection.class == type || Iterable.class == type)
         value = asList(values);
-      else if (Date.class.isAssignableFrom(type))
+      else if (Set.class == type)
+        value = new LinkedHashSet<>(asList(values));
+      else if (Date.class == type)
         value = parseDate(values[0], dateFormat, "yyyy-MM-dd");
       else {
         if (type.isPrimitive()) type = ClassUtils.primitiveToWrapper(type);

@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
@@ -85,6 +87,17 @@ public class BinderTest {
     String[] value = {"a", "b", "c"};
     binder.bindRequestParameters(controller, singletonMap("list", value));
     assertEquals(asList(value), controller.list);
+  }
+
+  @Test
+  public void bindSet() throws Exception {
+    class Foo extends Controller {
+      private Set<String> set;
+    }
+    Foo controller = new Foo();
+    String[] value = {"a", "b", "c"};
+    binder.bindRequestParameters(controller, singletonMap("set", value));
+    assertEquals(new LinkedHashSet<>(asList(value)), controller.set);
   }
 
   @Test
