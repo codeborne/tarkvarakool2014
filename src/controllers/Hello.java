@@ -5,21 +5,14 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class Hello extends Controller {
+  public String name;
 
-    public void get() {
-        System.out.println("Anna /hello");
-    }
+  @Override
+  public void post() {
+    name = request.getParameter("name");
+  }
 
-    public void post() {
-        System.out.println("Vota hello");
-        System.out.println(request.getParameter("name"));
-    }
-
-    public String getMegaName() {
-        return request.getParameter("name");
-    }
-
-    public List<String> getNames() {
+  public List<String> getNames() {
     return asList("Foo", "Bar", "Baz");
   }
 }
