@@ -10,6 +10,19 @@
     </style>
 </head>
 <body>
+
+<form method="post">
+    <input type="text" name="name">
+    <button>Submit</button>
+</form>
+
+<#if name??>Tere, ${name}</#if>
+
+
+
+
+
+
 <div id="main">
 
 <h1>Hello world!</h1>
