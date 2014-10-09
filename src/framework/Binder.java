@@ -5,6 +5,7 @@ import org.apache.commons.lang3.ClassUtils;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 import java.util.*;
 
 import static java.util.Arrays.asList;
@@ -33,7 +34,7 @@ public class Binder {
   void setFieldValue(Object controller, Field field, String[] values) {
     try {
       Class<?> type = field.getType();
-      field.set(controller, convert(values, type));
+      field.set(controller, convert(values, field.getType(), field));
     }
     catch (InvocationTargetException e) {
       recordBindError(controller, field.getName(), e.getCause());
@@ -43,7 +44,7 @@ public class Binder {
     }
   }
 
-  private Object convert(String[] values, Class<?> type) throws Exception {
+  private Object convert(String[] values, Class<?> type, Field field) throws Exception {
     if (String.class == type)
       return values[0];
     else if (String[].class == type)
@@ -51,19 +52,24 @@ public class Binder {
     else if (type.isArray()) {
       Object array = Array.newInstance(type.getComponentType(), values.length);
       for (int i = 0; i < values.length; i++)
-        Array.set(array, i, convert(new String[]{values[i]}, type.getComponentType()));
+        Array.set(array, i, convert(new String[]{values[i]}, type.getComponentType(), field));
       return array;
     }
     else if (List.class == type || Collection.class == type || Iterable.class == type)
-      return asList(values);
+      return asList((Object[])convert(values, getGenericArrayType(field), field));
     else if (Set.class == type)
-      return new LinkedHashSet<>(asList(values));
+      return new LinkedHashSet<>(asList((Object[])convert(values, getGenericArrayType(field), field)));
     else if (Date.class == type)
       return parseDate(values[0], dateFormat, "yyyy-MM-dd");
     else {
       if (type.isPrimitive()) type = ClassUtils.primitiveToWrapper(type);
       return type.getConstructor(String.class).newInstance(values[0]);
     }
+  }
+
+  private Class<?> getGenericArrayType(Field field) {
+    Class<?> componentType = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+    return Array.newInstance(componentType, 0).getClass();
   }
 
   @SuppressWarnings("ThrowableResultOfMethodCallIgnored")

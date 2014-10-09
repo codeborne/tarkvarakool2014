@@ -4,10 +4,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
@@ -108,6 +105,16 @@ public class BinderTest {
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("ints", new String[]{"1", "2", "3"}));
     assertArrayEquals(new int[]{1, 2, 3}, controller.ints);
+  }
+
+  @Test
+  public void bindCollectionOfBigDecimals() throws Exception {
+    class Foo extends Controller {
+      private Collection<BigDecimal> col;
+    }
+    Foo controller = new Foo();
+    binder.bindRequestParameters(controller, singletonMap("col", new String[]{"1", "2"}));
+    assertEquals(asList(new BigDecimal("1"), new BigDecimal("2")), controller.col);
   }
 
   @Test
