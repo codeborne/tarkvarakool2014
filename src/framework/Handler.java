@@ -3,7 +3,6 @@ package framework;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.template.*;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
@@ -20,9 +19,8 @@ import java.lang.reflect.Method;
 
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.joining;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 public class Handler extends AbstractHandler {
   static final String THE_ENCODING = "UTF-8";
@@ -146,7 +144,7 @@ public class Handler extends AbstractHandler {
     int i = path.lastIndexOf('/');
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";
     path = path.substring(i + 1);
-    return "controllers." + packagePrefix + asList(path.split("-")).stream().map(StringUtils::capitalize).collect(joining());
+    return "controllers." + packagePrefix + capitalize(path, '-').replace("-", "");
   }
 
   private boolean isRunningInDebugMode() {
