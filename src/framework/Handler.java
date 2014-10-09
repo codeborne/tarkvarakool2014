@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -31,7 +32,7 @@ public class Handler extends AbstractHandler {
   private Binder binder = new Binder("dd.MM.yyyy");
   private SessionFactory hibernateSessionFactory;
 
-  private boolean devMode = true;
+  private boolean devMode = isRunningInDebugMode();
 
   public Handler() throws IOException {
     initializeFreemarker();
@@ -146,6 +147,10 @@ public class Handler extends AbstractHandler {
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";
     path = path.substring(i + 1);
     return "controllers." + packagePrefix + asList(path.split("-")).stream().map(StringUtils::capitalize).collect(joining());
+  }
+
+  private boolean isRunningInDebugMode() {
+    return ManagementFactory.getRuntimeMXBean().getInputArguments().toString().contains("jdwp");
   }
 
   private void initializeFreemarker() throws IOException {
