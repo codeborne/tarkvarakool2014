@@ -1,13 +1,17 @@
 package framework;
 
+import controllers.Controller;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.template.*;
+import freemarker.template.Configuration;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,11 +34,13 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
+  private SessionFactory hibernateSessionFactory;
 
   private boolean devMode = true;
 
   public Handler() throws IOException {
     initializeFreemarker();
+    initializeHibernate();
   }
 
   @Override
@@ -43,6 +49,7 @@ public class Handler extends AbstractHandler {
     try {
       Object controller = createController(target);
       bindRequest(controller, request);
+      bindHibernate(controller);
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
@@ -72,6 +79,11 @@ public class Handler extends AbstractHandler {
       t += System.currentTimeMillis();
       LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
+  }
+
+  private void bindHibernate(Object controller) {
+    if (!(controller instanceof Controller)) return;
+    ((Controller) controller).hibernate = hibernateSessionFactory.openSession();
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -158,4 +170,9 @@ public class Handler extends AbstractHandler {
     });
     freemarker.addAutoInclude("decorator.ftl");
   }
+
+  private void initializeHibernate() {
+    hibernateSessionFactory = new org.hibernate.cfg.Configuration().buildSessionFactory();
+  }
 }
+
