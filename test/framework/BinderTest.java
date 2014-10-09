@@ -101,6 +101,16 @@ public class BinderTest {
   }
 
   @Test
+  public void bindIntArray() throws Exception {
+    class Foo extends Controller {
+      private int[] ints;
+    }
+    Foo controller = new Foo();
+    binder.bindRequestParameters(controller, singletonMap("ints", new String[]{"1", "2", "3"}));
+    assertArrayEquals(new int[]{1, 2, 3}, controller.ints);
+  }
+
+  @Test
   public void bindErrorsAreReported() throws Exception {
     class Foo extends Controller {
       private Integer number;

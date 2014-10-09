@@ -2,6 +2,7 @@ package framework;
 
 import org.apache.commons.lang3.ClassUtils;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -32,29 +33,36 @@ public class Binder {
   void setFieldValue(Object controller, Field field, String[] values) {
     try {
       Class<?> type = field.getType();
-      Object value;
-
-      if (String.class == type)
-        value = values[0];
-      else if (String[].class == type)
-        value = values;
-      else if (List.class == type || Collection.class == type || Iterable.class == type)
-        value = asList(values);
-      else if (Set.class == type)
-        value = new LinkedHashSet<>(asList(values));
-      else if (Date.class == type)
-        value = parseDate(values[0], dateFormat, "yyyy-MM-dd");
-      else {
-        if (type.isPrimitive()) type = ClassUtils.primitiveToWrapper(type);
-        value = type.getConstructor(String.class).newInstance(values[0]);
-      }
-      field.set(controller, value);
+      field.set(controller, convert(values, type));
     }
     catch (InvocationTargetException e) {
       recordBindError(controller, field.getName(), e.getCause());
     }
     catch (Exception e) {
       recordBindError(controller, field.getName(), e);
+    }
+  }
+
+  private Object convert(String[] values, Class<?> type) throws Exception {
+    if (String.class == type)
+      return values[0];
+    else if (String[].class == type)
+      return values;
+    else if (type.isArray()) {
+      Object array = Array.newInstance(type.getComponentType(), values.length);
+      for (int i = 0; i < values.length; i++)
+        Array.set(array, i, convert(new String[]{values[i]}, type.getComponentType()));
+      return array;
+    }
+    else if (List.class == type || Collection.class == type || Iterable.class == type)
+      return asList(values);
+    else if (Set.class == type)
+      return new LinkedHashSet<>(asList(values));
+    else if (Date.class == type)
+      return parseDate(values[0], dateFormat, "yyyy-MM-dd");
+    else {
+      if (type.isPrimitive()) type = ClassUtils.primitiveToWrapper(type);
+      return type.getConstructor(String.class).newInstance(values[0]);
     }
   }
 
