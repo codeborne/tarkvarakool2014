@@ -28,11 +28,13 @@ public class Handler extends AbstractHandler {
 
   private Configuration freemarker = new Configuration();
   private Binder binder = new Binder("dd.MM.yyyy");
+  private SessionFactory hibernateSessionFactory;
 
   private boolean devMode = true;
 
   public Handler() throws IOException {
     initializeFreemarker();
+    initializeHibernate();
   }
 
   @Override
@@ -43,6 +45,7 @@ public class Handler extends AbstractHandler {
       Object controller = createController(target);
       bindFrameworkFields(controller, request, response);
       binder.bindRequestParameters(controller, request.getParameterMap());
+      bindHibernate(controller);
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
@@ -73,6 +76,11 @@ public class Handler extends AbstractHandler {
       t += System.currentTimeMillis();
       LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
+  }
+
+  private void bindHibernate(Object controller) {
+    if (!(controller instanceof Controller)) return;
+    ((Controller) controller).hibernate = hibernateSessionFactory.openSession();
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -155,4 +163,10 @@ public class Handler extends AbstractHandler {
     });
     freemarker.addAutoInclude("decorator.ftl");
   }
+
+  private void initializeHibernate() {
+    //noinspection deprecation
+    hibernateSessionFactory = new org.hibernate.cfg.Configuration().buildSessionFactory();
+  }
 }
+

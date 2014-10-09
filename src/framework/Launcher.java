@@ -5,6 +5,9 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 public class Launcher {
 
@@ -12,6 +15,7 @@ public class Launcher {
 
   public static void main(String[] args) throws Exception {
     freemarker.log.Logger.selectLoggerLibrary(freemarker.log.Logger.LIBRARY_NONE);
+    System.setProperty("org.jboss.logging.provider", "slf4j");
     LOG.info("starting");
 
     ResourceHandler resourceHandler = new ResourceHandler();

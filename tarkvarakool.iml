@@ -14,9 +14,12 @@
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib" />
         </CLASSES>
-        <JAVADOC />
+        <JAVADOC>
+          <root url="file://$USER_HOME$/java-lib/hibernate-release-4.3.6.Final/documentation/javadocs" />
+        </JAVADOC>
         <SOURCES>
           <root url="file://$MODULE_DIR$/lib" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/hibernate-core-4.3.6.Final-sources.jar!/" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
