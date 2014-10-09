@@ -16,8 +16,7 @@ public class Hello extends Controller {
     }
 
     public String getMegaName() {
-        String name = request.getParameter("name");
-        return name == null ? "" : name;
+        return request.getParameter("name");
     }
 
     public List<String> getNames() {

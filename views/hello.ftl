@@ -6,7 +6,7 @@ Tere, mis sinu nimi on?
   <button>submit</button>
 </form>
 
-<#if megaName != "">
+<#if megaName??>
   <h1>Tere ${megaName}</h1>
 </#if>
 
