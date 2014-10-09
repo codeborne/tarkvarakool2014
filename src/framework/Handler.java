@@ -17,12 +17,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 
-import static freemarker.template.TemplateExceptionHandler.DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
 import static java.util.Arrays.asList;
@@ -30,10 +27,11 @@ import static java.util.stream.Collectors.joining;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 
 public class Handler extends AbstractHandler {
-
+  static final String THE_ENCODING = "UTF-8";
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
+  private Binder binder = new Binder();
   private SessionFactory hibernateSessionFactory;
 
   private boolean devMode = true;
@@ -47,13 +45,16 @@ public class Handler extends AbstractHandler {
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     long t = -System.currentTimeMillis();
     try {
+      request.setCharacterEncoding(THE_ENCODING);
       Object controller = createController(target);
-      bindRequest(controller, request);
+      bindFrameworkFields(controller, request, response);
+      binder.bindRequestParameters(controller, request.getParameterMap());
       bindHibernate(controller);
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
-      response.setContentType("text/html; charset=utf-8");
+      response.setContentType("text/html");
+      response.setCharacterEncoding(THE_ENCODING);
       template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
     }
     catch (ClassNotFoundException|NoSuchMethodException ignored) {
@@ -130,15 +131,11 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  void bindRequest(Object controller, HttpServletRequest request) {
-    try {
-      for (Field field : controller.getClass().getFields()) {
-        if (!field.getType().equals(HttpServletRequest.class)) continue;
-        field.set(controller, request);
-        break;
-      }
-    }
-    catch (IllegalAccessException ignored) {
+  void bindFrameworkFields(Object controller, HttpServletRequest request, HttpServletResponse response) {
+    if (controller instanceof Controller) {
+      Controller con = (Controller) controller;
+      con.request = request;
+      con.response = response;
     }
   }
 
@@ -157,7 +154,7 @@ public class Handler extends AbstractHandler {
   private void initializeFreemarker() throws IOException {
     DefaultObjectWrapper wrapper = (DefaultObjectWrapper) freemarker.getObjectWrapper();
     wrapper.setExposeFields(true);
-    freemarker.setDefaultEncoding("UTF-8");
+    freemarker.setDefaultEncoding(THE_ENCODING);
     freemarker.setTemplateExceptionHandler(devMode ? HTML_DEBUG_HANDLER : RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
     freemarker.setTemplateLoader(new FileTemplateLoader(new File("views")) {
