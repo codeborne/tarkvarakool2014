@@ -148,7 +148,6 @@ public class Handler extends AbstractHandler {
   private void initializeFreemarker() throws IOException {
     DefaultObjectWrapper wrapper = (DefaultObjectWrapper) freemarker.getObjectWrapper();
     wrapper.setExposeFields(true);
-    wrapper.setNullModel(TemplateScalarModel.EMPTY_STRING);
     freemarker.setDefaultEncoding("UTF-8");
     freemarker.setTemplateExceptionHandler(RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
