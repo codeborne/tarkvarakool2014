@@ -16,9 +16,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 
-import static freemarker.template.TemplateExceptionHandler.DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
 import static java.util.Arrays.asList;
@@ -42,7 +40,7 @@ public class Handler extends AbstractHandler {
     long t = -System.currentTimeMillis();
     try {
       Object controller = createController(target);
-      bindRequest(controller, request);
+      bindFrameworkFields(controller, request, response);
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
@@ -118,15 +116,11 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  void bindRequest(Object controller, HttpServletRequest request) {
-    try {
-      for (Field field : controller.getClass().getFields()) {
-        if (!field.getType().equals(HttpServletRequest.class)) continue;
-        field.set(controller, request);
-        break;
-      }
-    }
-    catch (IllegalAccessException ignored) {
+  void bindFrameworkFields(Object controller, HttpServletRequest request, HttpServletResponse response) {
+    if (controller instanceof Controller) {
+      Controller con = (Controller) controller;
+      con.request = request;
+      con.response = response;
     }
   }
 
