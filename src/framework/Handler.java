@@ -70,9 +70,14 @@ public class Handler extends AbstractHandler {
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
-    baseRequest.setHandled(true);
-    method.invoke(controller);
+    try {
+      Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
+      baseRequest.setHandled(true);
+      method.invoke(controller);
+    }
+    catch (NoSuchMethodException e) {
+      // no method - no problem, let's try to render just template
+    }
   }
 
   Object createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
