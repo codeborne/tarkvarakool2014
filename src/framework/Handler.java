@@ -29,6 +29,8 @@ public class Handler extends AbstractHandler {
 
   private Configuration freemarker = new Configuration();
 
+  private boolean devMode = true;
+
   public Handler() throws IOException {
     initializeFreemarker();
   }
@@ -50,7 +52,7 @@ public class Handler extends AbstractHandler {
     }
     catch (InstantiationException|IllegalAccessException e) {
       LOG.warn("Failed to create controller: " + e);
-      response.sendError(SC_INTERNAL_SERVER_ERROR);
+      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
       baseRequest.setHandled(true);
     }
     catch (InvocationTargetException e) {
@@ -58,11 +60,11 @@ public class Handler extends AbstractHandler {
     }
     catch (FileNotFoundException e) {
       LOG.warn(e.toString());
-      response.sendError(SC_INTERNAL_SERVER_ERROR);
+      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
     }
     catch (TemplateException e) {
       LOG.warn("Template failure: " + e);
-      response.sendError(SC_INTERNAL_SERVER_ERROR);
+      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
     }
     finally {
       t += System.currentTimeMillis();
@@ -94,7 +96,7 @@ public class Handler extends AbstractHandler {
     }
     else {
       LOG.warn("Controller failure: " + cause);
-      response.sendError(SC_INTERNAL_SERVER_ERROR);
+      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? cause.toString() : null);
     }
   }
 
