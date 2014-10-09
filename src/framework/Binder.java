@@ -4,9 +4,12 @@ import org.apache.commons.lang3.ClassUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.time.DateUtils.parseDate;
 
 public class Binder {
@@ -38,6 +41,8 @@ public class Binder {
         value = values[0];
       else if (String[].class.isAssignableFrom(type))
         value = values;
+      else if (List.class.isAssignableFrom(type) || Collection.class.isAssignableFrom(type) || Iterable.class.isAssignableFrom(type))
+        value = asList(values);
       else if (Date.class.isAssignableFrom(type))
         value = parseDate(values[0], dateFormat, "yyyy-MM-dd");
       else {

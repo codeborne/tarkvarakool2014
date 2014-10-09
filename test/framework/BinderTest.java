@@ -5,11 +5,12 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static org.apache.commons.lang3.time.DateUtils.parseDate;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class BinderTest {
   Binder binder = new Binder("dd.MM.yyyy");
@@ -62,6 +63,28 @@ public class BinderTest {
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("date", new String[]{"11.07.2013"}));
     assertEquals(date("11.07.2013"), controller.date);
+  }
+
+  @Test
+  public void bindStringArray() throws Exception {
+    class Foo extends Controller {
+      private String[] strings;
+    }
+    Foo controller = new Foo();
+    String[] value = {"a", "b", "c"};
+    binder.bindRequestParameters(controller, singletonMap("strings", value));
+    assertArrayEquals(value, controller.strings);
+  }
+
+  @Test
+  public void bindList() throws Exception {
+    class Foo extends Controller {
+      private List<String> list;
+    }
+    Foo controller = new Foo();
+    String[] value = {"a", "b", "c"};
+    binder.bindRequestParameters(controller, singletonMap("list", value));
+    assertEquals(asList(value), controller.list);
   }
 
   @Test
