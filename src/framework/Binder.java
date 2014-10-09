@@ -46,24 +46,29 @@ public class Binder {
   private Object convert(String[] values, Class<?> type, Field field) throws Exception {
     if (String.class == type)
       return values[0];
-    else if (String[].class == type)
+
+    if (String[].class == type)
       return values;
-    else if (type.isArray()) {
+
+    if (type.isArray()) {
       Object array = Array.newInstance(type.getComponentType(), values.length);
       for (int i = 0; i < values.length; i++)
         Array.set(array, i, convert(new String[]{values[i]}, type.getComponentType(), field));
       return array;
     }
-    else if (List.class == type || Collection.class == type || Iterable.class == type)
+
+    if (List.class == type || Collection.class == type || Iterable.class == type)
       return asList(convertArrayType(values, getGenericType(field)));
-    else if (Set.class == type)
+
+    if (Set.class == type)
       return new LinkedHashSet<>(asList(convertArrayType(values, getGenericType(field))));
-    else if (Date.class == type)
+
+    if (Date.class == type)
       return parseDate(values[0], dateFormat, "yyyy-MM-dd");
-    else {
-      if (type.isPrimitive()) type = ClassUtils.primitiveToWrapper(type);
-      return type.getConstructor(String.class).newInstance(values[0]);
-    }
+
+    // try with String-argument constructor
+    if (type.isPrimitive()) type = ClassUtils.primitiveToWrapper(type);
+    return type.getConstructor(String.class).newInstance(values[0]);
   }
 
   private Object[] convertArrayType(String[] values, Class<?> componentType) throws Exception {
