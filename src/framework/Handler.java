@@ -13,10 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
@@ -29,6 +27,7 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
+  private Binder binder = new Binder();
 
   private boolean devMode = true;
 
@@ -40,9 +39,10 @@ public class Handler extends AbstractHandler {
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     long t = -System.currentTimeMillis();
     try {
+      request.setCharacterEncoding(THE_ENCODING);
       Object controller = createController(target);
       bindFrameworkFields(controller, request, response);
-      bindRequestParameters(controller, request);
+      binder.bindRequestParameters(controller, request.getParameterMap());
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
@@ -72,21 +72,6 @@ public class Handler extends AbstractHandler {
     finally {
       t += System.currentTimeMillis();
       LOG.info(request.getMethod() + " " + target + " " + t + " ms");
-    }
-  }
-
-  void bindRequestParameters(Object controller, HttpServletRequest request) throws UnsupportedEncodingException {
-    request.setCharacterEncoding(THE_ENCODING);
-    Class clazz = controller.getClass();
-    Map<String, String[]> params = request.getParameterMap();
-    for (Map.Entry<String, String[]> param : params.entrySet()) {
-      try {
-        Field field = clazz.getDeclaredField(param.getKey());
-        field.setAccessible(true);
-        field.set(controller, param.getValue()[0]);
-      }
-      catch (NoSuchFieldException|IllegalAccessException ignore) {
-      }
     }
   }
 

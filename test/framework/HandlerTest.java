@@ -7,16 +7,12 @@ import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
-import java.util.HashMap;
 
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -142,16 +138,5 @@ public class HandlerTest {
   public void createController() throws Exception {
     Object controller = handler.createController("/mock-controller");
     assertThat(controller, instanceOf(MockController.class));
-  }
-
-  @Test
-  public void bindRequestParametersToFields() throws Exception {
-    class Foo extends Controller {
-      private String name;
-    }
-    Foo controller = new Foo();
-    when(request.getParameterMap()).thenReturn(Collections.singletonMap("name", new String[]{"Anton"}));
-    handler.bindRequestParameters(controller, request);
-    assertEquals("Anton", controller.name);
   }
 }
