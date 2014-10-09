@@ -3,6 +3,10 @@
 <head>
     <title>Tarkavarakool</title>
     <style>
+        body {
+            background-color: cadetblue;
+        }
+
         #apple {
             color: green;
         }
@@ -12,6 +16,15 @@
         .fancy {
             font-weight: bold;
         }
+
+        #container {
+            text-align: center;
+        }
+
+        #boxes {
+            display: inline-block;
+        }
+
         #boxes div {
             border: 1px solid black;
             -webkit-border-radius: 10px;
@@ -19,9 +32,6 @@
             border-radius: 10px;
             height: 100px;
             width: 100px;
-            margin: auto;
-
-
         }
 
         .first, .second, .third {
@@ -65,6 +75,7 @@
     <img src="https://www.google.ee/images/srpr/logo11w.png"/>
 </a>
 
+<div id ="container">
 <div id="boxes">
     <div class="first"></div>
     <div class="first"></div>
@@ -75,6 +86,7 @@
     <div class="third"></div>
     <div class="third"></div>
     <div class="third"></div>
+</div>
 </div>
 
 </body>
