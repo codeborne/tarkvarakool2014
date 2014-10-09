@@ -1,9 +1,16 @@
 <@html>
-<h1 align="center">Hello world!</h1>
+<div align="center">
 
-<p>This is our first paragraph on this page</p>
+<h1>Hello world!</h1>
+
+<p>Here you can use Google</p>
 
 <div>
-<a href="http://www.google.com">LINK</a>
+    <a href="http://www.google.com"><img src="http://i.forbesimg.com/media/lists/companies/google_416x416.jpg"/></a>
 </div>
+
+
+
+</div>
+
 </@html>
