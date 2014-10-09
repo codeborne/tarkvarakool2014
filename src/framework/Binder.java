@@ -55,9 +55,9 @@ public class Binder {
       return array;
     }
     else if (List.class == type || Collection.class == type || Iterable.class == type)
-      return asList((Object[])convert(values, getGenericArrayType(field), field));
+      return asList(convertArrayType(values, getGenericType(field)));
     else if (Set.class == type)
-      return new LinkedHashSet<>(asList((Object[])convert(values, getGenericArrayType(field), field)));
+      return new LinkedHashSet<>(asList(convertArrayType(values, getGenericType(field))));
     else if (Date.class == type)
       return parseDate(values[0], dateFormat, "yyyy-MM-dd");
     else {
@@ -66,9 +66,13 @@ public class Binder {
     }
   }
 
-  private Class<?> getGenericArrayType(Field field) {
-    Class<?> componentType = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-    return Array.newInstance(componentType, 0).getClass();
+  private Object[] convertArrayType(String[] values, Class<?> componentType) throws Exception {
+    Class<?> arrayType = Array.newInstance(componentType, 0).getClass();
+    return (Object[])convert(values, arrayType, null);
+  }
+
+  private Class<?> getGenericType(Field field) {
+    return (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
   }
 
   @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
