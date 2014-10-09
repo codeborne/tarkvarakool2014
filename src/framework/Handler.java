@@ -41,7 +41,7 @@ public class Handler extends AbstractHandler {
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
-      response.setContentType("text/html");
+      response.setContentType("text/html; charset=utf-8");
       template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
     }
     catch (ClassNotFoundException|NoSuchMethodException ignored) {
