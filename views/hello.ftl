@@ -1,9 +1,13 @@
 <@html>
-<h1>Hello world!</h1>
-<form method="post" action="submit">
-  <button type="submit">submit</button>
+
+Tere, mis sinu nimi on?
+<form method="post">
+  <input type="text" name="name">
+  <button>submit</button>
 </form>
-<div>
-  Names: <#list names as name>${name}</#list>
-</div>
+
+<#if megaName != "">
+  <h1>Tere ${megaName}</h1>
+</#if>
+
 </@html>

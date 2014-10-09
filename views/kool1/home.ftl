@@ -1,5 +1,16 @@
 <@html>
-<div align="center">
+<head>
+    <style>
+       body {
+
+       }
+        div {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
 
 <h1>Hello world!</h1>
 
@@ -12,5 +23,5 @@
     <a href="http://localhost:8080/kool1/nextpage">Teisele lehele</a>
 
 </div>
-
+</body>
 </@html>
