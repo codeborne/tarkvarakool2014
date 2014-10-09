@@ -33,7 +33,6 @@ public class Binder {
 
   void setFieldValue(Object controller, Field field, String[] values) {
     try {
-      Class<?> type = field.getType();
       field.set(controller, convert(values, field.getType(), field));
     }
     catch (InvocationTargetException e) {
