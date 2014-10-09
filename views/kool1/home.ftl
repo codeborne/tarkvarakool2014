@@ -1,12 +1,15 @@
 <@html>
 
-
+<div id="submit">
 <form method="post">
-    <input type="text" name="name">
+    Name:
+    <input type="text" name="name"><br>
+    Surname:
+    <input type="text" name="surname"><br>
     <button>Submit</button>
-</form>
+</form></div>
 
-    <#if name??>Tere, ${name}</#if>
+    <#if name??>Tere, ${name} ${surname}</#if>
 
 
 <div id="main">

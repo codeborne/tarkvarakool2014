@@ -11,4 +11,7 @@ public class Home extends Controller {
     public String getName(){
         return request.getParameter("name");
     }
+    public String getSurname(){
+        return request.getParameter("surname");
+    }
 }
