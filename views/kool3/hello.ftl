@@ -7,15 +7,15 @@
 <div id="question">
 Hello,what is your name?
 
-<form method="post">
+<form method="post" action="/kool3/end">
     <input type="text" name="name"> <br>
 Please enter your e-mail. <br>
     <input type="email" name="email"> <br>
     <button>submit</button>
 
 </form>
-    <#if name??>Hello, ${name}</#if> <br>
-    <#if email??> Your e-mail is ${email}</#if>
+
+  <#if warning??> ${warning}</#if> <br>
 
     <div class="row">
         <div class="col-lg-6">
