@@ -1,6 +1,6 @@
 package controllers.kool3;
 
-import controllers.Controller;
+import framework.Controller;
 
 public class Hello extends Controller {
 
