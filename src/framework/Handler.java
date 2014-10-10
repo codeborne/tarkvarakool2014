@@ -49,8 +49,8 @@ public class Handler extends AbstractHandler {
     long t = -System.currentTimeMillis();
     try {
       request.setCharacterEncoding(THE_ENCODING);
+      bindFrameworkFields(Controller.requestState.get(), request, response);
       Object controller = createController(target);
-      bindFrameworkFields(controller, request, response);
       binder.bindRequestParameters(controller, request.getParameterMap());
       invokeController(controller, baseRequest);
 
