@@ -1,0 +1,22 @@
+#main {
+    text-align: center;
+}
+.button {
+    height:100px;
+    width:100px;
+    background-color:lightblue;
+    margin:10px;
+    float: left;
+    text-align: center;
+    line-height: 100px;
+}
+#weirdbutton{
+    background-color: lightyellow;
+}
+#submit{
+    text-align:center;
+}
+#tere {
+    font-size: 20px;
+    font-weight: bolder;
+}

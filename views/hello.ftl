@@ -2,12 +2,13 @@
 
 Tere, mis sinu nimi on?
 <form method="post">
-  <input type="text" name="name">
+  <input type="text" name="firstName">
+  <input type="text" name="lastName">
   <button>submit</button>
 </form>
 
-<#if megaName != "">
-  <h1>Tere ${megaName}</h1>
+<#if fullName??>
+  <h1>Tere ${fullName}</h1>
 </#if>
 
 </@html>

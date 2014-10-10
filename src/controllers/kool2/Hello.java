@@ -1,6 +1,6 @@
 package controllers.kool2;
 
-import controllers.Controller;
+import framework.Controller;
 
 import javax.lang.model.element.Name;
 

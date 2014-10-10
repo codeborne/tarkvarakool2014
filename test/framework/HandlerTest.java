@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.lang.reflect.InvocationTargetException;
 
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
@@ -56,29 +55,15 @@ public class HandlerTest {
 
   @Test
   public void bindRequestWithoutRequestField() throws Exception {
-    handler.bindRequest(new Object(), request);
+    handler.bindFrameworkFields(new Object(), request, response);
   }
 
   @Test
-  public void bindRequestWithRequestField() throws Exception {
+  public void bindRequestToController() throws Exception {
     HttpServletRequest request = mock(HttpServletRequest.class);
-    class Foo {
-      public HttpServletRequest request;
-    }
-    Foo foo = new Foo();
-    handler.bindRequest(foo, request);
+    Controller foo = new Controller() {};
+    handler.bindFrameworkFields(foo, request, response);
     assertThat(foo.request, sameInstance(request));
-  }
-
-  @Test
-  public void bindRequestWithRequestFieldWithDifferentName() throws Exception {
-    HttpServletRequest request = mock(HttpServletRequest.class);
-    class Foo {
-      public HttpServletRequest httpRequest;
-    }
-    Foo foo = new Foo();
-    handler.bindRequest(foo, request);
-    assertThat(foo.httpRequest, sameInstance(request));
   }
 
   @Test
@@ -136,7 +121,7 @@ public class HandlerTest {
   public void handleException() throws Exception {
     handler.handleException(new InvocationTargetException(new RuntimeException()), response);
 
-    verify(response).sendError(SC_INTERNAL_SERVER_ERROR);
+    verify(response).sendError(eq(SC_INTERNAL_SERVER_ERROR), anyString());
     verifyNoMoreInteractions(response);
   }
 
