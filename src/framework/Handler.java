@@ -33,6 +33,7 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
+  private Messages messages = new Messages();
   private Binder binder = new Binder("dd.MM.yyyy");
   private SessionFactory hibernateSessionFactory;
 
@@ -48,8 +49,8 @@ public class Handler extends AbstractHandler {
     long t = -System.currentTimeMillis();
     try {
       request.setCharacterEncoding(THE_ENCODING);
+      bindFrameworkFields(Controller.requestState.get(), request, response);
       Object controller = createController(target);
-      bindFrameworkFields(controller, request, response);
       binder.bindRequestParameters(controller, request.getParameterMap());
       invokeController(controller, baseRequest);
 
@@ -133,6 +134,7 @@ public class Handler extends AbstractHandler {
       con.request = request;
       con.response = response;
       con.session = request.getSession();
+      con.messages = messages.getResolverFor(request);
       con.hibernate = hibernateSessionFactory.openSession();
     }
   }
