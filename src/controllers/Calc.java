@@ -15,7 +15,7 @@ public class Calc extends Controller {
     calculator.value ++;
   }
 
-  private static class Calculator {
+  public static class Calculator {
     public double value;
   }
 }
