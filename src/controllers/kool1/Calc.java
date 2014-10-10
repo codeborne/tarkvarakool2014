@@ -4,12 +4,14 @@ import framework.Controller;
 import model.kool1.Calculator;
 
 public class Calc extends Controller {
-  public double operand;
+  public Double operand;
   public String operator;
   public String note;
+  public String message;
+
 
   public Calculator getCalculator() {
-    Calculator calculator = (Calculator)session.getAttribute("calc");
+    Calculator calculator = (Calculator) session.getAttribute("calc");
     if (calculator == null) {
       calculator = new Calculator();
       session.setAttribute("calc", calculator);
@@ -17,37 +19,51 @@ public class Calc extends Controller {
     return calculator;
   }
 
-  public void post(){
+  public void post() {
     Calculator calculator = getCalculator();
 
-
-
-    switch (operator) {
-      case "+":
-        calculator.add(operand);
-        break;
-      case "-":
-        calculator.subtract(operand);
-        break;
-      case "*":
-        calculator.multiply(operand);
-        break;
-      case "^":
-        calculator.raiseToThePower(operand);
-        break;
-      case "/":
-        try {
-          calculator.divide(operand);
-        }
-        catch (IllegalArgumentException e){
-          note="Can't divide by zero. This is previous value.";
-        }
-        break;
-      default:
-        throw new IllegalArgumentException(operator);
+    if (operand == null && operator == null) {
+      message = "Vali tehe ja sisesta number";
     }
-  }
+    else if (operator == null) {
+      message = "Vali tehe!";
+    }
+    else if (operand == null) {
+      message = "Sisesta number!";
+    }
 
+    else {
+
+
+      switch (operator) {
+        case "+":
+          calculator.add(operand);
+          break;
+        case "-":
+          calculator.subtract(operand);
+          break;
+        case "*":
+          calculator.multiply(operand);
+          break;
+        case "^":
+          calculator.raiseToThePower(operand);
+          break;
+        case "/":
+          try {
+            calculator.divide(operand);
+          }
+          catch (IllegalArgumentException e) {
+            note = "Nulliga jagada ei saa. See on eelmine tulemus.";
+          }
+          break;
+        default:
+          throw new IllegalArgumentException(operator);
+
+
+      }
+    }
+
+  }
 }
 
 
