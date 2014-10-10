@@ -6,13 +6,15 @@ import framework.Redirect;
 public class Home extends Controller {
 
 
+
   public String warning;
 
   public void post() {
     String userInputPassword = request.getParameter("password");
     String userInputUsername = request.getParameter("username");
-    String password = "kasutaja";
-    String username = "parool";
+    String password = "parool";
+    String username = "kasutaja";
+
 
     if (userInputPassword.equals(password) && userInputUsername.equals(username)) throw new Redirect("/kool1/nextpage");
       else if (!userInputPassword.equals(password) && !userInputUsername.equals(username))
@@ -21,7 +23,6 @@ public class Home extends Controller {
       warning="Palun sisesta õige salasõna!";
       else
       warning="Palun sisesta õige kasutajanimi!";
-
 
   }
 }

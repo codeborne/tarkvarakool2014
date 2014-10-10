@@ -20,7 +20,7 @@
         <SOURCES>
           <root url="file://$MODULE_DIR$/lib" />
           <root url="jar://$USER_HOME$/.ideaLibSources/hibernate-core-4.3.6.Final-sources.jar!/" />
-          <root url="file://$MODULE_DIR$/../../freemarker/source/src/main/java" />
+          <root url="file://$USER_HOME$/freemarker/source/src/main/java" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />

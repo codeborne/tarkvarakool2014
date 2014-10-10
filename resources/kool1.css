@@ -25,3 +25,8 @@
   color:red;
   text-align:center;
 }
+
+.radioButton {
+  padding: 15px;
+  display:inline-block;
+}
