@@ -8,7 +8,7 @@ public class Calc extends Controller {
 
     public double currentValue;
     public double operand;
-    public String operator;
+    public String operator="";
     public String error;
     public boolean submit;
     public boolean reset;
