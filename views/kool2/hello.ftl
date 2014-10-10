@@ -28,7 +28,7 @@
     <div class="row">
         <label for="java" class="col-sm-offset-1 col-md-1 control-label">I love Java</label>
 
-        <div class="col-md-1"><input type="checkbox" name="java" id="java" value="true" class="form-control"></div>
+        <div class="col-md-1"><input type="checkbox" name="java" id="java" value="true" class="form-control" checked></div>
     </div>
     <div class="row">
         <label for="java" class="col-sm-offset-1 col-md-1 control-label">Choose your favourite color</label>

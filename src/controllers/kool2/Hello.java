@@ -11,7 +11,7 @@ public class Hello extends Controller implements LoginInfo {
 
     @Override
     public void post() {
-        if (USERNAME.equals(username) && PASSWORD.equals(password))
+        if (password.equals(ACCOUNTS.get(username)))
             accessAllowed = true;
     }
 }
