@@ -33,6 +33,7 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
+  private Messages messages = new Messages();
   private Binder binder = new Binder("dd.MM.yyyy");
   private SessionFactory hibernateSessionFactory;
 
@@ -133,6 +134,7 @@ public class Handler extends AbstractHandler {
       con.request = request;
       con.response = response;
       con.session = request.getSession();
+      con.messages = messages.getResolverFor(request);
       con.hibernate = hibernateSessionFactory.openSession();
     }
   }

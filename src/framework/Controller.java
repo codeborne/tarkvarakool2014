@@ -14,6 +14,7 @@ public abstract class Controller {
   protected HttpSession session;
   protected Session hibernate;
   protected Map<String, Throwable> errors = new LinkedHashMap<>();
+  public Messages.Resolver messages;
 
   public void get() {
   }
