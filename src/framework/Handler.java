@@ -171,6 +171,7 @@ public class Handler extends AbstractHandler {
       }
     });
     freemarker.addAutoInclude("decorator.ftl");
+    freemarker.addAutoInclude("macros.ftl");
     initFreemarkerObjectWarpper();
 
     if (devMode) {
