@@ -1,0 +1,24 @@
+.namebutton {
+
+    border-radius: 5px;
+    border: 2px solid #6495ED;
+    background-color: #BCD2EE;
+    height: 50px;
+    width: 120px;
+    align: left;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    text-decoration:none;
+}
+#question{
+
+}
+#back{
+    background:yellow ;
+}
+
+a {
+    text-decoration: none;
+}
