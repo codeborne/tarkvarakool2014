@@ -3,17 +3,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
-<div id="submit">
-<form method="post">
-    Name:
-    <input type="text" name="name"><br>
-    Surname:
-    <input type="text" name="surname"><br>
-    <button>Submit</button>
-</form>
 
-    <p id="tere"><#if name??>Tere, ${name} ${surname}</#if></p>
-</div>
 
 <div id="main">
 
@@ -25,21 +15,21 @@
         <a href="http://www.google.com"><img src="http://i.forbesimg.com/media/lists/companies/google_416x416.jpg"/></a>
     </div>
 
-    <a href="http://localhost:8080/kool1/nextpage">Teisele lehele</a>
+    <a href="/kool1/nextpage">Teisele lehele</a>
 
 </div>
 
-<form class="form-horizontal" role="form" action="http://localhost:8080/kool1/nextpage" onsubmit="">
+<form class="form-horizontal" role="form" method="post">
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
+        <label for="inputText3" class="col-sm-2 control-label">Kasutajanimi</label>
         <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <input type="text" class="form-control" id="inputText3" placeholder="Kasutajanimi" name="username">
         </div>
     </div>
     <div class="form-group">
         <label for="inputPassword3" class="col-sm-2 control-label">Salasõna</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Salasõna">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Salasõna" name="password">
         </div>
     </div>
     <div class="form-group">
@@ -57,5 +47,7 @@
         </div>
     </div>
 </form>
+
+  <p class="hoiatus"><#if warning??>${warning}</#if></p>
 </body>
 </@html>

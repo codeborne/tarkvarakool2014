@@ -1,5 +1,15 @@
 <@html>
+<div id="submit">
+  <form method="post">
+    Name:
+    <input type="text" name="name"><br>
+    Surname:
+    <input type="text" name="surname"><br>
+    <button>Submit</button>
+  </form>
 
+  <p id="tere"><#if name?? && surname??>Tere, ${name} ${surname}</#if></p>
+</div>
 
 <ul>
     <li>Nr 1</li>
