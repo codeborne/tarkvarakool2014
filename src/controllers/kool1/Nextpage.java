@@ -1,6 +1,6 @@
 package controllers.kool1;
 
-import controllers.Controller;
+import framework.Controller;
 
 public class Nextpage extends Controller {
     public void get(){
