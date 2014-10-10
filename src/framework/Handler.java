@@ -59,7 +59,7 @@ public class Handler extends AbstractHandler {
       Template template = freemarker.getTemplate(getTemplateName(target));
       response.setContentType("text/html");
       response.setCharacterEncoding(THE_ENCODING);
-      template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
+      template.process(controller, new OutputStreamWriter(response.getOutputStream(), THE_ENCODING));
     }
     catch (ClassNotFoundException|NoSuchMethodException ignored) {
       redirectIfPossible(target, baseRequest, response);
