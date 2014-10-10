@@ -52,4 +52,19 @@ public abstract class Controller {
 
   public void options() {
   }
+
+  @SuppressWarnings("unchecked")
+  protected  <T> T fromSession(Class<T> clazz) {
+    T value = (T) session.getAttribute(clazz.getName());
+    if (value == null) {
+      try {
+        value = clazz.newInstance();
+        session.setAttribute(clazz.getName(), value);
+      }
+      catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return value;
+  }
 }

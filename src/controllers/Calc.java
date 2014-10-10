@@ -3,15 +3,10 @@ package controllers;
 import framework.Controller;
 
 public class Calc extends Controller {
-  public Calculator calculator;
+  public Calculator calculator = fromSession(Calculator.class);
 
   @Override
   public void get() {
-    calculator = (Calculator) session.getAttribute("calculator");
-    if (calculator == null) {
-      calculator = new Calculator();
-      session.setAttribute("calculator", calculator);
-    }
     calculator.value ++;
   }
 
