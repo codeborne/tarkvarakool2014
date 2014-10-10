@@ -8,62 +8,76 @@ public class Calc extends Controller {
   public String operator;
   public String note;
   public String message;
+  public boolean reset;
 
 
   public Calculator getCalculator() {
     Calculator calculator = (Calculator) session.getAttribute("calc");
     if (calculator == null) {
-      calculator = new Calculator();
-      session.setAttribute("calc", calculator);
+      calculator = createCalculator();
     }
     return calculator;
   }
 
-  public void post() {
-    Calculator calculator = getCalculator();
+  public Calculator createCalculator() {
+    Calculator calculator = new Calculator();
+    session.setAttribute("calc", calculator);
+    return calculator;
+  }
 
-    if (operand == null && operator == null) {
-      message = "Vali tehe ja sisesta number";
-    }
-    else if (operator == null) {
-      message = "Vali tehe!";
-    }
-    else if (operand == null) {
-      message = "Sisesta number!";
+  public void post() {
+
+    if (reset) {
+      createCalculator();
     }
 
     else {
+      Calculator calculator = getCalculator();
 
-
-      switch (operator) {
-        case "+":
-          calculator.add(operand);
-          break;
-        case "-":
-          calculator.subtract(operand);
-          break;
-        case "*":
-          calculator.multiply(operand);
-          break;
-        case "^":
-          calculator.raiseToThePower(operand);
-          break;
-        case "/":
-          try {
-            calculator.divide(operand);
-          }
-          catch (IllegalArgumentException e) {
-            note = "Nulliga jagada ei saa. See on eelmine tulemus.";
-          }
-          break;
-        default:
-          throw new IllegalArgumentException(operator);
-
-
+      if (operand == null && operator == null) {
+        message = "Vali tehe ja sisesta number";
       }
-    }
+      else if (operator == null) {
+        message = "Vali tehe!";
+      }
+      else if (operand == null) {
+        message = "Sisesta number!";
+      }
 
+      else {
+
+
+        switch (operator) {
+          case "+":
+            calculator.add(operand);
+            break;
+          case "-":
+            calculator.subtract(operand);
+            break;
+          case "*":
+            calculator.multiply(operand);
+            break;
+          case "^":
+            calculator.raiseToThePower(operand);
+            break;
+          case "/":
+            try {
+              calculator.divide(operand);
+            }
+            catch (IllegalArgumentException e) {
+              note = "Nulliga jagada ei saa. See on eelmine tulemus.";
+            }
+            break;
+          default:
+            throw new IllegalArgumentException(operator);
+
+
+        }
+      }
+
+    }
   }
 }
+
 
 

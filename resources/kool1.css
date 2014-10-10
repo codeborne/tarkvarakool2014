@@ -29,4 +29,9 @@
 .radioButton {
   padding: 15px;
   display:inline-block;
+
+}
+
+.alert {
+  color:red;
 }
