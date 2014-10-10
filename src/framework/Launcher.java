@@ -5,9 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import org.eclipse.jetty.server.session.SessionHandler;
 
 public class Launcher {
 
@@ -22,12 +20,13 @@ public class Launcher {
     resourceHandler.setDirectoriesListed(false);
     resourceHandler.setResourceBase("resources");
 
-    HandlerList handlerList = new HandlerList();
-    handlerList.addHandler(new Handler());
-    handlerList.addHandler(resourceHandler);
+    HandlerList handlers = new HandlerList();
+    handlers.addHandler(new SessionHandler());
+    handlers.addHandler(new Handler());
+    handlers.addHandler(resourceHandler);
 
     Server server = new Server(8080);
-    server.setHandler(handlerList);
+    server.setHandler(handlers);
     server.start();
     server.join();
   }

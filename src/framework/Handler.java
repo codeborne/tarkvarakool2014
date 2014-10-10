@@ -1,5 +1,6 @@
 package framework;
 
+import com.google.common.reflect.ClassPath;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.template.*;
 import org.apache.commons.io.IOUtils;
@@ -7,8 +8,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
+import javax.persistence.Entity;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +21,7 @@ import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Scanner;
 
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
@@ -27,6 +33,7 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   private Configuration freemarker = new Configuration();
+  private Messages messages = new Messages();
   private Binder binder = new Binder("dd.MM.yyyy");
   private SessionFactory hibernateSessionFactory;
 
@@ -45,7 +52,6 @@ public class Handler extends AbstractHandler {
       Object controller = createController(target);
       bindFrameworkFields(controller, request, response);
       binder.bindRequestParameters(controller, request.getParameterMap());
-      bindHibernate(controller);
       invokeController(controller, baseRequest);
 
       Template template = freemarker.getTemplate(getTemplateName(target));
@@ -76,11 +82,6 @@ public class Handler extends AbstractHandler {
       t += System.currentTimeMillis();
       LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
-  }
-
-  private void bindHibernate(Object controller) {
-    if (!(controller instanceof Controller)) return;
-    ((Controller) controller).hibernate = hibernateSessionFactory.openSession();
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -132,6 +133,9 @@ public class Handler extends AbstractHandler {
       Controller con = (Controller) controller;
       con.request = request;
       con.response = response;
+      con.session = request.getSession();
+      con.messages = messages.getResolverFor(request);
+      con.hibernate = hibernateSessionFactory.openSession();
     }
   }
 
@@ -168,9 +172,24 @@ public class Handler extends AbstractHandler {
     freemarker.addAutoInclude("decorator.ftl");
   }
 
-  private void initializeHibernate() {
+  private void initializeHibernate() throws IOException {
     //noinspection deprecation
-    hibernateSessionFactory = new org.hibernate.cfg.Configuration().buildSessionFactory();
+    org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
+    ClassPath.from(this.getClass().getClassLoader()).getTopLevelClassesRecursive("model").stream()
+        .map(ClassPath.ClassInfo::load)
+        .filter(modelClass -> modelClass.isAnnotationPresent(Entity.class))
+        .forEach(configuration::addAnnotatedClass);
+    new SchemaUpdate(configuration).execute(true, true);
+    hibernateSessionFactory = configuration.buildSessionFactory();
+
+    Session session = hibernateSessionFactory.openSession();
+    Transaction transaction = session.beginTransaction();
+    Scanner scanner = new Scanner(getClass().getResourceAsStream("/init.sql"));
+    while (scanner.hasNextLine()) {
+      session.createSQLQuery(scanner.nextLine()).executeUpdate();
+    }
+    transaction.commit();
+    session.close();
   }
 }
 
