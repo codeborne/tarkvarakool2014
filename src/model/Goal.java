@@ -11,7 +11,6 @@ public class Goal {
   @GeneratedValue
   private Long id;
 
-  //not null
   private String goalText;
 
   private int budget;

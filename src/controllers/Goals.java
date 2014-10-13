@@ -33,5 +33,8 @@ public class Goals extends Controller {
     allGoals = hibernate.createCriteria(Goal.class).list();
   }
 
-
+  @Override
+  public void get(){
+    allGoals = hibernate.createCriteria(Goal.class).list();
+  }
 }
