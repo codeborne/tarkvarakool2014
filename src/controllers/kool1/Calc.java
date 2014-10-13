@@ -6,7 +6,6 @@ import model.kool1.Calculator;
 public class Calc extends Controller {
   public Double operand;
   public String operator;
-  public String note;
   public String message;
 
 
@@ -57,7 +56,7 @@ public class Calc extends Controller {
               calculator.divide(operand);
             }
             catch (IllegalArgumentException e) {
-              note = "Nulliga jagada ei saa. See on eelmine tulemus.";
+              message = "Nulliga jagada ei saa. See on eelmine tulemus.";
             }
             break;
           default:
