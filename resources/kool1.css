@@ -10,17 +10,17 @@
     text-align: center;
     line-height: 100px;
 }
-#weirdbutton{
+#weirdButton {
     background-color: lightyellow;
 }
 #submit{
     text-align:center;
 }
-#tere {
+#hello {
     font-size: 20px;
     font-weight: bolder;
 }
-.hoiatus {
+.warning {
   font-size:30px;
   color:red;
   text-align:center;
@@ -45,14 +45,17 @@
   color:black;
   border-radius: 3px;
   font-size:13px;
-  font-family: Arial;
   text-align:center;
   line-height:20px;
 
 }
-#resetlink{
+#resetLink {
  padding: 10px 15px 10px 15px ;
   text-decoration: none;
   color:black;
 }
 
+#result {
+  font-size:40px;
+
+}

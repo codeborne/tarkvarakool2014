@@ -48,6 +48,6 @@
     </div>
 </form>
 
-  <p class="hoiatus"><#if warning??>${warning}</#if></p>
+  <p class="warning"><#if warning??>${warning}</#if></p>
 </body>
 </@html>
