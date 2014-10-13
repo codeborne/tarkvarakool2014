@@ -8,7 +8,7 @@ public class Calc extends Controller {
 
     public double currentValue;
     public double operand;
-    public String operator;
+    public String operator="";
     public String error;
     public boolean submit;
     public boolean reset;
@@ -22,18 +22,18 @@ public class Calc extends Controller {
 
     @Override
     public void post() {
-        Throwable operandError = errors.get("operand");
-        if (error != null) {
-            error = operandError.getMessage();
-        } else {
-            calculator = (Calculator) session.getAttribute("calc");
-            if (calculator == null) {
-                calculator = new Calculator();
-                session.setAttribute("calc", calculator);
-            }
+        calculator = (Calculator) session.getAttribute("calc");
+        if (calculator == null) {
+            calculator = new Calculator();
+            session.setAttribute("calc", calculator);
+        }
 
-            if (reset) {
-                calculator.result = 0;
+        if (reset) {
+            calculator.result = 0;
+        } else {
+            Throwable operandError = errors.get("operand");
+            if (operandError != null) {
+                error = "Please insert a valid number";
             } else {
                 try {
                     switch (operator) {
@@ -59,7 +59,7 @@ public class Calc extends Controller {
                     error = e.getMessage();
                 }
             }
-            currentValue = calculator.getResult();
         }
+        currentValue = calculator.getResult();
     }
 }
