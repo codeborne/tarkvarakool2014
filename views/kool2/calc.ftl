@@ -5,17 +5,9 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <style>
-        .alert {
-            width: 565px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            cursor: hand;
-        }
-    </style>
+    <link rel="stylesheet" href="/kool2.css"/>
 </head>
-<body style="margin: 50px;">
+<body>
 <form method="post" class="form-inline" role="form">
     <input value="${currentValue}" readonly class="form-control">
     <select name="operator" class="form-control">
@@ -27,7 +19,7 @@
     </select>
     <input name="operand" class="form-control">
     <button name="submit" value="true" class="form-control">=</button>
-    <button name="reset" value="true" class="form-control">Reset</button>
+    <button class="form-control" onclick="location='reset'; return false;">Reset</button>
 
 <#if error??>
     <div class="alert alert-danger alert-error fade in" data-dismiss="alert">
