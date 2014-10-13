@@ -11,14 +11,17 @@
 <body>
 <form method="post">
     <h3>Create a new goal</h3>
-    <label>Goal: <input type="text" name="name"></label><br>
-    <label>Budget: <input type="text" name="budget"></label><br>
-    <button>Submit</button>
+    <label>
+        Goal:
+        <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
+    </label><br>
+    <label>Budget: <input type="number" class="form-control" name="budget" <#if budget??>value=${budget}</#if>></label><br>
+    <button class="form-control">Submit</button>
 </form>
 
 <#if goals?has_content>
   <h3>Current list of goals:</h3>
-  <table>
+  <table class="table table-hover">
       <tr>
           <th>Goal</th>
           <th>Budget</th>
@@ -37,7 +40,7 @@
 
 <#if errorsList?has_content>
   <#list errorsList as error>
-    <div class="error">${error}</div>
+    <div class="alert alert-danger">${error}</div>
   </#list>
 </#if>
 

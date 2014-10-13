@@ -4,36 +4,34 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.math.BigDecimal;
 
 @Entity
 public class Goal {
 
   @Id
   @GeneratedValue
-  private Integer id;
+  private Long id;
 
   @Column(nullable = false, unique = true)
   private String name;
 
   @Column(nullable = false)
-  private BigDecimal budget;
+  private Integer budget;
+
+  private Goal() {
+  }
+
+  public Goal(String name, Integer budget) {
+    this.name = name;
+    this.budget = budget;
+  }
 
   public String getName() {
     return name;
   }
 
-  public BigDecimal getBudget() {
+  public Integer getBudget() {
     return budget;
   }
-
-  public Goal() {
-  }
-
-  public Goal(String name, BigDecimal budget) {
-    this.name = name;
-    this.budget = budget;
-  }
-
 
 }

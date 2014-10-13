@@ -5,14 +5,12 @@ import framework.Redirect;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Goals extends Controller {
-
   public String name;
-  public BigDecimal budget;
+  public Integer budget;
 
   public List<Goal> goals = new ArrayList<>();
   public List<String> errorsList = new ArrayList<>();
@@ -26,7 +24,7 @@ public class Goals extends Controller {
   public void post() {
     Throwable nameError = errors.get("name");
     if (nameError != null) {
-        errorsList.add(nameError.getMessage());
+      errorsList.add(nameError.getMessage());
     }
 
     Throwable budgetError = errors.get("budget");
@@ -47,7 +45,7 @@ public class Goals extends Controller {
     } catch (ConstraintViolationException e) {
       errorsList.add("This goal already exists");
     } catch (Exception e) {
-        errorsList.add(e.getMessage());
+      errorsList.add(e.getMessage());
     }
 
     if (errorsList.isEmpty())
