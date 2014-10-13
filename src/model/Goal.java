@@ -22,6 +22,7 @@ public class Goal {
   public Goal() {
   }
 
+
   public String getGoal(){
     return goal;
   }
