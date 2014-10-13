@@ -1,0 +1,15 @@
+package controllers.kool1;
+
+import framework.Controller;
+import framework.Redirect;
+
+public class Reset extends Controller {
+
+  @Override
+public void get(){
+  session.removeAttribute("calc");
+  throw new Redirect("calc");
+
+}
+
+}

@@ -13,12 +13,13 @@
 
   <input type="number" name="operand" placeholder="Sisesta number"> <br>
   <br>
-  <p class="alert"><#if message??>${message}</#if></p><br>
-  <br>
-  <input type="submit" value="Arvuta!">
-  <input type="reset" value="Reset" >
+  <p class="alert"><#if message??>${message}</#if></p>
 
-</form>
+  <input type="submit" value="Arvuta!"></form>
+  <div id="reset"><a href="reset" id="resetlink">Reset</a></div>
+
+
+
 
 
 

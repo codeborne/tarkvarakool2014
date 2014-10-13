@@ -8,30 +8,22 @@ public class Calc extends Controller {
   public String operator;
   public String note;
   public String message;
-  public boolean reset;
 
 
   public Calculator getCalculator() {
     Calculator calculator = (Calculator) session.getAttribute("calc");
     if (calculator == null) {
-      calculator = createCalculator();
+      calculator = new Calculator();
+      session.setAttribute("calc", calculator);
     }
     return calculator;
   }
 
-  public Calculator createCalculator() {
-    Calculator calculator = new Calculator();
-    session.setAttribute("calc", calculator);
-    return calculator;
-  }
+
 
   public void post() {
 
-    if (reset) {
-      createCalculator();
-    }
 
-    else {
       Calculator calculator = getCalculator();
 
       if (operand == null && operator == null) {
@@ -75,7 +67,7 @@ public class Calc extends Controller {
         }
       }
 
-    }
+
   }
 }
 
