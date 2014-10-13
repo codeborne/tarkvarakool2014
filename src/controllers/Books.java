@@ -12,5 +12,7 @@ public class Books extends Controller {
   @Override
   public void get() {
     books = hibernate.createCriteria(Book.class).list();
+    Book book = new Book("Hello", "World");
+    hibernate.save(book);
   }
 }

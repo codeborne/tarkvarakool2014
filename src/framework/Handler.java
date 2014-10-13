@@ -51,9 +51,11 @@ public class Handler extends AbstractHandler {
   @Override
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     long t = -System.currentTimeMillis();
+    Session hibernate = null;
     try {
       request.setCharacterEncoding(THE_ENCODING);
       bindFrameworkFields(Controller.requestState.get(), request, response);
+      hibernate = openHibernateSession(Controller.requestState.get());
       Object controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
       invokeController(controller, baseRequest);
@@ -83,9 +85,19 @@ public class Handler extends AbstractHandler {
       response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
     }
     finally {
+      closeHibernateSession(hibernate);
       t += System.currentTimeMillis();
       LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
+  }
+
+  private Session openHibernateSession(Controller controller) {
+    return controller.hibernate = hibernateSessionFactory.openSession();
+  }
+
+  private void closeHibernateSession(Session hibernate) {
+      if (hibernate != null)
+        hibernate.close();
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -139,7 +151,6 @@ public class Handler extends AbstractHandler {
       con.response = response;
       con.session = request.getSession();
       con.messages = messages.getResolverFor(request);
-      con.hibernate = hibernateSessionFactory.openSession();
     }
   }
 
