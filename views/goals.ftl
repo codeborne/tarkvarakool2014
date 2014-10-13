@@ -1,14 +1,4 @@
-<html>
-<head>
-    <title>Add goal</title>
-    <style>
-        .error {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+<@html>
 <form method="post">
     <h3>Create a new goal</h3>
     <label>
@@ -44,5 +34,4 @@
   </#list>
 </#if>
 
-</body>
-</html>
+</@html>
