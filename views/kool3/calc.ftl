@@ -26,9 +26,7 @@
 </form>
 
 <form method="get" action="reset">
-  <button>Reset</button>
+  <button class="btn">Reset</button>
 </form>
-
-<button onclick="javascript: location='reset';">test</button>
 
 </@html>

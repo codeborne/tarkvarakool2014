@@ -11,7 +11,6 @@ public class Calc extends Controller {
     public String operator="";
     public String error;
     public boolean submit;
-    public boolean reset;
 
     @Override
     public void get() {
@@ -28,36 +27,32 @@ public class Calc extends Controller {
             session.setAttribute("calc", calculator);
         }
 
-        if (reset) {
-            calculator.result = 0;
+        Throwable operandError = errors.get("operand");
+        if (operandError != null) {
+            error = "Please insert a valid number";
         } else {
-            Throwable operandError = errors.get("operand");
-            if (operandError != null) {
-                error = "Please insert a valid number";
-            } else {
-                try {
-                    switch (operator) {
-                        case "+":
-                            calculator.add(operand);
-                            break;
-                        case "-":
-                            calculator.subtract(operand);
-                            break;
-                        case "*":
-                            calculator.multiply(operand);
-                            break;
-                        case "/":
-                            calculator.divide(operand);
-                            break;
-                        case "^":
-                            calculator.riseToThePower(operand);
-                            break;
-                        default:
-                            throw new Exception("Unsupported operator");
-                    }
-                } catch (Exception e) {
-                    error = e.getMessage();
+            try {
+                switch (operator) {
+                    case "+":
+                        calculator.add(operand);
+                        break;
+                    case "-":
+                        calculator.subtract(operand);
+                        break;
+                    case "*":
+                        calculator.multiply(operand);
+                        break;
+                    case "/":
+                        calculator.divide(operand);
+                        break;
+                    case "^":
+                        calculator.riseToThePower(operand);
+                        break;
+                    default:
+                        throw new Exception("Unsupported operator");
                 }
+            } catch (Exception e) {
+                error = e.getMessage();
             }
         }
         currentValue = calculator.getResult();

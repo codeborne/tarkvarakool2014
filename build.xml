@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tarkvarakool" default="all">
+  
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module tarkvarakool -->
+  
+  <dirname property="module.tarkvarakool.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.tarkvarakool" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+  
+  <property name="tarkvarakool.output.dir" value="${module.tarkvarakool.basedir}/out/production/tarkvarakool"/>
+  <property name="tarkvarakool.testoutput.dir" value="${module.tarkvarakool.basedir}/out/test/tarkvarakool"/>
+  
+  <path id="tarkvarakool.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="tarkvarakool.module.production.classpath">
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="tarkvarakool.runtime.production.module.classpath">
+    <pathelement location="${tarkvarakool.output.dir}"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="tarkvarakool.module.classpath">
+    <pathelement location="${tarkvarakool.output.dir}"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  <path id="tarkvarakool.runtime.module.classpath">
+    <pathelement location="${tarkvarakool.testoutput.dir}"/>
+    <pathelement location="${tarkvarakool.output.dir}"/>
+    <fileset dir="${basedir}/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.tarkvarakool">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.tarkvarakool">
+    <patternset refid="excluded.from.module.tarkvarakool"/>
+  </patternset>
+  
+  <path id="tarkvarakool.module.sourcepath">
+    <dirset dir="${module.tarkvarakool.basedir}">
+      <include name="src"/>
+      <include name="conf"/>
+    </dirset>
+  </path>
+  
+  <path id="tarkvarakool.module.test.sourcepath">
+    <dirset dir="${module.tarkvarakool.basedir}">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.tarkvarakool" depends="compile.module.tarkvarakool.production,compile.module.tarkvarakool.tests" description="Compile module tarkvarakool"/>
+  
+  <target name="compile.module.tarkvarakool.production" description="Compile module tarkvarakool; production classes">
+    <mkdir dir="${tarkvarakool.output.dir}"/>
+    <javac destdir="${tarkvarakool.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.tarkvarakool}"/>
+      <bootclasspath refid="tarkvarakool.module.bootclasspath"/>
+      <classpath refid="tarkvarakool.module.production.classpath"/>
+      <src refid="tarkvarakool.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tarkvarakool"/>
+    </javac>
+    
+    <copy todir="${tarkvarakool.output.dir}">
+      <fileset dir="${module.tarkvarakool.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.tarkvarakool.basedir}/conf">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.tarkvarakool.tests" depends="compile.module.tarkvarakool.production" description="compile module tarkvarakool; test classes" unless="skip.tests">
+    <mkdir dir="${tarkvarakool.testoutput.dir}"/>
+    <javac destdir="${tarkvarakool.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.tarkvarakool}"/>
+      <bootclasspath refid="tarkvarakool.module.bootclasspath"/>
+      <classpath refid="tarkvarakool.module.classpath"/>
+      <src refid="tarkvarakool.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.tarkvarakool"/>
+    </javac>
+    
+    <copy todir="${tarkvarakool.testoutput.dir}">
+      <fileset dir="${module.tarkvarakool.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.tarkvarakool" description="cleanup module">
+    <delete dir="${tarkvarakool.output.dir}"/>
+    <delete dir="${tarkvarakool.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.tarkvarakool" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.tarkvarakool" description="build all modules"/>
+
+  <target name="test" depends="build.modules">
+    <delete dir="testresults"/>
+    <mkdir dir="testresults"/>
+    <junit haltonfailure="true" showoutput="true" fork="yes">
+      <classpath>
+        <path location="${tarkvarakool.output.dir}"/>
+        <path location="${tarkvarakool.testoutput.dir}"/>
+        <fileset dir="lib" includes="**/*.jar"/>
+      </classpath>
+      <formatter type="xml"/>
+      <batchtest todir="testresults">
+        <fileset dir="${tarkvarakool.testoutput.dir}" includes="**/*Test.class"/>
+      </batchtest>
+    </junit>
+  </target>
+  
+  <target name="all" depends="build.modules,test" description="build all"/>
+</project>
