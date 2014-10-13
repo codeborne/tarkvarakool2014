@@ -11,14 +11,25 @@ public class Goal {
   @GeneratedValue
   private Long id;
 
- private String goal;
-  private int sum;
+  //not null
+  private String goalText;
 
-  public String getGoal(){
-    return goal;
-  }
-  public int getSum(){
-    return sum;
+  private int budget;
+
+
+  public String getGoalText() {
+    return goalText;
   }
 
+  public void setGoalText(String goalText) {
+    this.goalText = goalText;
+  }
+
+  public int getBudget() {
+    return budget;
+  }
+
+  public void setBudget(int budget) {
+    this.budget = budget;
+  }
 }
