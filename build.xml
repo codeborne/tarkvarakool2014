@@ -179,6 +179,22 @@
   <target name="clean" depends="clean.module.tarkvarakool" description="cleanup all"/>
   
   <target name="build.modules" depends="init, clean, compile.module.tarkvarakool" description="build all modules"/>
+
+  <target name="test" depends="build.modules">
+    <delete dir="testresults"/>
+    <mkdir dir="testresults"/>
+    <junit haltonfailure="true" showoutput="true" fork="yes">
+      <classpath>
+        <path location="${tarkvarakool.output.dir}"/>
+        <path location="${tarkvarakool.testoutput.dir}"/>
+        <fileset dir="lib" includes="**/*.jar"/>
+      </classpath>
+      <formatter type="xml"/>
+      <batchtest todir="testresults">
+        <fileset dir="${tarkvarakool.testoutput.dir}" includes="**/*Test.class"/>
+      </batchtest>
+    </junit>
+  </target>
   
-  <target name="all" depends="build.modules" description="build all"/>
+  <target name="all" depends="build.modules,test" description="build all"/>
 </project>
