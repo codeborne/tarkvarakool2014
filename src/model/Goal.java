@@ -14,6 +14,14 @@ public class Goal {
  private String goal;
   private int sum;
 
+  public Goal(String goal, int sum) {
+    this.goal = goal;
+    this.sum = sum;
+  }
+
+  public Goal() {
+  }
+
   public String getGoal(){
     return goal;
   }
