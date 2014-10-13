@@ -1,6 +1,6 @@
 <@html>
   <#if calculator.result??>${calculator.result}</#if><br>
-  <#if note??>${note}</#if><br>
+  <p class="alert"><#if note??>${note}</#if></p><br>
 
 <form method="post">
 
@@ -12,10 +12,14 @@
   <br>
 
   <input type="number" name="operand" placeholder="Sisesta number"> <br>
-  <input type="submit" value="Arvuta!">
+  <br>
+  <p class="alert"><#if message??>${message}</#if></p>
+
+  <input type="submit" value="Arvuta!"></form>
+  <div id="reset"><a href="reset" id="resetlink">Reset</a></div>
 
 
-</form>
+
 
 
 

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.InvocationTargetException;
 
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
@@ -17,14 +18,15 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class HandlerTest {
-
   private Handler handler;
   Request baseRequest = mock(Request.class);
   private HttpServletRequest request = mock(HttpServletRequest.class);
   private HttpServletResponse response = mock(HttpServletResponse.class);
+  private HttpSession session = mock(HttpSession.class);
 
   @Before
   public void setUp() throws Exception {
+    when(request.getSession()).thenReturn(session);
     handler = spy(new Handler());
   }
 
@@ -60,7 +62,6 @@ public class HandlerTest {
 
   @Test
   public void bindRequestToController() throws Exception {
-    HttpServletRequest request = mock(HttpServletRequest.class);
     Controller foo = new Controller() {};
     handler.bindFrameworkFields(foo, request, response);
     assertThat(foo.request, sameInstance(request));

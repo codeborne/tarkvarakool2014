@@ -23,6 +23,8 @@ import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
@@ -208,11 +210,25 @@ public class Handler extends AbstractHandler {
     Session session = hibernateSessionFactory.openSession();
     Transaction transaction = session.beginTransaction();
     Scanner scanner = new Scanner(getClass().getResourceAsStream("/init.sql"));
-    while (scanner.hasNextLine()) {
-      session.createSQLQuery(scanner.nextLine()).executeUpdate();
-    }
+    List<String> initCommands = getInitSQL(scanner);
+    scanner.close();
+    for (String command : initCommands) session.createSQLQuery(command).executeUpdate();
     transaction.commit();
     session.close();
+  }
+
+  private List<String> getInitSQL(Scanner scanner) {
+    List<String> commands = new ArrayList<>();
+    String command = "";
+    while (scanner.hasNextLine()) {
+      String line = scanner.nextLine().trim();
+      command += " " + line;
+      if (line.endsWith(";")) {
+        commands.add(command.trim());
+        command = "";
+      }
+    }
+    return commands;
   }
 }
 
