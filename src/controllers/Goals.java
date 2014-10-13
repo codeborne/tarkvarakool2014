@@ -5,11 +5,13 @@ import framework.Redirect;
 import model.Goal;
 
 import java.util.List;
-import java.util.Map;
 
 public class Goals extends Controller {
 
   public List<Goal> goals;
+  public String goal;
+  public Integer sum;
+  public String warning;
 
   @Override
   public void get() {
@@ -18,10 +20,13 @@ public class Goals extends Controller {
 
   @Override
   public void post() {
-    Map<String, String[]> map = request.getParameterMap();
-    String[] sums = map.get("sum");
-    Goal goal = new Goal(map.get("goal")[0], Integer.parseInt(sums[0]));
-    hibernate.saveOrUpdate(goal);
-    throw new Redirect("goals");
+
+    if (goal == null || sum == null) {
+      warning= "Palun sisesta nõutud väljad";
+    }
+    else {
+      hibernate.saveOrUpdate(new Goal(goal, sum));
+      throw new Redirect("goals");
+    }
   }
 }

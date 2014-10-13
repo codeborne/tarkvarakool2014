@@ -1,14 +1,12 @@
 <@html>
 
 
-<form method="post">
-  <h2>Sisestage eesmärk</h2><br>
-  <label> Eesmärk<input type="text" name="goal"></label><br>
+<form method="post" xmlns="http://www.w3.org/1999/html">
 
-  <h2>Sisestage eelarve summa</h2><br>
-  <label> Eelarve<input type="text" name="sum"> </label><br>
-  <button>Sisesta</button>
-
+  <label> Eesmärk<textarea name="goal" placeholder="Sisestage eesmärk"></textarea></label><br>
+  <label> Eelarve<input type="text" name="sum" placeholder="Sisestage eelarve summa"></label><br>
+  <button>Sisesta</button><br>
+  <#if warning??>${warning}</#if><br
 </form> <br>
 
 Sisestatud eesmärgid:
