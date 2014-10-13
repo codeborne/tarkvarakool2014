@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,23 +12,26 @@ public class Goal {
   @GeneratedValue
   private Long id;
 
- private String goal;
-  private int sum;
+  @Column(nullable = false, unique = true)
+  private String name;
 
-  public Goal(String goal, int sum) {
-    this.goal = goal;
-    this.sum = sum;
+  @Column(nullable = false)
+  private Integer budget;
+
+  private Goal() {
   }
 
-  public Goal() {
+  public Goal(String name, Integer budget) {
+    this.name = name;
+    this.budget = budget;
   }
 
-
-  public String getGoal(){
-    return goal;
+  public String getName() {
+    return name;
   }
-  public int getSum(){
-    return sum;
+
+  public Integer getBudget() {
+    return budget;
   }
 
 }

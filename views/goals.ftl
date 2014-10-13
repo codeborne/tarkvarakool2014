@@ -1,38 +1,48 @@
-<@html>
+<html>
+<head>
+    <title>Add goal</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<form method="post">
+    <h3>Create a new goal</h3>
+    <label>
+        Goal:
+        <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
+    </label><br>
+    <label>Budget: <input type="number" class="form-control" name="budget" <#if budget??>value=${budget}</#if>></label><br>
+    <button class="form-control">Submit</button>
+</form>
 
-
-<form method="post" xmlns="http://www.w3.org/1999/html">
-
-  <label> Eesmärk<textarea name="goal" placeholder="Sisestage eesmärk"></textarea></label><br>
-  <label> Eelarve<input type="text" name="sum" placeholder="Sisestage eelarve summa"></label><br>
-  <button>Sisesta</button><br>
-  <#if warning??>${warning}</#if><br
-</form> <br>
-
-Sisestatud eesmärgid:
-
-
-  <#if goals??>
-
-  <table>
-    <tr>
-      <th>Eesmärk</th>
-      <th>Summa</th>
-    </tr>
-
-    <#list goals as goal>
-
+<#if goals?has_content>
+  <h3>Current list of goals:</h3>
+  <table class="table table-hover">
       <tr>
-        <td>${goal.goal}</td>
-        <td>${goal.sum}</td>
+          <th>Goal</th>
+          <th>Budget</th>
       </tr>
+    <#list goals as goal>
+        <tr>
+            <td>${goal.name}</td>
+            <td>${goal.budget}</td>
+        </tr>
     </#list>
   </table>
-  </#if>
+<#else>
+  <h3>There are no goals in the database yet</h3>
+</#if>
 
 
+<#if errorsList?has_content>
+  <#list errorsList as error>
+    <div class="alert alert-danger">${error}</div>
+  </#list>
+</#if>
 
-
-
-
-</@html>
+</body>
+</html>
