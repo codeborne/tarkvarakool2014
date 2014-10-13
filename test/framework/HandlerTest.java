@@ -56,15 +56,10 @@ public class HandlerTest {
   }
 
   @Test
-  public void bindRequestWithoutRequestField() throws Exception {
-    handler.bindFrameworkFields(new Object(), request, response);
-  }
-
-  @Test
   public void bindRequestToController() throws Exception {
-    Controller foo = new Controller() {};
-    handler.bindFrameworkFields(foo, request, response);
-    assertThat(foo.request, sameInstance(request));
+    RequestState state = new RequestState() {};
+    handler.bindRequestState(state, request, response);
+    assertThat(state.request, sameInstance(request));
   }
 
   @Test
