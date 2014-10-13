@@ -29,4 +29,30 @@
 .radioButton {
   padding: 15px;
   display:inline-block;
+
 }
+
+.alert {
+  color:red;
+}
+
+#reset {
+  height:20px;
+  width: 64px;
+  background-color:lightgrey;
+  margin-top:20px;
+  border:1px solid grey;
+  color:black;
+  border-radius: 3px;
+  font-size:13px;
+  font-family: Arial;
+  text-align:center;
+  line-height:20px;
+
+}
+#resetlink{
+ padding: 10px 15px 10px 15px ;
+  text-decoration: none;
+  color:black;
+}
+
