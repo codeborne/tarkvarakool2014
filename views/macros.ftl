@@ -1,0 +1,1 @@
+<#macro m key>${messages.get(key)!key}</#macro>

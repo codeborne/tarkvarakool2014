@@ -1,10 +1,7 @@
 package framework;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static java.util.Collections.unmodifiableMap;
 
@@ -19,12 +16,14 @@ public class Messages  {
   }
 
   public String get(String locale, String key) {
-    ResourceBundle localizedBundle = bundles.get(locale);
-    String value = localizedBundle != null ? localizedBundle.getString(key) : null;
-    if (value == null) {
-      value = bundles.get(DEFAULT).getString(key);
+    try {
+      ResourceBundle bundle = bundles.get(locale);
+      if (bundle == null) bundle = bundles.get(DEFAULT);
+      return bundle.getString(key);
     }
-    return value;
+    catch (MissingResourceException e) {
+      return locale.equals(DEFAULT) ? null : get(DEFAULT, key);
+    }
   }
 
   public Resolver getResolverFor(String locale) {
