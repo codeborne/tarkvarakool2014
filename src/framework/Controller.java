@@ -1,42 +1,10 @@
 package framework;
 
-import org.hibernate.Session;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class Controller {
-  protected HttpServletRequest request;
-  protected HttpServletResponse response;
-  protected HttpSession session;
-  protected Session hibernate;
-  public Messages.Resolver messages;
-
+public abstract class Controller extends RequestState {
   protected Map<String, Throwable> errors = new LinkedHashMap<>();
-
-  static ThreadLocal<Controller> requestState = new ThreadLocal<Controller>() {
-    @Override protected Controller initialValue() {
-      return new Controller() {
-        @Override void initFieldsBeforeSubclasses() {
-        }
-      };
-    }
-  };
-
-  public Controller() {
-    initFieldsBeforeSubclasses();
-  }
-
-  void initFieldsBeforeSubclasses() {
-    request = requestState.get().request;
-    response = requestState.get().response;
-    session = requestState.get().session;
-    hibernate = requestState.get().hibernate;
-    messages = requestState.get().messages;
-  }
 
   public void get() {
   }

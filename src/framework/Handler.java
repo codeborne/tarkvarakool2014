@@ -51,11 +51,12 @@ public class Handler extends AbstractHandler {
   @Override
   public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     long t = -System.currentTimeMillis();
+    RequestState requestState = RequestState.threadLocal.get();
     Session hibernate = null;
     try {
       request.setCharacterEncoding(THE_ENCODING);
-      bindFrameworkFields(Controller.requestState.get(), request, response);
-      hibernate = openHibernateSession(Controller.requestState.get());
+      bindRequestState(requestState, request, response);
+      hibernate = openHibernateSession(requestState);
       Object controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
       invokeController(controller, baseRequest);
@@ -91,13 +92,12 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  private Session openHibernateSession(Controller controller) {
-    return controller.hibernate = hibernateSessionFactory.openSession();
+  private Session openHibernateSession(RequestState state) {
+    return state.hibernate = hibernateSessionFactory.openSession();
   }
 
   private void closeHibernateSession(Session hibernate) {
-      if (hibernate != null)
-        hibernate.close();
+      if (hibernate != null) hibernate.close();
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
@@ -144,14 +144,11 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  void bindFrameworkFields(Object controller, HttpServletRequest request, HttpServletResponse response) {
-    if (controller instanceof Controller) {
-      Controller con = (Controller) controller;
-      con.request = request;
-      con.response = response;
-      con.session = request.getSession();
-      con.messages = messages.getResolverFor(request);
-    }
+  void bindRequestState(RequestState state, HttpServletRequest request, HttpServletResponse response) {
+    state.request = request;
+    state.response = response;
+    state.session = request.getSession();
+    state.messages = messages.getResolverFor(request);
   }
 
   String getTemplateName(String path) {
