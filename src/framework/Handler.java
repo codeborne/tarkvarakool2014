@@ -12,6 +12,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
+import org.springsource.loaded.ReloadEventProcessorPlugin;
+import org.springsource.loaded.agent.SpringLoadedPreProcessor;
 
 import javax.persistence.Entity;
 import javax.servlet.ServletException;
@@ -57,7 +59,7 @@ public class Handler extends AbstractHandler {
       Template template = freemarker.getTemplate(getTemplateName(target));
       response.setContentType("text/html");
       response.setCharacterEncoding(THE_ENCODING);
-      template.process(controller, new OutputStreamWriter(response.getOutputStream(), "utf-8"));
+      template.process(controller, new OutputStreamWriter(response.getOutputStream(), THE_ENCODING));
     }
     catch (ClassNotFoundException|NoSuchMethodException ignored) {
       redirectIfPossible(target, baseRequest, response);
@@ -156,13 +158,12 @@ public class Handler extends AbstractHandler {
   }
 
   private void initializeFreemarker() throws IOException {
-    DefaultObjectWrapper wrapper = (DefaultObjectWrapper) freemarker.getObjectWrapper();
-    wrapper.setExposeFields(true);
     freemarker.setDefaultEncoding(THE_ENCODING);
     freemarker.setTemplateExceptionHandler(devMode ? HTML_DEBUG_HANDLER : RETHROW_HANDLER);
     freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
     freemarker.setTemplateLoader(new FileTemplateLoader(new File("views")) {
-      @Override public Reader getReader(Object templateSource, String encoding) throws IOException {
+      @Override
+      public Reader getReader(Object templateSource, String encoding) throws IOException {
         Reader reader = super.getReader(templateSource, encoding);
         String template = IOUtils.toString(reader);
         reader.close();
@@ -170,6 +171,28 @@ public class Handler extends AbstractHandler {
       }
     });
     freemarker.addAutoInclude("decorator.ftl");
+    freemarker.addAutoInclude("macros.ftl");
+    initFreemarkerObjectWarpper();
+
+    if (devMode) {
+      SpringLoadedPreProcessor.registerGlobalPlugin(new ReloadEventProcessorPlugin() {
+        @Override public void reloadEvent(String className, Class<?> clazz, String id) {
+          if (!className.startsWith("controllers.")) return;
+          LOG.info(className + " recompiled, reinitializing freemarker");
+          initFreemarkerObjectWarpper();
+        }
+
+        @Override public boolean shouldRerunStaticInitializer(String className, Class<?> clazz, String id) {
+          return false;
+        }
+      });
+    }
+  }
+
+  private void initFreemarkerObjectWarpper() {
+    DefaultObjectWrapper wrapper = new DefaultObjectWrapper();
+    wrapper.setExposeFields(true);
+    freemarker.setObjectWrapper(wrapper);
   }
 
   private void initializeHibernate() throws IOException {
