@@ -90,7 +90,10 @@ public class Handler extends AbstractHandler {
   }
 
   private void closeHibernateSession(Session hibernate) {
-      if (hibernate != null) hibernate.close();
+    if (hibernate != null) {
+      hibernate.flush();
+      hibernate.close();
+    }
   }
 
   void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
