@@ -11,26 +11,20 @@
           <th>Eesmärk</th>
           <th>Eelarve</th>
           <th></th>
-          <th></th>
+          <th>Delete</th>
       </tr>
     <#list goals as goal>
         <tr>
             <td>${goal.name}</td>
             <td>${goal.budget}</td>
             <td>
-              <form action="modify">
-                <button type="submit" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-pencil"></span> Muuda
-                </button>
-              </form>
+                <form action="modify">
+                    <button type="submit" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span> Muuda
+                    </button>
+                </form>
             </td>
-            <td>
-              <form action="delete">
-                <button type="submit" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-remove"></span> Kustuta
-                </button>
-              </form>
-            </td>
+           <td></td> 
         </tr>
     </#list>
   </table>
