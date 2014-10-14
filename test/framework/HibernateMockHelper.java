@@ -21,4 +21,9 @@ public class HibernateMockHelper {
     return captor.getAllValues();
   }
 
+  public static List<Object> getUpdatedEntities(Session hibernateMock) {
+    ArgumentCaptor<Object> captor = ArgumentCaptor.forClass(Object.class);
+    verify(hibernateMock).update(captor.capture());
+    return captor.getAllValues();
+  }
 }
