@@ -135,4 +135,9 @@ public class HandlerTest {
     Object controller = handler.createController("/mock-controller");
     assertThat(controller, instanceOf(MockController.class));
   }
+
+  @Test(expected = ClassNotFoundException.class)
+  public void createControllerDoesNotAllowUppercaseInURL() throws Exception {
+    handler.createController("/MockController");
+  }
 }
