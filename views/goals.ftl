@@ -25,7 +25,14 @@
                 </button>
               </form>
             </td>
-           <td></td> 
+           <td>
+               <form action="delete" method="post">
+                   <input type="hidden" name="id" value="${goal.id}"/>
+                   <button type = "submit" class="btn btn-default btn-sm">
+                     <span class="glyphicon glyphicon-trash"></span>
+                       </button>
+
+           </td>
         </tr>
     </#list>
   </table>
