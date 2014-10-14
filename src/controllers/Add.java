@@ -8,7 +8,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Goals extends Controller {
+public class Add extends Controller {
   public String name;
   public Integer budget;
 
