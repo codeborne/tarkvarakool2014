@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public abstract class Controller extends RequestState {
-  protected Map<String, Throwable> errors = new LinkedHashMap<>();
+  public Map<String, Throwable> errors = new LinkedHashMap<>();
 
   public void get() {
   }
