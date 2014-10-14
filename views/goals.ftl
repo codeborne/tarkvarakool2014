@@ -1,7 +1,11 @@
 <@html>
+<form action="add">
+    <input type="submit" class="btn btn-default" value="add">
+</form>
 
 <#if goals?has_content>
   <h3>Current list of goals:</h3>
+
   <table class="table table-hover">
       <tr>
           <th>Goal</th>

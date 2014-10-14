@@ -17,9 +17,9 @@ public class Add extends Controller {
 
   @Override
   public void post() {
-    Throwable nameError = errors.get("name");
-    if (nameError != null) {
-      errorsList.add(nameError.getMessage());
+
+    if (errors.containsKey("name")) {
+      errorsList.add(errors.get("name").getMessage());
     }
 
     Throwable budgetError = errors.get("budget");
