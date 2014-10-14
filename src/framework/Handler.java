@@ -105,6 +105,7 @@ public class Handler extends AbstractHandler {
   }
 
   Object createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    if (!target.toLowerCase().equals(target)) throw new ClassNotFoundException("all URLs must be lowercase");
     String className = getClassName(target);
     Class controllerClass = Class.forName(className);
     return controllerClass.newInstance();
