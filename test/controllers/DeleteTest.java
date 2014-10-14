@@ -32,4 +32,6 @@ public class DeleteTest {
       assertSame(expectedGoal, realGoal);
     }
   }
+
+
 }

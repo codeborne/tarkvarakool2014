@@ -16,4 +16,5 @@ public class Delete extends Controller {
     throw new Redirect("goals");
   }
 
+
 }
