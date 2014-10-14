@@ -10,19 +10,20 @@
       <tr>
           <th>Goal</th>
           <th>Budget</th>
-          <th></th>
+          <th>Modify</th>
           <th>Delete</th>
       </tr>
     <#list goals as goal>
         <tr>
             <td>${goal.name}</td>
-            <td>${goal.budget}</td>
+            <td>${goal.budget?c}</td>
             <td>
-                <form action="modify">
-                    <button type="submit" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-pencil"></span> Muuda
-                    </button>
-                </form>
+              <form action="modify">
+                <input type="hidden" value="${goal.id}" name="id">
+                <button type="submit" class="btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-pencil"></span> Muuda
+                </button>
+              </form>
             </td>
            <td></td> 
         </tr>
