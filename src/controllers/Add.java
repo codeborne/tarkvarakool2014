@@ -16,11 +16,6 @@ public class Add extends Controller {
   public List<String> errorsList = new ArrayList<>();
 
   @Override
-  public void get() {
-    goals = hibernate.createCriteria(Goal.class).list();
-  }
-
-  @Override
   public void post() {
     Throwable nameError = errors.get("name");
     if (nameError != null) {
