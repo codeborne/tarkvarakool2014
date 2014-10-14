@@ -1,44 +1,49 @@
 package framework;
 
-import freemarker.cache.FileTemplateLoader;
-import freemarker.template.*;
-import org.apache.commons.io.IOUtils;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springsource.loaded.ReloadEventProcessorPlugin;
-import org.springsource.loaded.agent.SpringLoadedPreProcessor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
-import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
+import static framework.FreemarkerHelper.initializeFreemarker;
+import static framework.HibernateHelper.buildSessionFactory;
+import static framework.HibernateHelper.initDatabase;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 public class Handler extends AbstractHandler {
-  static final String THE_ENCODING = "UTF-8";
   private final static Logger LOG = LogManager.getLogger();
 
-  private Configuration freemarker = new Configuration();
-  private Messages messages = new Messages();
-  private Binder binder = new Binder("dd.MM.yyyy");
-  private SessionFactory hibernateSessionFactory;
+  public static final String THE_ENCODING = "UTF-8";
 
   private boolean devMode = isRunningInDebugMode();
 
+  private Configuration freemarker;
+  private SessionFactory hibernateSessionFactory;
+
+  private Messages messages = new Messages();
+
+  private Binder binder = new Binder("dd.MM.yyyy");
+
   public Handler() throws IOException {
-    initializeFreemarker();
-    initializeHibernate();
+    freemarker = initializeFreemarker(devMode);
+    hibernateSessionFactory = buildSessionFactory();
+    initDatabase(hibernateSessionFactory);
   }
 
   @Override
@@ -158,49 +163,6 @@ public class Handler extends AbstractHandler {
 
   private boolean isRunningInDebugMode() {
     return ManagementFactory.getRuntimeMXBean().getInputArguments().toString().contains("jdwp");
-  }
-
-  private void initializeFreemarker() throws IOException {
-    freemarker.setDefaultEncoding(THE_ENCODING);
-    freemarker.setTemplateExceptionHandler(devMode ? HTML_DEBUG_HANDLER : RETHROW_HANDLER);
-    freemarker.setIncompatibleImprovements(new Version(2, 3, 20));
-    freemarker.setTemplateLoader(new FileTemplateLoader(new File("views")) {
-      @Override
-      public Reader getReader(Object templateSource, String encoding) throws IOException {
-        Reader reader = super.getReader(templateSource, encoding);
-        String template = IOUtils.toString(reader);
-        reader.close();
-        return new StringReader("<#escape value as value?html>" + template + "</#escape>");
-      }
-    });
-    freemarker.addAutoInclude("decorator.ftl");
-    freemarker.addAutoInclude("macros.ftl");
-    initFreemarkerObjectWarpper();
-
-    if (devMode) {
-      SpringLoadedPreProcessor.registerGlobalPlugin(new ReloadEventProcessorPlugin() {
-        @Override public void reloadEvent(String className, Class<?> clazz, String id) {
-          if (!className.startsWith("controllers.")) return;
-          LOG.info(className + " recompiled, reinitializing freemarker");
-          initFreemarkerObjectWarpper();
-        }
-
-        @Override public boolean shouldRerunStaticInitializer(String className, Class<?> clazz, String id) {
-          return false;
-        }
-      });
-    }
-  }
-
-  private void initFreemarkerObjectWarpper() {
-    DefaultObjectWrapper wrapper = new DefaultObjectWrapper();
-    wrapper.setExposeFields(true);
-    freemarker.setObjectWrapper(wrapper);
-  }
-
-  private void initializeHibernate() throws IOException {
-    hibernateSessionFactory = HibernateHelper.buildSessionFactory();
-    HibernateHelper.initDatabase(hibernateSessionFactory);
   }
 }
 
