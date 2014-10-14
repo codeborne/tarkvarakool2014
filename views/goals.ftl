@@ -10,8 +10,8 @@
       <tr>
           <th>Eesmärk</th>
           <th>Eelarve</th>
-          <th></th>
-          <th>Delete</th>
+          <th>Muuda</th>
+          <th>Kustuta</th>
       </tr>
     <#list goals as goal>
         <tr>
