@@ -1,11 +1,11 @@
 <@html>
 <form method="post">
-    <h3>Muuda eesmark</h3>
+    <h3>Muuda eesmärk</h3>
     <label>
-        Goal:
+        Eesmärk:
         <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
     </label><br>
-    <label>Budget: <input type="number" class="form-control" name="budget" <#if budget??>value=${budget?c}</#if>></label><br>
+    <label>Eelarve: <input type="number" class="form-control" name="budget" <#if budget??>value=${budget?c}</#if>></label><br>
     <button class="form-control">Muuda</button>
 </form>
 
