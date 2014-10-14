@@ -6,11 +6,13 @@
       <tr>
           <th>Goal</th>
           <th>Budget</th>
+          <th>Delete</th>
       </tr>
     <#list goals as goal>
         <tr>
             <td>${goal.name}</td>
             <td>${goal.budget}</td>
+            <td></td>
         </tr>
     </#list>
   </table>
