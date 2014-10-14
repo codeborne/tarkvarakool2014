@@ -28,40 +28,34 @@ public class Modify extends Controller {
   }
 
   @Override
-  public void post() {
-    Throwable nameError = errors.get("name");
-    if (nameError != null) {
-      errorsList.add(nameError.getMessage());
-    }
 
-    Throwable budgetError = errors.get("budget");
-    if (budgetError != null) {
-      if (budgetError instanceof NumberFormatException) {
-        errorsList.add("Please use a valid number for budget field");
-      } else {
-        errorsList.add(budgetError.getMessage());
-      }
+  public void post() {
+    if (name == null || name.length() == 0){
+      errorsList.add("Sisestage eesmärk.");
+    }
+    if (budget == null || budget<=0 || errors.get("budget") instanceof NumberFormatException){
+      errorsList.add("Sisestage korrektne eelarve.");
+    }
+    else if (errors.containsKey("name") || errors.containsKey("budget")) {
+      errorsList.add("Tekkis viga.");
     }
 
     try {
-      if (name.length() == 0)
-        throw new Exception("Goal field cannot be empty");
-
       if (errorsList.isEmpty()) {
         Goal goal = (Goal) hibernate.get(Goal.class, id);
         goal.setBudget(budget);
         goal.setName(name);
         hibernate.update(goal);
       }
-    } catch (ConstraintViolationException e) {
-      errorsList.add("This goal already exists");
-    } catch (Exception e) {
-      errorsList.add(e.getMessage());
+    }
+    catch (ConstraintViolationException e) {
+      errorsList.add("See eesmärk on juba sisestatud.");
+    }
+    catch (Exception e) {
+      errorsList.add("Tekkis viga.");
     }
 
     if (errorsList.isEmpty())
       throw new Redirect("goals");
-    else
-      goals = hibernate.createCriteria(Goal.class).list();
   }
 }
