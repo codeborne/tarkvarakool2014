@@ -1,6 +1,6 @@
 <@html>
 <form action="add">
-    <input type="submit" class="btn btn-default" value="add">
+    <input type="submit" class="btn btn-default" value="Lisa">
 </form>
 
 <#if goals?has_content>
