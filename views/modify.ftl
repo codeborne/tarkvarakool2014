@@ -1,12 +1,12 @@
 <@html>
-<form method="post" class="form-horizontal">
-    <h3>Lisage uus eesmärk</h3>
+<form method="post">
+    <h3>Muuda eesmärk</h3>
     <label>
-      Eesmärk:
+        Eesmärk:
         <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
     </label><br>
-    <label>Eelarve: <input type="number" class="form-control" name="budget" <#if budget?? && (budget>0)>value=${budget?c}</#if>></label><br>
-    <button class="btn btn-default btn-sm">Lisa</button>
+    <label>Eelarve: <input type="number" class="form-control" name="budget" <#if budget??>value=${budget?c}</#if>></label><br>
+    <button class="form-control">Muuda</button>
 </form>
 
 <#if errorsList?has_content>

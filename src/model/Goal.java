@@ -26,12 +26,24 @@ public class Goal {
     this.budget = budget;
   }
 
+  public Long getId() {
+    return id;
+  }
+
   public String getName() {
     return name;
   }
 
   public Integer getBudget() {
     return budget;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setBudget(Integer budget) {
+    this.budget = budget;
   }
 
 }
