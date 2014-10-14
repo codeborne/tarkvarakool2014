@@ -10,7 +10,7 @@ public abstract class RequestState {
   protected HttpServletRequest request;
   protected HttpServletResponse response;
   protected HttpSession session;
-  protected Session hibernate;
+  public Session hibernate;
   public Messages.Resolver messages;
 
   static ThreadLocal<RequestState> threadLocal = new ThreadLocal<RequestState>() {
