@@ -11,41 +11,33 @@ import java.util.List;
 public class Add extends Controller {
   public String name;
   public Integer budget;
-
-  public List<Goal> goals = new ArrayList<>();
   public List<String> errorsList = new ArrayList<>();
 
   @Override
   public void post() {
-
-    if (errors.containsKey("name")) {
-      errorsList.add(errors.get("name").getMessage());
-    }
-
-    Throwable budgetError = errors.get("budget");
-    if (budgetError != null) {
-      if (budgetError instanceof NumberFormatException) {
-        errorsList.add("Please use a valid number for budget field");
-      } else {
-        errorsList.add(budgetError.getMessage());
+      if (name == null || name.length() == 0){
+          errorsList.add("Sisestage eesmärk.");
       }
-    }
+      if (budget == null || budget<=0 || errors.get("budget") instanceof NumberFormatException){
+          errorsList.add("Sisestage korrektne eelarve.");
+      }
+      else if (errors.containsKey("name") || errors.containsKey("budget")) {
+          errorsList.add("Tekkis viga.");
+      }
 
-    try {
-      if (name.length() == 0)
-        throw new Exception("Goal field cannot be empty");
+      try {
+          if (errorsList.isEmpty()) {
+              hibernate.save(new Goal(name, budget));
+          }
+      }
+      catch (ConstraintViolationException e) {
+          errorsList.add("See eesmärk on juba sisestatud.");
+      }
+      catch (Exception e) {
+          errorsList.add("Tekkis viga.");
+      }
 
       if (errorsList.isEmpty())
-        hibernate.saveOrUpdate(new Goal(name, budget));
-    } catch (ConstraintViolationException e) {
-      errorsList.add("This goal already exists");
-    } catch (Exception e) {
-      errorsList.add(e.getMessage());
-    }
-
-    if (errorsList.isEmpty())
-      throw new Redirect("goals");
-    else
-      goals = hibernate.createCriteria(Goal.class).list();
+        throw new Redirect("goals");
   }
 }
