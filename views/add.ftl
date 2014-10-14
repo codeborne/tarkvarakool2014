@@ -6,7 +6,7 @@
         <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
     </label><br>
     <label>Eelarve: <input type="number" class="form-control" name="budget" <#if budget?? && (budget>0)>value=${budget?c}</#if>></label><br>
-    <button class="form-control">Lisa</button>
+    <button class="btn btn-default btn-sm">Lisa</button>
 </form>
 
 <#if errorsList?has_content>
