@@ -1,17 +1,17 @@
 <@html>
 <form action="add">
-    <input type="submit" class="btn btn-default" value="add">
+    <input type="submit" class="btn btn-default" value="Lisa">
 </form>
 
 <#if goals?has_content>
-  <h3>Current list of goals:</h3>
+  <h3>Eesmärgid:</h3>
 
   <table class="table table-hover">
       <tr>
-          <th>Goal</th>
-          <th>Budget</th>
-          <th>Modify</th>
-          <th>Delete</th>
+          <th>Eesmärk</th>
+          <th>Eelarve</th>
+          <th>Muuda</th>
+          <th>Kustuta</th>
       </tr>
     <#list goals as goal>
         <tr>
@@ -30,7 +30,7 @@
     </#list>
   </table>
 <#else>
-  <h3>There are no goals in the database yet</h3>
+  <h3>Andmebaasis eesmärke ei ole.</h3>
 </#if>
 
 </@html>
