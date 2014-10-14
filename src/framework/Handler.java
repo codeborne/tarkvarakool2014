@@ -1,6 +1,5 @@
 package framework;
 
-import com.google.common.reflect.ClassPath;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.template.*;
 import org.apache.commons.io.IOUtils;
@@ -10,12 +9,9 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 import org.springsource.loaded.ReloadEventProcessorPlugin;
 import org.springsource.loaded.agent.SpringLoadedPreProcessor;
 
-import javax.persistence.Entity;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,9 +19,6 @@ import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 import static freemarker.template.TemplateExceptionHandler.HTML_DEBUG_HANDLER;
 import static freemarker.template.TemplateExceptionHandler.RETHROW_HANDLER;
@@ -206,37 +199,8 @@ public class Handler extends AbstractHandler {
   }
 
   private void initializeHibernate() throws IOException {
-    //noinspection deprecation
-    org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
-    ClassPath.from(this.getClass().getClassLoader()).getTopLevelClassesRecursive("model").stream()
-        .map(ClassPath.ClassInfo::load)
-        .filter(modelClass -> modelClass.isAnnotationPresent(Entity.class))
-        .forEach(configuration::addAnnotatedClass);
-    new SchemaUpdate(configuration).execute(true, true);
-    hibernateSessionFactory = configuration.buildSessionFactory();
-
-    Session session = hibernateSessionFactory.openSession();
-    Transaction transaction = session.beginTransaction();
-    Scanner scanner = new Scanner(getClass().getResourceAsStream("/init.sql"));
-    List<String> initCommands = getInitSQL(scanner);
-    scanner.close();
-    for (String command : initCommands) session.createSQLQuery(command).executeUpdate();
-    transaction.commit();
-    session.close();
-  }
-
-  private List<String> getInitSQL(Scanner scanner) {
-    List<String> commands = new ArrayList<>();
-    String command = "";
-    while (scanner.hasNextLine()) {
-      String line = scanner.nextLine().trim();
-      command += " " + line;
-      if (line.endsWith(";")) {
-        commands.add(command.trim());
-        command = "";
-      }
-    }
-    return commands;
+    hibernateSessionFactory = HibernateHelper.buildSessionFactory();
+    HibernateHelper.initDatabase(hibernateSessionFactory);
   }
 }
 
