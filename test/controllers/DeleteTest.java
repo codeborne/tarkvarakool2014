@@ -6,8 +6,7 @@ import org.hibernate.Session;
 import org.junit.Test;
 
 import static framework.HibernateMockHelper.getDeletedEntities;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +28,7 @@ public class DeleteTest {
       fail();
     } catch (Redirect e) {
       assertEquals("goals", e.getMessage());
-      assertEquals(expectedGoal, getDeletedEntities(hibernate).get(0));
+      assertSame(expectedGoal, getDeletedEntities(hibernate).get(0));
     }
   }
 
@@ -39,8 +38,7 @@ public class DeleteTest {
     delete.id = 5L;
     delete.hibernate = mock(Session.class);
 
-    Goal expectedGoal = null;
-    when(delete.hibernate.get(Goal.class, 5L)).thenReturn(expectedGoal);
+    when(delete.hibernate.get(Goal.class, 5L)).thenReturn(null);
 
     try {
       delete.post();
@@ -48,14 +46,6 @@ public class DeleteTest {
     }
     catch (Redirect e) {
       assertEquals("goals", e.getMessage());
-    }
-
-    try {
-      delete.post();
-      fail();
-    }
-    catch (Exception e) {
-      assertEquals("Goal id not found.", e.getMessage());
     }
   }
 
