@@ -1,13 +1,10 @@
 package controllers;
 
-import framework.Redirect;
 import model.Goal;
 import org.hibernate.HibernateException;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class DeleteTest extends ControllerTest<Delete>{
 
@@ -18,13 +15,9 @@ public class DeleteTest extends ControllerTest<Delete>{
     Goal expectedGoal = new Goal("name", 300);
     when(hibernate.get(Goal.class, 5L)).thenReturn(expectedGoal);
 
-    try {
-      controller.post();
-      fail();
-    } catch (Redirect e) {
-      assertEquals("goals", e.getMessage());
-      assertSame(expectedGoal, getDeletedEntities().get(0));
-    }
+    assertRedirect("goals", () -> controller.post());
+
+    verify(hibernate).delete(expectedGoal);
   }
 
 
@@ -44,13 +37,7 @@ public class DeleteTest extends ControllerTest<Delete>{
     controller.id = 5L;
     when(hibernate.get(Goal.class, 5L)).thenReturn(null);
 
-    try {
-      controller.post();
-      fail();
-    }
-    catch (Redirect e) {
-      assertEquals("goals", e.getMessage());
-    }
+    assertRedirect("goals", () -> controller.post());
   }
 
 }
