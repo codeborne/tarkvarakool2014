@@ -13,22 +13,24 @@ public class Modify extends Controller {
   public String name;
   public Integer budget;
 
-  public List<Goal> goals = new ArrayList<>();
   public List<String> errorsList = new ArrayList<>();
 
   @Override
   public void get() {
     Goal goal = (Goal) hibernate.get(Goal.class, id);
-    if (goal != null) {
+    if (goal == null) {
+      throw new Redirect("add");
+    } else {
       name = goal.getName();
       budget = goal.getBudget();
-    } else {
-      throw new Redirect("add");
     }
   }
 
-  @Override
+  public void x() throws Exception {
+    throw new Exception();
+  }
 
+  @Override
   public void post() {
     if (name != null)
       name = name.trim();
