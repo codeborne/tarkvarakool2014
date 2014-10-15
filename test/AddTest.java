@@ -4,12 +4,12 @@ import model.Goal;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.util.Arrays;
 
-import static framework.HibernateMockHelper.*;
-import static junit.framework.TestCase.assertSame;
-import static junit.framework.TestCase.fail;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.fail;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -18,102 +18,92 @@ public class AddTest {
   @Test
   public void addNullName() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.name = null;
     add.budget = 300;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Sisestage eesmärk."), add.errorsList);
+    assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
   public void addBlankName() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.name = "";
     add.budget = 300;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Sisestage eesmärk."), add.errorsList);
+    assertTrue(add.errorsList.contains("Sisestage eesmärk."));
+  }
+
+  @Test
+  public void addSpacesOnlyName() {
+    Add add = new Add();
+    add.name = "     ";
+    add.budget = 300;
+
+    add.post();
+
+    assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
   public void addNullBudget() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.name = "abc";
     add.budget = null;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Sisestage korrektne eelarve."), add.errorsList);
+    assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
   public void addNegativeBudget() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.name = "abc";
     add.budget = -1;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Sisestage korrektne eelarve."), add.errorsList);
+    assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
   public void addBudgetNumberFormatException() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.errors.put("budget", new NumberFormatException());
     add.name = "abc";
     add.budget = 55;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Sisestage korrektne eelarve."), add.errorsList);
+    assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
   public void addNameException() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.errors.put("name", new RuntimeException());
     add.name = "abc";
     add.budget = 55;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Tekkis viga."), add.errorsList);
+    assertTrue(add.errorsList.contains("Tekkis viga."));
   }
 
   @Test
   public void addBudgetException() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.errors.put("budget", new RuntimeException());
     add.name = "abc";
     add.budget = 55;
 
     add.post();
 
-    verifyZeroInteractions(add.hibernate);
-    assertEquals(Arrays.asList("Tekkis viga."), add.errorsList);
+    assertTrue(add.errorsList.contains("Tekkis viga."));
   }
 
   @Test
@@ -121,8 +111,8 @@ public class AddTest {
     Add add = new Add();
     add.hibernate = mock(Session.class);
 
-    add.name = "abc";
-    add.budget = 55;
+    add.name = "   abcd   ";
+    add.budget = 1;
 
     try {
       add.post();
@@ -131,7 +121,10 @@ public class AddTest {
       assertEquals("goals", e.getMessage());
     }
 
-    verify(add.hibernate).save(any(Goal.class));
+    ArgumentCaptor<Goal> argument = ArgumentCaptor.forClass(Goal.class);
+    verify(add.hibernate).save(argument.capture());
+    assertEquals("abcd", argument.getValue().getName());
+    assertEquals(1, (int) argument.getValue().getBudget());
   }
 
   @Test
@@ -139,13 +132,18 @@ public class AddTest {
     Add add = new Add();
     add.hibernate = mock(Session.class);
 
-    add.name = "abc";
-    add.budget = 55;
+    add.name = "aaa aaa";
+    add.budget = 5555;
 
-    when(add.hibernate.save(any(Goal.class))).thenThrow(mock(ConstraintViolationException.class));
+    doThrow(mock(ConstraintViolationException.class)).when(add.hibernate).save(any(Goal.class));
     add.post();
 
-    assertEquals(Arrays.asList("See eesmärk on juba sisestatud."), add.errorsList);
+    assertTrue(add.errorsList.contains("See eesmärk on juba sisestatud."));
+
+    ArgumentCaptor<Goal> argument = ArgumentCaptor.forClass(Goal.class);
+    verify(add.hibernate).save(argument.capture());
+    assertEquals("aaa aaa", argument.getValue().getName());
+    assertEquals(5555, (int) argument.getValue().getBudget());
   }
 
   @Test
@@ -153,12 +151,17 @@ public class AddTest {
     Add add = new Add();
     add.hibernate = mock(Session.class);
 
-    add.name = "abc";
-    add.budget = 55;
+    add.name = "34567 hh";
+    add.budget = 999999;
 
-    when(add.hibernate.save(any(Goal.class))).thenThrow(new RuntimeException());
+    doThrow(new RuntimeException()).when(add.hibernate).save(any(Goal.class));
     add.post();
 
-    assertEquals(Arrays.asList("Tekkis viga."), add.errorsList);
+    assertTrue(add.errorsList.contains("Tekkis viga."));
+
+    ArgumentCaptor<Goal> argument = ArgumentCaptor.forClass(Goal.class);
+    verify(add.hibernate).save(argument.capture());
+    assertEquals("34567 hh", argument.getValue().getName());
+    assertEquals(999999, (int) argument.getValue().getBudget());
   }
 }
