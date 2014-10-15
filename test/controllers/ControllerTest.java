@@ -2,6 +2,7 @@ package controllers;
 
 import framework.Controller;
 import framework.HibernateMockHelper;
+import framework.Redirect;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;
@@ -9,6 +10,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 
 public abstract class ControllerTest<T extends Controller> {
@@ -32,6 +34,15 @@ public abstract class ControllerTest<T extends Controller> {
       return (T) Class.forName(controllerClassName).newInstance();
     } catch (Exception e) {
       throw new RuntimeException("Failed to create controller", e);
+    }
+  }
+
+  protected void assertRedirect(String target, Runnable runnable) {
+    try {
+      runnable.run();
+      fail("Redirect to " + target + " expected");
+    } catch (Redirect e) {
+      assertEquals(target, e.getMessage());
     }
   }
 
