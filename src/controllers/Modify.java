@@ -33,12 +33,11 @@ public class Modify extends Controller {
     if (name == null || name.length() == 0){
       errorsList.add("Sisestage eesmärk.");
     }
-    if (budget == null || budget<=0 || errors.get("budget") instanceof NumberFormatException){
+    if (budget == null || budget<=0 || errors.get("budget") instanceof NumberFormatException)
       errorsList.add("Sisestage korrektne eelarve.");
-    }
-    else if (errors.containsKey("name") || errors.containsKey("budget")) {
+
+    if (errors.containsKey("name") || (errors.containsKey("budget") && !(errors.get("budget") instanceof NumberFormatException)))
       errorsList.add("Tekkis viga.");
-    }
 
     try {
       if (errorsList.isEmpty()) {
