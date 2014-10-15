@@ -3,60 +3,49 @@ package controllers;
 import framework.Redirect;
 import model.Goal;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.junit.Test;
 
-import static framework.HibernateMockHelper.getDeletedEntities;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
 
-public class DeleteTest {
+public class DeleteTest extends ControllerTest<Delete>{
+
 
   @Test
-  public void postSuccess() {
-    Session hibernate = mock(Session.class);
-
-    Delete delete = new Delete();
-    delete.id = 5L;
-    delete.hibernate = hibernate;
-
+  public void postDeletesGoal() {
+    controller.id = 5L;
     Goal expectedGoal = new Goal("name", 300);
     when(hibernate.get(Goal.class, 5L)).thenReturn(expectedGoal);
 
     try {
-      delete.post();
+      controller.post();
       fail();
     } catch (Redirect e) {
       assertEquals("goals", e.getMessage());
-      assertSame(expectedGoal, getDeletedEntities(hibernate).get(0));
+      assertSame(expectedGoal, getDeletedEntities().get(0));
     }
   }
 
+
   @Test (expected = HibernateException.class)
-  public void postDeleteFailure() {
-    Session hibernate = mock(Session.class);
-
-    Delete delete = new Delete();
-    delete.id = 5L;
-    delete.hibernate = hibernate;
-
+  public void postDeleteThrowsHibernateException() {
+    controller.id = 5L;
     Goal goal = new Goal("", 1);
     when(hibernate.get(Goal.class, 5L)).thenReturn(goal);
     doThrow(new HibernateException("")).when(hibernate).delete(goal);
 
-    delete.post();
+    controller.post();
   }
 
-  @Test
-  public void postFailure() {
-    Delete delete = new Delete();
-    delete.id = 5L;
-    delete.hibernate = mock(Session.class);
 
-    when(delete.hibernate.get(Goal.class, 5L)).thenReturn(null);
+  @Test
+  public void postNoObjectToDelete() {
+    controller.id = 5L;
+    when(hibernate.get(Goal.class, 5L)).thenReturn(null);
 
     try {
-      delete.post();
+      controller.post();
       fail();
     }
     catch (Redirect e) {
