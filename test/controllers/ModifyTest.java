@@ -1,14 +1,14 @@
 package controllers;
 
-import framework.Redirect;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class ModifyTest extends ControllerTest<Modify>{
+public class ModifyTest extends ControllerTest<Modify> {
 
 
   @Test
@@ -30,15 +30,9 @@ public class ModifyTest extends ControllerTest<Modify>{
     controller.id = 2L;
     when(hibernate.get(Goal.class, 2L)).thenReturn(null);
 
-    try {
-      controller.get();
-      fail();
-    } catch (Redirect e) {
-      assertEquals("add", e.getMessage());
+    assertRedirect("add", () -> controller.get());
 
-    }
   }
-
 
   @Test
   public void postTestWithNoErrors() {
@@ -51,17 +45,14 @@ public class ModifyTest extends ControllerTest<Modify>{
     Goal goalBeingChanged = new Goal("name", 10);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
+    assertRedirect("goals", () -> controller.post());
 
-    try {
-      controller.post();
-      fail();
-    } catch (Exception e) {
-      assertEquals("goals", e.getMessage());
-      assertEquals(expectedGoal.getBudget(), goalBeingChanged.getBudget());
-      assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
 
-    }
+    assertEquals(expectedGoal.getBudget(), goalBeingChanged.getBudget());
+    assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
+
   }
+
   @Test
   public void postTestIfNameNull() {
     controller.name = null;
