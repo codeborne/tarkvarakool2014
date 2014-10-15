@@ -8,6 +8,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public abstract class ControllerTest<T extends Controller> {
@@ -34,6 +35,18 @@ public abstract class ControllerTest<T extends Controller> {
     }
   }
 
+  public Object getDeletedEntity() {
+    return getSingleItem(getDeletedEntities());
+  }
+
+  public Object getSavedEntity() {
+    return getSingleItem(getSavedEntities());
+  }
+
+  public Object getUpdatedEntity() {
+    return getSingleItem(getUpdatedEntities());
+  }
+
   public List<Object> getDeletedEntities() {
     return HibernateMockHelper.getDeletedEntities(hibernate);
   }
@@ -44,5 +57,10 @@ public abstract class ControllerTest<T extends Controller> {
 
   public List<Object> getUpdatedEntities() {
     return HibernateMockHelper.getUpdatedEntities(hibernate);
+  }
+
+  private Object getSingleItem(List<Object> list) {
+    assertEquals(1, list.size());
+    return list.get(0);
   }
 }
