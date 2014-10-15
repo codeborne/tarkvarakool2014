@@ -40,7 +40,7 @@ public abstract class ControllerTest<T extends Controller> {
   protected void assertRedirect(String target, Runnable runnable) {
     try {
       runnable.run();
-      fail("Redirect to " + target + " expected");
+      fail("Redirect to '" + target + "' expected");
     } catch (Redirect e) {
       assertEquals(target, e.getMessage());
     }
