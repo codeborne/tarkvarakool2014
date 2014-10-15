@@ -30,6 +30,9 @@ public class Modify extends Controller {
   @Override
 
   public void post() {
+    if (name != null)
+      name = name.trim();
+
     if (name == null || name.length() == 0){
       errorsList.add("Sisestage eesmärk.");
     }
