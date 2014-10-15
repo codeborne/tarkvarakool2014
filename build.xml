@@ -191,7 +191,7 @@
       </classpath>
       <formatter type="xml"/>
       <batchtest todir="testresults">
-        <fileset dir="${tarkvarakool.testoutput.dir}" includes="**/*Test.class"/>
+        <fileset dir="${tarkvarakool.testoutput.dir}" includes="**/*Test.class" excludes="controllers/ControllerTest.class"/>
       </batchtest>
     </junit>
   </target>
