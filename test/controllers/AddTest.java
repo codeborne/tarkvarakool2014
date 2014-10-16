@@ -1,7 +1,5 @@
 package controllers;
 
-import framework.Render;
-import framework.Result;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
@@ -19,8 +17,7 @@ public class AddTest extends ControllerTest<Add> {
     add.name = null;
     add.budget = 300;
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
@@ -31,8 +28,7 @@ public class AddTest extends ControllerTest<Add> {
     add.name = "";
     add.budget = 300;
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
@@ -43,8 +39,7 @@ public class AddTest extends ControllerTest<Add> {
     add.name = " \n\n \n    \r\n \r\n \n \n";
     add.budget = 300;
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
@@ -55,8 +50,7 @@ public class AddTest extends ControllerTest<Add> {
     add.name = "abc";
     add.budget = null;
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -67,8 +61,7 @@ public class AddTest extends ControllerTest<Add> {
     add.name = "abc";
     add.budget = -1;
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -80,8 +73,7 @@ public class AddTest extends ControllerTest<Add> {
     add.budget = 55;
     add.errors.put("budget", new NumberFormatException());
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -93,8 +85,7 @@ public class AddTest extends ControllerTest<Add> {
     add.budget = 55;
     add.errors.put("name", new RuntimeException());
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
   }
@@ -106,16 +97,15 @@ public class AddTest extends ControllerTest<Add> {
     add.budget = 55;
     add.errors.put("budget", new RuntimeException());
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
   }
 
   @Test
-  public void testSaveSuccess() throws Exception {
+  public void testSaveSuccessAndNameTrim() throws Exception {
     Add add = new Add();
-    add.name = "ab cd";
+    add.name = "\n \r\n ab cd \n \r\n ";
     add.budget = 111;
     add.hibernate = hibernate;
 
@@ -137,8 +127,7 @@ public class AddTest extends ControllerTest<Add> {
 
     doThrow(mock(ConstraintViolationException.class)).when(add.hibernate).save(any(Goal.class));
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("See eesmärk on juba sisestatud."));
 
@@ -158,8 +147,7 @@ public class AddTest extends ControllerTest<Add> {
 
     doThrow(new RuntimeException()).when(add.hibernate).save(any(Goal.class));
 
-    Result result = add.post();
-    assertTrue(result instanceof Render);
+    assertRender(add.post());
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
 
