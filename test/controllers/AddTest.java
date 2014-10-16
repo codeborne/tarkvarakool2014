@@ -3,7 +3,6 @@ package controllers;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
@@ -13,13 +12,12 @@ public class AddTest extends ControllerTest<Add> {
 
   @Test
   public void addNullName() {
-    Add add = new Add();
-    add.name = null;
-    add.budget = 300;
+    controller.name = null;
+    controller.budget = 300;
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
@@ -111,11 +109,10 @@ public class AddTest extends ControllerTest<Add> {
 
     assertRedirect(Goals.class, add.post());
 
-    ArgumentCaptor<Goal> captor = ArgumentCaptor.forClass(Goal.class);
-    verify(add.hibernate).save(captor.capture());
-    Goal capturedGoal = captor.getValue();
-    assertEquals("ab cd", capturedGoal.getName());
-    assertEquals(111, (int) capturedGoal.getBudget());
+    Goal savedGoal = (Goal)getSavedEntity();
+
+    assertEquals("ab cd", savedGoal.getName());
+    assertEquals(111, (int) savedGoal.getBudget());
   }
 
   @Test
@@ -131,11 +128,9 @@ public class AddTest extends ControllerTest<Add> {
 
     assertTrue(add.errorsList.contains("See eesmärk on juba sisestatud."));
 
-    ArgumentCaptor<Goal> captor = ArgumentCaptor.forClass(Goal.class);
-    verify(add.hibernate).save(captor.capture());
-    Goal capturedGoal = captor.getValue();
-    assertEquals("aaa aaa", capturedGoal.getName());
-    assertEquals(5555, (int) capturedGoal.getBudget());
+    Goal savedGoal = (Goal)getSavedEntity();
+    assertEquals("aaa aaa", savedGoal.getName());
+    assertEquals(5555, (int) savedGoal.getBudget());
   }
 
   @Test
@@ -151,10 +146,8 @@ public class AddTest extends ControllerTest<Add> {
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
 
-    ArgumentCaptor<Goal> captor = ArgumentCaptor.forClass(Goal.class);
-    verify(add.hibernate).save(captor.capture());
-    Goal capturedGoal = captor.getValue();
-    assertEquals("34567 hh", capturedGoal.getName());
-    assertEquals(999999, (int) capturedGoal.getBudget());
+    Goal savedGoal = (Goal)getSavedEntity();
+    assertEquals("34567 hh", savedGoal.getName());
+    assertEquals(999999, (int) savedGoal.getBudget());
   }
 }
