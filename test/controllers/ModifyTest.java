@@ -37,13 +37,18 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.budget = 10;
 
     Goal expectedGoal = new Goal(controller.name, controller.budget);
-    Goal goalBeingChanged = new Goal("name", 10);
+    Goal goalBeingChanged = new Goal("TERE", 33);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
     assertRedirect(Goals.class, controller.post());
 
     assertEquals(expectedGoal.getBudget(), goalBeingChanged.getBudget());
     assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
+    verify(hibernate).update(goalBeingChanged);
+
+//    Goal updatedEntity = (Goal) getUpdatedEntity();
+//    assertEquals(expectedGoal.getBudget(), updatedEntity.getBudget());
+//    assertEquals(expectedGoal.getName(), updatedEntity.getName());
   }
 
   @Test
