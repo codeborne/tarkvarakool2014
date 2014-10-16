@@ -1,10 +1,8 @@
 package controllers;
 
-import framework.Redirect;
 import framework.Render;
 import framework.Result;
 import model.Goal;
-import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -13,7 +11,7 @@ import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
-public class AddTest {
+public class AddTest extends ControllerTest<Add> {
 
   @Test
   public void addNullName() {
@@ -42,7 +40,7 @@ public class AddTest {
   @Test
   public void addSpacesOnlyName() {
     Add add = new Add();
-    add.name = "     ";
+    add.name = " \n\n \n    \r\n \r\n \n \n";
     add.budget = 300;
 
     Result result = add.post();
@@ -78,9 +76,9 @@ public class AddTest {
   @Test
   public void addBudgetNumberFormatException() {
     Add add = new Add();
-    add.errors.put("budget", new NumberFormatException());
     add.name = "abc";
     add.budget = 55;
+    add.errors.put("budget", new NumberFormatException());
 
     Result result = add.post();
     assertTrue(result instanceof Render);
@@ -91,9 +89,9 @@ public class AddTest {
   @Test
   public void addNameException() {
     Add add = new Add();
-    add.errors.put("name", new RuntimeException());
     add.name = "abc";
     add.budget = 55;
+    add.errors.put("name", new RuntimeException());
 
     Result result = add.post();
     assertTrue(result instanceof Render);
@@ -104,9 +102,9 @@ public class AddTest {
   @Test
   public void addBudgetException() {
     Add add = new Add();
-    add.errors.put("budget", new RuntimeException());
     add.name = "abc";
     add.budget = 55;
+    add.errors.put("budget", new RuntimeException());
 
     Result result = add.post();
     assertTrue(result instanceof Render);
@@ -117,29 +115,25 @@ public class AddTest {
   @Test
   public void testSaveSuccess() throws Exception {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
+    add.name = "ab cd";
+    add.budget = 111;
+    add.hibernate = hibernate;
 
-    add.name = " \n  ab cd  \n\n \r\n";
-    add.budget = 1;
-
-    Result result = add.post();
-    assertTrue(result instanceof Redirect);
-    assertEquals("/goals", ((Redirect)result).getPath());
+    assertRedirect(Goals.class, add.post());
 
     ArgumentCaptor<Goal> captor = ArgumentCaptor.forClass(Goal.class);
     verify(add.hibernate).save(captor.capture());
     Goal capturedGoal = captor.getValue();
     assertEquals("ab cd", capturedGoal.getName());
-    assertEquals(1, (int) capturedGoal.getBudget());
+    assertEquals(111, (int) capturedGoal.getBudget());
   }
 
   @Test
   public void saveDuplicate() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.name = "aaa aaa";
     add.budget = 5555;
+    add.hibernate = hibernate;
 
     doThrow(mock(ConstraintViolationException.class)).when(add.hibernate).save(any(Goal.class));
 
@@ -158,10 +152,9 @@ public class AddTest {
   @Test
   public void saveException() {
     Add add = new Add();
-    add.hibernate = mock(Session.class);
-
     add.name = "34567 hh";
     add.budget = 999999;
+    add.hibernate = hibernate;
 
     doThrow(new RuntimeException()).when(add.hibernate).save(any(Goal.class));
 
