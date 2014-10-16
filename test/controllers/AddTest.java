@@ -97,11 +97,10 @@ public class AddTest extends ControllerTest<Add> {
   public void testSaveSuccessAndNameTrim() throws Exception {
     controller.name = "\n \r\n ab cd \n \r\n ";
     controller.budget = 111;
-    controller.hibernate = hibernate;
 
     assertRedirect(Goals.class, controller.post());
 
-    Goal savedGoal = (Goal)getSavedEntity();
+    Goal savedGoal = (Goal) getSavedEntity();
 
     assertEquals("ab cd", savedGoal.getName());
     assertEquals(111, (int) savedGoal.getBudget());
@@ -111,7 +110,6 @@ public class AddTest extends ControllerTest<Add> {
   public void saveDuplicate() {
     controller.name = "aaa aaa";
     controller.budget = 5555;
-    controller.hibernate = hibernate;
 
     doThrow(mock(ConstraintViolationException.class)).when(controller.hibernate).save(any(Goal.class));
 
@@ -119,7 +117,7 @@ public class AddTest extends ControllerTest<Add> {
 
     assertTrue(controller.errorsList.contains("See eesmärk on juba sisestatud."));
 
-    Goal savedGoal = (Goal)getSavedEntity();
+    Goal savedGoal = (Goal) getSavedEntity();
     assertEquals("aaa aaa", savedGoal.getName());
     assertEquals(5555, (int) savedGoal.getBudget());
   }
@@ -128,7 +126,6 @@ public class AddTest extends ControllerTest<Add> {
   public void saveException() {
     controller.name = "34567 hh";
     controller.budget = 999999;
-    controller.hibernate = hibernate;
 
     doThrow(new RuntimeException()).when(controller.hibernate).save(any(Goal.class));
 
@@ -136,7 +133,7 @@ public class AddTest extends ControllerTest<Add> {
 
     assertTrue(controller.errorsList.contains("Tekkis viga."));
 
-    Goal savedGoal = (Goal)getSavedEntity();
+    Goal savedGoal = (Goal) getSavedEntity();
     assertEquals("34567 hh", savedGoal.getName());
     assertEquals(999999, (int) savedGoal.getBudget());
   }
