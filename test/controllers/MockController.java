@@ -1,4 +1,6 @@
 package controllers;
 
-public class MockController {
+import framework.Controller;
+
+public class MockController extends Controller {
 }

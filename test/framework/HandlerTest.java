@@ -8,9 +8,7 @@ import org.junit.Test;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.InvocationTargetException;
 
-import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
@@ -46,13 +44,6 @@ public class HandlerTest {
   public void handleWithUnknownUrl() throws Exception {
     handler.handle("/foo/bar", baseRequest, request, response);
     assertThat(baseRequest.isHandled(), is(false));
-  }
-
-  @Test
-  public void templateName() throws Exception {
-    assertThat(handler.getTemplateName("/foo"), is("foo.ftl"));
-    assertThat(handler.getTemplateName("/foo-bar-baz"), is("foo-bar-baz.ftl"));
-    assertThat(handler.getTemplateName("/foo/bar/baz"), is("foo/bar/baz.ftl"));
   }
 
   @Test
@@ -102,22 +93,6 @@ public class HandlerTest {
 
     handler.redirectIfPossible("/foo", baseRequest, response);
 
-    verifyNoMoreInteractions(response);
-  }
-
-  @Test
-  public void handleExceptionWithRedirect() throws Exception {
-    handler.handleException(new InvocationTargetException(new Redirect("/another/url")), response);
-
-    verify(response).sendRedirect("/another/url");
-    verifyNoMoreInteractions(response);
-  }
-
-  @Test
-  public void handleException() throws Exception {
-    handler.handleException(new InvocationTargetException(new RuntimeException()), response);
-
-    verify(response).sendError(eq(SC_INTERNAL_SERVER_ERROR), anyString());
     verifyNoMoreInteractions(response);
   }
 

@@ -1,5 +1,7 @@
 import controllers.Add;
 import framework.Redirect;
+import framework.Render;
+import framework.Result;
 import model.Goal;
 import org.hibernate.Session;
 import org.hibernate.exception.ConstraintViolationException;
@@ -7,7 +9,6 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -19,7 +20,8 @@ public class AddTest {
     add.name = null;
     add.budget = 300;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
@@ -30,7 +32,8 @@ public class AddTest {
     add.name = "";
     add.budget = 300;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
@@ -41,7 +44,8 @@ public class AddTest {
     add.name = "     ";
     add.budget = 300;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Sisestage eesmärk."));
   }
@@ -52,7 +56,8 @@ public class AddTest {
     add.name = "abc";
     add.budget = null;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -63,7 +68,8 @@ public class AddTest {
     add.name = "abc";
     add.budget = -1;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -75,7 +81,8 @@ public class AddTest {
     add.name = "abc";
     add.budget = 55;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -87,7 +94,8 @@ public class AddTest {
     add.name = "abc";
     add.budget = 55;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
   }
@@ -99,7 +107,8 @@ public class AddTest {
     add.name = "abc";
     add.budget = 55;
 
-    add.post();
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
   }
@@ -112,12 +121,9 @@ public class AddTest {
     add.name = " \n  ab cd  \n\n \r\n";
     add.budget = 1;
 
-    try {
-      add.post();
-      fail();
-    } catch (Redirect e) {
-      assertEquals("goals", e.getMessage());
-    }
+    Result result = add.post();
+    assertTrue(result instanceof Redirect);
+    assertEquals("/goals", ((Redirect)result).getPath());
 
     ArgumentCaptor<Goal> captor = ArgumentCaptor.forClass(Goal.class);
     verify(add.hibernate).save(captor.capture());
@@ -135,7 +141,9 @@ public class AddTest {
     add.budget = 5555;
 
     doThrow(mock(ConstraintViolationException.class)).when(add.hibernate).save(any(Goal.class));
-    add.post();
+
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("See eesmärk on juba sisestatud."));
 
@@ -155,7 +163,9 @@ public class AddTest {
     add.budget = 999999;
 
     doThrow(new RuntimeException()).when(add.hibernate).save(any(Goal.class));
-    add.post();
+
+    Result result = add.post();
+    assertTrue(result instanceof Render);
 
     assertTrue(add.errorsList.contains("Tekkis viga."));
 

@@ -1,8 +1,6 @@
 package controllers;
 
-import framework.Controller;
-import framework.HibernateMockHelper;
-import framework.Redirect;
+import framework.*;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;
@@ -10,7 +8,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 
 public abstract class ControllerTest<T extends Controller> {
@@ -37,13 +34,18 @@ public abstract class ControllerTest<T extends Controller> {
     }
   }
 
-  protected void assertRedirect(String target, Runnable runnable) {
-    try {
-      runnable.run();
-      fail("Redirect to '" + target + "' expected");
-    } catch (Redirect e) {
-      assertEquals(target, e.getMessage());
-    }
+  protected void assertRedirect(String target, Result result) {
+    assertEquals(Redirect.class, result.getClass());
+    assertEquals(target, ((Redirect) result).getPath());
+  }
+
+  protected void assertRedirect(Class<? extends Controller> targetClass, Result result) {
+    assertEquals(Redirect.class, result.getClass());
+    assertEquals(Redirect.createPath(targetClass), ((Redirect) result).getPath());
+  }
+
+  protected void assertRender(Result result) {
+    assertEquals(Render.class, result.getClass());
   }
 
   public Object getDeletedEntity() {

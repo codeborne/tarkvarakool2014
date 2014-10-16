@@ -8,18 +8,16 @@ import static org.mockito.Mockito.*;
 
 public class DeleteTest extends ControllerTest<Delete>{
 
-
   @Test
   public void postDeletesGoal() {
     controller.id = 5L;
     Goal expectedGoal = new Goal("name", 300);
     when(hibernate.get(Goal.class, 5L)).thenReturn(expectedGoal);
 
-    assertRedirect("goals", () -> controller.post());
+    assertRedirect(Goals.class, controller.post());
 
     verify(hibernate).delete(expectedGoal);
   }
-
 
   @Test (expected = HibernateException.class)
   public void postDeleteThrowsHibernateException() {
@@ -31,13 +29,11 @@ public class DeleteTest extends ControllerTest<Delete>{
     controller.post();
   }
 
-
   @Test
   public void postNoObjectToDelete() {
     controller.id = 5L;
     when(hibernate.get(Goal.class, 5L)).thenReturn(null);
 
-    assertRedirect("goals", () -> controller.post());
+    assertRedirect(Goals.class, controller.post());
   }
-
 }

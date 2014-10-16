@@ -1,7 +1,7 @@
 package controllers;
 
 import framework.Controller;
-import framework.Redirect;
+import framework.Result;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 
@@ -16,14 +16,15 @@ public class Modify extends Controller {
   public List<String> errorsList = new ArrayList<>();
 
   @Override
-  public void get() {
+  public Result get() {
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     if (goal == null) {
-      throw new Redirect("add");
+      return redirect(Add.class);
     } else {
       name = goal.getName();
       budget = goal.getBudget();
     }
+    return render();
   }
 
   public void x() throws Exception {
@@ -31,7 +32,7 @@ public class Modify extends Controller {
   }
 
   @Override
-  public void post() {
+  public Result post() {
     if (name != null)
       name = name.trim();
 
@@ -60,6 +61,8 @@ public class Modify extends Controller {
     }
 
     if (errorsList.isEmpty())
-      throw new Redirect("goals");
+      return redirect(Goals.class);
+
+    return render();
   }
 }

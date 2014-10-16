@@ -10,28 +10,24 @@ import static org.mockito.Mockito.*;
 
 public class ModifyTest extends ControllerTest<Modify> {
 
-
   @Test
   public void testGetWhenObjectFound() {
     controller.id = 2L;
 
     when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("name", 10));
 
-    controller.get();
+    assertRender(controller.get());
 
     assertEquals("name", controller.name);
     assertEquals(10, (int) controller.budget);
-
   }
-
 
   @Test
   public void testGetWhenObjectNotFound() {
     controller.id = 2L;
     when(hibernate.get(Goal.class, 2L)).thenReturn(null);
 
-    assertRedirect("add", () -> controller.get());
-
+    assertRedirect("/add", controller.get());
   }
 
   @Test
@@ -40,17 +36,14 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.name = "name";
     controller.budget = 10;
 
-
     Goal expectedGoal = new Goal(controller.name, controller.budget);
     Goal goalBeingChanged = new Goal("name", 10);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
-    assertRedirect("goals", () -> controller.post());
-
+    assertRedirect("/goals", controller.post());
 
     assertEquals(expectedGoal.getBudget(), goalBeingChanged.getBudget());
     assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
-
   }
 
   @Test
@@ -58,11 +51,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.name = null;
     controller.budget = 10;
 
-    controller.post();
+    assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
-
   }
 
   @Test
@@ -70,7 +62,8 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.name = "";
     controller.budget = 2;
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
@@ -80,7 +73,8 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.name = "name";
     controller.budget = null;
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -90,7 +84,8 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.name = "name";
     controller.budget = -1;
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -101,7 +96,8 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.budget = 1;
     controller.errors.put("budget", new NumberFormatException());
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
@@ -112,10 +108,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.budget = 1;
     controller.errors.put("name", new RuntimeException());
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Tekkis viga."));
-
   }
 
   @Test
@@ -124,10 +120,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.budget = 1;
     controller.errors.put("budget", new Exception());
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Tekkis viga."));
-
   }
 
   @Test
@@ -143,7 +139,8 @@ public class ModifyTest extends ControllerTest<Modify> {
     ConstraintViolationException expectedException = mock(ConstraintViolationException.class);
     doThrow(expectedException).when(hibernate).update(any(Goal.class));
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("See eesmärk on juba sisestatud."));
   }
@@ -161,7 +158,8 @@ public class ModifyTest extends ControllerTest<Modify> {
     Exception expectedException = new RuntimeException();
     doThrow(expectedException).when(hibernate).update(any(Goal.class));
 
-    controller.post();
+    assertRender(controller.post());
+
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Tekkis viga."));
   }

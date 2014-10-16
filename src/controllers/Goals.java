@@ -1,6 +1,7 @@
 package controllers;
 
 import framework.Controller;
+import framework.Result;
 import model.Goal;
 
 import java.util.ArrayList;
@@ -10,8 +11,9 @@ public class Goals extends Controller {
   public List<Goal> goals = new ArrayList<>();
 
   @Override
-  public void get() {
+  public Result get() {
     goals = hibernate.createCriteria(Goal.class).list();
+    return render();
   }
 
 }

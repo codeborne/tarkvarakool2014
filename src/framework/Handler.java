@@ -1,8 +1,5 @@
 package framework;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Request;
@@ -13,9 +10,7 @@ import org.hibernate.SessionFactory;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -33,7 +28,6 @@ public class Handler extends AbstractHandler {
 
   private boolean devMode = isRunningInDebugMode();
 
-  private Configuration freemarker;
   private SessionFactory hibernateSessionFactory;
 
   private Messages messages = new Messages();
@@ -41,7 +35,7 @@ public class Handler extends AbstractHandler {
   private Binder binder = new Binder("dd.MM.yyyy");
 
   public Handler() throws IOException {
-    freemarker = initializeFreemarker(devMode);
+    Render.freemarker = initializeFreemarker(devMode);
     hibernateSessionFactory = buildSessionFactory();
     initDatabase(hibernateSessionFactory);
   }
@@ -57,31 +51,16 @@ public class Handler extends AbstractHandler {
       hibernate = openHibernateSession(requestState);
       Object controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
-      invokeController(controller, baseRequest);
-
-      Template template = freemarker.getTemplate(getTemplateName(target));
-      response.setContentType("text/html");
-      response.setCharacterEncoding(THE_ENCODING);
-      template.process(controller, new OutputStreamWriter(response.getOutputStream(), THE_ENCODING));
+      Result result = invokeController(controller, baseRequest);
+      result.handle(request, response);
     }
     catch (ClassNotFoundException|NoSuchMethodException ignored) {
       redirectIfPossible(target, baseRequest, response);
     }
-    catch (InstantiationException|IllegalAccessException e) {
-      LOG.warn("Failed to create controller: " + e);
+    catch (Exception e) {
+      LOG.warn("Request handling failed", e);
       response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
       baseRequest.setHandled(true);
-    }
-    catch (InvocationTargetException e) {
-      handleException(e, response);
-    }
-    catch (FileNotFoundException e) {
-      LOG.warn(e.toString());
-      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
-    }
-    catch (TemplateException e) {
-      LOG.warn("Template failure: " + e);
-      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
     }
     finally {
       closeHibernateSession(hibernate);
@@ -101,10 +80,15 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  void invokeController(Object controller, Request baseRequest) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-    Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
-    baseRequest.setHandled(true);
-    method.invoke(controller);
+  Result invokeController(Object controller, Request baseRequest) throws Exception {
+    try {
+      Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
+      baseRequest.setHandled(true);
+      return (Result) method.invoke(controller);
+    }
+    catch (InvocationTargetException e) {
+      throw (Exception) e.getCause(); // todo fix for throwable
+    }
   }
 
   Object createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -112,17 +96,6 @@ public class Handler extends AbstractHandler {
     String className = getClassName(target);
     Class controllerClass = Class.forName(className);
     return controllerClass.newInstance();
-  }
-
-  void handleException(InvocationTargetException exception, HttpServletResponse response) throws IOException {
-    Throwable cause = exception.getCause();
-    if (cause instanceof Redirect) {
-      response.sendRedirect(cause.getMessage());
-    }
-    else {
-      LOG.warn("Controller failure: " + cause);
-      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? cause.toString() : null);
-    }
   }
 
   void redirectIfPossible(String target, Request baseRequest, HttpServletResponse response) throws IOException {
@@ -151,10 +124,6 @@ public class Handler extends AbstractHandler {
     state.response = response;
     state.session = request.getSession();
     state.messages = messages.getResolverFor(request);
-  }
-
-  String getTemplateName(String path) {
-    return path.substring(1) + ".ftl";
   }
 
   String getClassName(String path) {

@@ -6,19 +6,32 @@ import java.util.Map;
 public abstract class Controller extends RequestState {
   public Map<String, Throwable> errors = new LinkedHashMap<>();
 
-  public void get() {
+  public Result get() {
+    return render();
   }
 
-  public void post() {
+  public Result post() {
+    return render();
   }
 
-  public void put() {
+  public Result put() {
+    return render();
   }
 
-  public void delete() {
+  public Result delete() {
+    return render();
   }
 
-  public void options() {
+  public Result options() {
+    return render();
+  }
+
+  protected Redirect redirect(Class<? extends Controller> target) {
+    return new Redirect(target);
+  }
+
+  protected Render render() {
+    return new Render(this);
   }
 
   @SuppressWarnings("unchecked")
