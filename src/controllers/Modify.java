@@ -27,10 +27,6 @@ public class Modify extends Controller {
     return render();
   }
 
-  public void x() throws Exception {
-    throw new Exception();
-  }
-
   @Override
   public Result post() {
     if (name != null)

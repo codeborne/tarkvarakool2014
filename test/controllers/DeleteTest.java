@@ -22,11 +22,11 @@ public class DeleteTest extends ControllerTest<Delete>{
   @Test (expected = HibernateException.class)
   public void postDeleteThrowsHibernateException() {
     controller.id = 5L;
-    Goal goal = new Goal("", 1);
+    Goal goal = new Goal("a", 1);
     when(hibernate.get(Goal.class, 5L)).thenReturn(goal);
     doThrow(new HibernateException("")).when(hibernate).delete(goal);
 
-    controller.post();
+    assertRender(controller.post());
   }
 
   @Test
