@@ -22,92 +22,84 @@ public class AddTest extends ControllerTest<Add> {
 
   @Test
   public void addBlankName() {
-    Add add = new Add();
-    add.name = "";
-    add.budget = 300;
+    controller.name = "";
+    controller.budget = 300;
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
   public void addSpacesOnlyName() {
-    Add add = new Add();
-    add.name = " \n\n \n    \r\n \r\n \n \n";
-    add.budget = 300;
+    controller.name = " \n\n \n    \r\n \r\n \n \n";
+    controller.budget = 300;
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
   public void addNullBudget() {
-    Add add = new Add();
-    add.name = "abc";
-    add.budget = null;
+    controller.name = "abc";
+    controller.budget = null;
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
   public void addNegativeBudget() {
-    Add add = new Add();
-    add.name = "abc";
-    add.budget = -1;
+    controller.name = "abc";
+    controller.budget = -1;
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
   public void addBudgetNumberFormatException() {
-    Add add = new Add();
-    add.name = "abc";
-    add.budget = 55;
-    add.errors.put("budget", new NumberFormatException());
+    controller.name = "abc";
+    controller.budget = 55;
+    controller.errors.put("budget", new NumberFormatException());
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
   public void addNameException() {
-    Add add = new Add();
-    add.name = "abc";
-    add.budget = 55;
-    add.errors.put("name", new RuntimeException());
+    controller.name = "abc";
+    controller.budget = 55;
+    controller.errors.put("name", new RuntimeException());
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains("Tekkis viga."));
   }
 
   @Test
   public void addBudgetException() {
-    Add add = new Add();
-    add.name = "abc";
-    add.budget = 55;
-    add.errors.put("budget", new RuntimeException());
+    controller.name = "abc";
+    controller.budget = 55;
+    controller.errors.put("budget", new RuntimeException());
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains("Tekkis viga."));
   }
 
   @Test
   public void testSaveSuccessAndNameTrim() throws Exception {
-    Add add = new Add();
-    add.name = "\n \r\n ab cd \n \r\n ";
-    add.budget = 111;
-    add.hibernate = hibernate;
+    controller.name = "\n \r\n ab cd \n \r\n ";
+    controller.budget = 111;
+    controller.hibernate = hibernate;
 
-    assertRedirect(Goals.class, add.post());
+    assertRedirect(Goals.class, controller.post());
 
     Goal savedGoal = (Goal)getSavedEntity();
 
@@ -117,16 +109,15 @@ public class AddTest extends ControllerTest<Add> {
 
   @Test
   public void saveDuplicate() {
-    Add add = new Add();
-    add.name = "aaa aaa";
-    add.budget = 5555;
-    add.hibernate = hibernate;
+    controller.name = "aaa aaa";
+    controller.budget = 5555;
+    controller.hibernate = hibernate;
 
-    doThrow(mock(ConstraintViolationException.class)).when(add.hibernate).save(any(Goal.class));
+    doThrow(mock(ConstraintViolationException.class)).when(controller.hibernate).save(any(Goal.class));
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("See eesmärk on juba sisestatud."));
+    assertTrue(controller.errorsList.contains("See eesmärk on juba sisestatud."));
 
     Goal savedGoal = (Goal)getSavedEntity();
     assertEquals("aaa aaa", savedGoal.getName());
@@ -135,16 +126,15 @@ public class AddTest extends ControllerTest<Add> {
 
   @Test
   public void saveException() {
-    Add add = new Add();
-    add.name = "34567 hh";
-    add.budget = 999999;
-    add.hibernate = hibernate;
+    controller.name = "34567 hh";
+    controller.budget = 999999;
+    controller.hibernate = hibernate;
 
-    doThrow(new RuntimeException()).when(add.hibernate).save(any(Goal.class));
+    doThrow(new RuntimeException()).when(controller.hibernate).save(any(Goal.class));
 
-    assertRender(add.post());
+    assertRender(controller.post());
 
-    assertTrue(add.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains("Tekkis viga."));
 
     Goal savedGoal = (Goal)getSavedEntity();
     assertEquals("34567 hh", savedGoal.getName());
