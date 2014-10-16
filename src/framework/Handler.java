@@ -34,7 +34,7 @@ public class Handler extends AbstractHandler {
 
   private Binder binder = new Binder("dd.MM.yyyy");
 
-  public Handler() throws IOException {
+  public void initialize() throws IOException {
     Render.freemarker = initializeFreemarker(devMode);
     hibernateSessionFactory = buildSessionFactory();
     initDatabase(hibernateSessionFactory);

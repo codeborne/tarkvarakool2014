@@ -22,7 +22,9 @@ public class Launcher {
 
     HandlerList handlers = new HandlerList();
     handlers.addHandler(new SessionHandler());
-    handlers.addHandler(new Handler());
+    Handler handler = new Handler();
+    handler.initialize();
+    handlers.addHandler(handler);
     handlers.addHandler(resourceHandler);
 
     Server server = new Server(8080);
