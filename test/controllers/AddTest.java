@@ -1,4 +1,5 @@
-import controllers.Add;
+package controllers;
+
 import framework.Redirect;
 import framework.Render;
 import framework.Result;
