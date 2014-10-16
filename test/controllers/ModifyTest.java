@@ -46,9 +46,6 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
     verify(hibernate).update(goalBeingChanged);
 
-//    Goal updatedEntity = (Goal) getUpdatedEntity();
-//    assertEquals(expectedGoal.getBudget(), updatedEntity.getBudget());
-//    assertEquals(expectedGoal.getName(), updatedEntity.getName());
   }
 
   @Test
