@@ -40,7 +40,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     Goal goalBeingChanged = new Goal("name", 10);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
-    assertRedirect("/goals", controller.post());
+    assertRedirect(Goals.class, controller.post());
 
     assertEquals(expectedGoal.getBudget(), goalBeingChanged.getBudget());
     assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
