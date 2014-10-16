@@ -1,7 +1,5 @@
 <@html>
-<form action="add">
-  <input type="submit" class="btn btn-default" value="Lisa">
-</form>
+
 
   <#if goals?has_content>
   <h3>Eesmärgid:</h3>
@@ -39,5 +37,8 @@
   <#else>
   <h3>Andmebaasis eesmärke ei ole.</h3>
   </#if>
+<form action="add">
+  <input type="submit" class="btn btn-default" value="Lisa">
+</form>
 
 </@html>
