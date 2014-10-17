@@ -9,8 +9,8 @@ public class Modify extends Save {
 
   @Override
   public Result get() {
-    title = "Lisage uus eesmärk";
-    buttonTitle = "Lisa";
+    title = "Muuda eesmärk";
+    buttonTitle = "Muuda";
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     if (goal == null) {
       return redirect(Add.class);

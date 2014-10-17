@@ -7,8 +7,8 @@ public class Add extends Save {
 
   @Override
   public Result get(){
-    title = "Muuda eesmärk";
-    buttonTitle = "Muuda";
+    title = "Lisage uus eesmärk";
+    buttonTitle = "Lisa";
     return render("form");
   }
 

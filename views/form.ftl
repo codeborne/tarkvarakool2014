@@ -1,6 +1,6 @@
 <@html>
 <form method="post" class="form-horizontal">
-    <h3>Lisage uus eesmärk</h3>
+    <h3>${title}</h3>
     <label>
       Eesmärk:
         <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
