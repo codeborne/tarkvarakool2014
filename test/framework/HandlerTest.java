@@ -41,6 +41,11 @@ public class HandlerTest {
   }
 
   @Test
+  public void classNameWithEmptyValue() {
+    assertThat(handler.getClassName(""), is("controllers."));
+  }
+
+  @Test
   public void handleWithUnknownUrl() throws Exception {
     handler.handle("/foo/bar", baseRequest, request, response);
     assertThat(baseRequest.isHandled(), is(false));

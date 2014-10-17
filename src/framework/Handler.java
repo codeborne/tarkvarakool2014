@@ -127,7 +127,7 @@ public class Handler extends AbstractHandler {
   }
 
   String getClassName(String path) {
-    path = path.substring(1);
+    path = path.length() > 0 ? path.substring(1) : path;
     int i = path.lastIndexOf('/');
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";
     path = path.substring(i + 1);
