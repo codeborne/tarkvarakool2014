@@ -14,6 +14,8 @@ public class Metric {
 
   @Column(nullable = false, unique = true)
   private String name;
+
+
   private String publicDescription;
   private String privateDescription;
   private Integer startLevel;
@@ -23,7 +25,11 @@ public class Metric {
   private String infoSource;
   private String reportInstitution;
 
-  public Metric(){
+  private Metric(){
+  }
+
+  public Metric(String name) {
+    this.name = name;
   }
 
   public Metric(String name, String publicDescription, String privateDescription, Integer startLevel,

@@ -2,29 +2,48 @@ package controllers.admin.metrics;
 
 import framework.Controller;
 import framework.Result;
+import model.Metric;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 public class Add extends Controller {
 
-  private String name;
-  private String publicDescription;
-  private String privateDescription;
-  private Integer startLevel;
-  private String commentOnStartLevel;
-  private Integer targetLevel;
-  private String commentOnTargetLevel;
-  private String infoSource;
-  private String reportInstitution;
+  public String name;
+  public String publicDescription;
+  public String privateDescription;
+  public Integer startLevel;
+  public String commentOnStartLevel;
+  public Integer targetLevel;
+  public String commentOnTargetLevel;
+  public String infoSource;
+  public String reportInstitution;
   public Set<String> errorsList = new HashSet<>();
+
+  public java.util.List<Metric> metrics = new ArrayList<>();
 
 
   @Override
   public Result post() {
+   checkName();
+    if (errorsList.isEmpty()) {
+      try {
+        name.trim();
+        hibernate.save(new Metric(name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
+          targetLevel, commentOnTargetLevel, infoSource, reportInstitution));
 
-
-    return null;
-
+      } catch (Exception e) {
+        errorsList.add("Tekkis viga.");
+      }
+    }
+    metrics = hibernate.createCriteria(Metric.class).list();
+    return render();
 }
+  private void checkName() {
+    if (errors.containsKey("name") || isBlank(name))
+      errorsList.add("Sisestage mõõdik.");
+  }
 }
