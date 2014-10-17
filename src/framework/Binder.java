@@ -22,8 +22,8 @@ public class Binder {
     Class clazz = controller.getClass();
     for (Map.Entry<String, String[]> param : params.entrySet()) {
       try {
-        Field field = clazz.getDeclaredField(param.getKey());
-        field.setAccessible(true);
+        Field field = clazz.getField(param.getKey());
+        if (field.getDeclaringClass().isAssignableFrom(Controller.class)) continue;
         setFieldValue(controller, field, param.getValue());
       }
       catch (NoSuchFieldException ignore) {
