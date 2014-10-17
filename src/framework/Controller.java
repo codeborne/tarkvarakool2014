@@ -6,23 +6,23 @@ import java.util.Map;
 public abstract class Controller extends RequestState {
   public Map<String, Throwable> errors = new LinkedHashMap<>();
 
-  public Result get() {
+  public Result get() throws Exception {
     return render();
   }
 
-  public Result post() {
+  public Result post() throws Exception {
     return render();
   }
 
-  public Result put() {
+  public Result put() throws Exception {
     return render();
   }
 
-  public Result delete() {
+  public Result delete() throws Exception {
     return render();
   }
 
-  public Result options() {
+  public Result options() throws Exception {
     return render();
   }
 
