@@ -19,6 +19,7 @@ public class Modify extends Save {
     return render();
   }
 
+  @Override
   protected void save() {
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     goal.setBudget(budget);

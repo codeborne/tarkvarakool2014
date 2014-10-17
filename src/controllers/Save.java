@@ -7,7 +7,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Save extends Controller {
+public abstract class Save extends Controller {
   public String name;
   public Integer budget;
   public List<String> errorsList = new ArrayList<>();
@@ -40,6 +40,5 @@ public class Save extends Controller {
     return render();
   }
 
-protected void save() {
-  }
+  protected abstract void save();
 }
