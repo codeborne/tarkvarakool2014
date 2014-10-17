@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin.goals;
 
+import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.id = 2L;
     when(hibernate.get(Goal.class, 2L)).thenReturn(null);
 
-    assertRedirect("/add", controller.get());
+    assertRedirect(Add.class, controller.get());
   }
 
   @Test
@@ -39,7 +40,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     Goal goalBeingChanged = new Goal("TERE", 33);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
-    assertRedirect(Goals.class, controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(10, (int)goalBeingChanged.getBudget());
     assertEquals("name", goalBeingChanged.getName());

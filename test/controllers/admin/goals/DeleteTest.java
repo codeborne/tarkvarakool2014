@@ -1,12 +1,13 @@
-package controllers;
+package controllers.admin.goals;
 
+import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.HibernateException;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-public class DeleteTest extends ControllerTest<Delete>{
+public class DeleteTest extends ControllerTest<Delete> {
 
   @Test
   public void postDeletesGoal() {
@@ -14,7 +15,7 @@ public class DeleteTest extends ControllerTest<Delete>{
     Goal expectedGoal = new Goal("name", 300);
     when(hibernate.get(Goal.class, 5L)).thenReturn(expectedGoal);
 
-    assertRedirect(Goals.class, controller.post());
+    assertRedirect(Home.class, controller.post());
 
     verify(hibernate).delete(expectedGoal);
   }
@@ -34,6 +35,6 @@ public class DeleteTest extends ControllerTest<Delete>{
     controller.id = 5L;
     when(hibernate.get(Goal.class, 5L)).thenReturn(null);
 
-    assertRedirect(Goals.class, controller.post());
+    assertRedirect(Home.class, controller.post());
   }
 }

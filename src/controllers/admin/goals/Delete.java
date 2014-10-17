@@ -1,4 +1,4 @@
-package controllers;
+package controllers.admin.goals;
 
 import framework.Controller;
 import framework.Result;
@@ -15,7 +15,7 @@ public class Delete extends Controller {
     if (goal != null) {
       hibernate.delete(goal);
     }
-    return redirect(Goals.class);
+    return redirect(Home.class);
   }
 
 }

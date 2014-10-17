@@ -1,4 +1,4 @@
-package controllers;
+package controllers.admin.goals;
 
 import framework.Result;
 import model.Goal;
@@ -18,7 +18,7 @@ public class Modify extends Save {
       name = goal.getName();
       budget = goal.getBudget();
     }
-    return render("form");
+    return render("admin/goals/form");
   }
 
   @Override

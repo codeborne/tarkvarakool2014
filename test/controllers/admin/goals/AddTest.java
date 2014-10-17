@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin.goals;
 
+import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
@@ -113,7 +114,7 @@ public class AddTest extends ControllerTest<Add> {
     controller.name = "\n \r\n ab cd \n \r\n ";
     controller.budget = 111;
 
-    assertRedirect(Goals.class, controller.post());
+    assertRedirect(Home.class, controller.post());
 
     Goal savedGoal = (Goal) getSavedEntity();
 

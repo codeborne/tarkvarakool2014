@@ -1,4 +1,4 @@
-package controllers;
+package controllers.admin.goals;
 
 import framework.Result;
 import model.Goal;
@@ -9,7 +9,7 @@ public class Add extends Save {
   public Result get(){
     title = "Lisage uus eesmärk";
     buttonTitle = "Lisa";
-    return render("form");
+    return render("admin/goals/form");
   }
 
   @Override

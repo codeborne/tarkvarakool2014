@@ -1,4 +1,4 @@
-package controllers;
+package controllers.admin.goals;
 
 import framework.Controller;
 import framework.Result;
@@ -36,7 +36,7 @@ public abstract class Save extends Controller {
   private Result saveAndRedirect() {
     name = name.trim();
     save();
-    return redirect(Goals.class);
+    return redirect(Home.class);
   }
 
   private void checkErrors() {

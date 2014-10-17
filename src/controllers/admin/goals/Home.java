@@ -1,14 +1,13 @@
-package controllers;
+package controllers.admin.goals;
 
 import framework.Controller;
 import framework.Result;
 import model.Goal;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Goals extends Controller {
-  public List<Goal> goals = new ArrayList<>();
+public class Home extends Controller {
+  public java.util.List<Goal> goals = new ArrayList<>();
 
   @Override
   public Result get() {
