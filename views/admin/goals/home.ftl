@@ -22,7 +22,7 @@
           </form>
         </td>
         <td>
-          <form action="delete" method="post">
+          <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')" >
             <input type="hidden" name="id" value="${goal.id}"/>
             <button type="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-trash"></span>
