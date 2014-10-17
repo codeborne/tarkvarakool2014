@@ -15,7 +15,6 @@ public class Save extends Controller {
   @Override
   public Result post() {
 
-
     if (name != null)
       name = name.trim();
 
@@ -31,15 +30,12 @@ public class Save extends Controller {
     try {
       if (errorsList.isEmpty()) {
         save();
+        return redirect(Goals.class);
       }
     } catch (ConstraintViolationException e) {
       errorsList.add("See eesmärk on juba sisestatud.");
     } catch (Exception e) {
       errorsList.add("Tekkis viga.");
-    }
-
-    if (errorsList.isEmpty()) {
-      return redirect(Goals.class);
     }
     return render();
   }
