@@ -14,4 +14,10 @@ public class RenderTest {
     assertThat(render.getTemplateName("/foo-bar-baz"), is("foo-bar-baz.ftl"));
     assertThat(render.getTemplateName("/foo/bar/baz"), is("foo/bar/baz.ftl"));
   }
+
+  @Test
+  public void templateNameGiven() throws Exception {
+    Render render = new Render(null, "bar");
+    assertThat(render.getTemplateName("/foo"), is("bar.ftl"));
+  }
 }

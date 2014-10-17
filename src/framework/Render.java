@@ -12,10 +12,17 @@ import static framework.Handler.THE_ENCODING;
 public class Render extends Result {
 
   static Configuration freemarker;
+
   private Object model;
+  private String template;
 
   public Render(Object model) {
     this.model = model;
+  }
+
+  public Render(Object model, String template) {
+    this(model);
+    this.template = template;
   }
 
   @Override
@@ -27,6 +34,6 @@ public class Render extends Result {
   }
 
   String getTemplateName(String path) {
-    return path.substring(1) + ".ftl";
+    return (template != null ? template : path.substring(1)) + ".ftl";
   }
 }
