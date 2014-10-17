@@ -16,10 +16,6 @@ public abstract class Save extends Controller {
   public String title;
   public String buttonTitle;
 
-  public String title;
-  public String buttonTitle;
-
-
   @Override
   public Result post() {
     checkErrors();

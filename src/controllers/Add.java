@@ -16,11 +16,4 @@ public class Add extends Save {
   protected void save() {
     hibernate.save(new Goal(name, budget));
   }
-
-  @Override
-  public Result get() {
-    title="Lisa uus eesmärk";
-    buttonTitle="Lisa";
-    return render("form");
-  }
 }
