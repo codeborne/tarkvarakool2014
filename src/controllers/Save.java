@@ -4,40 +4,50 @@ import framework.Controller;
 import framework.Result;
 import org.hibernate.exception.ConstraintViolationException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public abstract class Save extends Controller {
   public String name;
   public Integer budget;
-  public List<String> errorsList = new ArrayList<>();
+  public Set<String> errorsList = new HashSet<>();
 
   @Override
   public Result post() {
+    checkErrors();
 
-    if (name != null)
-      name = name.trim();
-
-    if (name == null || name.length() == 0) {
-      errorsList.add("Sisestage eesmärk.");
-    }
-    if (budget == null || budget <= 0 || errors.get("budget") instanceof NumberFormatException)
-      errorsList.add("Sisestage korrektne eelarve.");
-
-    if (errors.containsKey("name") || (errors.containsKey("budget") && !(errors.get("budget") instanceof NumberFormatException)))
-      errorsList.add("Tekkis viga.");
-
-    try {
-      if (errorsList.isEmpty()) {
-        save();
-        return redirect(Goals.class);
+    if (errorsList.isEmpty()) {
+      try {
+        return saveAndRedirect();
+      } catch (ConstraintViolationException e) {
+        errorsList.add("See eesmärk on juba sisestatud.");
+      } catch (Exception e) {
+        errorsList.add("Tekkis viga.");
       }
-    } catch (ConstraintViolationException e) {
-      errorsList.add("See eesmärk on juba sisestatud.");
-    } catch (Exception e) {
-      errorsList.add("Tekkis viga.");
     }
+
     return render();
+  }
+
+  private Result saveAndRedirect() {
+    name = name.trim();
+    save();
+    return redirect(Goals.class);
+  }
+
+  private void checkErrors() {
+    checkName();
+    checkBudget();
+  }
+  private void checkName() {
+    if (errors.containsKey("name") || isBlank(name))
+      errorsList.add("Sisestage eesmärk.");
+  }
+  private void checkBudget() {
+    if (errors.containsKey("budget") || budget == null || budget <= 0)
+      errorsList.add("Sisestage korrektne eelarve.");
   }
 
   protected abstract void save();

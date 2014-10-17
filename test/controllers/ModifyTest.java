@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 public class ModifyTest extends ControllerTest<Modify> {
 
   @Test
-  public void testGetWhenObjectFound() {
+  public void getWhenObjectFound() {
     controller.id = 2L;
 
     when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("name", 10));
@@ -23,7 +23,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void testGetWhenObjectNotFound() {
+  public void getWhenObjectNotFound() {
     controller.id = 2L;
     when(hibernate.get(Goal.class, 2L)).thenReturn(null);
 
@@ -31,26 +31,23 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void postTestWithNoErrors() {
+  public void postNameTrimAndUpdateSuccess() {
     controller.id = 2L;
-    controller.name = "name";
+    controller.name = "\n name";
     controller.budget = 10;
 
-    Goal expectedGoal = new Goal(controller.name, controller.budget);
     Goal goalBeingChanged = new Goal("TERE", 33);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
     assertRedirect(Goals.class, controller.post());
 
-    assertEquals(expectedGoal.getBudget(), goalBeingChanged.getBudget());
-    assertEquals(expectedGoal.getName(), goalBeingChanged.getName());
+    assertEquals(10, (int)goalBeingChanged.getBudget());
+    assertEquals("name", goalBeingChanged.getName());
     verify(hibernate).update(goalBeingChanged);
-
   }
 
   @Test
-  public void postTestIfNameNull() {
-    controller.name = null;
+  public void postIfNameNull() {
     controller.budget = 10;
 
     assertRender(controller.post());
@@ -60,7 +57,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void postTestIfNameIsEmpty() {
+  public void postIfNameIsEmpty() {
     controller.name = "";
     controller.budget = 2;
 
@@ -71,9 +68,8 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void postTestIfBudgetNull() {
+  public void postIfBudgetNull() {
     controller.name = "name";
-    controller.budget = null;
 
     assertRender(controller.post());
 
@@ -82,7 +78,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void postTestIfBudgetIsNegative() {
+  public void postIfBudgetIsNegative() {
     controller.name = "name";
     controller.budget = -1;
 
@@ -95,7 +91,6 @@ public class ModifyTest extends ControllerTest<Modify> {
   @Test
   public void postIfBudgetConversionFails() {
     controller.name = "name";
-    controller.budget = 1;
     controller.errors.put("budget", new NumberFormatException());
 
     assertRender(controller.post());
@@ -106,26 +101,36 @@ public class ModifyTest extends ControllerTest<Modify> {
 
   @Test
   public void postIfErrorsContainsName() {
-    controller.name = "name";
     controller.budget = 1;
     controller.errors.put("name", new RuntimeException());
 
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
   public void postIfErrorsContainsBudget() {
     controller.name = "name";
-    controller.budget = 1;
     controller.errors.put("budget", new Exception());
 
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+  }
+
+  @Test
+  public void postIfErrorContainsNameAndBudget() {
+    controller.errors.put("budget", new RuntimeException());
+    controller.errors.put("name", new RuntimeException());
+
+    assertRender(controller.post());
+
+    assertEquals(2, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
@@ -136,7 +141,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     Goal expectedGoal = new Goal("goal", 100);
 
-    doReturn(expectedGoal).when(hibernate).get(Goal.class, 2L);
+    when(hibernate.get(Goal.class, 2L)).thenReturn(expectedGoal);
 
     ConstraintViolationException expectedException = mock(ConstraintViolationException.class);
     doThrow(expectedException).when(hibernate).update(any(Goal.class));
@@ -155,7 +160,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     Goal expectedGoal = new Goal("goal", 100);
 
-    doReturn(expectedGoal).when(hibernate).get(Goal.class, 2L);
+   when(hibernate.get(Goal.class, 2L)).thenReturn(expectedGoal);
 
     Exception expectedException = new RuntimeException();
     doThrow(expectedException).when(hibernate).update(any(Goal.class));

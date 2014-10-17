@@ -11,90 +11,105 @@ import static org.mockito.Mockito.*;
 public class AddTest extends ControllerTest<Add> {
 
   @Test
-  public void addNullName() {
-    controller.name = null;
-    controller.budget = 300;
+  public void postIfNameIsNull() {
+    controller.budget = 10;
 
     assertRender(controller.post());
 
+    assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
-  public void addBlankName() {
+  public void postIfNameIsEmpty() {
     controller.name = "";
     controller.budget = 300;
 
     assertRender(controller.post());
 
+    assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
-  public void addSpacesOnlyName() {
+  public void postIfNameHasSpacesOnly() {
     controller.name = " \n\n \n    \r\n \r\n \n \n";
     controller.budget = 300;
 
     assertRender(controller.post());
 
+    assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
-  public void addNullBudget() {
+  public void postIfBudgetIsNull() {
     controller.name = "abc";
-    controller.budget = null;
 
     assertRender(controller.post());
 
+    assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
-  public void addNegativeBudget() {
+  public void postIfBudgetIsNegative() {
     controller.name = "abc";
     controller.budget = -1;
 
     assertRender(controller.post());
 
+    assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
-  public void addBudgetNumberFormatException() {
+  public void postIfBudgetConversionFails() {
     controller.name = "abc";
-    controller.budget = 55;
     controller.errors.put("budget", new NumberFormatException());
 
     assertRender(controller.post());
 
+    assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
-  public void addNameException() {
-    controller.name = "abc";
+  public void postIfNameThrowsException() {
     controller.budget = 55;
     controller.errors.put("name", new RuntimeException());
 
     assertRender(controller.post());
 
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
   }
 
   @Test
-  public void addBudgetException() {
+  public void postIfBudgetThrowsException() {
     controller.name = "abc";
-    controller.budget = 55;
     controller.errors.put("budget", new RuntimeException());
 
     assertRender(controller.post());
 
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
   }
 
   @Test
-  public void testSaveSuccessAndNameTrim() throws Exception {
+  public void postIfNameAndBudgetThrowException() {
+    controller.errors.put("budget", new RuntimeException());
+    controller.errors.put("name", new RuntimeException());
+
+    assertRender(controller.post());
+
+    assertEquals(2, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+  }
+
+  @Test
+  public void postNameTrimAndSaveSuccess() throws Exception {
     controller.name = "\n \r\n ab cd \n \r\n ";
     controller.budget = 111;
 
@@ -104,10 +119,11 @@ public class AddTest extends ControllerTest<Add> {
 
     assertEquals("ab cd", savedGoal.getName());
     assertEquals(111, (int) savedGoal.getBudget());
+    verify(hibernate).save(savedGoal);
   }
 
   @Test
-  public void saveDuplicate() {
+  public void postSaveDuplicate() {
     controller.name = "aaa aaa";
     controller.budget = 5555;
 
@@ -116,14 +132,17 @@ public class AddTest extends ControllerTest<Add> {
     assertRender(controller.post());
 
     assertTrue(controller.errorsList.contains("See eesmärk on juba sisestatud."));
+    assertEquals(1, controller.errorsList.size());
 
     Goal savedGoal = (Goal) getSavedEntity();
+
     assertEquals("aaa aaa", savedGoal.getName());
     assertEquals(5555, (int) savedGoal.getBudget());
+
   }
 
   @Test
-  public void saveException() {
+  public void postSaveThrowsException() {
     controller.name = "34567 hh";
     controller.budget = 999999;
 
@@ -132,8 +151,10 @@ public class AddTest extends ControllerTest<Add> {
     assertRender(controller.post());
 
     assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertEquals(1, controller.errorsList.size());
 
     Goal savedGoal = (Goal) getSavedEntity();
+
     assertEquals("34567 hh", savedGoal.getName());
     assertEquals(999999, (int) savedGoal.getBudget());
   }

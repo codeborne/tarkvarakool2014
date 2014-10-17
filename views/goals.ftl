@@ -1,6 +1,4 @@
 <@html>
-
-
   <#if goals?has_content>
   <h3>Eesmärgid:</h3>
 
