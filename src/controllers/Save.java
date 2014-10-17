@@ -47,7 +47,7 @@ public abstract class Save extends Controller {
   }
   private void checkBudget() {
     if (errors.containsKey("budget") || budget == null || budget <= 0)
-      errorsList.add("Sisestage korrektne eelarve.");
+      errorsList.add("Sisestage korrektne eelarve (1 - 2 147 483 647).");
   }
 
   protected abstract void save();

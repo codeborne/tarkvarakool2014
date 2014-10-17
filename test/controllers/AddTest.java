@@ -49,7 +49,7 @@ public class AddTest extends ControllerTest<Add> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
   }
 
   @Test
@@ -60,7 +60,7 @@ public class AddTest extends ControllerTest<Add> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
   }
 
   @Test
@@ -71,7 +71,7 @@ public class AddTest extends ControllerTest<Add> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
   }
 
   @Test
@@ -93,7 +93,7 @@ public class AddTest extends ControllerTest<Add> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
   }
 
   @Test
@@ -105,7 +105,7 @@ public class AddTest extends ControllerTest<Add> {
 
     assertEquals(2, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
   }
 
   @Test
