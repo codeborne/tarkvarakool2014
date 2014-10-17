@@ -13,6 +13,8 @@ public abstract class Save extends Controller {
   public String name;
   public Integer budget;
   public Set<String> errorsList = new HashSet<>();
+  public String title;
+  public String buttonTitle;
 
   @Override
   public Result post() {
