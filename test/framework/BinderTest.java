@@ -17,7 +17,7 @@ public class BinderTest {
   @Test
   public void bindRequestParametersToFields() throws Exception {
     class Foo extends Controller {
-      private String name;
+      public String name;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("name", new String[]{"Anton"}));
@@ -25,9 +25,21 @@ public class BinderTest {
   }
 
   @Test
+  public void bindParentClass() throws Exception {
+    class Foo extends Controller {
+      public String name;
+    }
+    class Bar extends Foo {
+    }
+    Bar controller = new Bar();
+    binder.bindRequestParameters(controller, singletonMap("name", new String[]{"foo"}));
+    assertEquals("foo", controller.name);
+  }
+
+  @Test
   public void bindInt() throws Exception {
     class Foo extends Controller {
-      private int count;
+      public int count;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("count", new String[]{"123"}));
@@ -37,7 +49,7 @@ public class BinderTest {
   @Test
   public void bindInteger() throws Exception {
     class Foo extends Controller {
-      private Integer count;
+      public Integer count;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("count", new String[]{"123"}));
@@ -47,7 +59,7 @@ public class BinderTest {
   @Test
   public void bindBigDecimal() throws Exception {
     class Foo extends Controller {
-      private BigDecimal amount;
+      public BigDecimal amount;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("amount", new String[]{"123.45"}));
@@ -57,7 +69,7 @@ public class BinderTest {
   @Test
   public void bindDate() throws Exception {
     class Foo extends Controller {
-      private Date date;
+      public Date date;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("date", new String[]{"11.07.2013"}));
@@ -67,7 +79,7 @@ public class BinderTest {
   @Test
   public void bindStringArray() throws Exception {
     class Foo extends Controller {
-      private String[] strings;
+      public String[] strings;
     }
     Foo controller = new Foo();
     String[] value = {"a", "b", "c"};
@@ -78,7 +90,7 @@ public class BinderTest {
   @Test
   public void bindList() throws Exception {
     class Foo extends Controller {
-      private List<String> list;
+      public List<String> list;
     }
     Foo controller = new Foo();
     String[] value = {"a", "b", "c"};
@@ -89,7 +101,7 @@ public class BinderTest {
   @Test
   public void bindSet() throws Exception {
     class Foo extends Controller {
-      private Set<String> set;
+      public Set<String> set;
     }
     Foo controller = new Foo();
     String[] value = {"a", "b", "c"};
@@ -100,7 +112,7 @@ public class BinderTest {
   @Test
   public void bindIntArray() throws Exception {
     class Foo extends Controller {
-      private int[] ints;
+      public int[] ints;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("ints", new String[]{"1", "2", "3"}));
@@ -110,7 +122,7 @@ public class BinderTest {
   @Test
   public void bindCollectionOfBigDecimals() throws Exception {
     class Foo extends Controller {
-      private Collection<BigDecimal> col;
+      public Collection<BigDecimal> col;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("col", new String[]{"1", "2"}));
@@ -120,7 +132,7 @@ public class BinderTest {
   @Test
   public void bindErrorsAreReported() throws Exception {
     class Foo extends Controller {
-      private Integer number;
+      public Integer number;
     }
     Foo controller = new Foo();
     binder.bindRequestParameters(controller, singletonMap("number", new String[]{"zzz"}));

@@ -34,6 +34,10 @@ public abstract class Controller extends RequestState {
     return new Render(this);
   }
 
+  protected Render render(String template) {
+    return new Render(this, template);
+  }
+
   @SuppressWarnings("unchecked")
   protected  <T> T fromSession(Class<T> clazz) {
     T value = (T) session.getAttribute(clazz.getName());
