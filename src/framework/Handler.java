@@ -49,7 +49,7 @@ public class Handler extends AbstractHandler {
       request.setCharacterEncoding(THE_ENCODING);
       bindRequestState(requestState, request, response);
       hibernate = openHibernateSession(requestState);
-      Object controller = createController(target);
+      Controller controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
       Result result = invokeController(controller, baseRequest);
       result.handle(request, response);
@@ -80,7 +80,7 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  Result invokeController(Object controller, Request baseRequest) throws Exception {
+  Result invokeController(Controller controller, Request baseRequest) throws Exception {
     try {
       Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
       baseRequest.setHandled(true);
@@ -91,11 +91,11 @@ public class Handler extends AbstractHandler {
     }
   }
 
-  Object createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+  Controller createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
     if (!target.toLowerCase().equals(target)) throw new ClassNotFoundException("all URLs must be lowercase");
     String className = getClassName(target);
     Class controllerClass = Class.forName(className);
-    return controllerClass.newInstance();
+    return (Controller) controllerClass.newInstance();
   }
 
   void redirectIfPossible(String target, Request baseRequest, HttpServletResponse response) throws IOException {
