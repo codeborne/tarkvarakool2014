@@ -16,7 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static framework.FreemarkerHelper.initializeFreemarker;
-import static framework.HibernateHelper.buildSessionFactory;
+import static framework.HibernateHelper.createSessionFactory;
 import static framework.HibernateHelper.initDatabase;
 import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
@@ -37,7 +37,7 @@ public class Handler extends AbstractHandler {
 
   public void initialize() throws IOException {
     Render.freemarker = initializeFreemarker(devMode);
-    hibernateSessionFactory = buildSessionFactory();
+    hibernateSessionFactory = createSessionFactory(false);
     initDatabase(hibernateSessionFactory);
   }
 

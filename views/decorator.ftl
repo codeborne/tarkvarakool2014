@@ -22,9 +22,9 @@
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <#if loggedInUsername??>
+            <span class="greetings">Tere, ${loggedInUsername}</span>
             <form class="navbar-form navbar-left" action="/admin/logout">
-              Tere, ${loggedInUsername}
-              <button type="submit" class="btn-sm btn-success">Logi valja</button>
+              <button id="logout-button" type="submit" class="btn-sm btn-success">Logi valja</button>
             </form>
           <#else>
             <form class="navbar-form navbar-left" action="/admin/login">
