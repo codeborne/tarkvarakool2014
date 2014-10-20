@@ -50,8 +50,7 @@ public class Add extends UserAwareController {
       }
     }
 
-      return  render();
-
+    return  render();
   }
 
   private void checkErrors() {

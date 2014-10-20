@@ -9,12 +9,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 
 public abstract class ControllerTest<T extends Controller> {
 
   protected HttpSession session = mock(HttpSession.class);
-  protected Session hibernate = mock(Session.class);
+  protected Session hibernate = mock(Session.class, RETURNS_DEEP_STUBS);
   protected T controller;
 
   public ControllerTest() {

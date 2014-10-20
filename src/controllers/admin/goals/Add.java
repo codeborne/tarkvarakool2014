@@ -6,11 +6,14 @@ import model.Goal;
 
 public class Add extends Save {
 
+  public Add() {
+    title = "Lisage uus eesmärk";
+    buttonTitle = "Lisa";
+  }
+
   @Override
   @Role("admin")
   public Result get(){
-    title = "Lisage uus eesmärk";
-    buttonTitle = "Lisa";
     return render("admin/goals/form");
   }
 
