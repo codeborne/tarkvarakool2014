@@ -1,39 +1,69 @@
 <@html>
+
+<#if errorsList?has_content>
+  <#list errorsList as error>
+  <div class="alert alert-danger">${error}</div>
+  </#list>
+</#if>
+
 <form method="post" class="form-horizontal">
-  <h3>Lisage mõõdik</h3>
+  <input type="hidden" value="${goal.id}" name="goalId">
+  <h3>Lisage mõõdik: ${goal.name}</h3>
+
   <label>
     Mõõdik:
-    <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea><br>
+    <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
+  </label>
+  <br>
+  <label>
     Avalik kirjeldus:
     <textarea name="publicDescription" class="form-control" rows="5"><#if publicDescription??>${publicDescription}</#if></textarea><br>
+  </label>
+  <br>
+  <label>
     Mitteavalik kirjeldus:
-    <textarea name="privateDescription" class="form-control" rows="5"><#if privateDescription??>${privateDescription}</#if></textarea><br>
+    <textarea name="privateDescription" class="form-control" rows="5"><#if privateDescription??>${privateDescription}</#if></textarea>
+  </label>
+  <br>
+  <label>
     Algtase:
-    <input type="number" class="form-control" min="0" max="2147483647" name="startLevel"<#if startLevel?? && (startLevel>=0)>value=${startLevel?c}</#if>><br>
+    <input type="number" class="form-control" min="0" max="2147483647" name="startLevel"<#if startLevel?? && (startLevel>=0)>value=${startLevel?c}</#if>>
+  </label>
+  <br>
+  <label>
     Algtaseme kommentaar:
-    <textarea name="commentOnStartLevel" class="form-control" rows="5"><#if commentOnStartLevel??>${commentOnStartLevel}</#if></textarea><br>
+    <textarea name="commentOnStartLevel" class="form-control" rows="5"><#if commentOnStartLevel??>${commentOnStartLevel}</#if></textarea>
+  </label>
+  <br>
+  <label>
     Sihttase:
-    <input type="number" class="form-control" min="0" max="2147483647" name="targetLevel"<#if targetLevel?? && (targetLevel>=0)>value=${targetLevel?c}</#if>><br>
+    <input type="number" class="form-control" min="0" max="2147483647" name="targetLevel"<#if targetLevel?? && (targetLevel>=0)>value=${targetLevel?c}</#if>>
+  </label>
+  <br>
+  <label>
     Sihttaseme kommentaar:
-    <textarea name="commentOnTargetLevel" class="form-control" rows="5"><#if commentOnTargetLevel??>${commentOnTargetLevel}</#if></textarea><br>
+    <textarea name="commentOnTargetLevel" class="form-control" rows="5"><#if commentOnTargetLevel??>${commentOnTargetLevel}</#if></textarea>
+  </label>
+  <br>
+  <label>
     Infoallikas:
-    <input type="text" name="infoSource" class="form-control" rows="5"<#if infoSource??>${infoSource}</#if>><br>
+    <input type="text" name="infoSource" class="form-control" rows="5"<#if infoSource??>${infoSource}</#if>>
+  </label>
+  <br>
+  <label>
     Asutus, kuhu raporteerida:
     <input type="text" name="institutionToReport" class="form-control" rows="5"<#if institutionToReport??>${institutionToReport}</#if>><br>
-  </label><br>
+  </label>
+  <br>
 
-  <button class="btn btn-default btn-sm">Lisa</button>
-</form><br>
+  <button type="submit" class="btn btn-default btn-sm">
+    Lisa
+  </button>
+  <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id}'; return false;">
+    Tagasi
+  </button>
+  <br><br>
 
-  <#if errorsList?has_content>
-    <#list errorsList as error>
-    <div class="alert alert-danger">${error}</div>
-    </#list>
-  </#if>
+</form>
 
-  <#list metrics as metric>
-  <tr>
-    <td>${metric.name}</td>
-  </tr><br>
-  </#list>
 </@html>

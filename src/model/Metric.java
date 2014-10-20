@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Metric {
@@ -15,7 +12,8 @@ public class Metric {
   @Column(nullable = false, unique = true)
   private String name;
 
- // private Goal relatedGoal;
+  @ManyToOne
+  private Goal goal;
 
   private String publicDescription;
   private String privateDescription;
@@ -29,13 +27,10 @@ public class Metric {
   private Metric(){
   }
 
-  public Metric(String name) {
-    this.name = name;
-  }
-
-  public Metric(String name, String publicDescription, String privateDescription, Integer startLevel,
+  public Metric(Goal goal, String name, String publicDescription, String privateDescription, Integer startLevel,
                 String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
                 String infoSource, String institutionToReport) {
+    this.goal = goal;
     this.name = name;
     this.publicDescription = publicDescription;
     this.privateDescription = privateDescription;
@@ -45,6 +40,10 @@ public class Metric {
     this.commentOnTargetLevel = commentOnTargetLevel;
     this.infoSource = infoSource;
     this.institutionToReport = institutionToReport;
+  }
+
+  public Goal getGoal() {
+    return goal;
   }
 
   public Long getId() {
