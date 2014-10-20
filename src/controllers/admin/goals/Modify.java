@@ -1,6 +1,7 @@
 package controllers.admin.goals;
 
 import framework.Result;
+import framework.Role;
 import model.Goal;
 
 public class Modify extends Save {
@@ -8,6 +9,7 @@ public class Modify extends Save {
 
 
   @Override
+  @Role("admin")
   public Result get() {
     title = "Muuda eesmärk";
     buttonTitle = "Muuda";
