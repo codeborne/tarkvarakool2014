@@ -3,16 +3,19 @@ package controllers;
 import framework.*;
 import org.hibernate.Session;
 
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 
 public abstract class ControllerTest<T extends Controller> {
 
-  protected Session hibernate = mock(Session.class);
+  protected HttpSession session = mock(HttpSession.class);
+  protected Session hibernate = mock(Session.class, RETURNS_DEEP_STUBS);
   protected T controller;
 
   public ControllerTest() {
@@ -22,6 +25,7 @@ public abstract class ControllerTest<T extends Controller> {
     Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
     if (actualTypeArguments.length != 1) return;
     this.controller = createController(actualTypeArguments[0].getTypeName());
+    this.controller.session = session;
     this.controller.hibernate = hibernate;
   }
 

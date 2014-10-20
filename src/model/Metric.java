@@ -1,9 +1,6 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Metric {
@@ -15,6 +12,8 @@ public class Metric {
   @Column(nullable = false, unique = true)
   private String name;
 
+  @ManyToOne
+  private Goal goal;
 
   private String publicDescription;
   private String privateDescription;
@@ -23,18 +22,15 @@ public class Metric {
   private Integer targetLevel;
   private String commentOnTargetLevel;
   private String infoSource;
-  private String reportInstitution;
+  private String institutionToReport;
 
   private Metric(){
   }
 
-  public Metric(String name) {
-    this.name = name;
-  }
-
-  public Metric(String name, String publicDescription, String privateDescription, Integer startLevel,
+  public Metric(Goal goal, String name, String publicDescription, String privateDescription, Integer startLevel,
                 String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
-                String infoSource, String reportInstitution) {
+                String infoSource, String institutionToReport) {
+    this.goal = goal;
     this.name = name;
     this.publicDescription = publicDescription;
     this.privateDescription = privateDescription;
@@ -43,7 +39,11 @@ public class Metric {
     this.targetLevel = targetLevel;
     this.commentOnTargetLevel = commentOnTargetLevel;
     this.infoSource = infoSource;
-    this.reportInstitution = reportInstitution;
+    this.institutionToReport = institutionToReport;
+  }
+
+  public Goal getGoal() {
+    return goal;
   }
 
   public Long getId() {
@@ -82,8 +82,8 @@ public class Metric {
     return infoSource;
   }
 
-  public String getReportInstitution() {
-    return reportInstitution;
+  public String getInstitutionToReport() {
+    return institutionToReport;
   }
 
   public void setId(Long id) {
@@ -122,7 +122,7 @@ public class Metric {
     this.infoSource = infoSource;
   }
 
-  public void setReportInstitution(String reportInstitution) {
-    this.reportInstitution = reportInstitution;
+  public void setInstitutionToReport(String institutionToReport) {
+    this.institutionToReport = institutionToReport;
   }
 }

@@ -1,16 +1,20 @@
 package controllers.admin.goals;
 
 import framework.Result;
+import framework.Role;
 import model.Goal;
 
 public class Modify extends Save {
   public Long id;
 
-
-  @Override
-  public Result get() {
+  public Modify() {
     title = "Muuda eesmärk";
     buttonTitle = "Muuda";
+  }
+
+  @Override
+  @Role("admin")
+  public Result get() {
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     if (goal == null) {
       return redirect(Add.class);

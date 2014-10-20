@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
 import javax.persistence.Entity;
@@ -13,14 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class HibernateHelper {
+import static java.lang.String.valueOf;
+import static org.hibernate.cfg.AvailableSettings.AUTOCOMMIT;
 
-  public static SessionFactory buildSessionFactory() throws IOException {
-    Configuration configuration = new Configuration();
+public class HibernateHelper {
+  private static Configuration configuration;
+  private static SessionFactory sessionFactory;
+
+  public static SessionFactory buildSessionFactory(boolean autoCommit) throws IOException {
+    configuration = new Configuration();
     ClassPath.from(HibernateHelper.class.getClassLoader()).getTopLevelClassesRecursive("model").stream()
       .map(ClassPath.ClassInfo::load)
       .filter(modelClass -> modelClass.isAnnotationPresent(Entity.class))
       .forEach(configuration::addAnnotatedClass);
+    configuration.setProperty(AUTOCOMMIT, valueOf(autoCommit));
     new SchemaUpdate(configuration).execute(true, true);
     //noinspection deprecation
     return configuration.buildSessionFactory();
@@ -35,6 +42,17 @@ public class HibernateHelper {
     for (String command : initCommands) session.createSQLQuery(command).executeUpdate();
     transaction.commit();
     session.close();
+  }
+
+  public static void dropAndCreateSchema() {
+    new SchemaExport(configuration).create(true, true);
+  }
+
+  public static SessionFactory createSessionFactory(boolean autoCommit) throws IOException {
+    if (sessionFactory == null) {
+      sessionFactory = buildSessionFactory(autoCommit);
+    }
+    return sessionFactory;
   }
 
   private static List<String> getInitSQL(Scanner scanner) {

@@ -6,6 +6,7 @@ import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static framework.FreemarkerHelper.initializeFreemarker;
-import static framework.HibernateHelper.buildSessionFactory;
+import static framework.HibernateHelper.createSessionFactory;
 import static framework.HibernateHelper.initDatabase;
+import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
@@ -36,7 +38,7 @@ public class Handler extends AbstractHandler {
 
   public void initialize() throws IOException {
     Render.freemarker = initializeFreemarker(devMode);
-    hibernateSessionFactory = buildSessionFactory();
+    hibernateSessionFactory = createSessionFactory(false);
     initDatabase(hibernateSessionFactory);
   }
 
@@ -45,17 +47,25 @@ public class Handler extends AbstractHandler {
     long t = -System.currentTimeMillis();
     RequestState requestState = RequestState.threadLocal.get();
     Session hibernate = null;
+    Transaction transaction = null;
     try {
       request.setCharacterEncoding(THE_ENCODING);
       bindRequestState(requestState, request, response);
       hibernate = openHibernateSession(requestState);
+      transaction = hibernate.beginTransaction();
       Controller controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
       Result result = invokeController(controller, baseRequest);
+      if (transaction.isActive()) transaction.commit();
       result.handle(request, response);
     }
-    catch (ClassNotFoundException|NoSuchMethodException ignored) {
+    catch (ClassNotFoundException | NoSuchMethodException ignored) {
       redirectIfPossible(target, baseRequest, response);
+    }
+    catch (NotAuthorizedException e) {
+      LOG.error(e.getMessage());
+      response.sendError(SC_FORBIDDEN, devMode ? e.getMessage() : null);
+      baseRequest.setHandled(true);
     }
     catch (Exception e) {
       LOG.warn("Request handling failed", e);
@@ -63,7 +73,7 @@ public class Handler extends AbstractHandler {
       baseRequest.setHandled(true);
     }
     finally {
-      closeHibernateSession(hibernate);
+      closeHibernateSession(hibernate, transaction);
       t += System.currentTimeMillis();
       LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
@@ -73,16 +83,17 @@ public class Handler extends AbstractHandler {
     return state.hibernate = hibernateSessionFactory.openSession();
   }
 
-  private void closeHibernateSession(Session hibernate) {
-    if (hibernate != null) {
-      hibernate.flush();
-      hibernate.close();
-    }
+  private void closeHibernateSession(Session hibernate, Transaction transaction) {
+    if (transaction != null && transaction.isActive()) transaction.rollback();
+    if (hibernate != null) hibernate.close();
   }
 
   Result invokeController(Controller controller, Request baseRequest) throws Exception {
     try {
       Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
+      Role roleAnnotation = method.getAnnotation(Role.class);
+      if (roleAnnotation == null) throw new RoleMissingException(method);
+      if (!controller.getRoles().contains(roleAnnotation.value())) throw new NotAuthorizedException(method + " requires role '" + roleAnnotation.value() + "'");
       baseRequest.setHandled(true);
       return (Result) method.invoke(controller);
     }

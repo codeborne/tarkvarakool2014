@@ -1,7 +1,8 @@
 package controllers.admin.goals;
 
-import framework.Controller;
+import controllers.UserAwareController;
 import framework.Result;
+import framework.Role;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public abstract class Save extends Controller {
+public abstract class Save extends UserAwareController {
   public String name;
   public Integer budget;
   public Set<String> errorsList = new HashSet<>();
@@ -17,6 +18,7 @@ public abstract class Save extends Controller {
   public String buttonTitle;
 
   @Override
+  @Role("admin")
   public Result post() {
     checkErrors();
 
@@ -24,18 +26,18 @@ public abstract class Save extends Controller {
       try {
         return saveAndRedirect();
       } catch (ConstraintViolationException e) {
+        hibernate.getTransaction().rollback();
         errorsList.add("See eesmärk on juba sisestatud.");
-      } catch (Exception e) {
-        errorsList.add("Tekkis viga.");
       }
     }
 
-    return render();
+    return render("/admin/goals/form");
   }
 
   private Result saveAndRedirect() {
     name = name.trim();
     save();
+    hibernate.flush();
     return redirect(Home.class);
   }
 

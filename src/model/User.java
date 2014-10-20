@@ -1,6 +1,6 @@
 package model;
 
-import controllers.admin.Login;
+import static controllers.admin.goals.Password.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +25,8 @@ public class User {
   public User() {
   }
 
-  public User(String login, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-    this.username = login;
+  public User(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    setUsername(username);
     setPassword(password);
   }
 
@@ -34,7 +34,7 @@ public class User {
     return id;
   }
 
-  public String getLogin() {
+  public String getUsername() {
     return username;
   }
 
@@ -42,12 +42,12 @@ public class User {
     return password;
   }
 
-  public void setLogin(String login) {
-    this.username = login;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public void setPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-    this.password = Login.generateStrongPasswordHash(password);
+    this.password = generateStrongPasswordHash(password);
   }
 
 }

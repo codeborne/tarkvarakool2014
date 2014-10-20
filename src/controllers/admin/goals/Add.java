@@ -1,14 +1,19 @@
 package controllers.admin.goals;
 
 import framework.Result;
+import framework.Role;
 import model.Goal;
 
 public class Add extends Save {
 
-  @Override
-  public Result get(){
+  public Add() {
     title = "Lisage uus eesmärk";
     buttonTitle = "Lisa";
+  }
+
+  @Override
+  @Role("admin")
+  public Result get(){
     return render("admin/goals/form");
   }
 
