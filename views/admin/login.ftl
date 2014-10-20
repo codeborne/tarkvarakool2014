@@ -1,10 +1,8 @@
 <@html>
 
 <#if loggedInUsername??>
-  <p>Kasutaja: ${loggedInUsername}</p>
-  <form method="post" class="form-horizontal">
-    <button class="btn btn-default btn-sm" name="action" value="logout">Valju</button>
-  </form>
+  <p>Olete sisse loginud kasutajanimega ${loggedInUsername}</p>
+  <button class="btn btn-default btn-sm" onclick="location='/admin/logout'">Valju</button>
 <#else>
   <form method="post" class="form-horizontal">
 
@@ -14,7 +12,7 @@
       <input type="text" name="username" class="form-control">
     </label><br>
     <label>Parool: <input type="password" class="form-control" name="password"></label><br>
-    <button class="btn btn-default btn-sm" name="action" value="login">Sisene</button>
+    <button class="btn btn-default btn-sm">Sisene</button>
   </form>
 
   <#if error??>
