@@ -20,7 +20,7 @@
           </button>
           <a class="navbar-brand" href="#">Eesmärgid</a>
         </div>
-        <div class="navbar-collapse collapse navbar-right">
+        <div class="navbar-form navbar-collapse collapse navbar-right">
           <#if loggedInUsername??>
             Tere, ${loggedInUsername}<br>
             <button type="submit" class="btn-sm btn-success" onclick="location='/admin/logout'">Logi valja</button>
