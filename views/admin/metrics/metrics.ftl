@@ -32,10 +32,11 @@
   </#list>
   </table>
 
-<form action="/admin/goals">
-  <button type="submit" class="btn btn-default btn-sm">
-    Pealehele
-  </button>
-</form>
+<button type="submit" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
+  Pealehele
+</button>
+<button type="submit" class="btn btn-default btn-sm" onclick="location='/admin/metrics/add?goalId=${goal.id}'">
+  Lisa mõõdik
+</button>
 
 </@html>
