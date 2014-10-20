@@ -21,9 +21,9 @@ public class LoginTest extends UITest {
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 
-    $("#login-button").click();
+    $("#submit").click();
 
-    $(".alert-danger").shouldHave(text("Vale kasutajanimi voi parool"));
+    $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
   }
 
   @Test
@@ -36,7 +36,7 @@ public class LoginTest extends UITest {
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 
-    $("#login-button").click();
+    $("#submit").click();
 
     $(".greetings").shouldHave(text("Tere, johny"));
     $("#logout-button").click();

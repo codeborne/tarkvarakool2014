@@ -12,7 +12,7 @@
       <input type="text" name="username" class="form-control">
     </label><br>
     <label>Parool: <input type="password" class="form-control" name="password"></label><br>
-    <button id="login-button" class="btn btn-default btn-sm">Sisene</button>
+    <button id="submit" class="btn btn-default btn-sm">Sisene</button>
   </form>
 
   <#if error??>
