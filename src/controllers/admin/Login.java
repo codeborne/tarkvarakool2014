@@ -12,7 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static controllers.admin.goals.Password.validatePassword;
 
@@ -27,7 +26,7 @@ public class Login extends UserAwareController {
       hibernate.save(new User("Delia","pass"));
   }
 
-  @Override
+  @Override @Role("anonymous")
   public Result get() {
     return render();
   }
@@ -42,10 +41,5 @@ public class Login extends UserAwareController {
       session.setAttribute("username", username);
       return redirect(Home.class);
     }
-  }
-
-  @Override
-  protected Set<String> getRoles() {
-    return session.getAttribute("username") != null ? ImmutableSet.of("user") : ImmutableSet.of("anonymous");
   }
 }
