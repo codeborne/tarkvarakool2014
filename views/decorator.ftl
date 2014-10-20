@@ -24,7 +24,7 @@
           <#if loggedInUsername??>
             <form class="navbar-form navbar-left" action="/admin/logout">
               Tere, ${loggedInUsername}
-              <button type="submit" class="btn-sm btn-success">Logi valja</button>
+              <button type="submit" class="btn-sm btn-danger">Logi välja</button>
             </form>
           <#else>
             <form class="navbar-form navbar-left" action="/admin/login">
