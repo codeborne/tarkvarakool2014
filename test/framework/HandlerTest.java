@@ -103,8 +103,7 @@ public class HandlerTest {
 
   @Test
   public void invokeController() throws Exception {
-    class Controller { public void get() {} }
-    Controller controller = spy(new Controller());
+    Controller controller = mock(Controller.class);
     when(baseRequest.getMethod()).thenReturn("GET");
     handler.invokeController(controller, baseRequest);
     verify(controller).get();
