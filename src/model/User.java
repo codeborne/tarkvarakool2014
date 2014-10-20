@@ -25,8 +25,8 @@ public class User {
   public User() {
   }
 
-  public User(String login, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-    this.username = login;
+  public User(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    this.username = username;
     setPassword(password);
   }
 
