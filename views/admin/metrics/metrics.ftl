@@ -1,12 +1,9 @@
 <@html>
-<br>
-<br>
-<br><br><br>
-
 
 <form method="get">
 <input type="hidden" value="${goal.id}" name="goalID">
 </form>
+<h3>${goal.name}</h3>
 <table class="table table-hover">
   <tr>
     <th>Mõõdik</th>
