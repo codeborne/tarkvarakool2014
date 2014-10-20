@@ -1,6 +1,7 @@
 <@html>
 <form method="post" class="form-horizontal">
-  <h3>Lisage mõõdik</h3>
+  <input type="hidden" value="${goal.id}" name="goalId">
+  <h3>Lisage mõõdik: ${goal.name}</h3>
   <label>
     Mõõdik:
     <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea><br>
@@ -22,7 +23,13 @@
     <input type="text" name="institutionToReport" class="form-control" rows="5"<#if institutionToReport??>${institutionToReport}</#if>><br>
   </label><br>
 
-  <button class="btn btn-default btn-sm">Lisa</button>
+
+    <button type="submit" class="btn btn-default btn-sm">
+      Lisa
+    </button>
+
+
+
 </form><br>
 
   <#if errorsList?has_content>
@@ -31,9 +38,5 @@
     </#list>
   </#if>
 
-  <#list metrics as metric>
-  <tr>
-    <td>${metric.name}</td>
-  </tr><br>
-  </#list>
+
 </@html>
