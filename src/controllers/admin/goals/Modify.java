@@ -1,6 +1,5 @@
 package controllers.admin.goals;
 
-import controllers.admin.Login;
 import framework.Result;
 import model.Goal;
 
@@ -10,7 +9,6 @@ public class Modify extends Save {
 
   @Override
   public Result get() {
-    if (!isLoggedIn()) return redirect(Login.class);
     title = "Muuda eesmärk";
     buttonTitle = "Muuda";
     Goal goal = (Goal) hibernate.get(Goal.class, id);

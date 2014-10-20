@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container theme-showcase" role="main">
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -22,10 +22,14 @@
         </div>
         <div class="navbar-form navbar-collapse collapse navbar-right">
           <#if loggedInUsername??>
-            Tere, ${loggedInUsername}<br>
-            <button type="submit" class="btn-sm btn-success" onclick="location='/admin/logout'">Logi valja</button>
+            <form class="navbar-form navbar-left" action="/admin/logout">
+              Tere, ${loggedInUsername}
+              <button type="submit" class="btn-sm btn-success">Logi valja</button>
+            </form>
           <#else>
-            <button type="submit" class="btn-sm btn-success" onclick="location='/admin/login'">Logi sisse</button>
+            <form class="navbar-form navbar-left" action="/admin/login">
+              <button type="submit" class="btn-sm btn-success">Logi sisse</button>
+            </form>
           </#if>
         </div>
       </div>
