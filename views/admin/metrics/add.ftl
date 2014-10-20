@@ -16,10 +16,10 @@
     <input type="number" class="form-control" min="0" max="2147483647" name="targetLevel"<#if targetLevel?? && (targetLevel>=0)>value=${targetLevel?c}</#if>><br>
     Sihttaseme kommentaar:
     <textarea name="commentOnTargetLevel" class="form-control" rows="5"><#if commentOnTargetLevel??>${commentOnTargetLevel}</#if></textarea><br>
-    Info allikas:
+    Infoallikas:
     <input type="text" name="infoSource" class="form-control" rows="5"<#if infoSource??>${infoSource}</#if>><br>
     Asutus, kuhu raporteerida:
-    <input type="text" name="reportInstitution" class="form-control" rows="5"<#if reportInstitution??>${reportInstitution}</#if>><br>
+    <input type="text" name="institutionToReport" class="form-control" rows="5"<#if institutionToReport??>${institutionToReport}</#if>><br>
   </label><br>
 
   <button class="btn btn-default btn-sm">Lisa</button>

@@ -15,6 +15,7 @@ public class Metric {
   @Column(nullable = false, unique = true)
   private String name;
 
+ // private Goal relatedGoal;
 
   private String publicDescription;
   private String privateDescription;
@@ -23,7 +24,7 @@ public class Metric {
   private Integer targetLevel;
   private String commentOnTargetLevel;
   private String infoSource;
-  private String reportInstitution;
+  private String institutionToReport;
 
   private Metric(){
   }
@@ -34,7 +35,7 @@ public class Metric {
 
   public Metric(String name, String publicDescription, String privateDescription, Integer startLevel,
                 String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
-                String infoSource, String reportInstitution) {
+                String infoSource, String institutionToReport) {
     this.name = name;
     this.publicDescription = publicDescription;
     this.privateDescription = privateDescription;
@@ -43,7 +44,7 @@ public class Metric {
     this.targetLevel = targetLevel;
     this.commentOnTargetLevel = commentOnTargetLevel;
     this.infoSource = infoSource;
-    this.reportInstitution = reportInstitution;
+    this.institutionToReport = institutionToReport;
   }
 
   public Long getId() {
@@ -82,8 +83,8 @@ public class Metric {
     return infoSource;
   }
 
-  public String getReportInstitution() {
-    return reportInstitution;
+  public String getInstitutionToReport() {
+    return institutionToReport;
   }
 
   public void setId(Long id) {
@@ -122,7 +123,7 @@ public class Metric {
     this.infoSource = infoSource;
   }
 
-  public void setReportInstitution(String reportInstitution) {
-    this.reportInstitution = reportInstitution;
+  public void setInstitutionToReport(String institutionToReport) {
+    this.institutionToReport = institutionToReport;
   }
 }
