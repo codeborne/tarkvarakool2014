@@ -1,7 +1,6 @@
 package controllers.admin.goals;
 
 import controllers.UserAwareController;
-import controllers.admin.Login;
 import framework.Result;
 import org.hibernate.exception.ConstraintViolationException;
 
@@ -19,7 +18,6 @@ public abstract class Save extends UserAwareController {
 
   @Override
   public Result post() {
-    if (!isLoggedIn()) return redirect(Login.class);
     checkErrors();
 
     if (errorsList.isEmpty()) {
