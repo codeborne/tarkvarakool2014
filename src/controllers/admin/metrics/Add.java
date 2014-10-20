@@ -42,13 +42,14 @@ public class Add extends Controller {
         name.trim();
         hibernate.save(new Metric(goal, name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
           targetLevel, commentOnTargetLevel, infoSource, institutionToReport));
-
+        return redirect(Metrics.class);
       } catch (Exception e) {
         errorsList.add("Tekkis viga.");
       }
     }
 
-    return redirect(Metrics.class);
+      return  render();
+
   }
 
   private void checkErrors() {
