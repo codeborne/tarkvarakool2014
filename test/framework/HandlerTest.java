@@ -1,5 +1,6 @@
 package framework;
 
+import com.google.common.collect.ImmutableSet;
 import controllers.MockController;
 import org.eclipse.jetty.server.Request;
 import org.junit.Before;
@@ -9,9 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.Set;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -103,10 +107,26 @@ public class HandlerTest {
 
   @Test
   public void invokeController() throws Exception {
-    Controller controller = mock(Controller.class);
+    TestController controller = new TestController();
+    controller.roles = ImmutableSet.of("test");
     when(baseRequest.getMethod()).thenReturn("GET");
     handler.invokeController(controller, baseRequest);
-    verify(controller).get();
+    assertEquals(true, controller.getCalled);
+  }
+
+  @Test(expected = NotAuthorizedException.class)
+  public void invokeControllerFailsWithoutMatchingRole() throws Exception {
+    TestController controller = new TestController();
+    controller.roles = ImmutableSet.of("foo", "bar");
+    when(baseRequest.getMethod()).thenReturn("GET");
+    handler.invokeController(controller, baseRequest);
+  }
+
+  @Test(expected = RoleMissingException.class)
+  public void invokeControllerFailsWithoutRole() throws Exception {
+    Controller controller = new MockController();
+    when(baseRequest.getMethod()).thenReturn("POST");
+    handler.invokeController(controller, baseRequest);
   }
 
   @Test
@@ -118,5 +138,21 @@ public class HandlerTest {
   @Test(expected = ClassNotFoundException.class)
   public void createControllerDoesNotAllowUppercaseInURL() throws Exception {
     handler.createController("/MockController");
+  }
+
+  private static class TestController extends MockController {
+    boolean getCalled;
+    Set<String> roles;
+
+    @Override @Role("test")
+    public Result get() throws Exception {
+      getCalled = true;
+      return super.get();
+    }
+
+    @Override
+    protected Set<String> getRoles() {
+      return roles;
+    }
   }
 }

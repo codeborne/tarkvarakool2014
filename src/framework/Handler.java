@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import static framework.FreemarkerHelper.initializeFreemarker;
 import static framework.HibernateHelper.buildSessionFactory;
 import static framework.HibernateHelper.initDatabase;
+import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
@@ -57,6 +58,11 @@ public class Handler extends AbstractHandler {
     catch (ClassNotFoundException|NoSuchMethodException ignored) {
       redirectIfPossible(target, baseRequest, response);
     }
+    catch (NotAuthorizedException e) {
+      LOG.error(e.getMessage());
+      response.sendError(SC_FORBIDDEN, devMode ? e.getMessage() : null);
+      baseRequest.setHandled(true);
+    }
     catch (Exception e) {
       LOG.warn("Request handling failed", e);
       response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
@@ -83,6 +89,9 @@ public class Handler extends AbstractHandler {
   Result invokeController(Controller controller, Request baseRequest) throws Exception {
     try {
       Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
+      Role roleAnnotation = method.getAnnotation(Role.class);
+      if (roleAnnotation == null) throw new RoleMissingException(method);
+      if (!controller.getRoles().contains(roleAnnotation.value())) throw new NotAuthorizedException(method + " requires role '" + roleAnnotation.value() + "'");
       baseRequest.setHandled(true);
       return (Result) method.invoke(controller);
     }

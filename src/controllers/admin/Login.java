@@ -1,16 +1,20 @@
 package controllers.admin;
 
+import com.google.common.collect.ImmutableSet;
 import framework.Controller;
 import framework.Result;
+import framework.Role;
 import model.User;
 import org.apache.commons.codec.DecoderException;
 import org.hibernate.criterion.Restrictions;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-import static controllers.admin.goals.Password.*;
+import static controllers.admin.goals.Password.validatePassword;
 
 public class Login extends Controller {
 
@@ -33,13 +37,13 @@ public class Login extends Controller {
     return error;
   }
 
-  @Override
+  @Override @Role("anonymous")
   public Result get() {
     loggedInUsername = (String) session.getAttribute("username");
     return render();
   }
 
-  @Override
+  @Override @Role("anonymous")
   public Result post() throws InvalidKeySpecException, NoSuchAlgorithmException, DecoderException {
     if(action.equals("login")) {
       List<User> userList = (ArrayList<User>) hibernate.createCriteria(User.class).add(Restrictions.eq("username", username)).list();
@@ -54,5 +58,10 @@ public class Login extends Controller {
       session.removeAttribute("username");
       return redirect(Login.class);
     }
+  }
+
+  @Override
+  protected Set<String> getRoles() {
+    return session.getAttribute("username") != null ? ImmutableSet.of("user") : ImmutableSet.of("anonymous");
   }
 }
