@@ -2,6 +2,7 @@ package controllers.admin.goals;
 
 import controllers.UserAwareController;
 import framework.Result;
+import framework.Role;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.HashSet;
@@ -17,6 +18,7 @@ public abstract class Save extends UserAwareController {
   public String buttonTitle;
 
   @Override
+  @Role("admin")
   public Result post() {
     checkErrors();
 

@@ -7,7 +7,7 @@ import java.util.Set;
 
 public abstract class UserAwareController extends Controller {
 
-  private static final ImmutableSet<String> ADMIN_ROLES = ImmutableSet.of("admin");
+  private static final ImmutableSet<String> ADMIN_ROLES = ImmutableSet.of("admin", "anonymous");
   private static final ImmutableSet<String> ANONYMOUS_ROLES = ImmutableSet.of("anonymous");
 
   public String getLoggedInUsername() {
