@@ -1,2 +1,0 @@
-GET  /admin/login                                                            controllers.admin.Login.get
-POST /admin/login                                                             controllers.admin.Login.post
