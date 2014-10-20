@@ -18,7 +18,7 @@ public class Binder {
     this.dateFormat = dateFormat;
   }
 
-  void bindRequestParameters(Object controller, Map<String, String[]> params) {
+  void bindRequestParameters(Controller controller, Map<String, String[]> params) {
     Class clazz = controller.getClass();
     for (Map.Entry<String, String[]> param : params.entrySet()) {
       try {
@@ -31,7 +31,7 @@ public class Binder {
     }
   }
 
-  void setFieldValue(Object controller, Field field, String[] values) {
+  void setFieldValue(Controller controller, Field field, String[] values) {
     try {
       field.set(controller, convert(values, field.getType(), field));
     }
@@ -81,9 +81,7 @@ public class Binder {
   }
 
   @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
-  private void recordBindError(Object controller, String name, Throwable e) {
-    if (controller instanceof Controller) {
-      ((Controller) controller).errors.put(name, e);
-    }
+  private void recordBindError(Controller controller, String name, Throwable e) {
+    controller.errors.put(name, e);
   }
 }
