@@ -8,33 +8,32 @@
   <link rel="stylesheet" href="/styles.css"/>
 </head>
 <body>
-  <div class="container theme-showcase" role="main">
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="navbar-brand">Eesmärgid</div>
-        </div>
-        <div class="navbar-form navbar-collapse collapse navbar-right">
-          <#if loggedInUsername??>
-            <form class="navbar-form navbar-left" action="/admin/logout">
-              Tere, ${loggedInUsername}
-              <button type="submit" class="btn-sm btn-danger">Logi välja</button>
-            </form>
-          <#else>
-            <form class="navbar-form navbar-left" action="/admin/login">
-              <button type="submit" class="btn-sm btn-success">Logi sisse</button>
-            </form>
-          </#if>
-        </div>
+  <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse navbar-right">
+        <#if loggedInUsername??>
+          <form class="navbar-form navbar-left" action="/admin/logout">
+            Tere, ${loggedInUsername}!
+            <button type="submit" class="btn-sm btn-danger logout-button">Logi välja</button>
+          </form>
+        <#else>
+          <form class="navbar-form navbar-left" action="/admin/login">
+            <button type="submit" class="btn-sm btn-success">Logi sisse</button>
+          </form>
+        </#if>
       </div>
     </div>
+  </div>
 
+  <div class="container theme-showcase" role="main">
     <#nested>
   </div>
 </body>

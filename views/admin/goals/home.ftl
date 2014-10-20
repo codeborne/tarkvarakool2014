@@ -1,7 +1,7 @@
 <@html>
 
   <#if goals?has_content>
-  <h3>Eesmärgid:</h3>
+  <h3>Eesmärgid</h3>
 
 
   <table class="table table-hover">
