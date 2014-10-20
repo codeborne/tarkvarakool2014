@@ -7,6 +7,7 @@
     </label><br>
     <label>Eelarve: <input type="number" class="form-control" min="1" max="2147483647" name="budget" <#if budget?? && (budget>0)>value=${budget?c}</#if>></label><br>
   <button class="btn btn-default btn-sm">${buttonTitle}</button>
+  <button class="btn btn-default btn-sm" onclick="location='/admin/goals/home'; return false;">Tagasi</button>
 </form>
 
 <#if errorsList?has_content>

@@ -9,7 +9,6 @@
       <th>Eesmärk</th>
       <th>Eelarve</th>
       <th>Vaata mõõdikuid</th>
-      <th>Lisa mõõdik</th>
       <th>Muuda eesmärk</th>
       <th>Kustuta eesmärk</th>
     </tr>
@@ -25,12 +24,6 @@
           </button>
         </form></td>
 
-        <td><form action="/admin/metrics/add">
-          <input type="hidden" value="${goal.id}" name="goalId">
-          <button type="submit" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </button>
-        </form></td>
         <td>
           <form action="modify">
             <input type="hidden" value="${goal.id}" name="id">
