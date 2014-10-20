@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 public abstract class RequestState {
   protected HttpServletRequest request;
   protected HttpServletResponse response;
-  protected HttpSession session;
+  public HttpSession session;
   public Session hibernate;
   public Messages.Resolver messages;
 
