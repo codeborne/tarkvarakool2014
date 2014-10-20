@@ -17,7 +17,7 @@
         <td>${goal.name}</td>
         <td>${goal.budget?c}</td>
         <td><form action="/admin/metrics/add">
-          <#--<input type="hidden" value="${goal.id}" name="id">-->
+          <input type="hidden" value="${goal.id}" name="goalId">
           <button type="submit" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-list-alt"></span>
           </button>
