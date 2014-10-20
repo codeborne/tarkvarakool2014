@@ -26,7 +26,7 @@ public class User {
   }
 
   public User(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-    this.username = username;
+    setUsername(username);
     setPassword(password);
   }
 
@@ -34,7 +34,7 @@ public class User {
     return id;
   }
 
-  public String getLogin() {
+  public String getUsername() {
     return username;
   }
 
@@ -42,8 +42,8 @@ public class User {
     return password;
   }
 
-  public void setLogin(String login) {
-    this.username = login;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public void setPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
