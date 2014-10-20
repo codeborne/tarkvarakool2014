@@ -1,25 +1,17 @@
 package controllers.admin.metrics;
 
-import framework.Controller;
+import controllers.UserAwareController;
 import framework.Result;
-import model.Metric;
+import framework.Role;
+import model.Goal;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Metrics extends Controller {
-  public List<Metric> metrics = new ArrayList<>();
+public class Metrics extends UserAwareController{
   public Long goalId;
+  public Goal goal;
 
- @Override
+ @Override  @Role("admin")
   public Result get(){
-   List<Metric> allMetrics = new ArrayList<>();
-   allMetrics = hibernate.createCriteria(Metric.class).list();
-   for(Metric metric:allMetrics){
-     if(metric.getId() == goalId){
-       metrics.add(metric);
-     }
-   }
+   goal = (Goal) hibernate.get(Goal.class, goalId);
    return render();
  }
 }

@@ -26,6 +26,10 @@ public class Redirect extends Result {
     return this;
   }
 
+  public Redirect withParam(String name, Long value) {
+    return withParam(name, String.valueOf(value));
+  }
+
   @Override
   void handle(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.sendRedirect(path);

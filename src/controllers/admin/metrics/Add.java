@@ -1,7 +1,8 @@
 package controllers.admin.metrics;
 
-import framework.Controller;
+import controllers.UserAwareController;
 import framework.Result;
+import framework.Role;
 import model.Goal;
 import model.Metric;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class Add extends Controller {
+public class Add extends UserAwareController {
 
   public Long goalId;
   public String name;
@@ -27,13 +28,14 @@ public class Add extends Controller {
   public Goal goal;
 
 
-  @Override
-  public Result get() throws Exception {
+  @Override @Role("admin")
+  public Result get()  {
+
     goal = (Goal) hibernate.get(Goal.class, goalId);
     return render();
   }
 
-  @Override
+  @Override @Role("admin")
   public Result post() {
     goal = (Goal) hibernate.get(Goal.class, goalId);
     checkErrors();
@@ -42,7 +44,7 @@ public class Add extends Controller {
         name.trim();
         hibernate.save(new Metric(goal, name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
           targetLevel, commentOnTargetLevel, infoSource, institutionToReport));
-        return redirect(Metrics.class);
+        return redirect(Metrics.class).withParam("goalId", goalId);
       } catch (Exception e) {
         errorsList.add("Tekkis viga.");
       }

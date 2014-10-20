@@ -1,9 +1,7 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Goal {
@@ -18,6 +16,11 @@ public class Goal {
   @Column(nullable = false)
   private Integer budget;
 
+
+
+  @OneToMany(mappedBy = "goal")
+  private Set<Metric> metrics;
+
   private Goal() {
   }
 
@@ -26,6 +29,9 @@ public class Goal {
     this.budget = budget;
   }
 
+  public Set<Metric> getMetrics() {
+    return metrics;
+  }
   public Long getId() {
     return id;
   }

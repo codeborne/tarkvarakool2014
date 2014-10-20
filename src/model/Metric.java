@@ -42,6 +42,10 @@ public class Metric {
     this.institutionToReport = institutionToReport;
   }
 
+  public Goal getGoal() {
+    return goal;
+  }
+
   public Long getId() {
     return id;
   }

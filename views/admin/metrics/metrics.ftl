@@ -1,5 +1,12 @@
 <@html>
-<#--<input type="hidden" value="${goal.id}" name="goalId">-->
+<br>
+<br>
+<br><br><br>
+
+
+<form method="get">
+<input type="hidden" value="${goal.id}" name="goalID">
+</form>
 <table class="table table-hover">
   <tr>
     <th>Mõõdik</th>
@@ -13,19 +20,25 @@
     <th>Asutus, kuhu raporteerida</th>
   </tr>
 
-  <#list metrics as metric>
+  <#list goal.metrics as metric>
     <tr>
       <td>${metric.name}</td>
       <td>${metric.publicDescription}</td>
       <td>${metric.privateDescription}</td>
       <td>${metric.startLevel}</td>
-      <td>${metric.startLevelComment}</td>
+      <td>${metric.commentOnStartLevel}</td>
       <td>${metric.targetLevel}</td>
-      <td>${metric.targetLevelComment}</td>
+      <td>${metric.commentOnTargetLevel}</td>
       <td>${metric.infoSource}</td>
       <td>${metric.institutionToReport}</td>
       </tr>
   </#list>
   </table>
+
+<form action="/admin/goals">
+  <button type="submit" class="btn btn-default btn-sm">
+    Pealehele
+  </button>
+</form>
 
 </@html>
