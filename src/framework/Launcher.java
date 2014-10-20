@@ -12,11 +12,12 @@ public class Launcher {
   private final static Logger LOG = LogManager.getLogger();
 
   public static void main(String... args) throws Exception {
-    Server server = startServer(8080);
+    Server server = createServer(8080);
+    server.start();
     server.join();
   }
 
-  public static Server startServer(int port) throws Exception {
+  public static Server createServer(int port) throws Exception {
     freemarker.log.Logger.selectLoggerLibrary(freemarker.log.Logger.LIBRARY_NONE);
     System.setProperty("org.jboss.logging.provider", "slf4j");
     LOG.info("starting");
@@ -34,7 +35,6 @@ public class Launcher {
 
     Server server = new Server(port);
     server.setHandler(handlers);
-    server.start();
     return server;
   }
 }

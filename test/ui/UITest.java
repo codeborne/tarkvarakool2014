@@ -21,7 +21,9 @@ public class UITest {
   static {
     try {
       sessionFactory = createSessionFactory(true);
-      Launcher.startServer(PORT);
+      Launcher
+        .createServer(PORT)
+        .start();
     } catch (Exception e) {
       e.printStackTrace();
     }
