@@ -56,7 +56,7 @@ public class Handler extends AbstractHandler {
       Controller controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
       Result result = invokeController(controller, baseRequest);
-      transaction.commit();
+      if (transaction.isActive()) transaction.commit();
       result.handle(request, response);
     }
     catch (ClassNotFoundException | NoSuchMethodException ignored) {
