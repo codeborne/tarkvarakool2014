@@ -3,6 +3,7 @@ package controllers.admin;
 import framework.Controller;
 import framework.Result;
 import model.User;
+import org.apache.commons.codec.DecoderException;
 import org.hibernate.criterion.Restrictions;
 
 import java.security.NoSuchAlgorithmException;
@@ -15,13 +16,21 @@ public class Login extends Controller {
 
   public String username;
   public String password;
-  public String error;
   public String action;
-  public String loggedInUsername;
+  private String error;
+  private String loggedInUsername;
 
   public Login() throws InvalidKeySpecException, NoSuchAlgorithmException {
     if (hibernate.createCriteria(User.class).list().isEmpty())
       hibernate.save(new User("Delia","pass"));
+  }
+
+  public String getLoggedInUsername() {
+    return loggedInUsername;
+  }
+
+  public String getError() {
+    return error;
   }
 
   @Override
@@ -31,7 +40,7 @@ public class Login extends Controller {
   }
 
   @Override
-  public Result post() throws InvalidKeySpecException, NoSuchAlgorithmException {
+  public Result post() throws InvalidKeySpecException, NoSuchAlgorithmException, DecoderException {
     if(action.equals("login")) {
       List<User> userList = (ArrayList<User>) hibernate.createCriteria(User.class).add(Restrictions.eq("username", username)).list();
       if (userList.isEmpty() || !validatePassword(password, userList.get(0).getPassword())) {
