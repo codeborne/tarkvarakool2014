@@ -3,11 +3,17 @@ package controllers.admin.goals;
 import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.HibernateException;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
 public class DeleteTest extends ControllerTest<Delete> {
+
+  @Before
+  public void setUp() throws Exception {
+    when(session.getAttribute("username")).thenReturn("Some username");
+  }
 
   @Test
   public void postDeletesGoal() {

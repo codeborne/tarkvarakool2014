@@ -1,6 +1,7 @@
 package controllers.admin.goals;
 
-import framework.Controller;
+import controllers.UserAwareController;
+import controllers.admin.Login;
 import framework.Result;
 import org.hibernate.exception.ConstraintViolationException;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public abstract class Save extends Controller {
+public abstract class Save extends UserAwareController {
   public String name;
   public Integer budget;
   public Set<String> errorsList = new HashSet<>();
@@ -18,6 +19,7 @@ public abstract class Save extends Controller {
 
   @Override
   public Result post() {
+    if (!isLoggedIn()) return redirect(Login.class);
     checkErrors();
 
     if (errorsList.isEmpty()) {
