@@ -7,12 +7,14 @@ import model.Goal;
 public class Modify extends Save {
   public Long id;
 
+  public Modify() {
+    title = "Muuda eesmärk";
+    buttonTitle = "Muuda";
+  }
 
   @Override
   @Role("admin")
   public Result get() {
-    title = "Muuda eesmärk";
-    buttonTitle = "Muuda";
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     if (goal == null) {
       return redirect(Add.class);
