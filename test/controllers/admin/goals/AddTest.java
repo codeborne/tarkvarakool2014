@@ -3,6 +3,7 @@ package controllers.admin.goals;
 import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.exception.ConstraintViolationException;
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertTrue;
@@ -10,6 +11,11 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class AddTest extends ControllerTest<Add> {
+
+  @Before
+  public void setUp() throws Exception {
+    when(session.getAttribute("username")).thenReturn("Some username");
+  }
 
   @Test
   public void postIfNameIsNull() {
