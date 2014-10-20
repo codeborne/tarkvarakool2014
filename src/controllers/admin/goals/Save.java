@@ -26,13 +26,14 @@ public abstract class Save extends UserAwareController {
       try {
         return saveAndRedirect();
       } catch (ConstraintViolationException e) {
+        hibernate.getTransaction().rollback();
         errorsList.add("See eesmärk on juba sisestatud.");
       } catch (Exception e) {
         errorsList.add("Tekkis viga.");
       }
     }
 
-    return render();
+    return render("/admin/goals/form");
   }
 
   private Result saveAndRedirect() {
