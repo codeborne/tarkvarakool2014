@@ -2,9 +2,9 @@ package controllers.admin.metrics;
 
 import framework.Controller;
 import framework.Result;
+import model.Goal;
 import model.Metric;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class Add extends Controller {
 
+  public Long goalId;
   public String name;
   public String publicDescription;
   public String privateDescription;
@@ -23,24 +24,31 @@ public class Add extends Controller {
   public String institutionToReport;
   public Set<String> errorsList = new HashSet<>();
 
-  public java.util.List<Metric> metrics = new ArrayList<>();
+  public Goal goal;
 
 
   @Override
+  public Result get() throws Exception {
+    goal = (Goal) hibernate.get(Goal.class, goalId);
+    return render();
+  }
+
+  @Override
   public Result post() {
+    goal = (Goal) hibernate.get(Goal.class, goalId);
     checkErrors();
     if (errorsList.isEmpty()) {
       try {
         name.trim();
-        hibernate.save(new Metric(name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
+        hibernate.save(new Metric(goal, name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
           targetLevel, commentOnTargetLevel, infoSource, institutionToReport));
 
       } catch (Exception e) {
         errorsList.add("Tekkis viga.");
       }
     }
-    metrics = hibernate.createCriteria(Metric.class).list();
-    return render();
+
+    return redirect(Metrics.class);
   }
 
   private void checkErrors() {
