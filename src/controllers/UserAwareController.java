@@ -1,31 +1,21 @@
 package controllers;
 
-import controllers.admin.Login;
+import com.google.common.collect.ImmutableSet;
 import framework.Controller;
-import framework.Result;
-import org.apache.commons.codec.DecoderException;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+import java.util.Set;
 
 public abstract class UserAwareController extends Controller {
+
+  private static final ImmutableSet<String> ADMIN_ROLES = ImmutableSet.of("admin");
+  private static final ImmutableSet<String> ANONYMOUS_ROLES = ImmutableSet.of("anonymous");
 
   public String getLoggedInUsername() {
     return (String) session.getAttribute("username");
   }
-  public boolean isLoggedIn(){
-    return getLoggedInUsername()!=null;
-  }
 
   @Override
-  public Result get() {
-    if (!isLoggedIn()) return redirect(Login.class);
-    return render();
-  }
-
-  @Override
-  public Result post() throws InvalidKeySpecException, NoSuchAlgorithmException, DecoderException {
-    if (!isLoggedIn()) return redirect(Login.class);
-    return render();
+  protected Set<String> getRoles() {
+    return getLoggedInUsername() == null ? ANONYMOUS_ROLES : ADMIN_ROLES;
   }
 }

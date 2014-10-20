@@ -2,6 +2,7 @@ package framework;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public abstract class Controller extends RequestState {
   public Map<String, Throwable> errors = new LinkedHashMap<>();
@@ -51,5 +52,9 @@ public abstract class Controller extends RequestState {
       }
     }
     return value;
+  }
+
+  protected Set<String> getRoles() {
+    throw new UnsupportedOperationException("This controller has not implemented getRole() method");
   }
 }
