@@ -15,7 +15,7 @@ import static org.hibernate.FlushMode.ALWAYS;
 
 public class UITest {
   private static final int PORT = 8361;
-  protected Session session;
+  protected Session hibernate;
 
   private static SessionFactory sessionFactory;
 
@@ -38,12 +38,12 @@ public class UITest {
   @Before
   public void before() throws IOException {
     HibernateHelper.dropAndCreateSchema();
-    session = sessionFactory.openSession();
-    session.setFlushMode(ALWAYS);
+    hibernate = sessionFactory.openSession();
+    hibernate.setFlushMode(ALWAYS);
   }
 
   @After
   public void after() {
-    session.close();
+    hibernate.close();
   }
 }
