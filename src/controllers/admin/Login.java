@@ -13,18 +13,13 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static controllers.admin.goals.Password.validatePassword;
+import static helpers.Password.validatePassword;
 
 public class Login extends UserAwareController {
 
   public String username;
   public String password;
   public String error;
-
-  public Login() throws InvalidKeySpecException, NoSuchAlgorithmException {
-    if (hibernate.createCriteria(User.class).list().isEmpty())
-      hibernate.save(new User("Delia","pass"));
-  }
 
   @Override @Role("anonymous")
   public Result get() {
