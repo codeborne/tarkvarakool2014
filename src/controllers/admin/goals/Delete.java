@@ -18,6 +18,7 @@ public class Delete extends UserAwareController {
       hibernate.delete(goal);
     }
     return redirect(Home.class);
+
   }
 
 }

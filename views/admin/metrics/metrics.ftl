@@ -15,6 +15,7 @@
     <th>Sihttaseme kommentaar</th>
     <th>Infoallikas</th>
     <th>Asutus, kuhu raporteerida</th>
+    <th>Kustuta</th>
   </tr>
 
   <#list goal.metrics as metric>
@@ -28,6 +29,14 @@
       <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
       <td class="infoSource">${metric.infoSource}</td>
       <td class="institutionToReport">${metric.institutionToReport}</td>
+      <td>
+        <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
+          <input type="hidden" value="${goal.id}" name="goalId">
+          <input type="hidden" name="id" value="${metric.id}"/>
+          <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-trash"></span></button>
+        </form>
+      </td>
       </tr>
   </#list>
   </table>
