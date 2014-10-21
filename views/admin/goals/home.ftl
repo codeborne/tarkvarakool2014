@@ -14,8 +14,8 @@
     </tr>
     <#list goals as goal>
       <tr>
-        <td id="goalNameInTable">${goal.name}</td>
-        <td id="goalBudgetInTable">${goal.budget?c}</td>
+        <td class="goalNameInTable">${goal.name}</td>
+        <td class="goalBudgetInTable">${goal.budget?c}</td>
 
         <td><form action="/admin/metrics/metrics">
           <input type="hidden" value="${goal.id}" name="goalId">
@@ -35,7 +35,7 @@
         <td>
           <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
             <input type="hidden" name="id" value="${goal.id}"/>
-            <button type="submit" class="btn btn-default btn-sm">
+            <button id="deleteButton" type="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-trash"></span>
             </button>
           </form>

@@ -56,8 +56,8 @@ public class GoalModifyingTest extends UITest {
 
     $("#goalAddOrModifyButton").click();
 
-    $("#goalNameInTable").shouldHave(text("eesmark"));
-    $("#goalBudgetInTable").shouldHave(text("10"));
+    $(".goalNameInTable").shouldHave(text("eesmark"));
+    $(".goalBudgetInTable").shouldHave(text("10"));
 
   }
 
