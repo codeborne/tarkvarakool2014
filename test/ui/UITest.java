@@ -13,7 +13,7 @@ import java.io.IOException;
 import static framework.HibernateHelper.createSessionFactory;
 
 public class UITest {
-  private static final int PORT = 9000;
+  private static final int PORT = 8361;
   protected Session session;
 
   private static SessionFactory sessionFactory;
