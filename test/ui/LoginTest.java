@@ -12,8 +12,7 @@ public class LoginTest extends UITest {
 
   @Test
   public void loginFailsWithIncorrectPassword() throws Exception {
-
-    session.save(new User("johny", "foo"));
+    hibernate.save(new User("johny", "foo"));
 
     open("/admin/login");
 
@@ -27,7 +26,7 @@ public class LoginTest extends UITest {
 
   @Test
   public void userCanSuccessfullyLogIn() throws Exception {
-    session.save(new User("johny", "p2s3w04d"));
+    hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
 
