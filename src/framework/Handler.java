@@ -19,7 +19,6 @@ import java.lang.reflect.Method;
 import static framework.FreemarkerHelper.initializeFreemarker;
 import static framework.HibernateHelper.createSessionFactory;
 import static framework.HibernateHelper.initDatabase;
-import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
@@ -64,7 +63,8 @@ public class Handler extends AbstractHandler {
     }
     catch (NotAuthorizedException e) {
       LOG.error(e.getMessage());
-      response.sendError(SC_FORBIDDEN, devMode ? e.getMessage() : null);
+      //response.sendError(SC_FORBIDDEN, devMode ? e.getMessage() : null);
+      response.sendRedirect("/");
       baseRequest.setHandled(true);
     }
     catch (Exception e) {
