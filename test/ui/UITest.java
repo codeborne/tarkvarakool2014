@@ -20,12 +20,13 @@ public class UITest {
 
   static {
     try {
+      Launcher.prepareLogging();
       sessionFactory = createSessionFactory(true);
       Launcher
         .createServer(PORT)
         .start();
     } catch (Exception e) {
-      e.printStackTrace();
+      throw new RuntimeException(e);
     }
   }
 
