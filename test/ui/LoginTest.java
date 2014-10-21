@@ -14,7 +14,6 @@ public class LoginTest extends UITest {
   public void loginFailsWithIncorrectPassword() throws Exception {
 
     session.save(new User("johny", "foo"));
-    session.flush();
 
     open("/admin/login");
 
@@ -29,7 +28,6 @@ public class LoginTest extends UITest {
   @Test
   public void userCanSuccessfullyLogIn() throws Exception {
     session.save(new User("johny", "p2s3w04d"));
-    session.flush();
 
     open("/admin/login");
 

@@ -10,7 +10,8 @@ import org.junit.Before;
 
 import java.io.IOException;
 
-import static framework.HibernateHelper.createSessionFactory;
+import static framework.HibernateHelper.createTestSessionFactory;
+import static org.hibernate.FlushMode.ALWAYS;
 
 public class UITest {
   private static final int PORT = 8361;
@@ -21,7 +22,7 @@ public class UITest {
   static {
     try {
       Launcher.prepareLogging();
-      sessionFactory = createSessionFactory(true);
+      sessionFactory = createTestSessionFactory();
       Launcher
         .createServer(PORT)
         .start();
@@ -38,6 +39,7 @@ public class UITest {
   public void before() throws IOException {
     HibernateHelper.dropAndCreateSchema();
     session = sessionFactory.openSession();
+    session.setFlushMode(ALWAYS);
   }
 
   @After
