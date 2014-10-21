@@ -88,6 +88,7 @@ public class MetricsTest extends UITest {
     $(By.name("name")).setValue("muki");
     $("#submitButton").click();
     $(".alert-danger").shouldHave(text("See mõõdik on juba sisestatud."));
+
   }
 
   @Test
@@ -124,5 +125,14 @@ public class MetricsTest extends UITest {
     row.$(".infoSource").shouldHave(text("ioejoia"));
     row.$(".institutionToReport").shouldHave(text("koht"));
   }
-}
 
+  @Test
+  public void ifGoalNameIsAddedToTheMetricsTable() throws Exception {
+    hibernate.save(new Goal("Tere", 124));
+    open("/admin/goals/home");
+
+    $$(".metricsButton").get(0).click();
+    $("h3").shouldHave(text("Tere"));
+  }
+
+}
