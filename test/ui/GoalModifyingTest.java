@@ -38,7 +38,7 @@ public class GoalModifyingTest extends UITest {
 
     open("/admin/goals/home");
 
-    $("#modifyButton").click();
+    $(".modifyButton").click();
 
     $(By.name("name")).shouldHave(value("Sisestatud eesmark"));
     $(By.name("budget")).shouldHave(value("100"));
@@ -49,7 +49,7 @@ public class GoalModifyingTest extends UITest {
 
     open("/admin/goals/home");
 
-    $("#modifyButton").click();
+    $(".modifyButton").click();
 
     $(By.name("name")).setValue("eesmark");
     $(By.name("budget")).setValue("10");
@@ -66,7 +66,7 @@ public class GoalModifyingTest extends UITest {
 
     open("/admin/goals/home");
 
-    $("#modifyButton").click();
+    $(".modifyButton").click();
 
     $(By.name("name")).setValue("");
     $(By.name("budget")).setValue("15");

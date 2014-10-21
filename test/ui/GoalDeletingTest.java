@@ -8,8 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.confirm;
+import static com.codeborne.selenide.Selenide.*;
 
 public class GoalDeletingTest extends UITest {
 
@@ -38,7 +37,7 @@ public class GoalDeletingTest extends UITest {
 
     open("/admin/goals/home");
 
-    $("#deleteButton").click();
+    $(".deleteButton").click();
 
     confirm("Kas oled kustutamises kindel?");
 
@@ -46,6 +45,31 @@ public class GoalDeletingTest extends UITest {
 
   }
 
+  @Test
+  public void adminDeletesOneGoalFromMultipleGoals() throws Exception {
+
+    hibernate.save(new Goal("eesmark", 10));
+    open("/admin/goals/home");
+
+    $$(".deleteButton").get(0).click();
+
+    confirm("Kas oled kustutamises kindel?");
+
+    $(".goalNameInTable").shouldNotHave(text("Sisestatud eesmark"));
+    $(".goalNameInTable").shouldHave(text("eesmark"));
+
+  }
+
+  @Test
+  public void adminCancelsDelete() throws Exception {
+    open("/admin/goals/home");
+
+    $(".deleteButton").click();
+
+    dismiss("Kas oled kustutamises kindel?");
+
+    $(".goalNameInTable").shouldHave(text("Sisestatud eesmark"));
 
 
+  }
 }

@@ -27,7 +27,7 @@
         <td>
           <form action="modify">
             <input type="hidden" value="${goal.id}" name="id">
-            <button id="modifyButton" type="submit" class="btn btn-default btn-sm">
+            <button class="modifyButton" type="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </form>
@@ -35,7 +35,7 @@
         <td>
           <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
             <input type="hidden" name="id" value="${goal.id}"/>
-            <button id="deleteButton" type="submit" class="btn btn-default btn-sm">
+            <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-trash"></span>
             </button>
           </form>
