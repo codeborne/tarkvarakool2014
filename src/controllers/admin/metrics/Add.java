@@ -5,6 +5,7 @@ import framework.Result;
 import framework.Role;
 import model.Goal;
 import model.Metric;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,16 +42,36 @@ public class Add extends UserAwareController {
     checkErrors();
     if (errorsList.isEmpty()) {
       try {
-        name.trim();
+        trimAllInput();
         hibernate.save(new Metric(goal, name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
           targetLevel, commentOnTargetLevel, infoSource, institutionToReport));
         return redirect(Metrics.class).withParam("goalId", goalId);
-      } catch (Exception e) {
+      }catch (ConstraintViolationException e) {
+        hibernate.getTransaction().rollback();
+        errorsList.add("See mõõdik on juba sisestatud.");
+      }
+      catch (Exception e) {
         errorsList.add("Tekkis viga.");
       }
     }
 
     return  render();
+  }
+
+  private void trimAllInput() {
+    name = name.trim();
+    if(publicDescription != null)
+    publicDescription = publicDescription.trim();
+    if(privateDescription != null)
+    privateDescription = privateDescription.trim();
+    if(commentOnStartLevel != null)
+    commentOnStartLevel = commentOnStartLevel.trim();
+    if(commentOnTargetLevel != null)
+    commentOnTargetLevel = commentOnTargetLevel.trim();
+    if(infoSource != null)
+    infoSource = infoSource.trim();
+    if(institutionToReport != null)
+    institutionToReport = institutionToReport.trim();
   }
 
   private void checkErrors() {
@@ -108,7 +129,7 @@ public class Add extends UserAwareController {
   }
 
   private void checkInstitutionToReport() {
-    if (errors.containsKey(institutionToReport))
+    if (errors.containsKey("institutionToReport"))
       errorsList.add("Viga raporteeritava asutuse sisestamisel");
   }
 
