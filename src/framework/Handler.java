@@ -75,7 +75,7 @@ public class Handler extends AbstractHandler {
     finally {
       closeHibernateSession(hibernate, transaction);
       t += System.currentTimeMillis();
-      LOG.info(request.getMethod() + " " + target + " " + t + " ms");
+      if (baseRequest.isHandled()) LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
   }
 
