@@ -18,16 +18,16 @@
   </tr>
 
   <#list goal.metrics as metric>
-    <tr>
-      <td id="metricName">${metric.name}</td>
-      <td id="metricPublicDescription">${metric.publicDescription}</td>
-      <td id="metricPrivateDescription">${metric.privateDescription}</td>
-      <td id="metricStartLevel">${metric.startLevel}</td>
-      <td id="metricCommantOnStartLevel">${metric.commentOnStartLevel}</td>
-      <td id="metricTargetLevel">${metric.targetLevel}</td>
-      <td id="metricCommentOnTargetLevel">${metric.commentOnTargetLevel}</td>
-      <td id="metrivInfoSource">${metric.infoSource}</td>
-      <td id="metricInstitutionToReport">${metric.institutionToReport}</td>
+    <tr class="metric">
+      <td class="name">${metric.name}</td>
+      <td class="publicDescription">${metric.publicDescription}</td>
+      <td class="privateDescription">${metric.privateDescription}</td>
+      <td class="startLevel">${metric.startLevel}</td>
+      <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
+      <td class="targetLevel">${metric.targetLevel}</td>
+      <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
+      <td class="infoSource">${metric.infoSource}</td>
+      <td class="institutionToReport">${metric.institutionToReport}</td>
       </tr>
   </#list>
   </table>

@@ -68,7 +68,7 @@ public class GoalAddingTest extends UITest {
 
     $("#goBack").click();
 
-    $("#noGoals").shouldHave(text("Andmebaasis eesmärke ei ole."));
+    $("body").shouldHave(text("Andmebaasis eesmärke ei ole."));
   }
 
 

@@ -1,5 +1,6 @@
 package ui;
 
+import com.codeborne.selenide.SelenideElement;
 import model.Goal;
 import model.Metric;
 import model.User;
@@ -57,7 +58,7 @@ public class MetricsTest extends UITest {
 
     $(By.name("name")).setValue("Koer");
     $("#submitButton").click();
-    $("#metricName").shouldHave(text("Koer"));
+    $$("tr.metric").get(0).$(".name").shouldHave(text("Koer"));
   }
 
   @Test
@@ -107,15 +108,19 @@ public class MetricsTest extends UITest {
 
     $("#submitButton").click();
 
-    $("#metricName").shouldHave(text("Koer"));
-    $("#metricPublicDescription").shouldHave(text("trallalaa"));
-    $("#metricPrivateDescription").shouldHave(text("trullalaa"));
-    $("#metricStartLevel").shouldHave(text("435"));
-    $("#metricCommantOnStartLevel").shouldHave(text("blahblah"));
-    $("#metricTargetLevel").shouldHave(text("1"));
-    $("#metricCommentOnTargetLevel").shouldHave(text("iejoja"));
-    $("#metrivInfoSource").shouldHave(text("ioejoia"));
-    $("#metricInstitutionToReport").shouldHave(text("koht"));
+    $$("tr.metric").shouldHaveSize(1);
+
+    SelenideElement row = $$("tr.metric").get(0);
+
+    row.$(".name").shouldHave(text("Koer"));
+    row.$(".publicDescription").shouldHave(text("trallalaa"));
+    row.$(".privateDescription").shouldHave(text("trullalaa"));
+    row.$(".startLevel").shouldHave(text("435"));
+    row.$(".commantOnStartLevel").shouldHave(text("blahblah"));
+    row.$(".targetLevel").shouldHave(text("1"));
+    row.$(".commentOnTargetLevel").shouldHave(text("iejoja"));
+    row.$(".infoSource").shouldHave(text("ioejoia"));
+    row.$(".institutionToReport").shouldHave(text("koht"));
   }
 }
 
