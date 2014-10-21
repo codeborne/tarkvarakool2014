@@ -1,9 +1,9 @@
 package ui;
 
-import controllers.admin.metrics.Metrics;
 import model.Goal;
 import model.Metric;
 import model.User;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -24,6 +24,11 @@ public class MetricsTest extends UITest {
     $(By.name("password")).setValue("p2s3w04d");
 
     $("#submit").click();
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    $("#logout-button").click();
   }
 
   @Test
@@ -63,16 +68,16 @@ public class MetricsTest extends UITest {
     $$(".metricsButton").get(0).click();
 
     $("#goBackButton").click();
-    $("#goalNameInTable").shouldHave(text("Teere"));
+    $$(".goalNameInTable").get(0).shouldHave(text("Teere"));
 
-    }
+  }
 
   @Test
   public void failIfAdminAddsDuplicateMetric() throws Exception {
 
-    Goal goal1 = new Goal("Kool",145);
+    Goal goal1 = new Goal("Kool", 145);
     hibernate.save(goal1);
-    hibernate.save(new Metric(goal1, "muki", "","",0, "",0,"","",""));
+    hibernate.save(new Metric(goal1, "muki", "", "", 0, "", 0, "", "", ""));
     open("/admin/goals/home");
 
     $$(".metricsButton").get(0).click();
