@@ -1,3 +1,2 @@
 <@html>
-Hello
 </@html>

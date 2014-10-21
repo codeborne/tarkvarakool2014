@@ -14,8 +14,8 @@
     </tr>
     <#list goals as goal>
       <tr>
-        <td>${goal.name}</td>
-        <td>${goal.budget?c}</td>
+        <td id="goalNameInTable">${goal.name}</td>
+        <td id="goalBudgetInTable">${goal.budget?c}</td>
 
         <td><form action="/admin/metrics/metrics">
           <input type="hidden" value="${goal.id}" name="goalId">
@@ -44,7 +44,7 @@
     </#list>
   </table>
   <#else>
-  <h3>Andmebaasis eesmärke ei ole.</h3>
+  <h3 id="noGoals"> Andmebaasis eesmärke ei ole.</h3>
   </#if>
 <form action="add">
   <input type="submit" class="btn btn-default" value="Lisa">
