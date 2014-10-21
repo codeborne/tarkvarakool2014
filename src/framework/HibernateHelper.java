@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
 import javax.persistence.Entity;
@@ -13,17 +14,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class HibernateHelper {
+import static org.hibernate.cfg.AvailableSettings.AUTOCOMMIT;
+import static org.hibernate.cfg.AvailableSettings.URL;
 
-  public static SessionFactory buildSessionFactory() throws IOException {
-    Configuration configuration = new Configuration();
-    ClassPath.from(HibernateHelper.class.getClassLoader()).getTopLevelClassesRecursive("model").stream()
-      .map(ClassPath.ClassInfo::load)
-      .filter(modelClass -> modelClass.isAnnotationPresent(Entity.class))
-      .forEach(configuration::addAnnotatedClass);
-    new SchemaUpdate(configuration).execute(true, true);
-    //noinspection deprecation
-    return configuration.buildSessionFactory();
+public class HibernateHelper {
+  private static Configuration configuration = new Configuration();
+  private static SessionFactory sessionFactory;
+
+  public static SessionFactory createSessionFactory() throws IOException {
+    return sessionFactory != null ? sessionFactory : buildSessionFactory();
+  }
+
+  public static SessionFactory createTestSessionFactory() throws IOException {
+    configuration.setProperty(AUTOCOMMIT, "true");
+    configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
+    sessionFactory = buildSessionFactory();
+    return sessionFactory;
   }
 
   public static void initDatabase(SessionFactory sessionFactory) {
@@ -35,6 +41,24 @@ public class HibernateHelper {
     for (String command : initCommands) session.createSQLQuery(command).executeUpdate();
     transaction.commit();
     session.close();
+  }
+
+  public static void dropAndCreateSchema() {
+    new SchemaExport(configuration).create(true, true);
+  }
+
+  private static SessionFactory buildSessionFactory() throws IOException {
+    addMappedClasses(configuration);
+    new SchemaUpdate(configuration).execute(true, true);
+    //noinspection deprecation
+    return configuration.buildSessionFactory();
+  }
+
+  private static void addMappedClasses(Configuration configuration1) throws IOException {
+    ClassPath.from(HibernateHelper.class.getClassLoader()).getTopLevelClassesRecursive("model").stream()
+      .map(ClassPath.ClassInfo::load)
+      .filter(modelClass -> modelClass.isAnnotationPresent(Entity.class))
+      .forEach(configuration1::addAnnotatedClass);
   }
 
   private static List<String> getInitSQL(Scanner scanner) {

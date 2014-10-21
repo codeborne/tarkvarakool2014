@@ -28,8 +28,6 @@ public abstract class Save extends UserAwareController {
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
         errorsList.add("See eesmärk on juba sisestatud.");
-      } catch (Exception e) {
-        errorsList.add("Tekkis viga.");
       }
     }
 
@@ -39,6 +37,7 @@ public abstract class Save extends UserAwareController {
   private Result saveAndRedirect() {
     name = name.trim();
     save();
+    hibernate.flush();
     return redirect(Home.class);
   }
 

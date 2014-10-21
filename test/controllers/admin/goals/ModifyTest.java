@@ -159,23 +159,20 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertTrue(controller.errorsList.contains("See eesmärk on juba sisestatud."));
   }
 
-  @Test
-  public void postUpdateFailsWithException() {
+  @Test(expected = RuntimeException.class)
+  public void postCatchesOnlyConstraintViolationException() {
     controller.name = "name";
     controller.budget = 1;
     controller.id = 2L;
 
     Goal expectedGoal = new Goal("goal", 100);
 
-   when(hibernate.get(Goal.class, 2L)).thenReturn(expectedGoal);
+    when(hibernate.get(Goal.class, 2L)).thenReturn(expectedGoal);
 
     Exception expectedException = new RuntimeException();
     doThrow(expectedException).when(hibernate).update(any(Goal.class));
 
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    controller.post();
   }
 }
 

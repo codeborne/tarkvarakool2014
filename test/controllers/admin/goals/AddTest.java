@@ -148,21 +148,13 @@ public class AddTest extends ControllerTest<Add> {
 
   }
 
-  @Test
-  public void postSaveThrowsException() {
+  @Test(expected = RuntimeException.class)
+  public void postCatchesOnlyConstraintViolationException() {
     controller.name = "34567 hh";
     controller.budget = 999999;
 
     doThrow(new RuntimeException()).when(controller.hibernate).save(any(Goal.class));
 
-    assertRender(controller.post());
-
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
-    assertEquals(1, controller.errorsList.size());
-
-    Goal savedGoal = (Goal) getSavedEntity();
-
-    assertEquals("34567 hh", savedGoal.getName());
-    assertEquals(999999, (int) savedGoal.getBudget());
+    controller.post();
   }
 }

@@ -11,9 +11,14 @@ public class Launcher {
 
   private final static Logger LOG = LogManager.getLogger();
 
-  public static void main(String[] args) throws Exception {
-    freemarker.log.Logger.selectLoggerLibrary(freemarker.log.Logger.LIBRARY_NONE);
-    System.setProperty("org.jboss.logging.provider", "slf4j");
+  public static void main(String... args) throws Exception {
+    prepareLogging();
+    Server server = createServer(8080);
+    server.start();
+    server.join();
+  }
+
+  public static Server createServer(int port) throws Exception {
     LOG.info("starting");
 
     ResourceHandler resourceHandler = new ResourceHandler();
@@ -27,9 +32,13 @@ public class Launcher {
     handlers.addHandler(handler);
     handlers.addHandler(resourceHandler);
 
-    Server server = new Server(8080);
+    Server server = new Server(port);
     server.setHandler(handlers);
-    server.start();
-    server.join();
+    return server;
+  }
+
+  public static void prepareLogging() throws ClassNotFoundException {
+    freemarker.log.Logger.selectLoggerLibrary(freemarker.log.Logger.LIBRARY_NONE);
+    System.setProperty("org.jboss.logging.provider", "slf4j");
   }
 }
