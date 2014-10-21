@@ -19,23 +19,23 @@
 
   <#list goal.metrics as metric>
     <tr>
-      <td>${metric.name}</td>
-      <td>${metric.publicDescription}</td>
-      <td>${metric.privateDescription}</td>
-      <td>${metric.startLevel}</td>
-      <td>${metric.commentOnStartLevel}</td>
-      <td>${metric.targetLevel}</td>
-      <td>${metric.commentOnTargetLevel}</td>
-      <td>${metric.infoSource}</td>
-      <td>${metric.institutionToReport}</td>
+      <td id="metricName">${metric.name}</td>
+      <td id="metricPublicDescription">${metric.publicDescription}</td>
+      <td id="metricPrivateDescription">${metric.privateDescription}</td>
+      <td id="metricStartLevel">${metric.startLevel}</td>
+      <td id="metricCommantOnStartLevel">${metric.commentOnStartLevel}</td>
+      <td id="metricTargetLevel">${metric.targetLevel}</td>
+      <td id="metricCommentOnTargetLevel">${metric.commentOnTargetLevel}</td>
+      <td id="metrivInfoSource">${metric.infoSource}</td>
+      <td id="metricInstitutionToReport">${metric.institutionToReport}</td>
       </tr>
   </#list>
   </table>
 
-<button type="submit" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
+<button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
   Pealehele
 </button>
-<button type="submit" class="btn btn-default btn-sm" onclick="location='/admin/metrics/add?goalId=${goal.id}'">
+<button type="submit" id="addMetricButton" class="btn btn-default btn-sm" onclick="location='/admin/metrics/add?goalId=${goal.id}'">
   Lisa mõõdik
 </button>
 

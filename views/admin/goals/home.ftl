@@ -19,7 +19,7 @@
 
         <td><form action="/admin/metrics/metrics">
           <input type="hidden" value="${goal.id}" name="goalId">
-          <button type="submit" class="btn btn-default btn-sm">
+          <button type="submit" class="metricsButton btn btn-default btn-sm">
             <span class="glyphicon glyphicon-list-alt"></span>
           </button>
         </form></td>
