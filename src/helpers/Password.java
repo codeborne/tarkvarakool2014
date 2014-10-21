@@ -1,4 +1,4 @@
-package controllers.admin.goals;
+package helpers;
 
 import org.apache.commons.codec.DecoderException;
 
@@ -49,5 +49,9 @@ public class Password {
     byte[] salt = new byte[16];
     sr.nextBytes(salt);
     return salt;
+  }
+
+  public static void main(String[] args) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    for (String arg : args) System.out.println(generateStrongPasswordHash(arg) + " = " + arg);
   }
 }

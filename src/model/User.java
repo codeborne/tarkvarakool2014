@@ -1,13 +1,13 @@
 package model;
 
-import static controllers.admin.goals.Password.*;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+
+import static helpers.Password.generateStrongPasswordHash;
 
 @Entity
 public class User {
