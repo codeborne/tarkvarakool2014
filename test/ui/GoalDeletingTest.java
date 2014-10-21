@@ -75,6 +75,7 @@ public class GoalDeletingTest extends UITest {
 
     row.$(".nameInTable").shouldHave(text("Sisestatud eesmark"));
 
-
   }
+
+
 }

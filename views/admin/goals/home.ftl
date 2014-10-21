@@ -33,12 +33,14 @@
           </form>
         </td>
         <td>
+          <#if !goal.metrics?has_content>
           <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
             <input type="hidden" name="id" value="${goal.id}"/>
             <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-trash"></span>
             </button>
           </form>
+          </#if>
         </td>
       </tr>
     </#list>
