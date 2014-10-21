@@ -39,7 +39,7 @@ public class GoalAddingTest extends UITest {
     $(By.name("name")).setValue("Sisestatud eesmark");
     $(By.name("budget")).setValue("100");
 
-    $("#goalAddButton").click();
+    $("#goalAddOrModifyButton").click();
 
     $("#goalNameInTable").shouldHave(text("Sisestatud eesmark"));
     $("#goalBudgetInTable").shouldHave(text("100"));
@@ -53,7 +53,7 @@ public class GoalAddingTest extends UITest {
     $(By.name("name")).setValue("");
     $(By.name("budget")).setValue("10");
 
-    $("#goalAddButton").click();
+    $("#goalAddOrModifyButton").click();
 
     $(".alert-danger").shouldHave(text("Sisestage eesmärk."));
     $(By.name("budget")).shouldHave(value("10"));

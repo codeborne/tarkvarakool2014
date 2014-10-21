@@ -27,7 +27,7 @@
         <td>
           <form action="modify">
             <input type="hidden" value="${goal.id}" name="id">
-            <button type="submit" class="btn btn-default btn-sm">
+            <button id="modifyButton" type="submit" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </form>
