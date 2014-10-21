@@ -1,5 +1,6 @@
 package ui;
 
+import com.codeborne.selenide.SelenideElement;
 import model.Goal;
 import model.User;
 import org.junit.After;
@@ -55,8 +56,10 @@ public class GoalDeletingTest extends UITest {
 
     confirm("Kas oled kustutamises kindel?");
 
-    $(".goalNameInTable").shouldNotHave(text("Sisestatud eesmark"));
-    $(".goalNameInTable").shouldHave(text("eesmark"));
+    SelenideElement row = $$("tr.goal").get(0);
+
+    row.$(".nameInTable").shouldNotHave(text("Sisestatud eesmark"));
+    row.$(".nameInTable").shouldHave(text("eesmark"));
 
   }
 
@@ -68,7 +71,9 @@ public class GoalDeletingTest extends UITest {
 
     dismiss("Kas oled kustutamises kindel?");
 
-    $(".goalNameInTable").shouldHave(text("Sisestatud eesmark"));
+    SelenideElement row = $$("tr.goal").get(0);
+
+    row.$(".nameInTable").shouldHave(text("Sisestatud eesmark"));
 
 
   }

@@ -8,14 +8,14 @@
     <tr>
       <th>Eesmärk</th>
       <th>Eelarve</th>
-      <th>Vaata mõõdikuid</th>
-      <th>Muuda eesmärk</th>
-      <th>Kustuta eesmärk</th>
+      <th>Mõõdikud</th>
+      <th>Muuda</th>
+      <th>Kustuta</th>
     </tr>
     <#list goals as goal>
-      <tr>
-        <td class="goalNameInTable">${goal.name}</td>
-        <td class="goalBudgetInTable">${goal.budget?c}</td>
+      <tr class="goal">
+        <td class="nameInTable">${goal.name}</td>
+        <td class="budgetInTable">${goal.budget?c}</td>
 
         <td><form action="/admin/metrics/metrics">
           <input type="hidden" value="${goal.id}" name="goalId">

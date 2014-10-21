@@ -69,7 +69,9 @@ public class MetricsTest extends UITest {
     $$(".metricsButton").get(0).click();
 
     $("#goBackButton").click();
-    $$(".goalNameInTable").get(0).shouldHave(text("Teere"));
+    SelenideElement row = $$("tr.goal").get(0);
+
+    row.$(".nameInTable").shouldHave(text("Teere"));
 
   }
 

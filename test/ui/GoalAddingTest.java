@@ -1,5 +1,6 @@
 package ui;
 
+import com.codeborne.selenide.SelenideElement;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +10,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class GoalAddingTest extends UITest {
 
@@ -41,8 +43,10 @@ public class GoalAddingTest extends UITest {
 
     $("#goalAddOrModifyButton").click();
 
-    $(".goalNameInTable").shouldHave(text("Sisestatud eesmark"));
-    $(".goalBudgetInTable").shouldHave(text("100"));
+    SelenideElement row = $$("tr.goal").get(0);
+
+    row.$(".nameInTable").shouldHave(text("Sisestatud eesmark"));
+    row.$(".budgetInTable").shouldHave(text("100"));
   }
 
   @Test
