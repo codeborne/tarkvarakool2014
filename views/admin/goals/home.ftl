@@ -45,12 +45,22 @@
       </tr>
     </#list>
   </table>
+
   <#else>
   <h3 id="noGoals"> Andmebaasis eesmärke ei ole.</h3>
   </#if>
 <form action="add">
   <input type="submit" class="btn btn-default" value="Lisa">
 </form>
+  <#if goals?has_content>
+  <button type="submit" id="addMetricsValue" class="btn btn-default btn-sm" onclick="location='/admin/values/value'">
+    Nupp
+  </button>
+  </#if>
+
+
+
+
 
 </@html>
 

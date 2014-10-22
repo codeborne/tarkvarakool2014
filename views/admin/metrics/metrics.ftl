@@ -1,7 +1,7 @@
 <@html>
 
 <form method="get">
-<input type="hidden" value="${goal.id}" name="goalID">
+  <input type="hidden" value="${goal.id}" name="goalID">
 </form>
 <h3>${goal.name}</h3>
 <table class="table table-hover">
@@ -34,17 +34,18 @@
           <input type="hidden" value="${goal.id}" name="goalId">
           <input type="hidden" name="id" value="${metric.id}"/>
           <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-trash"></span></button>
+            <span class="glyphicon glyphicon-trash"></span></button>
         </form>
       </td>
-      </tr>
+    </tr>
   </#list>
-  </table>
+</table>
 
 <button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
   Pealehele
 </button>
-<button type="submit" id="addMetricButton" class="btn btn-default btn-sm" onclick="location='/admin/metrics/add?goalId=${goal.id}'">
+<button type="submit" id="addMetricButton" class="btn btn-default btn-sm"
+        onclick="location='/admin/metrics/add?goalId=${goal.id}'">
   Lisa mõõdik
 </button>
 
