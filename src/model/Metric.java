@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 public class Metric {
@@ -23,6 +25,12 @@ public class Metric {
   private String commentOnTargetLevel;
   private String infoSource;
   private String institutionToReport;
+
+  @ElementCollection
+  @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
+  @MapKeyColumn(name="year")
+  @Column(name="value")
+  private Map<Integer, Long> values = new HashMap<>();
 
   private Metric(){
   }
@@ -86,6 +94,10 @@ public class Metric {
     return institutionToReport;
   }
 
+  public Map<Integer, Long> getValues() {
+    return values;
+  }
+
   public void setId(Long id) {
     this.id = id;
   }
@@ -124,5 +136,13 @@ public class Metric {
 
   public void setInstitutionToReport(String institutionToReport) {
     this.institutionToReport = institutionToReport;
+  }
+
+  public void setGoal(Goal goal) {
+    this.goal = goal;
+  }
+
+  public void setValues(Map<Integer, Long> values) {
+    this.values = values;
   }
 }

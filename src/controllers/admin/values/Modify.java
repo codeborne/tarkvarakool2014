@@ -2,27 +2,40 @@ package controllers.admin.values;
 
 import controllers.UserAwareController;
 import framework.Result;
-import model.Value;
+import framework.Role;
+import model.Metric;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Modify extends UserAwareController {
-  Long goalId;
-  Long metricId;
-  Integer year;
-  Long value;
+  public Long goalId;
+  public Long metricId;
+  public Integer year;
+  public Long value;
 
   public Set<String> errorsList = new HashSet<>();
 
   @Override
+  @Role("admin")
   public Result post() {
     checkErrors();
-    if (errorsList.isEmpty())
-      hibernate.save(new Value(goalId, metricId, year, value));
+    if (errorsList.isEmpty()) {
+      List metricList = hibernate.createCriteria(Metric.class).add(Restrictions.eq("id", metricId))
+                             .createCriteria("goal").add(Restrictions.eq("id", goalId))
+                             .list();
+      if (metricList.size()==1) {
+        Metric metric = (Metric) metricList.get(0);
+        metric.getValues().put(year, value);
+        hibernate.update(metric);
+      } else {
+        errorsList.add("Tekkis viga.");
+      }
+    }
 
     return render();
-
   }
 
   public void checkErrors() {
