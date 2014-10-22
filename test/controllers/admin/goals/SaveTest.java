@@ -136,7 +136,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
   }
 
   @Test
-  public void postCallsSaveNameTrimmed() {
+  public void postCallsSaveWithTrimmedName() {
     controller.name = "\n \r\n ab cd \n \r\n ";;
     controller.budget = 123;
 

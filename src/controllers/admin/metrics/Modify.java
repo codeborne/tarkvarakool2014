@@ -1,9 +1,43 @@
 package controllers.admin.metrics;
 
+import framework.Result;
+import model.Metric;
+
 public class Modify extends Save {
+  public Long metricId;
+
+  @Override
+  public Result get() {
+    Metric metric = (Metric)hibernate.get(Metric.class, metricId);
+    if(metric == null){
+      return redirect(Add.class).withParam("goalId", goalId);
+    }
+    else{
+      name = metric.getName();
+      publicDescription = metric.getPublicDescription();
+      privateDescription = metric.getPrivateDescription();
+      startLevel = metric.getStartLevel();
+      targetLevel = metric.getTargetLevel();
+      commentOnStartLevel = metric.getCommentOnStartLevel();
+      commentOnTargetLevel = metric.getCommentOnTargetLevel();
+      infoSource = metric.getInfoSource();
+      institutionToReport = metric.getInstitutionToReport();
+    }
+    return render("admin/metrics/form");
+  }
 
   @Override
   protected void save(){
-
+    Metric metric = (Metric)hibernate.get(Metric.class, metricId);
+    metric.setName(name);
+    metric.setPublicDescription(publicDescription);
+    metric.setPrivateDescription(privateDescription);
+    metric.setStartLevel(startLevel);
+    metric.setTargetLevel(targetLevel);
+    metric.setCommentOnStartLevel(commentOnStartLevel);
+    metric.setCommentOnTargetLevel(commentOnTargetLevel);
+    metric.setInfoSource(infoSource);
+    metric.setInstitutionToReport(institutionToReport);
+    hibernate.update(metric);
   }
 }

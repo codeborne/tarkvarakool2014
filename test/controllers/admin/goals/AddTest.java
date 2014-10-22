@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 public class AddTest extends ControllerTest<Add> {
 
   @Test
-  public void saveSuccess() throws Exception {
+  public void saveSuccess() {
     controller.name = "ab cd";
     controller.budget = 111;
 
