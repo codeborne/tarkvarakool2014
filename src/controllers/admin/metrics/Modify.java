@@ -1,12 +1,13 @@
 package controllers.admin.metrics;
 
 import framework.Result;
+import framework.Role;
 import model.Metric;
 
 public class Modify extends Save {
   public Long metricId;
 
-  @Override
+  @Override @Role("admin")
   public Result get() {
     Metric metric = (Metric)hibernate.get(Metric.class, metricId);
     if(metric == null){
