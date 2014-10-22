@@ -38,4 +38,34 @@ public class LoginTest extends UITest {
     $(".greetings").shouldHave(text("Tere, johny"));
     $("#logout-button").click();
   }
+
+  @Test
+  public void loginFailsWithIncorrectName() throws Exception {
+    hibernate.save(new User("mari", "pass"));
+
+    open("/admin/login");
+
+    $(By.name("username")).setValue("meelis");
+    $(By.name("password")).setValue("pass");
+
+    $("#submit").click();
+
+    $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
+
+  }
+
+  @Test
+  public void loginFailsWithNoUsername() throws Exception {
+    hibernate.save(new User("tarmo", "tass"));
+
+    open("/admin/login");
+
+    $(By.name("username")).setValue(null);
+    $(By.name("password")).setValue("tass");
+
+    $("#submit").click();
+
+    $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
+
+  }
 }

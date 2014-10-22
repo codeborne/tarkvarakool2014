@@ -15,27 +15,36 @@
     <th>Sihttaseme kommentaar</th>
     <th>Infoallikas</th>
     <th>Asutus, kuhu raporteerida</th>
+    <th>Kustuta</th>
   </tr>
 
   <#list goal.metrics as metric>
-    <tr>
-      <td>${metric.name}</td>
-      <td>${metric.publicDescription}</td>
-      <td>${metric.privateDescription}</td>
-      <td>${metric.startLevel}</td>
-      <td>${metric.commentOnStartLevel}</td>
-      <td>${metric.targetLevel}</td>
-      <td>${metric.commentOnTargetLevel}</td>
-      <td>${metric.infoSource}</td>
-      <td>${metric.institutionToReport}</td>
+    <tr class="metric">
+      <td class="name">${metric.name}</td>
+      <td class="publicDescription">${metric.publicDescription}</td>
+      <td class="privateDescription">${metric.privateDescription}</td>
+      <td class="startLevel">${metric.startLevel}</td>
+      <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
+      <td class="targetLevel">${metric.targetLevel}</td>
+      <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
+      <td class="infoSource">${metric.infoSource}</td>
+      <td class="institutionToReport">${metric.institutionToReport}</td>
+      <td>
+        <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
+          <input type="hidden" value="${goal.id}" name="goalId">
+          <input type="hidden" name="id" value="${metric.id}"/>
+          <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-trash"></span></button>
+        </form>
+      </td>
       </tr>
   </#list>
   </table>
 
-<button type="submit" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
+<button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
   Pealehele
 </button>
-<button type="submit" class="btn btn-default btn-sm" onclick="location='/admin/metrics/add?goalId=${goal.id}'">
+<button type="submit" id="addMetricButton" class="btn btn-default btn-sm" onclick="location='/admin/metrics/add?goalId=${goal.id}'">
   Lisa mõõdik
 </button>
 
