@@ -20,11 +20,11 @@ public class Value {
   private Long metricId;
 
   @Column(nullable = false)
-  private Short year;
+  private Integer year;
 
   private Long value;
 
-  public Value(Long goalId, Long metricId, Short year, Long value) {
+  public Value(Long goalId, Long metricId, Integer year, Long value) {
     this.goalId = goalId;
     this.metricId = metricId;
     this.year = year;
@@ -43,7 +43,7 @@ public class Value {
     return metricId;
   }
 
-  public Short getYear() {
+  public Integer getYear() {
     return year;
   }
 
@@ -59,7 +59,7 @@ public class Value {
     this.metricId = metricId;
   }
 
-  public void setYear(Short year) {
+  public void setYear(Integer year) {
     this.year = year;
   }
 

@@ -10,7 +10,7 @@ import java.util.Set;
 public class Modify extends UserAwareController {
   Long goalId;
   Long metricId;
-  Short year;
+  Integer year;
   Long value;
 
   public Set<String> errorsList = new HashSet<>();
@@ -28,20 +28,28 @@ public class Modify extends UserAwareController {
   public void checkErrors() {
     checkGoalId();
     checkMetricId();
+    checkYear();
+    checkValue();
   }
 
   public void checkGoalId() {
     if (errors.containsKey("goalId") || goalId==null)
       errorsList.add("Tekkis viga.");
   }
+
   public void checkMetricId() {
-    if (errors.containsKey("metricId") || metricId ==null)
+    if (errors.containsKey("metricId") || metricId==null)
       errorsList.add("Tekkis viga.");
   }
+
   public void checkYear() {
-
+    if (errors.containsKey("year") || year==null || year>MAXIMUM_YEAR || year<MINIMUM_YEAR)
+      errorsList.add("Tekkis viga.");
   }
+
   public void checkValue() {
-
+    if (errors.containsKey("value") || value==null)
+      errorsList.add("Sisestage korrektne väärtus.");
   }
+
 }
