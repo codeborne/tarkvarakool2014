@@ -68,7 +68,7 @@ public class HibernateHelper {
   private static void prepareDatabase() {
     try {
       Connection connection = DriverManager.getConnection(configuration.getProperty(URL), configuration.getProperty(USER), configuration.getProperty(PASS));
-      connection.createStatement().execute("SET DATABASE COLLATION ESTONIAN");
+      connection.createStatement().execute("SET DATABASE COLLATION ESTONIAN STRENGTH SECONDARY");
       connection.close();
     } catch (SQLException e) {
       throw new RuntimeException(e);
