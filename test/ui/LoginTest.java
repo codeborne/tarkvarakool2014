@@ -68,4 +68,20 @@ public class LoginTest extends UITest {
     $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
 
   }
+
+  @Test
+  public void logoutSuccess() throws Exception {
+    hibernate.save(new User("johny", "p2s3w04d"));
+
+    open("/admin/login");
+
+    $(By.name("username")).setValue("johny");
+    $(By.name("password")).setValue("p2s3w04d");
+
+    $("#submit").click();
+    $(".greetings").shouldHave(text("Tere, johny"));
+
+    $("#logout-button").click();
+    $("#login-button").exists();
+  }
 }

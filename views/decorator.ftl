@@ -20,8 +20,8 @@
       </div>
       <div class="navbar-collapse collapse navbar-right">
         <#if loggedInUsername??>
-          <span class="greetings">Tere, ${loggedInUsername}</span>
           <form class="navbar-form navbar-left" action="/admin/logout">
+            <span class="greetings">Tere, ${loggedInUsername}</span>
             <button id="logout-button" type="submit" class="btn-sm btn-danger logout-button">Logi välja</button>
           </form>
         <#else>

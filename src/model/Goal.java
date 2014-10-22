@@ -17,7 +17,7 @@ public class Goal {
   private Integer budget;
 
 
-
+  @OrderBy("name")
   @OneToMany(mappedBy = "goal")
   private Set<Metric> metrics;
 
