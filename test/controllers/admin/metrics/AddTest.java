@@ -5,143 +5,16 @@ import model.Goal;
 import model.Metric;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class AddTest extends ControllerTest<Add> {
 
-  @Before
-  public void setUp() throws Exception {
-    when(session.getAttribute("username")).thenReturn("Some username");
-  }
 
-  @Test
-  public void postIfNameIsNull() {
-    assertRender(controller.post());
 
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
-
-  }
-
-  @Test
-  public void postIfNameHasOnlySpaces() {
-    controller.name = " \n\n \n    \r\n \r\n \n \n";
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
-
-  }
-
-  @Test
-  public void postIfNameIsEmpty() {
-    controller.name = "";
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
-
-  }
-
-  @Test
-  public void postIfPublicDescriptionThrowsException() {
-    controller.name = "metric";
-    controller.errors.put("publicDescription", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga avalikus kirjelduses"));
-  }
-
-  @Test
-  public void postIfPrivateDescriptionThrowsException() {
-    controller.name = "metric";
-    controller.errors.put("privateDescription", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga mitteavalikus kirjelduses"));
-
-  }
-
-  @Test
-  public void postIfStartLevelIsNotNumber() {
-    controller.name = "metric";
-    controller.errors.put("startLevel", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Algtase peab olema number"));
-
-  }
-
-  @Test
-  public void postIfCommentOnStartLevelThrowsException() {
-    controller.name = "metric";
-    controller.errors.put("commentOnStartLevel", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga algtaseme kommentaaris"));
-  }
-
-  @Test
-  public void postIfTargetLevelIsNotNumber() {
-    controller.name = "metric";
-    controller.errors.put("targetLevel", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sihttase peab olema number"));
-  }
-
-  @Test
-  public void postIfCommentOnTargetLevelThrowsException() {
-    controller.name = "metric";
-    controller.errors.put("commentOnTargetLevel", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga sihttaseme kommentaaris"));
-
-  }
-
-  @Test
-  public void postIfInfoSourceThrowsException() {
-    controller.name = "metric";
-    controller.errors.put("infoSource", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga infoallika sisestamisel"));
-
-  }
-
-  @Test
-  public void postIfInstitutionToReportThrowsException() {
-    controller.name = "metric";
-    controller.errors.put("institutionToReport", new RuntimeException());
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga raporteeritava asutuse sisestamisel"));
-  }
 
   @Test
   public void postIfAddingMetricSuccessfulNameOnly() {
@@ -176,23 +49,7 @@ public class AddTest extends ControllerTest<Add> {
 
   }
 
-  @Test
-  public void postSaveThrowsException() {
-    controller.name = "333 eee";
-    controller.goalId = 9L;
 
-    Goal goal = new Goal("name", 5);
-    doThrow(new RuntimeException()).when(controller.hibernate).save(any(Metric.class));
-    when(hibernate.get(Goal.class, 9L)).thenReturn(goal);
-    assertRender(controller.post());
-
-
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
-    Assert.assertEquals(1, controller.errorsList.size());
-
-    Metric savedMetric = (Metric) getSavedEntity();
-    verify(hibernate).save(savedMetric);
-  }
 
 
   @Test
