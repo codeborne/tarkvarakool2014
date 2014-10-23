@@ -6,6 +6,7 @@
   <link rel="shortcut icon" href="/favicon.png" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles.css"/>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
   <div class="navbar navbar-default" role="navigation">
