@@ -21,6 +21,7 @@
       thisObject.parent().children('span.value').hide();
       thisObject.parent().children('form').children('input').val(thisObject.parent().children('span.value').text());
       thisObject.parent().children('form').show();
+      thisObject.parent().children('form').children('input').focus();
     }
   </script>
 
