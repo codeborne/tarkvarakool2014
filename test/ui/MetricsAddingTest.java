@@ -2,7 +2,6 @@ package ui;
 
 import com.codeborne.selenide.SelenideElement;
 import model.Goal;
-import model.Metric;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
@@ -72,22 +71,6 @@ public class MetricsAddingTest extends UITest {
     SelenideElement row = $$("tr.goal").get(0);
 
     row.$(".nameInTable").shouldHave(text("Teere"));
-
-  }
-
-  @Test
-  public void failIfAdminAddsDuplicateMetric() throws Exception {
-
-    Goal goal1 = new Goal("Kool", 145);
-    hibernate.save(goal1);
-    hibernate.save(new Metric(goal1, "muki", "", "", 0, "", 0, "", "", ""));
-    open("/admin/goals/home");
-
-    $$(".metricsButton").get(0).click();
-    $("#addMetricButton").click();
-    $(By.name("name")).setValue("muki");
-    $(".submitButton").click();
-    $(".alert-danger").shouldHave(text("See mõõdik on juba sisestatud."));
 
   }
 

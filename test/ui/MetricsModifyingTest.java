@@ -66,20 +66,6 @@ public class MetricsModifyingTest extends UITest {
 
   }
 
-  @Test
-  public void adminFailsModifyingMetric(){
-
-
-    $(By.name("name")).setValue("Some metric1");
-
-    $(".submitButton").click();
-
-    $(".alert-danger").shouldHave(text("See mõõdik on juba sisestatud."));
-
-
-
-
-  }
 }
 
 
