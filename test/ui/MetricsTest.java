@@ -44,7 +44,7 @@ public class MetricsTest extends UITest {
     $("#submitButton").click();
 
     $(".alert-danger").shouldHave(text("Sisestage mõõdik."));
-    $("h3").shouldHave(text("Lisage mõõdik: Tere"));
+    $("h3").shouldHave(text("Lisage uus mõõdik: Tere"));
   }
 
   @Test

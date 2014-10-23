@@ -7,8 +7,10 @@
 </#if>
 
 <form method="post" class="form-horizontal">
+
   <input type="hidden" value="${goal.id}" name="goalId">
-  <h3>Lisage mõõdik: ${goal.name}</h3>
+
+  <h3>${title}: ${goal.name}</h3>
 
   <label>
     Mõõdik:
@@ -57,7 +59,7 @@
   <br>
 
   <button id="submitButton" type="submit" class="btn btn-default btn-sm">
-    Lisa
+  ${buttonTitle}
   </button>
   <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id}'; return false;">
     Tagasi

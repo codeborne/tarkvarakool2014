@@ -26,6 +26,8 @@ public abstract class Save extends UserAwareController {
   public Set<String> errorsList = new HashSet<>();
 
   public Goal goal;
+  public String title;
+  public String buttonTitle;
 
 
   @Override @Role("admin")
@@ -43,7 +45,7 @@ public abstract class Save extends UserAwareController {
       }
     }
 
-    return  render();
+    return  render("admin/metrics/form");
   }
 
 
