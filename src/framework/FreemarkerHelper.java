@@ -1,8 +1,8 @@
 package framework;
 
 import freemarker.cache.FileTemplateLoader;
+import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Version;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -39,7 +39,8 @@ public class FreemarkerHelper {
   }
 
   private static void initFreemarkerObjectWrapper(Configuration freemarker) {
-    DefaultObjectWrapper wrapper = new DefaultObjectWrapper();
+//    DefaultObjectWrapper wrapper = new DefaultObjectWrapper();
+    BeansWrapper wrapper = new BeansWrapper();
     wrapper.setExposeFields(true);
     freemarker.setObjectWrapper(wrapper);
   }
