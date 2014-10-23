@@ -1,4 +1,14 @@
 <@html>
+
+<script>
+  function sendData() {
+    $.post("/admin/values/modify", {goalId: 1, metricId: 1, year: 2010, value: 1},
+      function(data) {
+        alert(data);
+      }
+    );
+  }
+</script>
   <#list goals as goal>
   <div class="goal">
     <h4 class="name"> Eesmärk:${goal.name}</h4>
@@ -8,23 +18,20 @@
       <div class="tableHead">
         <tr>
           <th>Mõõdik</th>
-          <th>2014</th>
-          <th>2015</th>
-          <th>2016</th>
-          <th>2017</th>
-          <th>2018</th>
-          <th>2019</th>
-          <th>2020</th>
+          <#list minimumYear..maximumYear as year>
+            <th>${year?c}</th>
+          </#list>
         </tr>
-      </div>
-
-      <#list goal.metrics as metric>
-        <div class="tableBody">
-          <tr class="metric">
-            <td class="name">${metric.name}</td>
-          </tr>
-        </div>
-      </#list>
+        <#list goal.metrics as metric>
+          <div class="tableBody">
+            <tr class="metric">
+              <td class="name" onclick="sendData();">${metric.name}</td>
+              <#--<#list minimumYear..maximumYear as year>-->
+                <#--<td><#if metric.values[year]??>${metric.values[year]}</#if></td>-->
+              <#--</#list>-->
+            </tr>
+          </div>
+        </#list>
     </table>
     <br>
     <br>

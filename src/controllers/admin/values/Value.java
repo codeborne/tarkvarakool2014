@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class Value extends UserAwareController{
 
   public java.util.List<Goal> goals = new ArrayList<>();
+  public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
+  public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
 
   @Override
   @Role("admin")
