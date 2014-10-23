@@ -1,15 +1,26 @@
 <@html>
 
 <script>
-  function sendData(goalId, metricId, year, value) {
-    $.post("/admin/values/modify", {goalId: goalId, metricId: metricId, year: year, value: value},
+  function sendData(goalId, metricId, year, thisObject) {
+    inputValue = thisObject.children('input').val();
+    $.post("/admin/values/modify", {goalId: goalId, metricId: metricId, year: year, value: inputValue},
       function(data) {
         if(data!="")
           alert("Error occurred: " + data);
 
-        $("#newValue").parent().parent().val("")
+        thisObject.hide();
+        thisObject.parent().children('span.glyphicon').show();
+        thisObject.parent().children('span.value').text(inputValue);
+        thisObject.parent().children('span.value').show();
       }
     );
+  }
+
+  function showInputHideIconAndValue(thisObject) {
+    thisObject.hide();
+    thisObject.parent().children('span.value').hide();
+    thisObject.parent().children('form').children('input').val(thisObject.parent().children('span.value').text());
+    thisObject.parent().children('form').show();
   }
 </script>
   <#list goals as goal>
@@ -29,15 +40,12 @@
           <tr class="metric">
             <td class="name">${metric.name}</td>
             <#list minimumYear..maximumYear as year>
-              <td><span class="value">${(metric.values.get(year))!""}</span> <span class="glyphicon glyphicon-pencil" onclick="$(this).hide(); $(this).parent().children('form').show()"></span>
-              <form style="display: none;" onsubmit="sendData(${goal.id}, ${metric.id}, ${year?c}, $(this).children('input').val()); $(this).hide(); $(this).parent().children('span.glyphicon').show(); $(this).parent().children('span.value').text($(this).children('input').val()); return false;"><input></form></td>
+              <td><span class="value">${((metric.values.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
+              <form style="display: none;" onsubmit="sendData(${goal.id}, ${metric.id}, ${year?c}, $(this)); return false;"><input></form></td>
             </#list>
           </tr>
         </#list>
     </table>
-
-
-
     <br>
     <br>
   </div>

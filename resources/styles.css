@@ -1,5 +1,7 @@
-
-
+.hand-pointer {
+  cursor: pointer;
+  cursor: hand;
+}
 
 .logout-button {
   margin-left: 20px;
