@@ -1,4 +1,9 @@
 <@html>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default active" onclick="location='/home'">Eesmärgid</button>
+    <button type="button" id="addMetricsValue" class="btn btn-default" onclick="location='/values'">Väärtused</button>
+  </div>
+  <br><br>
   <#list goals as goal>
   <div class="goal">
     <h4 class="name"> Eesmärk: ${goal.name}</h4>
