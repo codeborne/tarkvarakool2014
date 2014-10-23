@@ -1,8 +1,12 @@
 <@html>
 
+  <div class="btn-group">
+    <button type="button" class="btn btn-default active" onclick="location='/admin/goals/home'">Eesmärgid</button>
+    <button type="button" id="addMetricsValue" class="btn btn-default" onclick="location='/admin/values/value'">Väärtused</button>
+  </div>
+  <br><br>
   <#if goals?has_content>
   <h3>Eesmärgid</h3>
-
 
   <table class="table table-hover">
     <tr>
@@ -52,15 +56,5 @@
 <form action="add">
   <input type="submit" class="btn btn-default" value="Lisa">
 </form>
-  <#if goals?has_content>
-  <button type="submit" id="addMetricsValue" class="btn btn-default btn-sm" onclick="location='/admin/values/value'">
-    Nupp
-  </button>
-  </#if>
-
-
-
-
-
 </@html>
 

@@ -58,7 +58,7 @@
   </label>
   <br>
 
-  <button class="submitButton" type="submit" class="btn btn-default btn-sm">
+  <button class="btn btn-default btn-sm submitButton" type="submit" class="btn btn-default btn-sm">
   ${buttonTitle}
   </button>
   <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id}'; return false;">
