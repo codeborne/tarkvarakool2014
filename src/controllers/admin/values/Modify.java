@@ -6,9 +6,7 @@ import framework.Role;
 import model.Metric;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Modify extends UserAwareController {
   public Long goalId;
@@ -30,6 +28,7 @@ public class Modify extends UserAwareController {
         Metric metric = (Metric) metricList.get(0);
         metric.getValues().put(year, value);
         hibernate.update(metric);
+        hibernate.flush();
       } else {
         errorsList.add("Tekkis viga.");
       }
