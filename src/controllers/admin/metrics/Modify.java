@@ -2,14 +2,22 @@ package controllers.admin.metrics;
 
 import framework.Result;
 import framework.Role;
+import model.Goal;
 import model.Metric;
 
 public class Modify extends Save {
   public Long metricId;
 
+  public Modify() {
+    title = "Muuda mõõdik";
+    buttonTitle = "Muuda";
+  }
+
   @Override @Role("admin")
   public Result get() {
+    goal = (Goal)hibernate.get(Goal.class, goalId);
     Metric metric = (Metric)hibernate.get(Metric.class, metricId);
+
     if(metric == null){
       return redirect(Add.class).withParam("goalId", goalId);
     }

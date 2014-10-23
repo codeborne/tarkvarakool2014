@@ -7,11 +7,16 @@ import model.Metric;
 
 public class Add extends Save {
 
+  public Add() {
+    title = "Lisage uus mõõdik";
+    buttonTitle = "Lisa";
+  }
+
   @Override @Role("admin")
   public Result get()  {
 
     goal = (Goal) hibernate.get(Goal.class, goalId);
-    return render();
+    return render("admin/metrics/form");
   }
 
 

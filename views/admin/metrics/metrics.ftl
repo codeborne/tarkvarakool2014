@@ -15,6 +15,7 @@
     <th>Sihttaseme kommentaar</th>
     <th>Infoallikas</th>
     <th>Asutus, kuhu raporteerida</th>
+    <th>Muuda</th>
     <th>Kustuta</th>
   </tr>
 
@@ -30,6 +31,15 @@
       <td class="infoSource">${metric.infoSource}</td>
       <td class="institutionToReport">${metric.institutionToReport}</td>
       <td>
+        <form action="modify">
+          <input type="hidden" value="${goal.id}" name="goalId">
+          <input type="hidden" name="metricId" value="${metric.id}"/>
+          <button class="modifyButton" type="submit" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+        </form>
+      </td>
+      <td>
         <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
           <input type="hidden" value="${goal.id}" name="goalId">
           <input type="hidden" name="id" value="${metric.id}"/>
@@ -44,9 +54,12 @@
 <button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
   Pealehele
 </button>
-<button type="submit" id="addMetricButton" class="btn btn-default btn-sm"
-        onclick="location='/admin/metrics/add?goalId=${goal.id}'">
+<form action="add">
+  <input type="hidden" value="${goal.id}" name="goalId">
+<button type="submit" id="addMetricButton" class="btn btn-default btn-sm">
+        <#--onclick="location='/admin/metrics/add?goalId=${goal.id}'">-->
   Lisa mõõdik
 </button>
+</form>
 
 </@html>
