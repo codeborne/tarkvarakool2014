@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class Metric {
   @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
   @MapKeyColumn(name="year")
   @Column(name="value")
-  private Map<Integer, Long> values = new HashMap<>();
+  private Map<Integer, BigDecimal> values = new HashMap<>();
 
   private Metric(){
   }
@@ -94,7 +95,7 @@ public class Metric {
     return institutionToReport;
   }
 
-  public Map<Integer, Long> getValues() {
+  public Map<Integer, BigDecimal> getValues() {
     return values;
   }
 
@@ -142,7 +143,7 @@ public class Metric {
     this.goal = goal;
   }
 
-  public void setValues(Map<Integer, Long> values) {
+  public void setValues(Map<Integer, BigDecimal> values) {
     this.values = values;
   }
 }

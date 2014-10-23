@@ -6,13 +6,14 @@ import framework.Role;
 import model.Metric;
 import org.hibernate.criterion.Restrictions;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Modify extends UserAwareController {
   public Long goalId;
   public Long metricId;
   public Integer year;
-  public Long value;
+  public BigDecimal value;
 
   public Set<String> errorsList = new HashSet<>();
 

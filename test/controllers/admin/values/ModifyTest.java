@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -33,7 +34,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 1L;
     controller.metricId = 1L;
     controller.year = 2015;
-    controller.value = 777L;
+    controller.value = new BigDecimal(777);
 
     assertRender(controller.post());
 
@@ -47,7 +48,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void FailWhenMetricIdIsNull() throws Exception {
     controller.goalId = 2L;
     controller.year = 2014;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
     assertRender(controller.post());
 
@@ -60,7 +61,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfErrorsContainsMetricId() {
     controller.goalId = 2L;
     controller.year = 2014;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
 
     controller.errors.put("metricId", new Exception());
@@ -75,7 +76,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void FailWhenGoalIdIsNull() throws Exception {
     controller.metricId = 2L;
     controller.year = 2014;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744.55);
 
     assertRender(controller.post());
 
@@ -87,7 +88,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfErrorsContainsGoalId() {
     controller.metricId = 2L;
     controller.year = 2014;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
 
     controller.errors.put("goalId", new Exception());
@@ -102,7 +103,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void FailWhenYearNull() throws Exception {
     controller.goalId = 12L;
     controller.metricId = 21L;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
     assertRender(controller.post());
 
@@ -114,7 +115,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfErrorsContainsYear() {
     controller.goalId = 12L;
     controller.metricId = 21L;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
     controller.errors.put("year", new Exception());
 
@@ -129,7 +130,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = UserAwareController.MAXIMUM_YEAR + 1;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
     assertRender(controller.post());
 
@@ -142,7 +143,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = UserAwareController.MINIMUM_YEAR - 1;
-    controller.value = 744L;
+    controller.value = new BigDecimal(744);
 
     assertRender(controller.post());
 
