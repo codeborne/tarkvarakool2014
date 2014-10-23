@@ -12,7 +12,7 @@ public class Metric {
   @GeneratedValue
   private Long id;
 
-  @Column(nullable = false, unique = true)
+  @Column(nullable = false)
   private String name;
 
   @ManyToOne
