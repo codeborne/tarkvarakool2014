@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class MetricsTest extends UITest {
+public class MetricsAddingTest extends UITest {
 
   @Before
   public void logIn() throws Exception {
@@ -41,7 +41,7 @@ public class MetricsTest extends UITest {
     $("#addMetricButton").click();
 
 
-    $("#submitButton").click();
+    $(".submitButton").click();
 
     $(".alert-danger").shouldHave(text("Sisestage mõõdik."));
     $("h3").shouldHave(text("Lisage uus mõõdik: Tere"));
@@ -57,7 +57,7 @@ public class MetricsTest extends UITest {
 
 
     $(By.name("name")).setValue("Koer");
-    $("#submitButton").click();
+    $(".submitButton").click();
     $$("tr.metric").get(0).$(".name").shouldHave(text("Koer"));
   }
 
@@ -86,7 +86,7 @@ public class MetricsTest extends UITest {
     $$(".metricsButton").get(0).click();
     $("#addMetricButton").click();
     $(By.name("name")).setValue("muki");
-    $("#submitButton").click();
+    $(".submitButton").click();
     $(".alert-danger").shouldHave(text("See mõõdik on juba sisestatud."));
 
   }
@@ -109,7 +109,7 @@ public class MetricsTest extends UITest {
     $(By.name("infoSource")).setValue("ioejoia");
     $(By.name("institutionToReport")).setValue("koht");
 
-    $("#submitButton").click();
+    $(".submitButton").click();
 
     $$("tr.metric").shouldHaveSize(1);
 
@@ -119,7 +119,7 @@ public class MetricsTest extends UITest {
     row.$(".publicDescription").shouldHave(text("trallalaa"));
     row.$(".privateDescription").shouldHave(text("trullalaa"));
     row.$(".startLevel").shouldHave(text("435"));
-    row.$(".commantOnStartLevel").shouldHave(text("blahblah"));
+    row.$(".commentOnStartLevel").shouldHave(text("blahblah"));
     row.$(".targetLevel").shouldHave(text("1"));
     row.$(".commentOnTargetLevel").shouldHave(text("iejoja"));
     row.$(".infoSource").shouldHave(text("ioejoia"));

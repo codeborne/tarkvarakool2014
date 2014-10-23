@@ -48,5 +48,6 @@ public class Modify extends Save {
     metric.setInfoSource(infoSource);
     metric.setInstitutionToReport(institutionToReport);
     hibernate.update(metric);
+    hibernate.flush();
   }
 }
