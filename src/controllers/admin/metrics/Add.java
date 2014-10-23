@@ -24,5 +24,6 @@ public class Add extends Save {
   protected void save() {
     hibernate.save(new Metric(goal, name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
       targetLevel, commentOnTargetLevel, infoSource, institutionToReport));
+    hibernate.flush();
   }
 }

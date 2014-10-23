@@ -45,7 +45,7 @@ public abstract class Save extends UserAwareController {
       }
     }
 
-    return  render("admin/metrics/form");
+    return render("admin/metrics/form");
   }
 
 

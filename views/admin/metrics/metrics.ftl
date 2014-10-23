@@ -25,7 +25,7 @@
       <td class="publicDescription">${metric.publicDescription}</td>
       <td class="privateDescription">${metric.privateDescription}</td>
       <td class="startLevel">${metric.startLevel?c}</td>
-      <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
+      <td class="commentOnStartLevel">${metric.commentOnStartLevel}</td>
       <td class="targetLevel">${metric.targetLevel?c}</td>
       <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
       <td class="infoSource">${metric.infoSource}</td>
