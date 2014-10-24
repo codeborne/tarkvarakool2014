@@ -127,4 +127,18 @@ public class YearlyBudgetsModifyingTest extends UITest {
     open("/admin/values/value");
     $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(4).shouldHave(text("555555"));
   }
+
+  @Test
+  public void clickingOnPencilClosesPreviousInputFieldAndSaves() throws Exception {
+    open("/admin/values/value");
+    $$(".goal").get(0).$(".yearlyBudget").$$(".glyphicon").get(0).click();
+    SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(0);
+    input.setValue("4382");
+    $$(".goal").get(1).$(".yearlyBudget").$$(".glyphicon").get(3).click();
+
+    input.shouldNotBe(visible);
+    $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(0).shouldHave(text("4382"));
+    $$(".goal").get(1).$(".yearlyBudget").$$(".modify-value").get(3).shouldBe(visible);
+  }
+
 }
