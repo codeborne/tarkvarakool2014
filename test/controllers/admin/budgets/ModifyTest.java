@@ -97,17 +97,6 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
   }
 
-  @Test
-  public void postIfYearlyBudgetIsNull() throws Exception {
-    controller.goalId = 45L;
-    controller.year = 2017;
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
-  }
-
 
   @Test
   public void postIfYearlyBudgetIsNegative() throws Exception {
@@ -139,6 +128,24 @@ public class ModifyTest extends ControllerTest<Modify> {
     Assert.assertEquals((Long) 555L, updatedGoal.getYearlyBudgets().get(2015));
     verify(hibernate).update(updatedGoal);
 
+  }
+
+  @Test
+  public void postIfYearlyBudgetIsNull() throws Exception {
+    controller.goalId = 45L;
+    controller.year = 2017;
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
+    when(criteria.add(any(SimpleExpression.class))).thenReturn(criteria);
+    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", 1000)));
+
+    assertRender(controller.post());
+
+    Goal updatedGoal = (Goal) getUpdatedEntity();
+    assertTrue(controller.errorsList.isEmpty());
+    assertTrue(updatedGoal.getYearlyBudgets().containsKey(2017));
+    Assert.assertEquals(null, updatedGoal.getYearlyBudgets().get(2015));
+    verify(hibernate).update(updatedGoal);
   }
 
   @Test

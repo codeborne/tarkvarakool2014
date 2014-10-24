@@ -57,7 +57,7 @@ public class Modify extends UserAwareController {
   }
 
   public void checkYearlyBudget() {
-    if (errors.containsKey("yearlyBudget") || yearlyBudget==null || yearlyBudget < 0)
+    if (errors.containsKey("yearlyBudget") || (yearlyBudget!=null && yearlyBudget < 0))
       errorsList.add("Sisestage korrektne väärtus.");
   }
 }
