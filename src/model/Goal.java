@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -20,6 +22,13 @@ public class Goal {
   @OrderBy("name")
   @OneToMany(mappedBy = "goal")
   private Set<Metric> metrics;
+
+
+  @ElementCollection
+  @JoinTable(name = "YearlyBudget", joinColumns = @JoinColumn(name = "goal_id"))
+  @MapKeyColumn(name="year")
+  @Column(name="yearlyBudget")
+  private Map<Integer, Long> yearlyBudgets = new HashMap<>();
 
   private Goal() {
   }
@@ -44,12 +53,20 @@ public class Goal {
     return budget;
   }
 
+  public Map<Integer, Long> getYearlyBudgets() {
+    return yearlyBudgets;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
 
   public void setBudget(Integer budget) {
     this.budget = budget;
+  }
+
+  public void setYearlyBudgets(Map<Integer, Long> yearlyBudgets) {
+    this.yearlyBudgets = yearlyBudgets;
   }
 
 }

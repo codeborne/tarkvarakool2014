@@ -16,6 +16,21 @@
       );
     }
 
+    function sendBudgetData(goalId, year, thisObject) {
+      inputValue = thisObject.children('input').val();
+      $.post("/admin/values/modify2", {goalId: goalId, year: year, yearlyBudget: inputValue},
+        function(data) {
+          if(data!="")
+            alert("Error occurred: " + data);
+
+          thisObject.hide();
+          thisObject.parent().children('span.glyphicon').show();
+          thisObject.parent().children('span.value').text(inputValue);
+          thisObject.parent().children('span.value').show();
+        }
+      );
+    }
+
     function showInputHideIconAndValue(thisObject) {
       thisObject.hide();
       thisObject.parent().children('span.value').hide();
@@ -43,6 +58,8 @@
             <th>${year?c}</th>
           </#list>
         </tr>
+      </div>
+
         <#list goal.metrics as metric>
           <tr class="metric">
             <td class="name">${metric.name}</td>
@@ -52,9 +69,16 @@
             </#list>
           </tr>
         </#list>
+      <tr>
+        <td>Kulutatud raha eurodes</td>
+        <#list minimumYear..maximumYear as year>
+          <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
+            <form style="display: none;" onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;"><input></form></td>
+        </#list>
+      </tr>
     </table>
     <br>
     <br>
-  </div>
+
   </#list>
 </@html>
