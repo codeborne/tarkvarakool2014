@@ -7,6 +7,7 @@
   <#list goals as goal>
   <div class="goal">
     <h4 class="name"> Eesmärk: ${goal.name}</h4>
+    <div style="white-space: pre;">${goal.comment!""}</div>
     <h4 class="budget">Eelarve: €${goal.budget?c} </h4>
 
     <table class="table">
@@ -15,9 +16,9 @@
           <th>Mõõdik</th>
           <th>Kirjeldus</th>
           <th>Algtase</th>
-          <th>Kommentaar</th>
+          <th>Algtaseme kommentaar</th>
           <th>Sihttase</th>
-          <th>Kommentaar</th>
+          <th>Sihttaseme kommentaar</th>
           <th>Infoallikas</th>
         </tr>
       </div>

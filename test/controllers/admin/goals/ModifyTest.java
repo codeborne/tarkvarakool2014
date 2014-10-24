@@ -13,12 +13,14 @@ public class ModifyTest extends ControllerTest<Modify> {
   @Test
   public void getWhenObjectFound() {
     controller.id = 2L;
-    when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("name", 10));
+    when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("name", "abc" ,10));
 
     assertRender(controller.get());
 
     assertEquals("name", controller.name);
     assertEquals(10, (int) controller.budget);
+    assertEquals("abc", controller.comment);
+
   }
 
   @Test
@@ -34,14 +36,17 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.id = 2L;
     controller.name = "name";
     controller.budget = 10;
+    controller.comment = "abc";
 
-    Goal goalBeingChanged = new Goal("TERE", 34);
+    Goal goalBeingChanged = new Goal("TERE", "tre",34);
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
     controller.save();
 
     assertEquals(10, (int)goalBeingChanged.getBudget());
     assertEquals("name", goalBeingChanged.getName());
+    assertEquals("abc", goalBeingChanged.getComment());
+
     verify(hibernate).update(goalBeingChanged);
   }
 

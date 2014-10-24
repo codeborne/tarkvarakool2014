@@ -19,6 +19,6 @@ public class Add extends Save {
 
   @Override
   protected void save() {
-    hibernate.save(new Goal(name, budget));
+    hibernate.save(new Goal(name, comment, budget));
   }
 }
