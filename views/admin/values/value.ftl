@@ -6,7 +6,7 @@
       $.post("/admin/values/modify", {goalId: goalId, metricId: metricId, year: year, value: inputValue, isForecast: isForecast},
         function(data) {
           if(data!="")
-            alert("Error occurred: " + data);
+            alert(data);
 
           thisObject.hide();
           thisObject.parent().children('span.glyphicon').show();
@@ -21,7 +21,7 @@
       $.post("/admin/budgets/modify", {goalId: goalId, year: year, yearlyBudget: inputValue},
         function(data) {
           if(data!="")
-            alert("Error occurred: " + data);
+            alert(data);
 
           thisObject.hide();
           thisObject.parent().children('span.glyphicon').show();
@@ -83,11 +83,11 @@
             </#list>
           </tr>
         </#list>
-      <tr>
+      <tr class="yearlyBudget">
         <td>Kulutatud raha eurodes</td>
         <#list minimumYear..maximumYear as year>
           <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
-            <form style="display: none;" onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;"><input type="number" step="any"></form></td>
+            <form style="display: none;" onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;"><input type="number" step="any" class="modify-value"></form></td>
         </#list>
       </tr>
     </table>
