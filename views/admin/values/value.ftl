@@ -18,7 +18,7 @@
 
     function sendBudgetData(goalId, year, thisObject) {
       inputValue = thisObject.children('input').val();
-      $.post("/admin/values/modify2", {goalId: goalId, year: year, yearlyBudget: inputValue},
+      $.post("/admin/budgets/modify", {goalId: goalId, year: year, yearlyBudget: inputValue},
         function(data) {
           if(data!="")
             alert("Error occurred: " + data);
@@ -73,7 +73,7 @@
         <td>Kulutatud raha eurodes</td>
         <#list minimumYear..maximumYear as year>
           <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
-            <form style="display: none;" onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;"><input></form></td>
+            <form style="display: none;" onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;"><input type="number" step="any"></form></td>
         </#list>
       </tr>
     </table>
