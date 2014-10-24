@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +27,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
     when(criteria.createCriteria(anyString())).thenReturn(criteria);
     when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Metric(new Goal("some goal", 1000), "Some metric", "", "", 777, "", 55, "", "", "abc")));
+    when(criteria.list()).thenReturn(Arrays.asList(new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777, "", 55, "", "", "abc")));
   }
 
   @Test
@@ -226,5 +227,24 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
   }
 
+  @Test
+  public void postIfIncorrectMetricOrGoalId() {
+    controller.goalId = 12L;
+    controller.metricId = 21L;
+    controller.year = 2016;
+    controller.value = new BigDecimal(744);
+
+    when(session.getAttribute("username")).thenReturn("Some username");
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
+    when(criteria.createCriteria(anyString())).thenReturn(criteria);
+    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
+    when(criteria.list()).thenReturn(new ArrayList<Metric>());
+
+    assertRender(controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains("Tekkis viga."));
+  }
 
 }

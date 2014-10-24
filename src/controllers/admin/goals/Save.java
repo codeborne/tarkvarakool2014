@@ -12,6 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public abstract class Save extends UserAwareController {
   public String name;
+  public String comment;
   public Integer budget;
   public Set<String> errorsList = new HashSet<>();
   public String title;
@@ -36,6 +37,12 @@ public abstract class Save extends UserAwareController {
 
   private Result saveAndRedirect() {
     name = name.trim();
+    if (comment != null) {
+      comment = comment.trim();
+      if (comment.equals(""))
+        comment = null;
+    }
+
     save();
     hibernate.flush();
     return redirect(Home.class);
@@ -43,11 +50,16 @@ public abstract class Save extends UserAwareController {
 
   private void checkErrors() {
     checkName();
+    checkComment();
     checkBudget();
   }
   private void checkName() {
     if (errors.containsKey("name") || isBlank(name))
       errorsList.add("Sisestage eesmärk.");
+  }
+  private void checkComment() {
+    if (errors.containsKey("comment"))
+      errorsList.add("Sisestage kommentaar.");
   }
   private void checkBudget() {
     if (errors.containsKey("budget") || budget == null || budget <= 0)

@@ -20,6 +20,7 @@ public class Modify extends Save {
       return redirect(Add.class);
     } else {
       name = goal.getName();
+      comment = goal.getComment();
       budget = goal.getBudget();
     }
     return render("admin/goals/form");
@@ -30,6 +31,7 @@ public class Modify extends Save {
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     goal.setBudget(budget);
     goal.setName(name);
+    goal.setComment(comment);
     hibernate.update(goal);
   }
 }

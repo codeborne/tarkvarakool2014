@@ -3,7 +3,11 @@
     <h3>${title}</h3>
     <label>
         Eesmärk:
-        <textarea name="name" class="form-control" rows="5" maxlength="255"><#if name??>${name}</#if></textarea>
+        <textarea name="name" class="form-control" rows="5" maxlength="255">${name!""}</textarea>
+    </label><br>
+    <label>
+      Kommentaar:
+      <textarea name="comment" class="form-control" rows="5" maxlength="255">${comment!""}</textarea>
     </label><br>
     <label>Eelarve: <input type="number" class="form-control" min="1" max="2147483647" name="budget" <#if budget?? && (budget>0)>value=${budget?c}</#if>></label><br>
   <button id="goalAddOrModifyButton" class="btn btn-default btn-sm">${buttonTitle}</button>

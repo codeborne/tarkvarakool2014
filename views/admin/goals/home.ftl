@@ -11,6 +11,7 @@
   <table class="table table-hover">
     <tr>
       <th>Eesmärk</th>
+      <th>Kommentaar</th>
       <th>Eelarve</th>
       <th>Mõõdikud</th>
       <th>Muuda</th>
@@ -19,6 +20,7 @@
     <#list goals as goal>
       <tr class="goal">
         <td class="nameInTable">${goal.name}</td>
+        <td class="commentInTable">${goal.comment!""}</td>
         <td class="budgetInTable">${goal.budget?c}</td>
 
         <td><form action="/admin/metrics/metrics">
