@@ -88,6 +88,19 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
   }
 
   @Test
+  public void postIfInputFieldCommentHasErrors() {
+    controller.budget = 1;
+    controller.name = "name";
+    controller.errors.put("comment", new RuntimeException());
+
+    assertRender(controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains("Sisestage kommentaar."));
+    verify(controller, never()).save();
+  }
+
+  @Test
   public void postIfInputFieldBudgetHasErrors() {
     controller.name = "name";
     controller.errors.put("budget", new RuntimeException());
@@ -100,14 +113,16 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
   }
 
   @Test
-  public void postIfInputFieldsNameAndBudgetHaveErrors() {
+  public void postIfInputFieldsNameCommentAndBudgetHaveErrors() {
     controller.errors.put("budget", new RuntimeException());
+    controller.errors.put("comment", new RuntimeException());
     controller.errors.put("name", new RuntimeException());
 
     assertRender(controller.post());
 
-    assertEquals(2, controller.errorsList.size());
+    assertEquals(3, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains("Sisestage kommentaar."));
     assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
     verify(controller, never()).save();
   }
@@ -137,12 +152,14 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
   @Test
   public void postCallsSaveWithTrimmedName() {
-    controller.name = "\n \r\n ab cd \n \r\n ";;
+    controller.name = "\n \r\n ab cd \n \r\n ";
+    controller.comment = "\ntest\n  ";
     controller.budget = 123;
 
     assertRedirect(Home.class, controller.post());
 
     assertEquals("ab cd",controller.name);
+    assertEquals("test",controller.comment);
     verify(controller).save();
   }
 
@@ -151,4 +168,5 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     protected void save() {
     }
   }
+
 }

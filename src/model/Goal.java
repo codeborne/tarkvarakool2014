@@ -15,6 +15,8 @@ public class Goal {
   @Column(nullable = false, unique = true)
   private String name;
 
+  private String comment;
+
   @Column(nullable = false)
   private Integer budget;
 
@@ -38,6 +40,12 @@ public class Goal {
     this.budget = budget;
   }
 
+  public Goal(String name, String comment, Integer budget) {
+    this.comment = comment;
+    this.name = name;
+    this.budget = budget;
+  }
+
   public Set<Metric> getMetrics() {
     return metrics;
   }
@@ -57,6 +65,10 @@ public class Goal {
     return yearlyBudgets;
   }
 
+  public String getComment() {
+    return comment;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -69,4 +81,7 @@ public class Goal {
     this.yearlyBudgets = yearlyBudgets;
   }
 
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
 }
