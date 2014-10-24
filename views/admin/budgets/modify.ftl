@@ -1,3 +1,3 @@
 <#list errorsList as error>
-${error}\n
+${error}
 </#list>

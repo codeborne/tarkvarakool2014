@@ -8,7 +8,7 @@
 
 <form method="post" class="form-horizontal">
 
-  <input type="hidden" value="${goal.id}" name="goalId">
+  <input type="hidden" value="${goal.id?c}" name="goalId">
 
   <h3>${title}: ${goal.name}</h3>
 
@@ -61,7 +61,7 @@
   <button class="btn btn-default btn-sm submitButton" type="submit" class="btn btn-default btn-sm">
   ${buttonTitle}
   </button>
-  <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id}'; return false;">
+  <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id?c}'; return false;">
     Tagasi
   </button>
   <br><br>

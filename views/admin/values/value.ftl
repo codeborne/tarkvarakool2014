@@ -69,13 +69,13 @@
               <td>
                 <div class="measured">
                   <span class="value">${((metric.values.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
-                  <form style="display: none;" onsubmit="sendData(${goal.id}, ${metric.id}, ${year?c}, false, $(this)); return false;">
+                  <form style="display: none;" onsubmit="sendData(${goal.id?c}, ${metric.id?c}, ${year?c}, false, $(this)); return false;">
                     <input type="number" step="any" class="modify-value">
                   </form>
                 </div>
                 <div class="forecasted">
                   <span class="value">${((metric.values.get(year))?c)!""}</span><sup class="forecast-indicator">P</sup> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
-                  <form style="display: none;" onsubmit="sendData(${goal.id}, ${metric.id}, ${year?c}, true, $(this)); return false;">
+                  <form style="display: none;" onsubmit="sendData(${goal.id?c}, ${metric.id?c}, ${year?c}, true, $(this)); return false;">
                     <input type="number" step="any" class="modify-value">
                   </form>
                 </div>
@@ -87,7 +87,7 @@
         <td>Kulutatud raha eurodes</td>
         <#list minimumYear..maximumYear as year>
           <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
-            <form style="display: none;" onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;"><input type="number" step="any"></form></td>
+            <form style="display: none;" onsubmit="sendBudgetData(${goal.id?c}, ${year?c}, $(this)); return false;"><input type="number" step="any"></form></td>
         </#list>
       </tr>
     </table>
