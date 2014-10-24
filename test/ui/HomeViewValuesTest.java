@@ -31,7 +31,7 @@ public class HomeViewValuesTest extends UITest {
   }
 
   @Test
-  public void goalsAndMetricsAtCorrectPlace() throws Exception {
+  public void userShouldSeeGoalsAndMetrics() throws Exception {
     Goal goal1 = new Goal("Eesmark1", 145);
     Goal goal2 = new Goal("Eesmark2", 120);
 
@@ -39,7 +39,7 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(goal2);
 
     hibernate.save(new Metric(goal1, "Mood1", "", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal1, "Mood2", "", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 0, "", 0, "", "", ""));
     hibernate.save(new Metric(goal2, "Mood3", "", "", "", 0, "", 0, "", "", ""));
     hibernate.save(new Metric(goal2, "Mood4", "", "", "", 0, "", 0, "", "", ""));
 
@@ -53,21 +53,20 @@ public class HomeViewValuesTest extends UITest {
     goalBlock1.$("h4.name").shouldHave(text("Eesmark1"));
 
     ElementsCollection goal1Metrics = goalBlock1.$$(".metric");
-    goal1Metrics.get(0).$(".name").shouldHave(text("Mood1"));
-    goal1Metrics.get(1).$(".name").shouldHave(text("Mood2"));
+
+    assertEquals("Mood1", goal1Metrics.get(0).$(".name").getText());
+    assertEquals("Mood2 ($)", goal1Metrics.get(1).$(".name").getText());
 
     SelenideElement goalBlock2 = goals.get(1);
     goalBlock2.$("h4.name").shouldHave(text("Eesmark2"));
 
     ElementsCollection goal2Metrics = goalBlock2.$$(".metric");
-    goal2Metrics.get(0).$(".name").shouldHave(text("Mood3"));
-    goal2Metrics.get(1).$(".name").shouldHave(text("Mood4"));
-
-
+    assertEquals("Mood3", goal2Metrics.get(0).$(".name").getText());
+    assertEquals("Mood4", goal2Metrics.get(1).$(".name").getText());
   }
 
   @Test
-  public void valueAtCorrectPlace() throws Exception {
+  public void userShouldSeeMetricValuesPerYear() throws Exception {
     Goal goal = new Goal("Eesmark", 10);
     hibernate.save(goal);
     Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "");
