@@ -71,10 +71,8 @@ public class Modify extends UserAwareController {
   }
 
   public void checkValue() {
-    if (errors.containsKey("value") || value==null)
+    if (errors.containsKey("value"))
       errorsList.add("Sisestage korrektne väärtus.");
   }
-
-
 
 }
