@@ -5,5 +5,8 @@
 
 .logout-button {
   margin-left: 20px;
+}
 
+.forecasted>span.value, .forecast-indicator {
+  color: #D44E2B;
 }

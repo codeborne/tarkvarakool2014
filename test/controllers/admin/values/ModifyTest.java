@@ -30,16 +30,39 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void ModifyValueSuccess() throws Exception {
+  public void ModifyMeasuredValueSuccess() throws Exception {
     controller.goalId = 1L;
     controller.metricId = 1L;
     controller.year = 2015;
     controller.value = new BigDecimal(777);
+    controller.isForecast = false;
 
     assertRender(controller.post());
 
     Metric savedMetric = (Metric) getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
+
+    assertEquals(controller.value, savedMetric.getValues().get(controller.year));
+    assertTrue(savedMetric.getForecasts().isEmpty());
+
+    verify(hibernate).update(savedMetric);
+  }
+
+  @Test
+  public void ModifyForecastValueSuccess() throws Exception {
+    controller.goalId = 1L;
+    controller.metricId = 1L;
+    controller.year = 2015;
+    controller.value = new BigDecimal(777);
+    controller.isForecast = true;
+
+    assertRender(controller.post());
+
+    Metric savedMetric = (Metric) getUpdatedEntity();
+    Assert.assertTrue(controller.errorsList.isEmpty());
+
+    assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));
+    assertTrue(savedMetric.getValues().isEmpty());
 
     verify(hibernate).update(savedMetric);
   }
@@ -176,5 +199,6 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
   }
+
 
 }

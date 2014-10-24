@@ -16,6 +16,7 @@ public class Modify extends UserAwareController {
   public Long metricId;
   public Integer year;
   public BigDecimal value;
+  public Boolean isForecast;
 
   public Set<String> errorsList = new HashSet<>();
 
@@ -30,7 +31,12 @@ public class Modify extends UserAwareController {
                              .list();
       if (metricList.size()==1) {
         Metric metric = (Metric) metricList.get(0);
-        metric.getValues().put(year, value);
+
+        if(isForecast)
+          metric.getForecasts().put(year, value);
+        else
+          metric.getValues().put(year, value);
+
         hibernate.update(metric);
         hibernate.flush();
       } else {
