@@ -1,7 +1,7 @@
 <@html>
 
 <form method="get">
-  <input type="hidden" value="${goal.id}" name="goalID">
+  <input type="hidden" value="${goal.id?c}" name="goalID">
 </form>
 <h3>${goal.name}</h3>
 <table class="table table-hover">
@@ -32,8 +32,8 @@
       <td class="institutionToReport">${metric.institutionToReport}</td>
       <td>
         <form action="modify">
-          <input type="hidden" value="${goal.id}" name="goalId">
-          <input type="hidden" name="metricId" value="${metric.id}"/>
+          <input type="hidden" value="${goal.id?c}" name="goalId">
+          <input type="hidden" name="metricId" value="${metric.id?c}"/>
           <button class="modifyButton" type="submit" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
@@ -41,8 +41,8 @@
       </td>
       <td>
         <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
-          <input type="hidden" value="${goal.id}" name="goalId">
-          <input type="hidden" name="id" value="${metric.id}"/>
+          <input type="hidden" value="${goal.id?c}" name="goalId">
+          <input type="hidden" name="id" value="${metric.id?c}"/>
           <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-trash"></span></button>
         </form>
@@ -55,9 +55,9 @@
   Pealehele
 </button>
 <form action="add">
-  <input type="hidden" value="${goal.id}" name="goalId">
+  <input type="hidden" value="${goal.id?c}" name="goalId">
 <button type="submit" id="addMetricButton" class="btn btn-default btn-sm">
-        <#--onclick="location='/admin/metrics/add?goalId=${goal.id}'">-->
+        <#--onclick="location='/admin/metrics/add?goalId=${goal.id?c}'">-->
   Lisa mõõdik
 </button>
 </form>
