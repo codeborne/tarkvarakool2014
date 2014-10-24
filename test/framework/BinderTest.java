@@ -67,6 +67,17 @@ public class BinderTest {
   }
 
   @Test
+  public void bindBigDecimalEmptyValue() throws Exception {
+    class Foo extends Controller {
+      public BigDecimal amount;
+    }
+    Foo controller = new Foo();
+    binder.bindRequestParameters(controller, singletonMap("amount", new String[]{""}));
+    assertEquals(null, controller.amount);
+    assertEquals(0, controller.errors.size());
+  }
+
+  @Test
   public void bindDate() throws Exception {
     class Foo extends Controller {
       public Date date;
