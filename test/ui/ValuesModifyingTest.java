@@ -9,8 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class ValuesModifyingTest extends UITest {
 
@@ -83,7 +85,7 @@ public class ValuesModifyingTest extends UITest {
   }
 
   @Test
-  public void modifyigExistingForecastValue() throws Exception {
+  public void modifyingExistingForecastValue() throws Exception {
     open("/admin/values/value");
 
     $$(".glyphicon").get(1).click();
@@ -133,5 +135,18 @@ public class ValuesModifyingTest extends UITest {
     input.setValue("").pressEnter();
     input.shouldNotBe(visible); // wait for response
     $$(".value").get(3).shouldHave(text(""));
+  }
+
+  @Test
+  public void clickingOnPencilClosesPreviousInputFieldAndSaves() throws Exception {
+    open("/admin/values/value");
+    $$(".goal").get(0).$$(".metric").get(0).$$(".glyphicon").get(3).click();
+    SelenideElement input = $$(".goal").get(0).$$(".metric").get(0).$$(".modify-value").get(3);
+    input.setValue("432");
+    $$(".goal").get(0).$$(".metric").get(1).$$(".glyphicon").get(2).click();
+
+    input.shouldNotBe(visible);
+    $$(".goal").get(0).$$(".metric").get(0).$$(".value").get(3).shouldHave(text("432"));
+    $$(".goal").get(0).$$(".metric").get(1).$$(".modify-value").get(2).shouldBe(visible);
   }
 }
