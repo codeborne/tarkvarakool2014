@@ -18,6 +18,11 @@
   </label>
   <br>
   <label>
+    Ühik:
+    <textarea name="unit" class="form-control" rows="1"><#if unit??>${unit}</#if></textarea>
+  </label>
+  <br>
+  <label>
     Avalik kirjeldus:
     <textarea name="publicDescription" class="form-control" rows="5"><#if publicDescription??>${publicDescription}</#if></textarea><br>
   </label>

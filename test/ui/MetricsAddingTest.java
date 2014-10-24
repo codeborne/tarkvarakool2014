@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static org.junit.Assert.assertEquals;
 
 public class MetricsAddingTest extends UITest {
 
@@ -54,10 +55,10 @@ public class MetricsAddingTest extends UITest {
     $$(".metricsButton").get(0).click();
     $("#addMetricButton").click();
 
-
     $(By.name("name")).setValue("Koer");
     $(".submitButton").click();
-    $$("tr.metric").get(0).$(".name").shouldHave(text("Koer"));
+
+    assertEquals("Koer", $$("tr.metric").get(0).$(".name").getText());
   }
 
   @Test
@@ -70,8 +71,7 @@ public class MetricsAddingTest extends UITest {
     $("#goBackButton").click();
     SelenideElement row = $$("tr.goal").get(0);
 
-    row.$(".nameInTable").shouldHave(text("Teere"));
-
+    row.$(".nameInTable").getText();
   }
 
   @Test
@@ -83,6 +83,7 @@ public class MetricsAddingTest extends UITest {
     $("#addMetricButton").click();
 
     $(By.name("name")).setValue("Koer");
+    $(By.name("unit")).setValue("%");
     $(By.name("publicDescription")).setValue("trallalaa");
     $(By.name("privateDescription")).setValue("trullalaa");
     $(By.name("startLevel")).setValue("435");
@@ -98,7 +99,7 @@ public class MetricsAddingTest extends UITest {
 
     SelenideElement row = $$("tr.metric").get(0);
 
-    row.$(".name").shouldHave(text("Koer"));
+    row.$(".name").shouldHave(text("Koer (%)"));
     row.$(".publicDescription").shouldHave(text("trallalaa"));
     row.$(".privateDescription").shouldHave(text("trullalaa"));
     row.$(".startLevel").shouldHave(text("435"));
@@ -110,7 +111,7 @@ public class MetricsAddingTest extends UITest {
   }
 
   @Test
-  public void ifGoalNameIsAddedToTheMetricsTable() throws Exception {
+  public void goalNameIsShownInTheMetricsTable() throws Exception {
     hibernate.save(new Goal("Tere", 124));
     open("/admin/goals/home");
 
