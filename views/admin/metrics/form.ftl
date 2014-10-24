@@ -49,12 +49,12 @@
   <br>
   <label>
     Infoallikas:
-    <input type="text" name="infoSource" class="form-control" rows="5"<#if infoSource??>${infoSource}</#if>>
+    <input type="text" name="infoSource" class="form-control" rows="5" value="<#if infoSource??>${infoSource}</#if>">
   </label>
   <br>
   <label>
     Asutus, kuhu raporteerida:
-    <input type="text" name="institutionToReport" class="form-control" rows="5"<#if institutionToReport??>${institutionToReport}</#if>><br>
+    <input type="text" name="institutionToReport" class="form-control" rows="5" value="<#if institutionToReport??>${institutionToReport}</#if>"><br>
   </label>
   <br>
 
