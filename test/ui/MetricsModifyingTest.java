@@ -30,7 +30,7 @@ public class MetricsModifyingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal, "Some metric", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr"));
     hibernate.save(new Metric(goal, "Some metric1", "", "", 0, "", 0, "", "", ""));
 
     open("/admin/goals/home");
@@ -49,13 +49,23 @@ public class MetricsModifyingTest extends UITest {
   @Test
   public void adminClicksOnModifyButton() {
 
-    $(By.name("name")).shouldHave(value("Some metric"));
-    $(By.name("publicDescription")).shouldHave(value(""));
+    $(By.name("name")).shouldHave(text("Some metric"));
+    $(By.name("publicDescription")).shouldHave(text(""));
 
   }
 
   @Test
   public void adminModifiesMetric(){
+
+    $(By.name("name")).shouldHave(text("Some metric"));
+    $(By.name("publicDescription")).shouldHave(text("abc"));
+    $(By.name("privateDescription")).shouldHave(text("def"));
+    $(By.name("startLevel")).shouldHave(value("10"));
+    $(By.name("commentOnStartLevel")).shouldHave(text("ghi"));
+    $(By.name("targetLevel")).shouldHave(value("10"));
+    $(By.name("commentOnTargetLevel")).shouldHave(text("jkl"));
+    $(By.name("infoSource")).shouldHave(value("mno"));
+    $(By.name("institutionToReport")).shouldHave(value("pqr"));
 
     $(By.name("name")).setValue("Metric");
 

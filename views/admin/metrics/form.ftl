@@ -8,7 +8,7 @@
 
 <form method="post" class="form-horizontal">
 
-  <input type="hidden" value="${goal.id}" name="goalId">
+  <input type="hidden" value="${goal.id?c}" name="goalId">
 
   <h3>${title}: ${goal.name}</h3>
 
@@ -49,19 +49,19 @@
   <br>
   <label>
     Infoallikas:
-    <input type="text" name="infoSource" class="form-control" rows="5"<#if infoSource??>${infoSource}</#if>>
+    <input type="text" name="infoSource" class="form-control" rows="5" value="<#if infoSource??>${infoSource}</#if>">
   </label>
   <br>
   <label>
     Asutus, kuhu raporteerida:
-    <input type="text" name="institutionToReport" class="form-control" rows="5"<#if institutionToReport??>${institutionToReport}</#if>><br>
+    <input type="text" name="institutionToReport" class="form-control" rows="5" value="<#if institutionToReport??>${institutionToReport}</#if>"><br>
   </label>
   <br>
 
   <button class="btn btn-default btn-sm submitButton" type="submit" class="btn btn-default btn-sm">
   ${buttonTitle}
   </button>
-  <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id}'; return false;">
+  <button class="btn btn-default btn-sm" onclick="location='/admin/metrics/metrics?goalId=${goal.id?c}'; return false;">
     Tagasi
   </button>
   <br><br>
