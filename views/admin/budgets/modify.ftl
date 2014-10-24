@@ -1,3 +1,1 @@
-<#list errorsList as error>
-${error}
-</#list>
+${jsonResponse}

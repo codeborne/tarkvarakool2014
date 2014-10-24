@@ -1,5 +1,6 @@
 package controllers.admin.budgets;
 
+import com.google.gson.Gson;
 import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
@@ -15,6 +16,7 @@ public class Modify extends UserAwareController {
   public Long goalId;
   public Integer year;
   public Long yearlyBudget;
+  public String jsonResponse;
 
   public Set<String> errorsList = new HashSet<>();
 
@@ -35,6 +37,7 @@ public class Modify extends UserAwareController {
 
     }
 
+    jsonResponse = new Gson().toJson(errorsList);
     return render();
   }
 
