@@ -10,11 +10,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.uncapitalize;
 
 public abstract class Save extends UserAwareController {
 
   public Long goalId;
   public String name;
+  public String unit;
   public String publicDescription;
   public String privateDescription;
   public Integer startLevel = 0;
@@ -30,7 +32,8 @@ public abstract class Save extends UserAwareController {
   public String buttonTitle;
 
 
-  @Override @Role("admin")
+  @Override
+  @Role("admin")
   public Result post() {
     goal = (Goal) hibernate.get(Goal.class, goalId);
     checkErrors();
@@ -39,7 +42,7 @@ public abstract class Save extends UserAwareController {
         trimAllInput();
         save();
         return redirect(Metrics.class).withParam("goalId", goalId);
-      }catch (ConstraintViolationException e) {
+      } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
         errorsList.add("See mõõdik on juba sisestatud.");
       }
@@ -49,20 +52,21 @@ public abstract class Save extends UserAwareController {
   }
 
 
-
   private void trimAllInput() {
     name = name.trim();
-    if(publicDescription != null)
+    if (unit != null)
+      unit = unit.trim();
+    if (publicDescription != null)
       publicDescription = publicDescription.trim();
-    if(privateDescription != null)
+    if (privateDescription != null)
       privateDescription = privateDescription.trim();
-    if(commentOnStartLevel != null)
+    if (commentOnStartLevel != null)
       commentOnStartLevel = commentOnStartLevel.trim();
-    if(commentOnTargetLevel != null)
+    if (commentOnTargetLevel != null)
       commentOnTargetLevel = commentOnTargetLevel.trim();
-    if(infoSource != null)
+    if (infoSource != null)
       infoSource = infoSource.trim();
-    if(institutionToReport != null)
+    if (institutionToReport != null)
       institutionToReport = institutionToReport.trim();
   }
 

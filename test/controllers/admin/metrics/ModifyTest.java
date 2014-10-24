@@ -13,7 +13,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   @Test
   public void getWhenObjectFound() throws Exception{
     controller.metricId = 2L;
-    when(hibernate.get(Metric.class, 2L)).thenReturn(new Metric(new Goal("",10), "name", "a", "b", 2, "c", 4, "d", "e", "f"));
+    when(hibernate.get(Metric.class, 2L)).thenReturn(new Metric(new Goal("",10), "name", "", "a", "b", 2, "c", 4, "d", "e", "f"));
 
     assertRender(controller.get());
     assertEquals("name",controller.name);
@@ -49,7 +49,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.infoSource = "e";
     controller.institutionToReport = "f";
 
-    Metric metricBeingChanged = new Metric(new Goal("",10),"TERE",null, null,0,null,0,null,null, null);
+    Metric metricBeingChanged = new Metric(new Goal("",10),"TERE", "", null, null,0,null,0,null,null, null);
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
 
     controller.save();

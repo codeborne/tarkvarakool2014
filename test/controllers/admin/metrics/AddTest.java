@@ -9,9 +9,6 @@ import static org.mockito.Mockito.verify;
 
 public class AddTest extends ControllerTest<Add> {
 
-
-
-
   @Test
   public void saveNameOnly() {
     controller.name = "metric";
@@ -22,6 +19,7 @@ public class AddTest extends ControllerTest<Add> {
     Metric savedMetric = (Metric) getSavedEntity();
 
     assertEquals("metric",savedMetric.getName());
+    assertEquals(null,savedMetric.getUnit());
     assertEquals(null,savedMetric.getPublicDescription());
     assertEquals(null,savedMetric.getPrivateDescription());
     assertEquals(0, (int) savedMetric.getStartLevel());
@@ -36,6 +34,7 @@ public class AddTest extends ControllerTest<Add> {
   @Test
   public void saveAllFields()  {
     controller.name = "metric";
+    controller.unit = "%";
     controller.publicDescription = "a";
     controller.privateDescription = "b";
     controller.startLevel = 5;
@@ -50,6 +49,7 @@ public class AddTest extends ControllerTest<Add> {
     Metric savedMetric = (Metric) getSavedEntity();
 
     assertEquals("metric",savedMetric.getName());
+    assertEquals("%",savedMetric.getUnit());
     assertEquals("a",savedMetric.getPublicDescription());
     assertEquals("b",savedMetric.getPrivateDescription());
     assertEquals(5,(int) savedMetric.getStartLevel());
@@ -60,5 +60,4 @@ public class AddTest extends ControllerTest<Add> {
     assertEquals("f",savedMetric.getInstitutionToReport());
     verify(hibernate).save(savedMetric);
   }
-
 }

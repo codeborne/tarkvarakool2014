@@ -168,6 +168,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
   @Test
   public void postCallsSaveWithTrimmedFields() {
     controller.name = "metric    ";
+    controller.unit = "  %";
     controller.publicDescription = "a b    ";
     controller.privateDescription = "\n b \n";
     controller.commentOnStartLevel = "    c";
@@ -179,6 +180,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     assertRedirect("/admin/metrics/metrics?goalId=5", controller.post());
 
     assertEquals("metric",controller.name);
+    assertEquals("%",controller.unit);
     assertEquals("a b",controller.publicDescription);
     assertEquals("b",controller.privateDescription);
     assertEquals("c",controller.commentOnStartLevel);
@@ -193,4 +195,6 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     protected void save() {
     }
   }
+
+
 }

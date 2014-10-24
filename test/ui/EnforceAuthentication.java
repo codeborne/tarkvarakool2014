@@ -18,9 +18,9 @@ public class EnforceAuthentication extends UITest {
 
     Goal goal = new Goal("Sisestatud eesmark", 100);
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "", "", 0, "", 0, "", "tt", ""));
-    hibernate.save(new Metric(goal, "Other metric", "", "", 2, "", 0, "", "", "dd"));
-    hibernate.save(new Metric(goal, "Third metric", "", "jj", 8, "", 0, "", "", "dd"));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "tt", ""));
+    hibernate.save(new Metric(goal, "Other metric", "", "", "", 2, "", 0, "", "", "dd"));
+    hibernate.save(new Metric(goal, "Third metric", "", "", "jj", 8, "", 0, "", "", "dd"));
   }
 
   @Test
