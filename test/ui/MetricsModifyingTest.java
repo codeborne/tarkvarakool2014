@@ -49,8 +49,8 @@ public class MetricsModifyingTest extends UITest {
   @Test
   public void adminClicksOnModifyButton() {
 
-    $(By.name("name")).shouldHave(value("Some metric"));
-    $(By.name("publicDescription")).shouldHave(value(""));
+    $(By.name("name")).shouldHave(text("Some metric"));
+    $(By.name("publicDescription")).shouldHave(text(""));
 
   }
 
