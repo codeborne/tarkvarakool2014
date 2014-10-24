@@ -12,8 +12,9 @@ public class Add extends Save {
     buttonTitle = "Lisa";
   }
 
-  @Override @Role("admin")
-  public Result get()  {
+  @Override
+  @Role("admin")
+  public Result get() {
 
     goal = (Goal) hibernate.get(Goal.class, goalId);
     return render("admin/metrics/form");
@@ -22,7 +23,7 @@ public class Add extends Save {
 
   @Override
   protected void save() {
-    hibernate.save(new Metric(goal, name, publicDescription, privateDescription, startLevel, commentOnStartLevel,
+    hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevel, commentOnStartLevel,
       targetLevel, commentOnTargetLevel, infoSource, institutionToReport));
     hibernate.flush();
   }

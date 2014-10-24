@@ -19,7 +19,7 @@
         </tr>
         <#list goal.metrics as metric>
           <tr class="metric">
-            <td class="name">${metric.name}</td>
+            <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
             <#list minimumYear..maximumYear as year>
               <td><span class="value">${((metric.values.get(year))?c)!""}</span></td>
             </#list>

@@ -35,18 +35,20 @@ public class Metric {
 
   @ElementCollection
   @JoinTable(name = "MetricForecast", joinColumns = @JoinColumn(name = "metric_id"))
-  @MapKeyColumn(name="year")
-  @Column(name="forecast")
+  @MapKeyColumn(name = "year")
+  @Column(name = "forecast")
   private Map<Integer, BigDecimal> forecasts = new HashMap<>();
+  private String unit;
 
-  private Metric(){
+  private Metric() {
   }
 
-  public Metric(Goal goal, String name, String publicDescription, String privateDescription, Integer startLevel,
+  public Metric(Goal goal, String name, String unit, String publicDescription, String privateDescription, Integer startLevel,
                 String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
                 String infoSource, String institutionToReport) {
     this.goal = goal;
     this.name = name;
+    this.unit = unit;
     this.publicDescription = publicDescription;
     this.privateDescription = privateDescription;
     this.startLevel = startLevel;
@@ -159,5 +161,13 @@ public class Metric {
 
   public void setForecasts(Map<Integer, BigDecimal> forecasts) {
     this.forecasts = forecasts;
+  }
+
+  public String getUnit() {
+    return unit;
+  }
+
+  public void setUnit(String unit) {
+    this.unit = unit;
   }
 }

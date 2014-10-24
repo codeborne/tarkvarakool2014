@@ -20,18 +20,18 @@ public class Test extends UserAwareController {
     Goal goal1 = new Goal("Sisestatud eesmark", 100);
     hibernate.save(goal1);
     hibernate.flush();
-    hibernate.save(new Metric(goal1, "Some metric", "", "", 0, "", 33, "", "", "aa"));
+    hibernate.save(new Metric(goal1, "Some metric", "", "", "", 0, "", 33, "", "", "aa"));
     hibernate.flush();
-    hibernate.save(new Metric(goal1, "Some other metric", "", "abc", 777, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Some other metric", "", "", "abc", 777, "", 0, "", "", ""));
     hibernate.flush();
 
     Goal goal2 = new Goal("Second goal", 100);
     hibernate.save(goal2);
     hibernate.flush();
-    hibernate.save(new Metric(goal2, "A metric", "", "", 8, "", 33, "", "cnf tgh", "aa"));
+    hibernate.save(new Metric(goal2, "A metric", "", "", "", 8, "", 33, "", "cnf tgh", "aa"));
     hibernate.flush();
 
-    Metric metric = new Metric(goal2, "ABC metric", "", "abc", 0, "", 0, "", "dfghdtgfy iutyuio", "");
+    Metric metric = new Metric(goal2, "ABC metric", "", "", "abc", 0, "", 0, "", "dfghdtgfy iutyuio", "");
     metric.setValues(new HashMap<Integer, BigDecimal>() {{
       put(2014, new BigDecimal(55555));
       put(2015, new BigDecimal(888888));
@@ -42,7 +42,7 @@ public class Test extends UserAwareController {
     hibernate.save(metric);
     hibernate.flush();
 
-    metric = new Metric(goal2, "DEF metric", "", "def", 0, "", 0, "", "dsfhgf iutyuio", "dsfhgjk");
+    metric = new Metric(goal2, "DEF metric", "", "", "def", 0, "", 0, "", "dsfhgf iutyuio", "dsfhgjk");
     metric.setValues(new HashMap<Integer, BigDecimal>() {{
       put(2015, new BigDecimal(555));
       put(2016, new BigDecimal(200));

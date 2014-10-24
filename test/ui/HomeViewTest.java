@@ -13,6 +13,7 @@ import static com.codeborne.selenide.Condition.text;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static org.junit.Assert.assertEquals;
 
 public class HomeViewTest extends UITest {
 
@@ -25,9 +26,9 @@ public class HomeViewTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal1, "Moodik2", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal2, "Moodik3", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", ""));
 
     open("/home");
 
@@ -37,14 +38,14 @@ public class HomeViewTest extends UITest {
     SelenideElement goalBlock1 = goals.get(0);
     goalBlock1.$(".name").shouldHave(text("Eesmark1"));
     goalBlock1.$(".budget").shouldHave(text("10"));
-    goalBlock1.$$(".metric").get(0).$(".name").shouldHave(text("Moodik1"));
-    goalBlock1.$$(".metric").get(1).$(".name").shouldHave(text("Moodik2"));
+    assertEquals("Moodik1", goalBlock1.$$(".metric").get(0).$(".name").getText());
+    assertEquals("Moodik2 (EUR)", goalBlock1.$$(".metric").get(1).$(".name").getText());
+
 
     SelenideElement goalBlock2 = goals.get(1);
     goalBlock2.$(".name").shouldHave(text("Eesmark2"));
     goalBlock2.$(".budget").shouldHave(text("12"));
-    goalBlock2.$$(".metric").get(0).$(".name").shouldHave(text("Moodik3"));
-
+    assertEquals("Moodik3", goalBlock2.$$(".metric").get(0).$(".name").getText());
   }
 }
 

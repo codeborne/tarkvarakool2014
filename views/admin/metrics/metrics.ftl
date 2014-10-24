@@ -21,7 +21,7 @@
 
   <#list goal.metrics as metric>
     <tr class="metric">
-      <td class="name">${metric.name}</td>
+      <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
       <td class="publicDescription">${metric.publicDescription}</td>
       <td class="privateDescription">${metric.privateDescription}</td>
       <td class="startLevel">${metric.startLevel?c}</td>

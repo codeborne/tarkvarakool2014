@@ -12,6 +12,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static org.junit.Assert.assertEquals;
 
 public class MetricsModifyingTest extends UITest {
 
@@ -28,17 +29,14 @@ public class MetricsModifyingTest extends UITest {
 
     $("#submit").click();
 
-
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr"));
-    hibernate.save(new Metric(goal, "Some metric1", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr"));
+    hibernate.save(new Metric(goal, "Some metric1", "", "", "", 0, "", 0, "", "", ""));
 
     open("/admin/goals/home");
 
     $$(".metricsButton").get(0).click();
     $$(".modifyButton").get(0).click();
-
-
   }
 
   @After
@@ -48,16 +46,14 @@ public class MetricsModifyingTest extends UITest {
 
   @Test
   public void adminClicksOnModifyButton() {
-
     $(By.name("name")).shouldHave(text("Some metric"));
     $(By.name("publicDescription")).shouldHave(text(""));
-
   }
 
   @Test
   public void adminModifiesMetric(){
-
     $(By.name("name")).shouldHave(text("Some metric"));
+    $(By.name("unit")).shouldHave(text("%"));
     $(By.name("publicDescription")).shouldHave(text("abc"));
     $(By.name("privateDescription")).shouldHave(text("def"));
     $(By.name("startLevel")).shouldHave(value("10"));
@@ -68,14 +64,12 @@ public class MetricsModifyingTest extends UITest {
     $(By.name("institutionToReport")).shouldHave(value("pqr"));
 
     $(By.name("name")).setValue("Metric");
+    $(By.name("unit")).setValue("EUR");
 
     $(".submitButton").click();
 
-    $$("tr.metric").get(0).$(".name").shouldHave(text("Metric"));
-
-
+    assertEquals("Metric (EUR)", $$("tr.metric").get(0).$(".name").getText());
   }
-
 }
 
 

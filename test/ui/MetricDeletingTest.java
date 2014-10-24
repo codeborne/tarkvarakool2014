@@ -1,5 +1,6 @@
 package ui;
 
+import com.codeborne.selenide.ElementsCollection;
 import model.Goal;
 import model.Metric;
 import model.User;
@@ -10,6 +11,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
+import static org.junit.Assert.assertEquals;
 
 public class MetricDeletingTest extends UITest {
 
@@ -28,7 +30,7 @@ public class MetricDeletingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", ""));
 
   }
 
@@ -49,9 +51,9 @@ public class MetricDeletingTest extends UITest {
 
   @Test
   public void testSuccessfullyDeleteMetricWhenThereAreSeveralMetrics() throws Exception {
-    hibernate.save(new Metric(goal, "zzz", "", "xdfghj", 70, "",40, "", "", ""));
-    hibernate.save(new Metric(goal, "another metric", "", "", 7, "",4, "", "", ""));
-    hibernate.save(new Metric(goal, "bbb", "", "xdfghj", 70, "",40, "", "", ""));
+    hibernate.save(new Metric(goal, "zzz", "USD", "", "xdfghj", 70, "",40, "", "", ""));
+    hibernate.save(new Metric(goal, "another metric", "", "", "", 7, "",4, "", "", ""));
+    hibernate.save(new Metric(goal, "bbb", "", "", "xdfghj", 70, "",40, "", "", ""));
     open("/admin/goals/home");
 
     $$(".metricsButton").get(0).click();
@@ -59,11 +61,12 @@ public class MetricDeletingTest extends UITest {
     $$(".deleteButton").get(1).click();
 
     confirm("Kas oled kustutamises kindel?");
-    $$("tr.metric").shouldHaveSize(3);
+    ElementsCollection metrics = $$("tr.metric");
+    metrics.shouldHaveSize(3);
 
-    $$("tr.metric").get(0).$(".name").shouldHave(text("another metric"));
-    $$("tr.metric").get(1).$(".name").shouldHave(text("Some metric"));
-    $$("tr.metric").get(2).$(".name").shouldHave(text("zzz"));
+    assertEquals("another metric", metrics.get(0).$(".name").getText());
+    assertEquals("Some metric", metrics.get(1).$(".name").getText());
+    assertEquals("zzz (USD)", metrics.get(2).$(".name").getText());
   }
 
 

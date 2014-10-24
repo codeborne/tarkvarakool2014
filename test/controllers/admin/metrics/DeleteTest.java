@@ -13,7 +13,7 @@ public class DeleteTest extends ControllerTest<Delete>{
   public void postIfDeleteSuccessful() throws Exception {
     controller.id = 5L;
     controller.goalId = 3L;
-    Metric metric = new Metric(new Goal("name", 5), "muki", "", "", 0, "", 0, "", "", "");
+    Metric metric = new Metric(new Goal("name", 5), "muki", "", "", "", 0, "", 0, "", "", "");
 
     when(hibernate.get(Metric.class, 5L)).thenReturn(metric);
 
@@ -39,7 +39,7 @@ public class DeleteTest extends ControllerTest<Delete>{
   public void postIfDeleteThrowsHibernateException() throws Exception {
 
     controller.id = 5L;
-    Metric metric = new Metric(new Goal("name", 5), "muki", "", "", 0, "", 0, "", "", "");
+    Metric metric = new Metric(new Goal("name", 5), "muki", "", "", "", 0, "", 0, "", "", "");
 
     when(hibernate.get(Metric.class, 5L)).thenReturn(metric);
     doThrow(mock(HibernateException.class)).when(hibernate).delete(metric);

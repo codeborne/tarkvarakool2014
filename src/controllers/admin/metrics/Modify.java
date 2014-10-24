@@ -23,6 +23,7 @@ public class Modify extends Save {
     }
     else{
       name = metric.getName();
+      unit = metric.getUnit();
       publicDescription = metric.getPublicDescription();
       privateDescription = metric.getPrivateDescription();
       startLevel = metric.getStartLevel();
@@ -39,6 +40,7 @@ public class Modify extends Save {
   protected void save(){
     Metric metric = (Metric)hibernate.get(Metric.class, metricId);
     metric.setName(name);
+    metric.setUnit(unit);
     metric.setPublicDescription(publicDescription);
     metric.setPrivateDescription(privateDescription);
     metric.setStartLevel(startLevel);
