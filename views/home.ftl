@@ -26,7 +26,7 @@
       <#list goal.metrics as metric>
         <div class="tableBody">
           <tr class="metric">
-            <td class="name">${metric.name}</td>
+            <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
             <td class="publicDescription">${metric.publicDescription}</td>
             <td class="startLevel">${metric.startLevel?c}</td>
             <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
