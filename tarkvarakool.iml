@@ -23,6 +23,7 @@
           <root url="file://$USER_HOME$/freemarker/source/src/main/java" />
           <root url="jar://$USER_HOME$/.ideaLibSources/commons-lang3-3.3.2-sources.jar!/" />
           <root url="file://$USER_HOME$/java-lib/hibernate-release-4.3.6.Final/project/hibernate-core/src/main/java" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/selenide-2.14-sources.jar!/" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />

@@ -33,6 +33,12 @@ public class Metric {
   @Column(name="value")
   private Map<Integer, BigDecimal> values = new HashMap<>();
 
+  @ElementCollection
+  @JoinTable(name = "MetricForecast", joinColumns = @JoinColumn(name = "metric_id"))
+  @MapKeyColumn(name="year")
+  @Column(name="forecast")
+  private Map<Integer, BigDecimal> forecasts = new HashMap<>();
+
   private Metric(){
   }
 
@@ -99,6 +105,10 @@ public class Metric {
     return values;
   }
 
+  public Map<Integer, BigDecimal> getForecasts() {
+    return forecasts;
+  }
+
   public void setId(Long id) {
     this.id = id;
   }
@@ -145,5 +155,9 @@ public class Metric {
 
   public void setValues(Map<Integer, BigDecimal> values) {
     this.values = values;
+  }
+
+  public void setForecasts(Map<Integer, BigDecimal> forecasts) {
+    this.forecasts = forecasts;
   }
 }

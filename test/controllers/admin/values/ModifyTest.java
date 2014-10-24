@@ -30,22 +30,83 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void ModifyValueSuccess() throws Exception {
+  public void modifyMeasuredValueSuccess() throws Exception {
     controller.goalId = 1L;
     controller.metricId = 1L;
     controller.year = 2015;
     controller.value = new BigDecimal(777);
+    controller.isForecast = false;
 
     assertRender(controller.post());
 
     Metric savedMetric = (Metric) getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
+    assertEquals(controller.value, savedMetric.getValues().get(controller.year));
+    assertTrue(savedMetric.getForecasts().isEmpty());
+
     verify(hibernate).update(savedMetric);
   }
 
   @Test
-  public void FailWhenMetricIdIsNull() throws Exception {
+  public void modifyForecastValueSuccess() throws Exception {
+    controller.goalId = 1L;
+    controller.metricId = 1L;
+    controller.year = 2015;
+    controller.value = new BigDecimal(777);
+    controller.isForecast = true;
+
+    assertRender(controller.post());
+
+    Metric savedMetric = (Metric) getUpdatedEntity();
+    Assert.assertTrue(controller.errorsList.isEmpty());
+
+    assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));
+    assertTrue(savedMetric.getValues().isEmpty());
+
+    verify(hibernate).update(savedMetric);
+  }
+
+  @Test
+  public void setMeasuredValueToNullSuccess() throws Exception {
+    controller.goalId = 1L;
+    controller.metricId = 1L;
+    controller.year = 2015;
+    controller.value = null;
+    controller.isForecast = false;
+
+    assertRender(controller.post());
+
+    Metric savedMetric = (Metric) getUpdatedEntity();
+    Assert.assertTrue(controller.errorsList.isEmpty());
+
+    assertEquals(controller.value, savedMetric.getValues().get(controller.year));
+    assertTrue(savedMetric.getForecasts().isEmpty());
+
+    verify(hibernate).update(savedMetric);
+  }
+
+  @Test
+  public void setForecastValueToNullSuccess() throws Exception {
+    controller.goalId = 1L;
+    controller.metricId = 1L;
+    controller.year = 2015;
+    controller.value = null;
+    controller.isForecast = true;
+
+    assertRender(controller.post());
+
+    Metric savedMetric = (Metric) getUpdatedEntity();
+    Assert.assertTrue(controller.errorsList.isEmpty());
+
+    assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));
+    assertTrue(savedMetric.getValues().isEmpty());
+
+    verify(hibernate).update(savedMetric);
+  }
+
+  @Test
+  public void failWhenMetricIdIsNull() throws Exception {
     controller.goalId = 2L;
     controller.year = 2014;
     controller.value = new BigDecimal(744);
@@ -73,7 +134,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void FailWhenGoalIdIsNull() throws Exception {
+  public void failWhenGoalIdIsNull() throws Exception {
     controller.metricId = 2L;
     controller.year = 2014;
     controller.value = new BigDecimal(744.55);
@@ -100,7 +161,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void FailWhenYearNull() throws Exception {
+  public void failWhenYearNull() throws Exception {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.value = new BigDecimal(744);
@@ -126,7 +187,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void FailWhenYearIsTooBig() throws Exception {
+  public void failWhenYearIsTooBig() throws Exception {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = UserAwareController.MAXIMUM_YEAR + 1;
@@ -139,7 +200,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
-  public void FailWhenYearIsTooSmall() throws Exception {
+  public void failWhenYearIsTooSmall() throws Exception {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = UserAwareController.MINIMUM_YEAR - 1;
@@ -149,18 +210,6 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Tekkis viga."));
-  }
-
-  @Test
-  public void FailWhenValueIsNull() throws Exception {
-    controller.goalId = 12L;
-    controller.metricId = 2L;
-    controller.year = 2014;
-
-    assertRender(controller.post());
-
-    assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
   }
 
   @Test
@@ -176,5 +225,6 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
   }
+
 
 }

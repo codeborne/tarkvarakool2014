@@ -63,6 +63,9 @@ public class Binder {
     if (Set.class == type)
       return new LinkedHashSet<>(asList(convertArrayType(values, getGenericType(field))));
 
+    if ("".equals(values[0]))
+      return null;
+
     if (Date.class == type)
       return parseDate(values[0], dateFormat, "yyyy-MM-dd");
 
