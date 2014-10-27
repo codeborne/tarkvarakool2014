@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -59,17 +60,19 @@ public class ValuesModifyingTest extends UITest {
 
     $$(".glyphicon").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
-    input.setValue("-4564.656").pressEnter();
+    input.setValue("4345356498989898989898999118.65689898989555").pressEnter();
     input.shouldNotBe(visible); // wait for response
 
-    $$(".value").get(0).shouldHave(text("-4564.656"));
+    $$(".value").get(0).shouldHave(text("4345356498989898989898999118.656899"));
 
     $$(".glyphicon").get(0).click();
     input = $$(".modify-value").get(0);
-    input.setValue("43453564.656").pressEnter();
+    input.shouldHave(value("4345356498989898989898999118.656899"));
+
+    input.setValue("-4345356498989898989898999118.65").pressEnter();
     input.shouldNotBe(visible); // wait for response
 
-    $$(".value").get(0).shouldHave(text("43453564.656"));
+    $$(".value").get(0).shouldHave(text("-4345356498989898989898999118.65"));
 
   }
 
