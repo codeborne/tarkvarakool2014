@@ -24,3 +24,15 @@
 .table th:first-child, .table td:first-child {
   text-align: left;
 }
+.title {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.table {
+  table-layout: fixed;
+}
+
+.table tr.metric td span.value {
+  word-wrap: break-word;
+}
