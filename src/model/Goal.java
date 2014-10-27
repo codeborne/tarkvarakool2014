@@ -20,6 +20,9 @@ public class Goal {
   @Column(nullable = false)
   private Integer budget;
 
+  @Column(nullable = false, unique = true)
+  private Integer sequenceNumber;
+
   @OrderBy("orderNumber")
   @OneToMany(mappedBy = "goal")
   private Set<Metric> metrics;
@@ -45,6 +48,13 @@ public class Goal {
     this.budget = budget;
   }
 
+  public Goal(String name, String comment, Integer budget, Integer sequenceNumber) {
+    this.comment = comment;
+    this.name = name;
+    this.budget = budget;
+    this.sequenceNumber = sequenceNumber;
+  }
+
   public Set<Metric> getMetrics() {
     return metrics;
   }
@@ -68,6 +78,10 @@ public class Goal {
     return comment;
   }
 
+  public Integer getSequenceNumber() {
+    return sequenceNumber;
+  }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -83,4 +97,9 @@ public class Goal {
   public void setComment(String comment) {
     this.comment = comment;
   }
+
+  public void setSequenceNumber(Integer sequenceNumber) {
+    this.sequenceNumber = sequenceNumber;
+  }
+
 }

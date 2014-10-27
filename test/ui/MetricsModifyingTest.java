@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class MetricsModifyingTest extends UITest {
 
-  Goal goal = new Goal("Sisestatud eesmark", 100);
+  Goal goal = new Goal("Sisestatud eesmark","", 100,1);
 
   @Before
   public void setUp() throws Exception {

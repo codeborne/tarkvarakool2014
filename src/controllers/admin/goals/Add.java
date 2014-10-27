@@ -6,6 +6,9 @@ import model.Goal;
 
 public class Add extends Save {
 
+  Integer sequenceNumber;
+
+
   public Add() {
     title = "Lisage uus eesmärk";
     buttonTitle = "Lisa";
@@ -19,6 +22,7 @@ public class Add extends Save {
 
   @Override
   protected void save() {
-    hibernate.save(new Goal(name, comment, budget));
+    sequenceNumber = hibernate.createCriteria(Goal.class).list().size()+1;
+    hibernate.save(new Goal(name, comment, budget, sequenceNumber));
   }
 }

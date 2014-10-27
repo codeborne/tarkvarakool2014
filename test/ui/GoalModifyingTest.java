@@ -26,7 +26,7 @@ public class GoalModifyingTest extends UITest {
 
     $("#submit").click();
 
-    hibernate.save(new Goal("Sisestatud eesmark", 100));
+    hibernate.save(new Goal("Sisestatud eesmark","", 100, 1));
 
   }
 

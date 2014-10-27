@@ -24,7 +24,7 @@ public class GoalDeletingTest extends UITest {
 
     $("#submit").click();
 
-    hibernate.save(new Goal("Sisestatud eesmark", 100));
+    hibernate.save(new Goal("Sisestatud eesmark", "", 100, 1));
 
   }
 
@@ -49,7 +49,7 @@ public class GoalDeletingTest extends UITest {
   @Test
   public void adminDeletesOneGoalFromMultipleGoals() throws Exception {
 
-    hibernate.save(new Goal("eesmark", 10));
+    hibernate.save(new Goal("eesmark", "", 10, 2));
     open("/admin/goals/home");
 
     $$(".deleteButton").get(0).click();

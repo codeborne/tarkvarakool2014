@@ -12,15 +12,13 @@ import org.openqa.selenium.By;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class YearlyBudgetsModifyingTest extends UITest {
 
-  Goal goal = new Goal("Sisestatud eesmark", 100);
-  Goal goal2 = new Goal("eesmark", 10);
+  Goal goal = new Goal("Sisestatud eesmark","", 100,1);
+  Goal goal2 = new Goal("eesmark","" ,10, 2);
 
   @Before
   public void setUp() throws Exception {
