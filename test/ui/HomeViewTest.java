@@ -5,13 +5,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.Goal;
 import model.Metric;
-
 import org.junit.Test;
 
-
 import static com.codeborne.selenide.Condition.text;
-
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
 
@@ -26,9 +22,9 @@ public class HomeViewTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "", "", 2.0));
+    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", "", 10.0));
+    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", "", 5.8));
 
     open("/home");
 

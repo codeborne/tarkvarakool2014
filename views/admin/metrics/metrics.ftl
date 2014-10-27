@@ -15,6 +15,7 @@
     <th>Sihttaseme kommentaar</th>
     <th>Infoallikas</th>
     <th>Asutus, kuhu raporteerida</th>
+    <th>Järjekorra number</th>
     <th>Muuda</th>
     <th>Kustuta</th>
   </tr>
@@ -30,6 +31,21 @@
       <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
       <td class="infoSource">${metric.infoSource}</td>
       <td class="institutionToReport">${metric.institutionToReport}</td>
+      <td class="orderNumber">
+        <form method="post" action="/admin/metrics/modify?goalId=${goal.id}&metricId=${metric.id}">
+          <input name="orderNumber" value="${metric.orderNumber}" maxlength="7" class="order-number">
+          <input type="hidden" name="name" value="${metric.name}">
+          <input type="hidden" name="publicDescription" value="${metric.publicDescription}">
+          <input type="hidden" name="privateDescription" value="${metric.privateDescription}">
+          <input type="hidden" name="startLevel" value="${metric.startLevel}">
+          <input type="hidden" name="commentOnStartLevel" value="${metric.commentOnStartLevel}">
+          <input type="hidden" name="targetLevel" value="${metric.targetLevel}">
+          <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
+          <input type="hidden" name="infoSource" value="${metric.infoSource}">
+          <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
+          <input type="hidden" name="unit" value="${metric.unit}">
+        </form>
+      </td>
       <td>
         <form action="modify">
           <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -57,7 +73,6 @@
 <form action="add">
   <input type="hidden" value="${goal.id?c}" name="goalId">
 <button type="submit" id="addMetricButton" class="btn btn-default btn-sm">
-        <#--onclick="location='/admin/metrics/add?goalId=${goal.id?c}'">-->
   Lisa mõõdik
 </button>
 </form>

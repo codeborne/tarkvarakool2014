@@ -20,8 +20,7 @@ public class Goal {
   @Column(nullable = false)
   private Integer budget;
 
-
-  @OrderBy("name")
+  @OrderBy("orderNumber")
   @OneToMany(mappedBy = "goal")
   private Set<Metric> metrics;
 

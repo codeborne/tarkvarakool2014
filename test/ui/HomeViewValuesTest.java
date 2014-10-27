@@ -38,10 +38,10 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Mood1", "", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal2, "Mood3", "", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal2, "Mood4", "", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Mood1", "", "", "", 0, "", 0, "", "", "", 1.0));
+    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 0, "", 0, "", "", "", 2.0));
+    hibernate.save(new Metric(goal2, "Mood3", "", "", "", 0, "", 0, "", "", "", 1.0));
+    hibernate.save(new Metric(goal2, "Mood4", "", "", "", 0, "", 0, "", "", "", 2.0));
 
     $("#MetricsValue").click();
 
@@ -69,7 +69,7 @@ public class HomeViewValuesTest extends UITest {
   public void userShouldSeeMetricValuesPerYear() throws Exception {
     Goal goal = new Goal("Eesmark", 10);
     hibernate.save(goal);
-    Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "");
+    Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "", 1.0);
     metric.getValues().put(2014, new BigDecimal(12));
     metric.getValues().put(2015, new BigDecimal(13));
     metric.getValues().put(2016, new BigDecimal(14));
