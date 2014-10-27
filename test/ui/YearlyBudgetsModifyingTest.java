@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -101,9 +102,9 @@ public class YearlyBudgetsModifyingTest extends UITest {
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(0);
     input.setValue("-1").pressEnter();
 
-    confirm("Sisestage korrektne väärtus.\n");
-    input.shouldNotBe(visible);
-    $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(0).shouldHave(text("-1"));
+    confirm("Sisestage korrektne väärtus.");
+    input.shouldBe(visible);
+    input.shouldHave(value("-1"));
     open("/admin/values/value");
     $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(0).shouldHave(text(""));
   }
@@ -120,10 +121,10 @@ public class YearlyBudgetsModifyingTest extends UITest {
     $$(".goal").get(0).$(".yearlyBudget").$$(".glyphicon").get(4).click();
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(4);
     input.setValue("-5").pressEnter();
-    confirm("Sisestage korrektne väärtus.\n");
-    input.shouldNotBe(visible);
+    confirm("Sisestage korrektne väärtus.");
+    input.shouldBe(visible);
 
-    $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(4).shouldHave(text("-5"));
+    input.shouldHave(value("-5"));
     open("/admin/values/value");
     $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(4).shouldHave(text("555555"));
   }

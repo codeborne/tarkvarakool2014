@@ -1,5 +1,6 @@
 package controllers.admin.values;
 
+import com.google.gson.Gson;
 import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
@@ -11,14 +12,27 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.math.RoundingMode.HALF_UP;
+
 public class Modify extends UserAwareController {
   public Long goalId;
   public Long metricId;
   public Integer year;
   public BigDecimal value;
   public Boolean isForecast;
+  public String jsonResponse;
 
   public Set<String> errorsList = new HashSet<>();
+
+  private class JsonResponse {
+    public Set<String> errorsList;
+    public BigDecimal value;
+
+    private JsonResponse(Set<String> errorsList, BigDecimal value) {
+      this.errorsList = errorsList;
+      this.value = value;
+    }
+  }
 
   @Override
   @Role("admin")
@@ -45,6 +59,7 @@ public class Modify extends UserAwareController {
 
     }
 
+    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, value));
     return render();
   }
 
@@ -71,8 +86,12 @@ public class Modify extends UserAwareController {
   }
 
   public void checkValue() {
-    if (errors.containsKey("value"))
+    if (errors.containsKey("value")) {
       errorsList.add("Sisestage korrektne väärtus.");
+    } else if (value != null) {
+      value = value.setScale(6, HALF_UP);
+      if(value.toString().length()>38)
+        errorsList.add("Väärtus on liiga suur või väike.");
+    }
   }
-
 }

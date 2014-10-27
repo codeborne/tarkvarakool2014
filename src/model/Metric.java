@@ -29,14 +29,14 @@ public class Metric {
 
   @ElementCollection
   @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
-  @MapKeyColumn(name = "year")
-  @Column(name = "value")
+  @MapKeyColumn(name="year")
+  @Column(name="value", precision = 38, scale = 6)
   private Map<Integer, BigDecimal> values = new HashMap<>();
 
   @ElementCollection
   @JoinTable(name = "MetricForecast", joinColumns = @JoinColumn(name = "metric_id"))
   @MapKeyColumn(name = "year")
-  @Column(name = "forecast")
+  @Column(name = "forecast", precision = 38, scale = 6)
   private Map<Integer, BigDecimal> forecasts = new HashMap<>();
   private String unit;
 

@@ -4,14 +4,16 @@
     function sendData(goalId, metricId, year, isForecast, thisObject) {
       inputValue = thisObject.children('input').val();
       $.post("/admin/values/modify", {goalId: goalId, metricId: metricId, year: year, value: inputValue, isForecast: isForecast},
-        function(data) {
-          if(data!="")
-            alert(data);
-
-          thisObject.hide();
-          thisObject.parent().children('span.glyphicon').show();
-          thisObject.parent().children('span.value').text(inputValue);
-          thisObject.parent().children('span.value').show();
+        function(text) {
+          var data = JSON.parse(text.replace(/&quot;/g,'"'));
+          if(data.errorsList.length>0) {
+            alert(data.errorsList.join("\n"));
+          } else {
+            thisObject.parent().children('span.value').text(data.value);
+            thisObject.hide();
+            thisObject.parent().children('span.glyphicon').show();
+            thisObject.parent().children('span.value').show();
+          }
         }
       );
     }
@@ -19,14 +21,16 @@
     function sendBudgetData(goalId, year, thisObject) {
       inputValue = thisObject.children('input').val();
       $.post("/admin/budgets/modify", {goalId: goalId, year: year, yearlyBudget: inputValue},
-        function(data) {
-          if(data!="")
-            alert(data);
-
-          thisObject.hide();
-          thisObject.parent().children('span.glyphicon').show();
-          thisObject.parent().children('span.value').text(inputValue);
-          thisObject.parent().children('span.value').show();
+        function(text) {
+          var errorsList = JSON.parse(text.replace(/&quot;/g,'"'));
+          if(errorsList.length>0) {
+            alert(errorsList.join("\n"));
+          } else {
+            thisObject.parent().children('span.value').text(inputValue);
+            thisObject.hide();
+            thisObject.parent().children('span.glyphicon').show();
+            thisObject.parent().children('span.value').show();
+          }
         }
       );
     }
