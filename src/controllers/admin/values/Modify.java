@@ -26,9 +26,9 @@ public class Modify extends UserAwareController {
 
   private class JsonResponse {
     public Set<String> errorsList;
-    public BigDecimal value;
+    public String value;
 
-    private JsonResponse(Set<String> errorsList, BigDecimal value) {
+    private JsonResponse(Set<String> errorsList, String value) {
       this.errorsList = errorsList;
       this.value = value;
     }
@@ -59,7 +59,7 @@ public class Modify extends UserAwareController {
 
     }
 
-    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, value));
+    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, value == null ? "" : value.toString()));
     return render();
   }
 
