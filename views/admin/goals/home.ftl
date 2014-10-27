@@ -21,11 +21,31 @@
   </tr>
   <#if goals?has_content>
     <#list goals as goal>
-
       <tr class="goal">
         <td class="nameInTable">${goal.name}</td>
+        <td class="sequenceNumberInTable">
+          <form method="post">
+            <input type="hidden" value="${goal.id?c}" name="id">
+            <select onchange="this.form.submit()" name="sequenceNumber">
+              <option>${goal.sequenceNumber}</option>
+              <#list 1..goals.size() as number>
+                <option value="${number}">${number}</option>
+              </#list>
+            </select>
+          </form>
+        </td>
         <td class="commentInTable">${goal.comment!""}</td>
         <td class="budgetInTable">${goal.budget?c}</td>
+
+        <td>
+          <form action="/admin/metrics/metrics">
+            <input type="hidden" value="${goal.id?c}" name="goalId">
+            <button type="submit" class="metricsButton btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-list-alt"></span>
+            </button>
+          </form>
+        </td>
+
         <td>
           <form action="/admin/metrics/metrics">
             <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -54,6 +74,10 @@
         </td>
       </tr>
     </#list>
+  </table>
+
+  <#else>
+  <h3 id="noGoals"> Andmebaasis eesmärke ei ole.</h3>
   </#if>
   <form method="post" action="add" id="addGoalForm">
     <tr>

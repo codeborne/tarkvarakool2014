@@ -23,8 +23,7 @@ public class Goal {
   @Column(nullable = false, unique = true)
   private Integer sequenceNumber;
 
-
-  @OrderBy("name")
+  @OrderBy("orderNumber")
   @OneToMany(mappedBy = "goal")
   private Set<Metric> metrics;
 
@@ -102,4 +101,5 @@ public class Goal {
   public void setSequenceNumber(Integer sequenceNumber) {
     this.sequenceNumber = sequenceNumber;
   }
+
 }

@@ -18,10 +18,9 @@ public class Modify extends Save {
     goal = (Goal)hibernate.get(Goal.class, goalId);
     Metric metric = (Metric)hibernate.get(Metric.class, metricId);
 
-    if(metric == null){
+    if(metric == null) {
       return redirect(Add.class).withParam("goalId", goalId);
-    }
-    else{
+    } else {
       name = metric.getName();
       unit = metric.getUnit();
       publicDescription = metric.getPublicDescription();
@@ -32,6 +31,7 @@ public class Modify extends Save {
       commentOnTargetLevel = metric.getCommentOnTargetLevel();
       infoSource = metric.getInfoSource();
       institutionToReport = metric.getInstitutionToReport();
+      orderNumber = metric.getOrderNumber();
     }
     return render("admin/metrics/form");
   }
@@ -49,6 +49,7 @@ public class Modify extends Save {
     metric.setCommentOnTargetLevel(commentOnTargetLevel);
     metric.setInfoSource(infoSource);
     metric.setInstitutionToReport(institutionToReport);
+    metric.setOrderNumber(orderNumber);
     hibernate.update(metric);
     hibernate.flush();
   }

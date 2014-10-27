@@ -22,9 +22,9 @@ public class HomeViewTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", ""));
-    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "", "", 2.0));
+    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", "", 10.0));
+    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", "", 5.8));
 
     open("/home");
 

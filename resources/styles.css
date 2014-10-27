@@ -36,3 +36,7 @@
 .table tr.metric td span.value {
   word-wrap: break-word;
 }
+
+.order-number {
+  width: 70px;
+}
