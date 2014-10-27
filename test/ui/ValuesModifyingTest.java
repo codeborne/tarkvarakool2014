@@ -32,13 +32,14 @@ public class ValuesModifyingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", ""));
     hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 0, "", "", ""));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", ""));
+
   }
 
   @After
   public void after() {
-    $("#logout-button").click();
+  $("#logout-button").click();
   }
 
 
@@ -151,5 +152,14 @@ public class ValuesModifyingTest extends UITest {
     input.shouldNotBe(visible);
     $$(".goal").get(0).$$(".metric").get(0).$$(".value").get(3).shouldHave(text("432"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".modify-value").get(2).shouldBe(visible);
+  }
+
+  @Test
+  public void startLevelShownInValuesTable() throws Exception {
+    open("/admin/values/value");
+
+    $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
+    $$(".goal").get(0).$$(".metric").get(1).$$(".startLevel").get(0).shouldHave(text("0"));
+
   }
 }

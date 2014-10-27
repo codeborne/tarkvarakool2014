@@ -73,7 +73,8 @@
         <#list goal.metrics as metric>
           <tr class="metric">
             <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
-            <#list minimumYear..maximumYear as year>
+            <td class="startLevel">${metric.startLevel?c}</td>
+            <#list (minimumYear+1)..maximumYear as year>
               <td>
                 <div class="measured">
                   <span class="value">${((metric.values.get(year))?c)!""}</span> <span class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
