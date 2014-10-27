@@ -42,11 +42,6 @@ public class Goal {
     this.budget = budget;
   }
 
-  public Goal(String name, String comment, Integer budget) {
-    this.comment = comment;
-    this.name = name;
-    this.budget = budget;
-  }
 
   public Goal(String name, String comment, Integer budget, Integer sequenceNumber) {
     this.comment = comment;
