@@ -21,11 +21,11 @@
   </tr>
   <#if goals?has_content>
     <#list goals as goal>
+
       <tr class="goal">
         <td class="nameInTable">${goal.name}</td>
         <td class="commentInTable">${goal.comment!""}</td>
         <td class="budgetInTable">${goal.budget?c}</td>
-
         <td>
           <form action="/admin/metrics/metrics">
             <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -34,7 +34,6 @@
             </button>
           </form>
         </td>
-
         <td>
           <form action="modify">
             <input type="hidden" value="${goal.id?c}" name="id">
@@ -53,25 +52,52 @@
             </form>
           </#if>
         </td>
-
       </tr>
     </#list>
   </#if>
-  <form method="post" class="form-horizontal">
-  <tr>
-    <td><textarea name="name" class="form-control" rows="1" maxlength="255">${name!""}</textarea></td>
-    <td><textarea name="comment" class="form-control" rows="1" maxlength="255">${comment!""}</textarea></td>
-    <td><input type="number" class="form-control" min="1" max="2147483647" name="budget"
-               <#if budget?? && (budget>0)>value=${budget?c}</#if>></td>
-    <button id="goalButton" class="btn btn-default btn-sm">${buttonTitle}</button>
-  </tr>
-    </form>
+  <form method="post" action="add" id="addGoalForm">
+    <tr>
+      <td>
+        <input name="name" class="form-control" rows="1" placeholder="Sisesta eesmärk"
+               maxlength="255" value="${name!""}"></td>
+      <td><input name="comment" class="form-control" rows="1" placeholder="Sisesta kommentaar"
+                 maxlength="255"  value="${comment!""}"></td>
+      <td><input type="number" class="form-control" placeholder="Sisesta eelarve" min="1" max="2147483647" name="budget"
+                 <#if budget?? && (budget>0)>value=${budget?c}</#if>></td>
+      <td>
+        <button id="goalAddOrModifyButton" type="button" class="btn btn-default btn-sm">Lisa</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"
+      <span id="errors"></span></td></tr>
+  </form>
 </table>
-<#--<#else>-->
-<#--<h3 id="noGoals"> Andmebaasis eesmärke ei ole.</h3>-->
-<#--</#if>-->
-<form action="add">
-  <input type="submit" class="btn btn-default" value="Lisa">
-</form>
+
+
+<script>
+
+  $(function () {
+
+    var responseHandler = function (response) {
+      if (response.trim() == "") {
+        window.location = window.location;
+      }
+      $("#errors").html(response);
+    };
+
+    var clickHandler = function () {
+      var form = $('#addGoalForm');
+      $.post(form.attr("action"), form.serialize(), responseHandler);
+    };
+
+    $('#goalAddOrModifyButton').click(clickHandler);
+
+  });
+
+
+
+</script>
+
 </@html>
 

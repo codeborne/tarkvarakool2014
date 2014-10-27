@@ -25,7 +25,7 @@ public abstract class Save extends UserAwareController {
 
     if (errorsList.isEmpty()) {
       try {
-        return saveAndRedirect();
+        doSave();
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
         errorsList.add("See eesmärk on juba sisestatud.");
@@ -35,7 +35,7 @@ public abstract class Save extends UserAwareController {
     return render("/admin/goals/form");
   }
 
-  private Result saveAndRedirect() {
+  private void doSave() {
     name = name.trim();
     if (comment != null) {
       comment = comment.trim();
@@ -45,7 +45,6 @@ public abstract class Save extends UserAwareController {
 
     save();
     hibernate.flush();
-    return redirect(Home.class);
   }
 
   private void checkErrors() {
