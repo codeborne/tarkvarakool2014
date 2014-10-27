@@ -17,7 +17,7 @@ public class Test extends UserAwareController {
   public Result get() {
     session.setAttribute("username", "test");
 
-    Goal goal1 = new Goal("Sisestatud eesmark","", 100, 1);
+    Goal goal1 = new Goal("Sisestatud eesmark","", 100, 2);
     hibernate.save(goal1);
     hibernate.flush();
     hibernate.save(new Metric(goal1, "Some metric", "", "", "", 0, "", 33, "", "", "aa"));
@@ -25,7 +25,7 @@ public class Test extends UserAwareController {
     hibernate.save(new Metric(goal1, "Some other metric", "", "", "abc", 777, "", 0, "", "", ""));
     hibernate.flush();
 
-    Goal goal2 = new Goal("Second goal","", 100, 2);
+    Goal goal2 = new Goal("Second goal","", 100, 1);
     hibernate.save(goal2);
     hibernate.flush();
     hibernate.save(new Metric(goal2, "A metric", "", "", "", 8, "", 33, "", "cnf tgh", "aa"));

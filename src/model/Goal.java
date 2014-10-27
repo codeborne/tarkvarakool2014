@@ -102,4 +102,5 @@ public class Goal {
   public void setSequenceNumber(Integer sequenceNumber) {
     this.sequenceNumber = sequenceNumber;
   }
+
 }
