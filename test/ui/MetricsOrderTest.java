@@ -16,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class MetricsOrderTest extends UITest {
 
-  Goal goal = new Goal("Sisestatud eesmark", 100);
+  Goal goal = new Goal("Sisestatud eesmark", "comment", 100, 1);
 
   @Before
   public void setUp() throws Exception {
