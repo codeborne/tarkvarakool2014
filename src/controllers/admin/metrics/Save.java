@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.commons.lang3.StringUtils.uncapitalize;
 
 public abstract class Save extends UserAwareController {
 
@@ -25,6 +24,7 @@ public abstract class Save extends UserAwareController {
   public String commentOnTargetLevel;
   public String infoSource;
   public String institutionToReport;
+  public Double orderNumber;
   public Set<String> errorsList = new HashSet<>();
 
   public Goal goal;
@@ -80,6 +80,7 @@ public abstract class Save extends UserAwareController {
     checkCommentOnTargetLevel();
     checkInfoSource();
     checkInstitutionToReport();
+    checkOrderNumber();
   }
 
   private void checkName() {
@@ -129,6 +130,10 @@ public abstract class Save extends UserAwareController {
       errorsList.add("Viga raporteeritava asutuse sisestamisel");
   }
 
+  private void checkOrderNumber() {
+    if (errors.containsKey("orderNumber"))
+      errorsList.add("Sisestage korrektne järjekorra number");
+  }
 
   protected abstract void save();
 }

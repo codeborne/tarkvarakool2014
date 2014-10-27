@@ -13,7 +13,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   @Test
   public void getWhenObjectFound() throws Exception{
     controller.metricId = 2L;
-    when(hibernate.get(Metric.class, 2L)).thenReturn(new Metric(new Goal("",10), "name", "%", "a", "b", 2, "c", 4, "d", "e", "f"));
+    when(hibernate.get(Metric.class, 2L)).thenReturn(new Metric(new Goal("",10), "name", "%", "a", "b", 2, "c", 4, "d", "e", "f", 1.0));
 
     assertRender(controller.get());
     assertEquals("name",controller.name);
@@ -26,6 +26,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertEquals("f",controller.institutionToReport);
     assertEquals(2,(int) controller.startLevel);
     assertEquals(4, (int) controller.targetLevel);
+    assertEquals((Double) 1.0, controller.orderNumber);
   }
 
   @Test
@@ -50,8 +51,9 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.commentOnTargetLevel = "d";
     controller.infoSource = "e";
     controller.institutionToReport = "f";
+    controller.orderNumber = 5.0;
 
-    Metric metricBeingChanged = new Metric(new Goal("",10),"TERE", null, null, null,0,null,0,null,null, null);
+    Metric metricBeingChanged = new Metric(new Goal("",10),"TERE", null, null, null,0,null,0,null,null, null, 1.0);
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
 
     controller.save();
@@ -66,6 +68,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertEquals("d",metricBeingChanged.getCommentOnTargetLevel());
     assertEquals("e",metricBeingChanged.getInfoSource());
     assertEquals("f",metricBeingChanged.getInstitutionToReport());
+    assertEquals((Double) 5.0, metricBeingChanged.getOrderNumber());
     verify(hibernate).update(metricBeingChanged);
   }
 }

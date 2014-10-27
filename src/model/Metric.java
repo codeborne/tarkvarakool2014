@@ -40,12 +40,15 @@ public class Metric {
   private Map<Integer, BigDecimal> forecasts = new HashMap<>();
   private String unit;
 
+  @Column(nullable = false)
+  private Double orderNumber;
+
   private Metric() {
   }
 
   public Metric(Goal goal, String name, String unit, String publicDescription, String privateDescription, Integer startLevel,
                 String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
-                String infoSource, String institutionToReport) {
+                String infoSource, String institutionToReport, Double orderNumber) {
     this.goal = goal;
     this.name = name;
     this.unit = unit;
@@ -57,6 +60,7 @@ public class Metric {
     this.commentOnTargetLevel = commentOnTargetLevel;
     this.infoSource = infoSource;
     this.institutionToReport = institutionToReport;
+    this.orderNumber = orderNumber;
   }
 
   public Goal getGoal() {
@@ -169,5 +173,13 @@ public class Metric {
 
   public void setUnit(String unit) {
     this.unit = unit;
+  }
+
+  public Double getOrderNumber() {
+    return orderNumber;
+  }
+
+  public void setOrderNumber(Double orderNumber) {
+    this.orderNumber = orderNumber;
   }
 }

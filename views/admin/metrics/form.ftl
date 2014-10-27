@@ -9,6 +9,7 @@
 <form method="post" class="form-horizontal">
 
   <input type="hidden" value="${goal.id?c}" name="goalId">
+  <input type="hidden" name="orderNumber" class="form-control" value="${orderNumber}">
 
   <h3>${title}: ${goal.name}</h3>
 
@@ -54,12 +55,12 @@
   <br>
   <label>
     Infoallikas:
-    <input type="text" name="infoSource" class="form-control" rows="5" value="<#if infoSource??>${infoSource}</#if>">
+    <input type="text" name="infoSource" class="form-control" value="<#if infoSource??>${infoSource}</#if>">
   </label>
   <br>
   <label>
     Asutus, kuhu raporteerida:
-    <input type="text" name="institutionToReport" class="form-control" rows="5" value="<#if institutionToReport??>${institutionToReport}</#if>"><br>
+    <input type="text" name="institutionToReport" class="form-control" value="<#if institutionToReport??>${institutionToReport}</#if>"><br>
   </label>
   <br>
 
