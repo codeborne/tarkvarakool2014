@@ -5,13 +5,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.Goal;
 import model.Metric;
-
 import org.junit.Test;
 
-
 import static com.codeborne.selenide.Condition.text;
-
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
 
@@ -20,8 +16,8 @@ public class HomeViewTest extends UITest {
   @Test
   public void GoalAndBudgetWithCorrectMetrics() {
 
-    Goal goal1 = new Goal("Eesmark1", 10);
-    Goal goal2 = new Goal("Eesmark2", 12);
+    Goal goal1 = new Goal("Eesmark1","", 10 ,1);
+    Goal goal2 = new Goal("Eesmark2","", 12, 2);
 
     hibernate.save(goal1);
     hibernate.save(goal2);

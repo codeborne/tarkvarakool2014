@@ -25,6 +25,8 @@ public class MetricsAddingTest extends UITest {
     $(By.name("password")).setValue("p2s3w04d");
 
     $("#submit").click();
+    hibernate.save(new Goal("Tere","", 124,1));
+    open("/admin/goals/home");
   }
 
   @After
@@ -34,9 +36,6 @@ public class MetricsAddingTest extends UITest {
 
   @Test
   public void submitFailsWithoutMetricName() throws Exception {
-    hibernate.save(new Goal("Tere", 124));
-    open("/admin/goals/home");
-
     $$(".metricsButton").get(0).click();
     $("#addMetricButton").click();
 
@@ -49,9 +48,6 @@ public class MetricsAddingTest extends UITest {
 
   @Test
   public void submitSuccessWithMetricName() throws Exception {
-    hibernate.save(new Goal("Teere", 124));
-    open("/admin/goals/home");
-
     $$(".metricsButton").get(0).click();
     $("#addMetricButton").click();
 
@@ -63,9 +59,6 @@ public class MetricsAddingTest extends UITest {
 
   @Test
   public void adminCancelsAddingMetric() throws Exception {
-    hibernate.save(new Goal("Teere", 124));
-    open("/admin/goals/home");
-
     $$(".metricsButton").get(0).click();
 
     $("#goBackButton").click();
@@ -76,9 +69,6 @@ public class MetricsAddingTest extends UITest {
 
   @Test
   public void successIfAllFieldsHaveValue() throws Exception {
-    hibernate.save(new Goal("Teere", 124));
-    open("/admin/goals/home");
-
     $$(".metricsButton").get(0).click();
     $("#addMetricButton").click();
 
@@ -112,9 +102,6 @@ public class MetricsAddingTest extends UITest {
 
   @Test
   public void goalNameIsShownInTheMetricsTable() throws Exception {
-    hibernate.save(new Goal("Tere", 124));
-    open("/admin/goals/home");
-
     $$(".metricsButton").get(0).click();
     $("h3").shouldHave(text("Tere"));
   }

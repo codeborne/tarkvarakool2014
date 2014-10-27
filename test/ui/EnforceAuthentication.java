@@ -16,7 +16,7 @@ public class EnforceAuthentication extends UITest {
   @Before
   public void logIn() throws Exception {
 
-    Goal goal = new Goal("Sisestatud eesmark", 100);
+    Goal goal = new Goal("Sisestatud eesmark","", 100, 1);
     hibernate.save(goal);
     hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "tt", ""));
     hibernate.save(new Metric(goal, "Other metric", "", "", "", 2, "", 0, "", "", "dd"));

@@ -2,10 +2,8 @@ package ui;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-
 import model.Goal;
 import model.Metric;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +11,6 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static com.codeborne.selenide.Condition.text;
-
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
@@ -32,8 +29,8 @@ public class HomeViewValuesTest extends UITest {
 
   @Test
   public void userShouldSeeGoalsAndMetrics() throws Exception {
-    Goal goal1 = new Goal("Eesmark1", 145);
-    Goal goal2 = new Goal("Eesmark2", 120);
+    Goal goal1 = new Goal("Eesmark1","", 145, 1);
+    Goal goal2 = new Goal("Eesmark2","", 120, 2);
 
     hibernate.save(goal1);
     hibernate.save(goal2);
@@ -67,7 +64,7 @@ public class HomeViewValuesTest extends UITest {
 
   @Test
   public void userShouldSeeMetricValuesPerYear() throws Exception {
-    Goal goal = new Goal("Eesmark", 10);
+    Goal goal = new Goal("Eesmark", "", 10, 1);
     hibernate.save(goal);
     Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "");
     metric.getValues().put(2014, new BigDecimal(12));
