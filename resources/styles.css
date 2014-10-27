@@ -10,3 +10,11 @@
 .forecasted>span.value, .forecast-indicator {
   color: #D44E2B;
 }
+
+.glyphicon-pencil{
+  color:lightgray;
+
+}
+.tableHead{
+  text-align: center;
+}
