@@ -15,6 +15,12 @@
   color:lightgray;
 
 }
-.tableHead{
-  text-align: center;
+
+
+.table th, .table td {
+  text-align: right;
+}
+
+.table th:first-child, .table td:first-child {
+  text-align: left;
 }

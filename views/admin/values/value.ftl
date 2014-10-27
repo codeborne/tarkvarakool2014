@@ -62,10 +62,10 @@
 
     <table class="table">
       <div class="tableHead">
-        <tr
+        <tr>
           <th>Mõõdik</th>
           <#list minimumYear..maximumYear as year>
-            <th>${year?c}</th>
+            <th> ${year?c}</th>
           </#list>
         </tr>
       </div>

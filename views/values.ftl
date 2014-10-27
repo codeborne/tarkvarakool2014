@@ -14,7 +14,7 @@
         <tr>
           <th>Mõõdik</th>
           <#list minimumYear..maximumYear as year>
-            <th>${year?c}</th>
+            <th> ${year?c}</th>
           </#list>
         </tr>
         <#list goal.metrics as metric>
