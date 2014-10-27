@@ -10,3 +10,8 @@
 .forecasted>span.value, .forecast-indicator {
   color: #D44E2B;
 }
+
+.title {
+  margin-top: 12px;
+  font-weight: bold;
+}

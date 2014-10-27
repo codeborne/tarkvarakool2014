@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tarkvarakool</title>
+  <title>Infoühiskonna arendamise mõõdikud</title>
   <link rel="shortcut icon" href="/favicon.png" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles.css"/>
@@ -11,14 +11,7 @@
 <body>
   <div class="navbar navbar-default" role="navigation">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
+      <div class="navbar-left title">Infoühiskonna arendamise mõõdikud</div>
       <div class="navbar-collapse collapse navbar-right">
         <#if loggedInUsername??>
           <form class="navbar-form navbar-left" action="/admin/logout">
