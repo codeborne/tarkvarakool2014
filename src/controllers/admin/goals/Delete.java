@@ -20,7 +20,7 @@ public class Delete extends UserAwareController {
     if (deletableGoal != null) {
       hibernate.delete(deletableGoal);
       hibernate.flush();
-      if(hibernate.get(Goal.class, id) == null) {
+
         List<Goal> goals = hibernate.createCriteria(Goal.class).list();
         for (Goal goal : goals) {
           Integer sequenceNumber = goal.getSequenceNumber();
@@ -28,7 +28,6 @@ public class Delete extends UserAwareController {
             goal.setSequenceNumber(sequenceNumber - 1);
             hibernate.update(goal);
             hibernate.flush();
-          }
         }
       }
     }

@@ -3,12 +3,11 @@ package controllers.admin.goals;
 import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
-import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -68,7 +67,6 @@ public class HomeTest extends ControllerTest<Home> {
 
     assertTrue(updatedGoals.size() == 5);
 
-    Collections.reverse(updatedGoals);
     for (Object goal : updatedGoals) {
       Goal updatedGoal = (Goal) goal;
       verify(hibernate, atLeastOnce()).update(updatedGoal);
@@ -103,7 +101,7 @@ public class HomeTest extends ControllerTest<Home> {
     verify(hibernate, never()).update(any(Goal.class));
   }
 
-  @Test
+  @Test (expected = HibernateException.class)
   public void postFailure() throws Exception {
     controller.id = 8L;
     controller.sequenceNumber = 2;
@@ -113,12 +111,10 @@ public class HomeTest extends ControllerTest<Home> {
     when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", "", 1000, 1), new Goal("second goal", "", 2000, 2),
       new Goal("third goal", "", 3000, 3)));
     when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
-    doThrow(mock(ConstraintViolationException.class)).when(hibernate).update(any(Goal.class));
+    doThrow(mock(HibernateException.class)).when(hibernate).update(any(Goal.class));
 
     assertRedirect(Home.class, controller.post());
 
-    assertTrue(controller.errorsList.contains("Muutmine ebaõnnestus."));
-    assertEquals(1, controller.errorsList.size());
 
   }
 }

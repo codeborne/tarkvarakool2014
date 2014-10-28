@@ -4,7 +4,6 @@ import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
 import model.Goal;
-import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,14 +33,16 @@ public class Home extends UserAwareController {
     Integer previousSequenceNumber = goalToBeChanged.getSequenceNumber();
     if (previousSequenceNumber!=sequenceNumber) {
       goalToBeChanged.setSequenceNumber(0);
-      tryUpdate(goalToBeChanged);
+      hibernate.update(goalToBeChanged);
+      hibernate.flush();
 
       if (previousSequenceNumber < sequenceNumber) {
         for (Goal goal : goals) {
           Integer currentSequenceNumber = goal.getSequenceNumber();
           if (currentSequenceNumber <= sequenceNumber && currentSequenceNumber > previousSequenceNumber) {
             goal.setSequenceNumber(currentSequenceNumber - 1);
-            tryUpdate(goal);
+            hibernate.update(goal);
+            hibernate.flush();
           }
         }
       }
@@ -51,24 +52,17 @@ public class Home extends UserAwareController {
           Integer currentSequenceNumber = goal.getSequenceNumber();
           if (currentSequenceNumber >= sequenceNumber && currentSequenceNumber < previousSequenceNumber) {
             goal.setSequenceNumber(currentSequenceNumber + 1);
-            tryUpdate(goal);
+            hibernate.update(goal);
+            hibernate.flush();
           }
         }
       }
       goalToBeChanged.setSequenceNumber(sequenceNumber);
-      tryUpdate(goalToBeChanged);
+      hibernate.update(goalToBeChanged);
+      hibernate.flush();
     }
     return redirect(Home.class);
   }
 
-  private void tryUpdate(Goal goal) {
-    try {
-      hibernate.update(goal);
-      hibernate.flush();
-    }
-    catch (ConstraintViolationException e){
-      errorsList.add("Muutmine ebaõnnestus.");
-      //render("");
-    }
   }
-}
+
