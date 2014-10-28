@@ -26,6 +26,9 @@
           <root url="jar://$USER_HOME$/.ideaLibSources/selenide-2.14-sources.jar!/" />
           <root url="jar://$USER_HOME$/.ideaLibSources/selenium-api-2.43.1-sources.jar!/" />
           <root url="jar://$USER_HOME$/Downloads/selenium-api-2.43.1-sources.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/selenium-api-2.43.1-sources.jar!/" />
+          <root url="file://$MODULE_DIR$/../selenide/src/main/java" />
+          <root url="file://$MODULE_DIR$/../selenide/src/test/java" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
