@@ -4,9 +4,12 @@ import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
 import model.Goal;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hibernate.criterion.Order.asc;
 
@@ -14,6 +17,7 @@ public class Home extends UserAwareController {
   public java.util.List<Goal> goals = new ArrayList<>();
   public Long id;
   public Integer sequenceNumber;
+  public Set<String> errorsList = new HashSet<>();
 
   @Override
   @Role("admin")
@@ -29,16 +33,14 @@ public class Home extends UserAwareController {
     Goal goalToBeChanged = (Goal) hibernate.get(Goal.class, id);
     Integer previousSequenceNumber = goalToBeChanged.getSequenceNumber();
     goalToBeChanged.setSequenceNumber(0);
-    hibernate.update(goalToBeChanged);
-    hibernate.flush();
+    tryUpdate(goalToBeChanged);
 
     if (previousSequenceNumber < sequenceNumber) {
       for (Goal goal : goals) {
         Integer currentSequenceNumber = goal.getSequenceNumber();
         if (currentSequenceNumber <= sequenceNumber && currentSequenceNumber > previousSequenceNumber) {
           goal.setSequenceNumber(currentSequenceNumber - 1);
-          hibernate.update(goal);
-          hibernate.flush();
+          tryUpdate(goal);
         }
       }
     }
@@ -48,14 +50,23 @@ public class Home extends UserAwareController {
         Integer currentSequenceNumber = goal.getSequenceNumber();
         if (currentSequenceNumber >= sequenceNumber && currentSequenceNumber < previousSequenceNumber) {
           goal.setSequenceNumber(currentSequenceNumber + 1);
-          hibernate.update(goal);
-          hibernate.flush();
+          tryUpdate(goal);
         }
       }
     }
     goalToBeChanged.setSequenceNumber(sequenceNumber);
-    hibernate.update(goalToBeChanged);
-    hibernate.flush();
-return redirect(Home.class);
+    tryUpdate(goalToBeChanged);
+    return redirect(Home.class);
+  }
+
+  private void tryUpdate(Goal goal) {
+    try {
+      hibernate.update(goal);
+      hibernate.flush();
+    }
+    catch (ConstraintViolationException e){
+      errorsList.add("Muutmine ebaõnnestus.");
+      render("");
+    }
   }
 }
