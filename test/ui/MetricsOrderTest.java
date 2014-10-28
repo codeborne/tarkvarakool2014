@@ -10,8 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 import static junit.framework.Assert.assertEquals;
 
 public class MetricsOrderTest extends UITest {
@@ -33,7 +32,7 @@ public class MetricsOrderTest extends UITest {
     hibernate.save(new Metric(goal, "Some metric1", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -5.5));
     hibernate.save(new Metric(goal, "Some metric4", "", "", "", 0, "", 0, "", "", "", 5.0));
     hibernate.save(new Metric(goal, "Some metric3", "", "", "", 0, "", 0, "", "", "", 0.0));
-    hibernate.save(new Metric(goal, "Some metric2", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -1.33));
+    hibernate.save(new Metric(goal, "Some metric2", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -1.5));
   }
 
   @After
@@ -83,23 +82,59 @@ public class MetricsOrderTest extends UITest {
   }
 
   @Test
-  public void testAdminOrderChange() {
+  public void testAdminChangeOrderInTheMiddle() {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
 
-    $$(By.name("orderNumber")).get(1).setValue("10").pressEnter();
+    Metric originalMetricObject = (Metric) hibernate.createCriteria(Metric.class).add(Restrictions.eq("name", "Some metric1")).list().get(0);
+
+    $$(".metric").get(0).$(".glyphicon-sort").dragAndDropTo("#sortable tr:last-child");
+
+    Metric updatedMetricObject = (Metric) hibernate.createCriteria(Metric.class).add(Restrictions.eq("name", "Some metric1")).list().get(0);
+
+    originalMetricObject.setOrderNumber(2.5);
+    assertEquals(originalMetricObject,updatedMetricObject);
+
+    $$("td.name").get(0).shouldHave(text("Some metric2 (%)"));
+    $$("td.name").get(1).shouldHave(text("Some metric3"));
+    $$("td.name").get(2).shouldHave(text("Some metric1 (%)"));
+    $$("td.name").get(3).shouldHave(text("Some metric4"));
+
+    open("/admin/goals/home");
+    $$(".metricsButton").get(0).click();
+
+    $$("td.name").get(0).shouldHave(text("Some metric2 (%)"));
+    $$("td.name").get(1).shouldHave(text("Some metric3"));
+    $$("td.name").get(2).shouldHave(text("Some metric1 (%)"));
+    $$("td.name").get(3).shouldHave(text("Some metric4"));
+  }
+
+  @Test
+  public void testAdminMoveElementToFirstPosition() {
+    open("/admin/goals/home");
+    $$(".metricsButton").get(0).click();
 
     Metric originalMetricObject = (Metric) hibernate.createCriteria(Metric.class).add(Restrictions.eq("name", "Some metric2")).list().get(0);
 
-    $$("td.name").get(0).shouldHave(text("Some metric1 (%)"));
-    $$("td.name").get(1).shouldHave(text("Some metric3"));
-    $$("td.name").get(2).shouldHave(text("Some metric4"));
-    $$("td.name").get(3).shouldHave(text("Some metric2 (%)"));
+    $$(".metric").get(1).$(".glyphicon-sort").dragAndDropTo("#sortable tr:first-child");
 
     Metric updatedMetricObject = (Metric) hibernate.createCriteria(Metric.class).add(Restrictions.eq("name", "Some metric2")).list().get(0);
 
-    originalMetricObject.setOrderNumber(10.0);
+    originalMetricObject.setOrderNumber(-7.0);
     assertEquals(originalMetricObject,updatedMetricObject);
+
+    $$("td.name").get(0).shouldHave(text("Some metric2 (%)"));
+    $$("td.name").get(1).shouldHave(text("Some metric1 (%)"));
+    $$("td.name").get(2).shouldHave(text("Some metric3"));
+    $$("td.name").get(3).shouldHave(text("Some metric4"));
+
+    open("/admin/goals/home");
+    $$(".metricsButton").get(0).click();
+
+    $$("td.name").get(0).shouldHave(text("Some metric2 (%)"));
+    $$("td.name").get(1).shouldHave(text("Some metric1 (%)"));
+    $$("td.name").get(2).shouldHave(text("Some metric3"));
+    $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
 }
