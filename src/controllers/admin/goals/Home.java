@@ -32,30 +32,32 @@ public class Home extends UserAwareController {
     goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
     Goal goalToBeChanged = (Goal) hibernate.get(Goal.class, id);
     Integer previousSequenceNumber = goalToBeChanged.getSequenceNumber();
-    goalToBeChanged.setSequenceNumber(0);
-    tryUpdate(goalToBeChanged);
+    if (previousSequenceNumber!=sequenceNumber) {
+      goalToBeChanged.setSequenceNumber(0);
+      tryUpdate(goalToBeChanged);
 
-    if (previousSequenceNumber < sequenceNumber) {
-      for (Goal goal : goals) {
-        Integer currentSequenceNumber = goal.getSequenceNumber();
-        if (currentSequenceNumber <= sequenceNumber && currentSequenceNumber > previousSequenceNumber) {
-          goal.setSequenceNumber(currentSequenceNumber - 1);
-          tryUpdate(goal);
+      if (previousSequenceNumber < sequenceNumber) {
+        for (Goal goal : goals) {
+          Integer currentSequenceNumber = goal.getSequenceNumber();
+          if (currentSequenceNumber <= sequenceNumber && currentSequenceNumber > previousSequenceNumber) {
+            goal.setSequenceNumber(currentSequenceNumber - 1);
+            tryUpdate(goal);
+          }
         }
       }
-    }
-    if (previousSequenceNumber > sequenceNumber) {
-      Collections.reverse(goals);
-      for (Goal goal : goals) {
-        Integer currentSequenceNumber = goal.getSequenceNumber();
-        if (currentSequenceNumber >= sequenceNumber && currentSequenceNumber < previousSequenceNumber) {
-          goal.setSequenceNumber(currentSequenceNumber + 1);
-          tryUpdate(goal);
+      if (previousSequenceNumber > sequenceNumber) {
+        Collections.reverse(goals);
+        for (Goal goal : goals) {
+          Integer currentSequenceNumber = goal.getSequenceNumber();
+          if (currentSequenceNumber >= sequenceNumber && currentSequenceNumber < previousSequenceNumber) {
+            goal.setSequenceNumber(currentSequenceNumber + 1);
+            tryUpdate(goal);
+          }
         }
       }
+      goalToBeChanged.setSequenceNumber(sequenceNumber);
+      tryUpdate(goalToBeChanged);
     }
-    goalToBeChanged.setSequenceNumber(sequenceNumber);
-    tryUpdate(goalToBeChanged);
     return redirect(Home.class);
   }
 
@@ -66,7 +68,7 @@ public class Home extends UserAwareController {
     }
     catch (ConstraintViolationException e){
       errorsList.add("Muutmine ebaõnnestus.");
-      render("");
+      //render("");
     }
   }
 }

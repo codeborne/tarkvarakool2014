@@ -29,7 +29,9 @@
             <select onchange="this.form.submit()" name="sequenceNumber">
               <option>${goal.sequenceNumber}</option>
               <#list 1..goals.size() as number>
+              <#if number!=goal.sequenceNumber>
                 <option value="${number}">${number}</option>
+              </#if>
               </#list>
             </select>
           </form>
