@@ -24,6 +24,9 @@
   word-wrap: break-word;
 }
 
-.order-number {
-  width: 70px;
+.sort {
+  text-align: center;
+}
+.ui-state-highlight {
+  background-color: lightgreen;
 }
