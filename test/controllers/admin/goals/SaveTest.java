@@ -59,7 +59,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
     verify(controller, never()).save();
   }
 
@@ -71,7 +71,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
     verify(controller, never()).save();
   }
 
@@ -108,7 +108,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
     verify(controller, never()).save();
   }
 
@@ -123,7 +123,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     assertEquals(3, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
     assertTrue(controller.errorsList.contains("Sisestage kommentaar."));
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve (1 - 2 147 483 647)."));
+    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
     verify(controller, never()).save();
   }
 
@@ -145,7 +145,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     controller.name = "asd";
     controller.budget = 123;
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     verify(controller).save();
   }
@@ -156,7 +156,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     controller.comment = "\ntest\n  ";
     controller.budget = 123;
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     assertEquals("ab cd",controller.name);
     assertEquals("test",controller.comment);

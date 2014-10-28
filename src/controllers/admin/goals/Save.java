@@ -62,7 +62,7 @@ public abstract class Save extends UserAwareController {
   }
   private void checkBudget() {
     if (errors.containsKey("budget") || budget == null || budget <= 0)
-      errorsList.add("Sisestage korrektne eelarve (1 - 2 147 483 647).");
+      errorsList.add("Sisestage korrektne eelarve.");
   }
 
   protected abstract void save();

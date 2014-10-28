@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class GoalDeletingTest extends UITest {
@@ -42,7 +43,7 @@ public class GoalDeletingTest extends UITest {
 
     confirm("Kas oled kustutamises kindel?");
 
-    $("#noGoals").shouldHave(text("Andmebaasis eesmärke ei ole."));
+    $("tr.goal").shouldNotBe(visible);
 
   }
 

@@ -56,7 +56,7 @@ public class GoalModifyingTest extends UITest {
     $(By.name("name")).setValue("eesmark");
     $(By.name("budget")).setValue("10");
 
-    $("#goalAddOrModifyButton").click();
+    $(".saveGoalButton").click();
 
     SelenideElement row = $$("tr.goal").get(0);
 
@@ -75,7 +75,7 @@ public class GoalModifyingTest extends UITest {
     $(By.name("name")).setValue("");
     $(By.name("budget")).setValue("15");
 
-    $("#goalAddOrModifyButton").click();
+    $(".saveGoalButton").click();
 
     $(".alert-danger").shouldHave(text("Sisestage eesmärk."));
     $(By.name("budget")).shouldHave(value("15"));
