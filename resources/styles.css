@@ -30,3 +30,7 @@
 .ui-state-highlight {
   background-color: lightgreen;
 }
+
+input.modify-value {
+  max-width: 120px;
+}
