@@ -6,11 +6,13 @@ import model.User;
 import org.hibernate.criterion.Restrictions;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static junit.framework.Assert.assertEquals;
 
 public class MetricsOrderTest extends UITest {
@@ -81,7 +83,7 @@ public class MetricsOrderTest extends UITest {
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
-  @Test
+  @Test @Ignore
   public void testAdminChangeOrderInTheMiddle() {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
@@ -109,7 +111,7 @@ public class MetricsOrderTest extends UITest {
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
-  @Test
+  @Test @Ignore
   public void testAdminMoveElementToFirstPosition() {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
