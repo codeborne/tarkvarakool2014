@@ -28,7 +28,7 @@
       <tr class="goal">
         <td class="sort">
           <span class="glyphicon glyphicon-sort hand-pointer"></span>
-          <form class="orderNumberForm" goalId="post" action="/admin/metrics/modify">
+          <form class="orderNumberForm" >
             <input type="hidden" value="${goal.id?c}" name="id">
             <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
           </form>
