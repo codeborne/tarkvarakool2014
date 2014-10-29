@@ -110,7 +110,7 @@ public class GoalsOrderTest extends UITest {
     SelenideElement target = $("#sortableGoals tr:nth-child(5)");
 
     slowDragAndDrop(source, target);
-    $$("#sortableGoals tr");
+    System.out.println("Result: " + $$("#sortableGoals tr"));
 
     $$(".goal").get(0).$(".nameInTable").shouldHave(text("Eesmark1"));
     $$(".goal").get(1).$(".nameInTable").shouldHave(text("Eesmark3"));
@@ -121,11 +121,16 @@ public class GoalsOrderTest extends UITest {
   }
 
   private void slowDragAndDrop(SelenideElement source, SelenideElement target) {
-    Actions actions = actions().clickAndHold(source);
-    int numberOfMovements = Math.abs(target.getLocation().getY() - source.getLocation().getY());
+    System.out.println("Drag: " + source);
+    System.out.println("Drop to: " + target);
+    
+    Actions actions = actions().clickAndHold(source.toWebElement());
+    int numberOfMovements = (int) Math.ceil(Math.abs(target.getLocation().getY() - source.getLocation().getY()) / 10.0);
+    int increment = 10 * (int) Math.signum(target.getLocation().getY() - source.getLocation().getY());
     for (int i = 0; i < numberOfMovements; i++) {
-      actions.moveByOffset(0, 1);
+      actions.moveByOffset(0, increment);
+      actions.pause(50);
     }
-    actions.release(target).build().perform();
+    actions.release(target.toWebElement()).build().perform();
   }
 }
