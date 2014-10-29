@@ -46,7 +46,7 @@
     <mkdir dir="testresults"/>
     <junit maxmemory="512m" haltonfailure="false" failureproperty="tests-failed" fork="true" includeantruntime="true" forkmode="once">
       <batchtest todir="testresults">
-        <fileset dir="classes-test" includes="**/*.class">
+        <fileset dir="classes-test" includes="**/*Test.class">
           <exclude name="controllers/ControllerTest.class"/>
           <exclude name="ui/UITest.class"/>
         </fileset>
