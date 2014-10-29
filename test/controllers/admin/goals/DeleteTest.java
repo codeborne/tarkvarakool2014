@@ -71,4 +71,5 @@ public class DeleteTest extends ControllerTest<Delete> {
 
     verify(hibernate).delete(deletableGoal);
   }
+
 }

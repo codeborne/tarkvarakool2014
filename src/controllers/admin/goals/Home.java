@@ -62,6 +62,7 @@ public class Home extends UserAwareController {
       hibernate.flush();
     }
     return redirect(Home.class);
+
   }
 
   }
