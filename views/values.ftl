@@ -1,9 +1,4 @@
-<@html>
-  <div class="btn-group">
-    <button type="button" class="btn btn-default" onclick="location='/home'">Eesmärgid</button>
-    <button type="button" id="MetricsValue" class="btn btn-default active" onclick="location='/values'">Väärtused</button>
-  </div>
-  <br><br>
+<@html values_active=true>
   <#list goals as goal>
   <div class="goal">
     <h4 class="name"> Eesmärk: ${goal.name}</h4>

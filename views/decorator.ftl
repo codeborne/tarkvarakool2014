@@ -1,4 +1,4 @@
-<#macro html>
+<#macro html values_active=false>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +34,17 @@
         <td><img src="/images/rm-logo.png"></td>
         <td><div class="symbol"></div></td>
         <td>Infoühiskonna arendamise mõõdikud</td>
-        <#nested>
+        <td>
+          <div class="btn-group button-menu-inner">
+            <button type="button" class="switch-button<#if !values_active> active</#if>" onclick="location='/home'">Eesmärgid</button>
+            <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>" onclick="location='/values'">Väärtused</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <#nested>
+
   </div>
   <div class="footer">
 

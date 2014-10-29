@@ -1,12 +1,4 @@
 <@html>
-      <td>
-        <div class="btn-group button-menu-inner">
-          <button type="button" class="switch-button active" onclick="location='/home'">Eesmärgid</button>
-          <button type="button" id="MetricsValue" class="switch-button" onclick="location='/values'">Väärtused</button>
-        </div>
-      </td>
-    </tr>
-  </table>
   <#list goals as goal>
     <div class="panel panel-default goal">
       <div class="panel-heading">
