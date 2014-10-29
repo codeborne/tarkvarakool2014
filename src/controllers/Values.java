@@ -6,6 +6,8 @@ import model.Goal;
 
 import java.util.ArrayList;
 
+import static org.hibernate.criterion.Order.asc;
+
 public class Values extends UserAwareController{
 
   public java.util.List<Goal> goals = new ArrayList<>();
@@ -15,7 +17,7 @@ public class Values extends UserAwareController{
   @Override
   @Role("anonymous")
   public Result get() {
-    goals = hibernate.createCriteria(Goal.class).list();
+    goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
     return render();
   }
 

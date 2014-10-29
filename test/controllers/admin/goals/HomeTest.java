@@ -28,7 +28,7 @@ public class HomeTest extends ControllerTest<Home> {
       new Goal("third goal", "", 3000, 3)));
     when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     List<Object> updatedGoals = getUpdatedEntities();
 
@@ -46,7 +46,6 @@ public class HomeTest extends ControllerTest<Home> {
       }
     }
 
-
   }
 
   @Test
@@ -60,7 +59,7 @@ public class HomeTest extends ControllerTest<Home> {
       new Goal("third goal", "", 3000, 3), new Goal("fourth goal", "", 4000, 4)));
     when(hibernate.get(Goal.class, 3L)).thenReturn(new Goal("fourth goal", "", 4000, 4));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     List<Object> updatedGoals = getUpdatedEntities();
 
@@ -96,7 +95,7 @@ public class HomeTest extends ControllerTest<Home> {
       new Goal("third goal", "", 3000, 3), new Goal("fourth goal", "", 4000, 4)));
     when(hibernate.get(Goal.class, 3L)).thenReturn(new Goal("fourth goal", "", 1000, 1));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     verify(hibernate, never()).update(any(Goal.class));
   }
@@ -113,7 +112,7 @@ public class HomeTest extends ControllerTest<Home> {
     when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
     doThrow(mock(HibernateException.class)).when(hibernate).update(any(Goal.class));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
 
   }
