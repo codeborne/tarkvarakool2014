@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="tarkvarakool" default="all">
 
+  <property environment="env"/>
   <target name="all" depends="clean,test"/>
 
   <target name="clean">
@@ -45,7 +46,7 @@
     <mkdir dir="testresults"/>
     <junit maxmemory="512m" haltonfailure="false" failureproperty="tests-failed" fork="true" includeantruntime="true" forkmode="once">
       <batchtest todir="testresults">
-        <fileset dir="classes-test" includes="**/*Test.class">
+        <fileset dir="classes-test" includes="**/*GoalsOrderTest.class">
           <exclude name="controllers/ControllerTest.class"/>
           <exclude name="ui/UITest.class"/>
         </fileset>
@@ -58,6 +59,7 @@
         <path path="conf"/>
         <fileset dir="lib" includes="*.jar"/>
       </classpath>
+      <jvmarg value="-DBUILD_URL=${env.BUILD_URL}"/>
     </junit>
     <fail if="tests-failed"/>
   </target>
