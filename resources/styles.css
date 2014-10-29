@@ -79,6 +79,22 @@ body, td {
   padding: 0;
   border: 0;
   width: 100%;
+.glyphicon-pencil{
+  color:lightgray;
+
+}
+
+
+.table th, .table td {
+  text-align: right;
+}
+
+.table th:first-child, .table td:first-child {
+  text-align: left;
+}
+.title {
+  margin-top: 12px;
+  font-weight: bold;
 }
 
 .toprow td:nth-child(3) {

@@ -3,3 +3,4 @@
 .idea/copyright/
 out/
 testresults/
+*.db

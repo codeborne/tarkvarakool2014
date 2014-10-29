@@ -24,7 +24,7 @@ public class HibernateHelper {
   private static SessionFactory sessionFactory;
 
   static {
-    configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool;DB_CLOSE_DELAY=-1");
+    configuration.setProperty(URL, "jdbc:h2:./moodikud");
     configuration.setProperty(USER, "sa");
     configuration.setProperty(PASS, "sa");
     configuration.setProperty(DRIVER, "org.h2.Driver");

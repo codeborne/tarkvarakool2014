@@ -36,14 +36,14 @@ public class GoalAddingTest extends UITest {
   @Test
   public void adminCanSuccessfullyInsertGoal() throws Exception {
 
-    open("/admin/goals/add");
+    open("/admin/goals/home");
 
     $(By.name("name")).setValue("Sisestatud eesmark");
     $(By.name("budget")).setValue("100");
 
-    $("#goalAddOrModifyButton").click();
+    $(".saveGoalButton").click();
 
-    SelenideElement row = $$("tr.goal").get(0);
+    SelenideElement row = $$(".goal").get(0);
 
     row.$(".nameInTable").shouldHave(text("Sisestatud eesmark"));
     row.$(".budgetInTable").shouldHave(text("100"));
@@ -52,28 +52,18 @@ public class GoalAddingTest extends UITest {
   @Test
   public void adminInsertsInvalidGoal() throws Exception {
 
-    open("/admin/goals/add");
+    open("/admin/goals/home");
 
     $(By.name("name")).setValue("");
     $(By.name("budget")).setValue("10");
 
-    $("#goalAddOrModifyButton").click();
+    $(".saveGoalButton").click();
 
     $(".alert-danger").shouldHave(text("Sisestage eesmärk."));
     $(By.name("budget")).shouldHave(value("10"));
   }
 
-  @Test
-  public void adminCancelsAddingGoal() throws Exception {
 
-    open("/admin/goals/add");
-
-    $(By.name("name")).setValue("Eesmark");
-
-    $("#goBack").click();
-
-    $("body").shouldHave(text("Andmebaasis eesmärke ei ole."));
-  }
 
 
 }

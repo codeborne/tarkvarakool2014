@@ -5,6 +5,7 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 public class HibernateMockHelper {
@@ -23,7 +24,7 @@ public class HibernateMockHelper {
 
   public static List<Object> getUpdatedEntities(Session hibernateMock) {
     ArgumentCaptor<Object> captor = ArgumentCaptor.forClass(Object.class);
-    verify(hibernateMock).update(captor.capture());
+    verify(hibernateMock, atLeastOnce()).update(captor.capture());
     return captor.getAllValues();
   }
 }

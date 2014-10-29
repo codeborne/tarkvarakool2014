@@ -25,7 +25,7 @@ public abstract class Save extends UserAwareController {
 
     if (errorsList.isEmpty()) {
       try {
-        return saveAndRedirect();
+        doSave();
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
         errorsList.add("See eesmärk on juba sisestatud.");
@@ -35,7 +35,7 @@ public abstract class Save extends UserAwareController {
     return render("/admin/goals/form");
   }
 
-  private Result saveAndRedirect() {
+  private void doSave() {
     name = name.trim();
     if (comment != null) {
       comment = comment.trim();
@@ -45,7 +45,6 @@ public abstract class Save extends UserAwareController {
 
     save();
     hibernate.flush();
-    return redirect(Home.class);
   }
 
   private void checkErrors() {
@@ -63,7 +62,7 @@ public abstract class Save extends UserAwareController {
   }
   private void checkBudget() {
     if (errors.containsKey("budget") || budget == null || budget <= 0)
-      errorsList.add("Sisestage korrektne eelarve (1 - 2 147 483 647).");
+      errorsList.add("Sisestage korrektne eelarve.");
   }
 
   protected abstract void save();

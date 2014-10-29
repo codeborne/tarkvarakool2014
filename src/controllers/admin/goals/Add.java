@@ -17,7 +17,7 @@ public class Add extends Save {
   @Override
   @Role("admin")
   public Result get(){
-    return render("admin/goals/form");
+    return render("admin/goals/add");
   }
 
   @Override
