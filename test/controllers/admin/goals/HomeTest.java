@@ -49,6 +49,39 @@ public class HomeTest extends ControllerTest<Home> {
   }
 
   @Test
+  public void postIfChangedSequenceNumberIsGreaterThanGoalsListSize() throws Exception {
+    controller.id = 8L;
+    controller.sequenceNumber = 5;
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
+    when(criteria.addOrder(any(Order.class))).thenReturn(criteria);
+    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", "", 1000, 1), new Goal("second goal", "", 2000, 2),
+      new Goal("third goal", "", 3000, 3)));
+    when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
+
+    assertRender(controller.post());
+
+    List<Object> updatedGoals = getUpdatedEntities();
+
+    assertTrue(updatedGoals.size() == 4);
+
+    for (Object goal : updatedGoals) {
+      Goal updatedGoal = (Goal) goal;
+      verify(hibernate, atLeastOnce()).update(updatedGoal);
+      if ("some goal".equals(updatedGoal.getName())) {
+        assertEquals(3, (int) updatedGoal.getSequenceNumber());
+      }
+      if ("second goal".equals(updatedGoal.getName())) {
+        assertEquals(1, (int) updatedGoal.getSequenceNumber());
+      }
+      if ("third goal".equals(updatedGoal.getName())) {
+        assertEquals(2, (int) updatedGoal.getSequenceNumber());
+      }
+    }
+
+  }
+
+  @Test
   public void postIfChangedSequenceNumberIsSmallerThanPreviousSequenceNumber() throws Exception {
     controller.id = 3L;
     controller.sequenceNumber = 1;
