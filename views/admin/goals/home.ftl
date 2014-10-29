@@ -11,6 +11,7 @@
 <h3>Eesmärgid</h3>
 
 <table class="table table-hover">
+  <thead>
   <tr>
     <th>Jrk nr</th>
     <th>Eesmärk</th>
@@ -20,21 +21,16 @@
     <th>Mõõdikud</th>
     <th>Kustuta</th>
   </tr>
+  </thead>
+  <tbody id="sortableGoals">
   <#if goals?has_content>
     <#list goals as goal>
       <tr class="goal">
-
-        <td class="sequenceNumberInTable">
-          <form method="post">
+        <td class="sort">
+          <span class="glyphicon glyphicon-sort hand-pointer"></span>
+          <form class="orderNumberForm" >
             <input type="hidden" value="${goal.id?c}" name="id">
-            <select onchange="this.form.submit()" name="sequenceNumber">
-              <option>${goal.sequenceNumber}</option>
-              <#list 1..goals.size() as number>
-              <#if number!=goal.sequenceNumber>
-                <option value="${number}">${number}</option>
-              </#if>
-              </#list>
-            </select>
+            <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
           </form>
         </td>
 
@@ -44,7 +40,8 @@
         </td>
         <td class="commentInTable">
           <span class="value">${goal.comment!""}</span>
-          <input type="text" class="value form-control" name="comment" <#if goal.comment??>value="${goal.comment}"</#if> style="display: none;">
+          <input type="text" class="value form-control" name="comment" <#if goal.comment??>value="${goal.comment}"</#if>
+                 style="display: none;">
         </td>
         <td class="budgetInTable">
           <span class="value">${goal.budget?c}</span>
@@ -88,6 +85,7 @@
     </#list>
 
   </#if>
+
   <tr>
     <td></td>
     <td>
@@ -95,18 +93,16 @@
              maxlength="255" value="${name!""}"></td>
     <td><input name="comment" class="value form-control" rows="1" placeholder="Kommentaar"
                maxlength="255" value="${comment!""}"></td>
-    <td><input type="number" class="value form-control" placeholder="Eelarve"name="budget"
+    <td><input type="number" class="value form-control" placeholder="Eelarve" name="budget"
                <#if budget?? && (budget>0)>value=${budget?c}</#if>></td>
     <td>
       <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Lisa" data-action="add">
     </td>
   </tr>
-  <tr>
-    <td></td>
-    <td colspan="3"
-    <span id="errors"></span></td></tr>
+  </tbody>
 </table>
 
+<span id="errors"></span>
 
 <script>
 
@@ -136,6 +132,37 @@
     };
 
     $('.modifyButton').click(modifyClickHandler);
+  });
+</script>
+
+<script>
+  $(function() {
+    $( "#sortableGoals" ).sortable({
+      placeholder: "ui-state-highlight",
+      handle:'.glyphicon-sort',
+      cursor: "move",
+      axis: "y",
+      items: "tr:not(:last-child)",
+      update: function( event, ui ) {
+        var id = ui.item.find("[name=id]").val();
+        var sequenceNumberBeforeInput = ui.item.prev().find("[name=sequenceNumber]");
+
+        if (sequenceNumberBeforeInput.length == 0)
+          var order = 1;
+
+        else
+          var order = parseInt(sequenceNumberBeforeInput.val())+1;
+
+        $.ajax({
+          type: "POST",
+          url: "/admin/goals/home",
+          data: { sequenceNumber : order, id : id },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Tekkis viga");
+          }
+        });
+      }
+    });
   });
 </script>
 

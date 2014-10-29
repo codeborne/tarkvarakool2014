@@ -31,7 +31,10 @@ public class Home extends UserAwareController {
     goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
     Goal goalToBeChanged = (Goal) hibernate.get(Goal.class, id);
     Integer previousSequenceNumber = goalToBeChanged.getSequenceNumber();
-    if (previousSequenceNumber!=sequenceNumber) {
+    if (sequenceNumber > goals.size()) {
+      sequenceNumber = goals.size();
+    }
+    if (previousSequenceNumber != sequenceNumber) {
       goalToBeChanged.setSequenceNumber(0);
       hibernate.update(goalToBeChanged);
       hibernate.flush();
@@ -61,8 +64,9 @@ public class Home extends UserAwareController {
       hibernate.update(goalToBeChanged);
       hibernate.flush();
     }
-    return redirect(Home.class);
+
+    return render();
   }
 
-  }
+}
 

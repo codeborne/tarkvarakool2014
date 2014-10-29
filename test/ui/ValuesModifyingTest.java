@@ -9,9 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -47,7 +45,7 @@ public class ValuesModifyingTest extends UITest {
   public void successModifyingEmptyMeasuredValue () throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon").get(0).click();
+    $$(".glyphicon-pencil").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
     input.setValue("4564.656").pressEnter();
     input.shouldNotBe(visible); // wait for response
@@ -59,14 +57,14 @@ public class ValuesModifyingTest extends UITest {
   public void successModifyingExistingMeasuredValue() throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon").get(0).click();
+    $$(".glyphicon-pencil").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
     input.setValue("4345356498989898989898999118.65689898989555").pressEnter();
     input.shouldNotBe(visible); // wait for response
 
     $$(".value").get(0).shouldHave(text("4345356498989898989898999118.656899"));
 
-    $$(".glyphicon").get(0).click();
+    $$(".glyphicon-pencil").get(0).click();
     input = $$(".modify-value").get(0);
     input.shouldHave(value("4345356498989898989898999118.656899"));
 
@@ -81,7 +79,7 @@ public class ValuesModifyingTest extends UITest {
   public void modifyingEmptyForecastValue() throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon").get(1).click();
+    $$(".glyphicon-pencil").get(1).click();
     SelenideElement input = $$(".modify-value").get(1);
     input.setValue("0").pressEnter();
     input.shouldNotBe(visible); // wait for response
@@ -92,13 +90,13 @@ public class ValuesModifyingTest extends UITest {
   public void modifyingExistingForecastValue() throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon").get(1).click();
+    $$(".glyphicon-pencil").get(1).click();
     SelenideElement input = $$(".modify-value").get(1);
     input.setValue("53453").pressEnter();
     input.shouldNotBe(visible); // wait for response
     $$(".value").get(1).shouldHave(text("53453"));
 
-    $$(".glyphicon").get(1).click();
+    $$(".glyphicon-pencil").get(1).click();
     input = $$(".modify-value").get(1);
     input.setValue("-4").pressEnter();
     input.shouldNotBe(visible); // wait for response
@@ -109,14 +107,14 @@ public class ValuesModifyingTest extends UITest {
   public void deleteExistingMeasuredValue() throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon").get(0).click();
+    $$(".glyphicon-pencil").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
     input.setValue("-4564.656").pressEnter();
     input.shouldNotBe(visible); // wait for response
 
     $$(".value").get(0).shouldHave(text("-4564.656"));
 
-    $$(".glyphicon").get(0).click();
+    $$(".glyphicon-pencil").get(0).click();
     input = $$(".modify-value").get(0);
     input.setValue("").pressEnter();
     input.shouldNotBe(visible); // wait for response
@@ -128,13 +126,13 @@ public class ValuesModifyingTest extends UITest {
   public void deleteExistingForecastValue() throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon").get(3).click();
+    $$(".glyphicon-pencil").get(3).click();
     SelenideElement input = $$(".modify-value").get(3);
     input.setValue("53453").pressEnter();
     input.shouldNotBe(visible); // wait for response
     $$(".value").get(3).shouldHave(text("53453"));
 
-    $$(".glyphicon").get(3).click();
+    $$(".glyphicon-pencil").get(3).click();
     input = $$(".modify-value").get(3);
     input.setValue("").pressEnter();
     input.shouldNotBe(visible); // wait for response
@@ -144,10 +142,10 @@ public class ValuesModifyingTest extends UITest {
   @Test
   public void clickingOnPencilClosesPreviousInputFieldAndSaves() throws Exception {
     open("/admin/values/value");
-    $$(".goal").get(0).$$(".metric").get(0).$$(".glyphicon").get(3).click();
+    $$(".goal").get(0).$$(".metric").get(0).$$(".glyphicon-pencil").get(3).click();
     SelenideElement input = $$(".goal").get(0).$$(".metric").get(0).$$(".modify-value").get(3);
     input.setValue("432");
-    $$(".goal").get(0).$$(".metric").get(1).$$(".glyphicon").get(2).click();
+    $$(".goal").get(0).$$(".metric").get(1).$$(".glyphicon-pencil").get(2).click();
 
     input.shouldNotBe(visible);
     $$(".goal").get(0).$$(".metric").get(0).$$(".value").get(3).shouldHave(text("432"));

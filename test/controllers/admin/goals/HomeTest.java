@@ -28,7 +28,7 @@ public class HomeTest extends ControllerTest<Home> {
       new Goal("third goal", "", 3000, 3)));
     when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     List<Object> updatedGoals = getUpdatedEntities();
 
@@ -46,6 +46,38 @@ public class HomeTest extends ControllerTest<Home> {
       }
     }
 
+  }
+
+  @Test
+  public void postIfChangedSequenceNumberIsGreaterThanGoalsListSize() throws Exception {
+    controller.id = 8L;
+    controller.sequenceNumber = 5;
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
+    when(criteria.addOrder(any(Order.class))).thenReturn(criteria);
+    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", "", 1000, 1), new Goal("second goal", "", 2000, 2),
+      new Goal("third goal", "", 3000, 3)));
+    when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
+
+    assertRender(controller.post());
+
+    List<Object> updatedGoals = getUpdatedEntities();
+
+    assertTrue(updatedGoals.size() == 4);
+
+    for (Object goal : updatedGoals) {
+      Goal updatedGoal = (Goal) goal;
+      verify(hibernate, atLeastOnce()).update(updatedGoal);
+      if ("some goal".equals(updatedGoal.getName())) {
+        assertEquals(3, (int) updatedGoal.getSequenceNumber());
+      }
+      if ("second goal".equals(updatedGoal.getName())) {
+        assertEquals(1, (int) updatedGoal.getSequenceNumber());
+      }
+      if ("third goal".equals(updatedGoal.getName())) {
+        assertEquals(2, (int) updatedGoal.getSequenceNumber());
+      }
+    }
 
   }
 
@@ -60,7 +92,7 @@ public class HomeTest extends ControllerTest<Home> {
       new Goal("third goal", "", 3000, 3), new Goal("fourth goal", "", 4000, 4)));
     when(hibernate.get(Goal.class, 3L)).thenReturn(new Goal("fourth goal", "", 4000, 4));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     List<Object> updatedGoals = getUpdatedEntities();
 
@@ -96,7 +128,7 @@ public class HomeTest extends ControllerTest<Home> {
       new Goal("third goal", "", 3000, 3), new Goal("fourth goal", "", 4000, 4)));
     when(hibernate.get(Goal.class, 3L)).thenReturn(new Goal("fourth goal", "", 1000, 1));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
     verify(hibernate, never()).update(any(Goal.class));
   }
@@ -113,7 +145,7 @@ public class HomeTest extends ControllerTest<Home> {
     when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
     doThrow(mock(HibernateException.class)).when(hibernate).update(any(Goal.class));
 
-    assertRedirect(Home.class, controller.post());
+    assertRender(controller.post());
 
 
   }

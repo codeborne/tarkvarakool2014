@@ -5,7 +5,6 @@ import model.Goal;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,12 +15,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class DeleteTest extends ControllerTest<Delete> {
-
-  @Before
-  public void setUp() throws Exception {
-    when(session.getAttribute("username")).thenReturn("Some username");
-  }
-
 
   @Test (expected = HibernateException.class)
   public void postDeleteThrowsHibernateException() {
@@ -71,4 +64,5 @@ public class DeleteTest extends ControllerTest<Delete> {
 
     verify(hibernate).delete(deletableGoal);
   }
+
 }

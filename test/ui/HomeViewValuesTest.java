@@ -98,6 +98,23 @@ public class HomeViewValuesTest extends UITest {
     assertEquals("17", metricValues.get(5).text());
     assertEquals("18", metricValues.get(6).text());
   }
+
+  @Test
+  public void goalsAreDisplayedInCorrectOrder() throws Exception {
+    hibernate.save(new Goal("Eesmark3", "", 103, 3));
+    hibernate.save(new Goal("Eesmark1", "", 101, 1));
+    hibernate.save(new Goal("Eesmark5", "", 102, 5));
+    hibernate.save(new Goal("Eesmark4", "", 104, 4));
+    hibernate.save(new Goal("Eesmark2", "", 105, 2));
+    $("#MetricsValue").click();
+
+    $$(".goal").get(0).$("h4").shouldHave(text("Eesmark1"));
+    $$(".goal").get(1).$("h4").shouldHave(text("Eesmark2"));
+    $$(".goal").get(2).$("h4").shouldHave(text("Eesmark3"));
+    $$(".goal").get(3).$("h4").shouldHave(text("Eesmark4"));
+    $$(".goal").get(4).$("h4").shouldHave(text("Eesmark5"));
+
+  }
 }
 
 

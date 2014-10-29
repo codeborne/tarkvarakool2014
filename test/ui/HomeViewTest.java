@@ -13,6 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class HomeViewTest extends UITest {
 
+
   @Test
   public void GoalAndBudgetWithCorrectMetrics() {
 
@@ -42,6 +43,24 @@ public class HomeViewTest extends UITest {
     goalBlock2.$(".name").shouldHave(text("Eesmark2"));
     goalBlock2.$(".budget").shouldHave(text("12"));
     assertEquals("Moodik3", goalBlock2.$$(".metric").get(0).$(".name").getText());
+  }
+
+  @Test
+  public void goalsAreDisplayedInCorrectOrder() throws Exception {
+    hibernate.save(new Goal("Eesmark1", "", 101, 1));
+    hibernate.save(new Goal("Eesmark5", "", 102, 5));
+    hibernate.save(new Goal("Eesmark3", "", 103, 3));
+    hibernate.save(new Goal("Eesmark4", "", 104, 4));
+    hibernate.save(new Goal("Eesmark2", "", 105, 2));
+    open("/home");
+
+    $$(".goal").get(0).$("h4").shouldHave(text("Eesmark1"));
+    $$(".goal").get(1).$("h4").shouldHave(text("Eesmark2"));
+    $$(".goal").get(2).$("h4").shouldHave(text("Eesmark3"));
+    $$(".goal").get(3).$("h4").shouldHave(text("Eesmark4"));
+    $$(".goal").get(4).$("h4").shouldHave(text("Eesmark5"));
+
+
   }
 }
 
