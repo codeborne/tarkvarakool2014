@@ -105,7 +105,7 @@ public class GoalsOrderTest extends UITest {
 
   }
 
-  @Test
+  @Test @Ignore
   public void adminMovesElementToLastPosition() throws Exception {
     SelenideElement source = $$(".goal").get(1).$(".glyphicon-sort");
     SelenideElement target = $("#sortableGoals tr:nth-child(5)");
