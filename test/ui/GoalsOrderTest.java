@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
+import static com.codeborne.selenide.CollectionCondition.texts;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -38,25 +39,19 @@ public class GoalsOrderTest extends UITest {
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     $("#logout-button").click();
   }
 
   @Test
-  public void goalsAreDisplayedInCorrectOrder() throws Exception {
-
-    $$(".goal").get(0).$(".nameInTable").shouldHave(text("Eesmark1"));
-    $$(".goal").get(1).$(".nameInTable").shouldHave(text("Eesmark2"));
-    $$(".goal").get(2).$(".nameInTable").shouldHave(text("Eesmark3"));
-    $$(".goal").get(3).$(".nameInTable").shouldHave(text("Eesmark4"));
-    $$(".goal").get(4).$(".nameInTable").shouldHave(text("Eesmark5"));
-
+  public void goalsAreDisplayedInCorrectOrder() {
+    $$(".goal .nameInTable").shouldHave(
+      texts("Eesmark1", "Eesmark2", "Eesmark3", "Eesmark4", "Eesmark5"));
   }
 
   @Test
-  public void adminMovesElementToFirstPosition() throws Exception {
-
-    $$(".goal").get(2).$(".glyphicon-sort").dragAndDropTo("#sortableGoals tr:first-child");
+  public void adminMovesElementToFirstPosition() {
+    dragAndDrop($$(".goal").get(2).$(".glyphicon-sort"), -2);
 
     $$(".goal").get(0).$(".nameInTable").shouldHave(text("Eesmark3"));
     $$(".goal").get(0).$(".budgetInTable").shouldHave(text("103"));
@@ -68,69 +63,43 @@ public class GoalsOrderTest extends UITest {
   }
 
   @Test
-  public void goalsAreDisplayedInCorrectOrderInAdminValuesView() throws Exception {
+  public void goalsAreDisplayedInCorrectOrderInAdminValuesView() {
     open("/admin/values/value");
-
-    $$(".goal").get(0).$("h4").shouldHave(text("Eesmark1"));
-    $$(".goal").get(1).$("h4").shouldHave(text("Eesmark2"));
-    $$(".goal").get(2).$("h4").shouldHave(text("Eesmark3"));
-    $$(".goal").get(3).$("h4").shouldHave(text("Eesmark4"));
-    $$(".goal").get(4).$("h4").shouldHave(text("Eesmark5"));
-
+    $$(".goal h4").shouldHave(
+      texts("Eesmark1", "Eesmark2", "Eesmark3", "Eesmark4", "Eesmark5"));
   }
 
   @Test
-  public void adminMovesElementInTheMiddle() throws Exception {
-    $$(".goal").get(3).$(".glyphicon-sort").dragAndDropTo("#sortableGoals tr:nth-child(2) ");
+  public void adminMovesElementInTheMiddle() {
+    dragAndDrop($$(".goal").get(3).$(".glyphicon-sort"), -2);
 
-
-    $$(".goal").get(0).$(".nameInTable").shouldHave(text("Eesmark1"));
-    $$(".goal").get(1).$(".nameInTable").shouldHave(text("Eesmark4"));
-    $$(".goal").get(2).$(".nameInTable").shouldHave(text("Eesmark2"));
-    $$(".goal").get(3).$(".nameInTable").shouldHave(text("Eesmark3"));
-    $$(".goal").get(4).$(".nameInTable").shouldHave(text("Eesmark5"));
-
+    $$(".goal .nameInTable").shouldHave(texts("Eesmark1", "Eesmark4", "Eesmark2", "Eesmark3", "Eesmark5"));
   }
 
   @Test
-  public void adminTriesToMoveElementToLastRow() throws Exception {
-    $$(".goal").get(1).$(".glyphicon-sort").dragAndDropTo("#sortableGoals tr:last-child");
-
-    $$(".goal").get(0).$(".nameInTable").shouldHave(text("Eesmark1"));
-    $$(".goal").get(1).$(".nameInTable").shouldHave(text("Eesmark2"));
-    $$(".goal").get(2).$(".nameInTable").shouldHave(text("Eesmark3"));
-    $$(".goal").get(3).$(".nameInTable").shouldHave(text("Eesmark4"));
-    $$(".goal").get(4).$(".nameInTable").shouldHave(text("Eesmark5"));
-
-  }
-
-  @Test
-  public void adminMovesElementToLastPosition() throws Exception {
-    SelenideElement source = $$(".goal").get(1).$(".glyphicon-sort");
-    SelenideElement target = $("#sortableGoals tr:nth-child(5)");
-
-    slowDragAndDrop(source, target);
-    System.out.println("Result: " + $$("#sortableGoals tr"));
-
-    $$(".goal").get(0).$(".nameInTable").shouldHave(text("Eesmark1"));
-    $$(".goal").get(1).$(".nameInTable").shouldHave(text("Eesmark3"));
-    $$(".goal").get(2).$(".nameInTable").shouldHave(text("Eesmark4"));
-    $$(".goal").get(3).$(".nameInTable").shouldHave(text("Eesmark5"));
-    $$(".goal").get(4).$(".nameInTable").shouldHave(text("Eesmark2"));
-
-  }
-
-  private void slowDragAndDrop(SelenideElement source, SelenideElement target) {
-    System.out.println("Drag: " + source);
-    System.out.println("Drop to: " + target);
+  public void adminTriesToMoveElementToLastRow() {
+    dragAndDrop($$(".goal").get(1).$(".glyphicon-sort"), +5);
     
-    Actions actions = actions().clickAndHold(source.toWebElement());
-    int numberOfMovements = (int) Math.ceil(Math.abs(target.getLocation().getY() - source.getLocation().getY()) / 10.0);
-    int increment = 10 * (int) Math.signum(target.getLocation().getY() - source.getLocation().getY());
-    for (int i = 0; i < numberOfMovements; i++) {
-      actions.moveByOffset(0, increment);
-      actions.pause(50);
+    $$(".goal .nameInTable").shouldHave(
+      texts("Eesmark1", "Eesmark2", "Eesmark3", "Eesmark4", "Eesmark5"));
+  }
+
+  @Test
+  public void adminMovesElementToLastPosition() {
+    dragAndDrop($$(".goal").get(1).$(".glyphicon-sort"), +3);
+    $$(".goal .nameInTable").shouldHave(texts("Eesmark1", "Eesmark3", "Eesmark4", "Eesmark5", "Eesmark2"));
+  }
+
+  private void dragAndDrop(SelenideElement draggable, int shiftByRows) {
+    SelenideElement row = draggable.closest("tr");
+    
+    Actions actions = actions().clickAndHold(draggable.toWebElement());
+    if (shiftByRows > 0) {
+      actions.moveByOffset(0, shiftByRows * row.getSize().getHeight() + 5);
     }
-    actions.release(target.toWebElement()).build().perform();
+    else {
+      actions.moveByOffset(0, shiftByRows * row.getSize().getHeight() - 5);
+    }
+    actions.release().build().perform();
   }
 }
