@@ -6,7 +6,6 @@ import model.Metric;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
@@ -54,7 +53,7 @@ public class GoalsOrderTest extends UITest {
 
   }
 
-  @Test @Ignore
+  @Test
   public void adminMovesElementToFirstPosition() throws Exception {
 
     $$(".goal").get(2).$(".glyphicon-sort").dragAndDropTo("#sortableGoals tr:first-child");
@@ -80,7 +79,7 @@ public class GoalsOrderTest extends UITest {
 
   }
 
-  @Test @Ignore
+  @Test
   public void adminMovesElementInTheMiddle() throws Exception {
     $$(".goal").get(3).$(".glyphicon-sort").dragAndDropTo("#sortableGoals tr:nth-child(2) ");
 
@@ -93,7 +92,7 @@ public class GoalsOrderTest extends UITest {
 
   }
 
-  @Test @Ignore
+  @Test
   public void adminTriesToMoveElementToLastRow() throws Exception {
     $$(".goal").get(1).$(".glyphicon-sort").dragAndDropTo("#sortableGoals tr:last-child");
 
@@ -105,7 +104,7 @@ public class GoalsOrderTest extends UITest {
 
   }
 
-  @Test @Ignore
+  @Test
   public void adminMovesElementToLastPosition() throws Exception {
     SelenideElement source = $$(".goal").get(1).$(".glyphicon-sort");
     SelenideElement target = $("#sortableGoals tr:nth-child(5)");
@@ -125,8 +124,8 @@ public class GoalsOrderTest extends UITest {
     Actions actions = actions().clickAndHold(source);
     int numberOfMovements = Math.abs(target.getLocation().getY() - source.getLocation().getY());
     for (int i = 0; i < numberOfMovements; i++) {
-      actions = actions.moveByOffset(0, 1);
+      actions.moveByOffset(0, 1);
     }
-    actions.release().build().perform();
+    actions.release(target).build().perform();
   }
 }
