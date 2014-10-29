@@ -27,15 +27,15 @@
         <td class="sort">
           <span class="glyphicon glyphicon-sort hand-pointer"></span>
           <form class="orderNumberForm" goalId="post" action="/admin/metrics/modify">
-            <input type="hidden" name="goalId" value="${goal.id}">
-            <input type="hidden" name="metricId" value="${metric.id}">
-            <input type="hidden" name="orderNumber" value="${metric.orderNumber}">
+            <input type="hidden" name="goalId" value="${goal.id?c}">
+            <input type="hidden" name="metricId" value="${metric.id?c}">
+            <input type="hidden" name="orderNumber" value="${metric.orderNumber?c}">
             <input type="hidden" name="name" value="${metric.name}">
             <input type="hidden" name="publicDescription" value="${metric.publicDescription}">
             <input type="hidden" name="privateDescription" value="${metric.privateDescription}">
-            <input type="hidden" name="startLevel" value="${metric.startLevel}">
+            <input type="hidden" name="startLevel" value="${metric.startLevel?c}">
             <input type="hidden" name="commentOnStartLevel" value="${metric.commentOnStartLevel}">
-            <input type="hidden" name="targetLevel" value="${metric.targetLevel}">
+            <input type="hidden" name="targetLevel" value="${metric.targetLevel?c}">
             <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
             <input type="hidden" name="infoSource" value="${metric.infoSource}">
             <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
