@@ -6,22 +6,22 @@
   <link rel="shortcut icon" href="/favicon.png" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles.css"/>
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700,400italic,700italic,300italic' rel='stylesheet' type='text/css'>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 </head>
 <body>
   <div class="navbar navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-left title">Infoühiskonna arendamise mõõdikud</div>
+    <div class="container container-top">
       <div class="navbar-collapse collapse navbar-right">
         <#if loggedInUsername??>
           <form class="navbar-form navbar-left" action="/admin/logout">
-            <span class="greetings">Tere, ${loggedInUsername}</span>
-            <button id="logout-button" type="submit" class="btn-sm btn-danger logout-button">Logi välja</button>
+            <span class="greetings">Tere, <strong>${loggedInUsername}</strong></span>
+            <button id="logout-button" type="submit" class="authentication-button"><span class="glyphicon glyphicon-lock"></span> Logi välja</button>
           </form>
         <#else>
           <form class="navbar-form navbar-left" action="/admin/login">
-            <button id="login-button" type="submit" class="btn-sm btn-success">Logi sisse</button>
+            <button id="login-button" type="submit" class="authentication-button"><span class="glyphicon glyphicon-lock"></span> Logi sisse</button>
           </form>
         </#if>
       </div>
@@ -29,7 +29,15 @@
   </div>
 
   <div class="container theme-showcase" role="main">
-    <#nested>
+    <table class="toprow">
+      <tr>
+        <td><img src="/images/rm-logo.png"></td>
+        <td><div class="symbol"></div></td>
+        <td>Infoühiskonna arendamise mõõdikud</td>
+        <#nested>
+  </div>
+  <div class="footer">
+
   </div>
 </body>
 </html>
