@@ -23,6 +23,7 @@ public class Launcher {
       server.join();
     } catch (BindException e) {
       System.err.println(e.toString());
+      System.exit(-1);
     }
   }
 
