@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
   <Appenders>
-    <RollingFile name="Console" fileName="logs/general.log" filePattern="logs/general.log.%d{yyyyMMdd}">
+    <Console name="Console" target="SYSTEM_OUT">
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5p %c{1} - %msg%n"/>
-      <Policies><TimeBasedTriggeringPolicy/></Policies>
-    </RollingFile>
+    </Console>
   </Appenders>
   <Loggers>
-    <Logger name="org.hibernate.SQL" level="warn"/>
+    <Logger name="org.hibernate.SQL" level="debug"/>
     <Root level="info">
       <AppenderRef ref="Console"/>
     </Root>
