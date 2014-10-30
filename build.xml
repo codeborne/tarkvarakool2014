@@ -12,6 +12,7 @@
 
   <target name="compile">
     <mkdir dir="classes"/>
+    <mkdir dir="logs"/>
     <javac srcdir="src" destdir="classes" debug="true" encoding="utf-8" includeantruntime="false">
       <classpath>
         <fileset dir="lib" includes="*.jar"/>
@@ -20,6 +21,11 @@
     <copy todir="classes">
       <fileset dir="src">
         <exclude name="**/*.java"/>
+      </fileset>
+    </copy>
+    <copy todir="classes">
+      <fileset dir="conf">
+        <exclude name="log4j2-test.xml"/>
       </fileset>
     </copy>
   </target>
