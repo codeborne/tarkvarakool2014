@@ -20,10 +20,10 @@ public class Launcher {
     Server server = createServer(port);
     try {
       server.start();
+      server.join();
     } catch (BindException e) {
-      System.err.println(e);
+      System.err.println(e.toString());
     }
-    server.join();
   }
 
   public static Server createServer(int port) throws Exception {
