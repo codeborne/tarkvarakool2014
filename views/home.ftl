@@ -13,9 +13,9 @@
               <th>Mõõdik</th>
               <th>Kirjeldus</th>
               <th>Algtase</th>
-              <th>Algtaseme kommentaar</th>
+              <th>Kommentaar</th>
               <th>Sihttase</th>
-              <th>Sihttaseme kommentaar</th>
+              <th>Kommentaar</th>
               <th>Infoallikas</th>
             </tr>
           </thead>

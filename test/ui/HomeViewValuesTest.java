@@ -40,7 +40,7 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(new Metric(goal2, "Mood3", "", "", "", 0, "", 0, "", "", "", 1.0));
     hibernate.save(new Metric(goal2, "Mood4", "", "", "", 0, "", 0, "", "", "", 2.0));
 
-    $("#MetricsValue").click();
+    $(".switch-button.active").click();
 
     ElementsCollection goals = $$(".goal");
 
@@ -77,9 +77,9 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(metric);
     hibernate.flush();
 
-    $("#MetricsValue").click();
+    $$(".switch-button").get(1).click();
 
-    $$(".goal").shouldHaveSize(1);
+    $$(".goal").shouldHaveSize(2);
 
     SelenideElement goalBlock = $$(".goal").get(0);
     $(goalBlock, "h4.name").shouldHave(text("Eesmark"));
@@ -97,6 +97,8 @@ public class HomeViewValuesTest extends UITest {
     assertEquals("16", metricValues.get(4).text());
     assertEquals("17", metricValues.get(5).text());
     assertEquals("18", metricValues.get(6).text());
+
+
   }
 
   @Test
@@ -106,7 +108,7 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(new Goal("Eesmark5", "", 102, 5));
     hibernate.save(new Goal("Eesmark4", "", 104, 4));
     hibernate.save(new Goal("Eesmark2", "", 105, 2));
-    $("#MetricsValue").click();
+    $(".switch-button.active").click();
 
     $$(".goal").get(0).$("h4").shouldHave(text("Eesmark1"));
     $$(".goal").get(1).$("h4").shouldHave(text("Eesmark2"));
