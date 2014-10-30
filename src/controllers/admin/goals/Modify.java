@@ -17,7 +17,7 @@ public class Modify extends Save {
   public Result get() {
     Goal goal = (Goal) hibernate.get(Goal.class, id);
     if (goal == null) {
-      return redirect(Add.class);
+      return redirect(Home.class);
     } else {
       name = goal.getName();
       comment = goal.getComment();

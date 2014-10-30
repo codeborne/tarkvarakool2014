@@ -9,6 +9,7 @@
     <tr>
       <th>Sorteeri</th>
       <th>Mõõdik</th>
+      <th>Ühik</th>
       <th>Avalik kirjeldus</th>
       <th>Mitteavalik kirjeldus</th>
       <th>Algtase</th>
@@ -31,6 +32,7 @@
             <input type="hidden" name="metricId" value="${metric.id?c}">
             <input type="hidden" name="orderNumber" value="${metric.orderNumber?c}">
             <input type="hidden" name="name" value="${metric.name}">
+            <input type="hidden" name="unit" value="${metric.unit}">
             <input type="hidden" name="publicDescription" value="${metric.publicDescription}">
             <input type="hidden" name="privateDescription" value="${metric.privateDescription}">
             <input type="hidden" name="startLevel" value="${metric.startLevel?c}">
@@ -39,26 +41,69 @@
             <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
             <input type="hidden" name="infoSource" value="${metric.infoSource}">
             <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
-            <input type="hidden" name="unit" value="${metric.unit}">
           </form>
         </td>
-        <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
-        <td class="publicDescription">${metric.publicDescription}</td>
-        <td class="privateDescription">${metric.privateDescription}</td>
-        <td class="startLevel">${metric.startLevel?c}</td>
-        <td class="commentOnStartLevel">${metric.commentOnStartLevel}</td>
-        <td class="targetLevel">${metric.targetLevel?c}</td>
-        <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
-        <td class="infoSource">${metric.infoSource}</td>
-        <td class="institutionToReport">${metric.institutionToReport}</td>
+
+
+        <td class="name">
+          <span class="value">${metric.name}</span>
+          <input class="value form-control" name="name" value="${metric.name}" style="display: none;">
+        </td>
+        <td class="unit">
+          <span class="value">${metric.unit}</span>
+          <input class="value form-control" name="unit" value="${metric.unit}" style="display: none;">
+        </td>
+        <td class="publicDescription">
+          <span class="value">${metric.publicDescription}</span>
+          <input class="value form-control" name="publicDescription" value="${metric.publicDescription}" style="display: none;">
+        </td>
+        <td class="privateDescription">
+          <span class="value">${metric.privateDescription}</span>
+          <input class="value form-control" name="privateDescription" value="${metric.privateDescription}" style="display: none;">
+        </td>
+        <td class="startLevel">
+          <span class="value">${metric.startLevel}</span>
+          <input class="value form-control" name="startLevel" value="${metric.startLevel}" style="display: none;">
+        </td>
+        <td class="commentOnStartLevel">
+          <span class="value">${metric.commentOnStartLevel}</span>
+          <input class="value form-control" name="commentOnStartLevel" value="${metric.commentOnStartLevel}" style="display: none;">
+        </td>
+        <td class="targetLevel">
+          <span class="value">${metric.targetLevel}</span>
+          <input class="value form-control" name="targetLevel" value="${metric.targetLevel}" style="display: none;">
+        </td>
+        <td class="commentOnTargetLevel">
+          <span class="value">${metric.commentOnTargetLevel}</span>
+          <input class="value form-control" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}" style="display: none;">
+        </td>
+        <td class="infoSource">
+          <span class="value">${metric.infoSource}</span>
+          <input class="value form-control" name="infoSource" value="${metric.infoSource}" style="display: none;">
+        </td>
+        <td class="institutionToReport">
+          <span class="value">${metric.institutionToReport}</span>
+          <input class="value form-control" name="institutionToReport" value="${metric.institutionToReport}" style="display: none;">
+        </td>
+
         <td>
-          <form action="modify">
-            <input type="hidden" value="${goal.id?c}" name="goalId">
-            <input type="hidden" name="metricId" value="${metric.id?c}"/>
-            <button class="modifyButton" type="submit" class="btn btn-default btn-sm">
+
+          <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
+          <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+          <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
+          <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Salvesta"
+                 style="display: none" data-action="modify">
+          <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
+                 onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="Tühista" style="display:none"
+                 data-action="modify">
+          <span class="value">
+            <button class="modifyButton" type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
-          </form>
+          </span>
+
+
+
         </td>
         <td>
           <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
@@ -70,18 +115,61 @@
         </td>
       </tr>
     </#list>
+
+  <tr class="addMetric">
+    <td></td>
+    <td><input name="name" class="value form-control" placeholder="Mõõdik" value="${name!""}"></td>
+    <td><input name="unit" class="value form-control" placeholder="Ühik" value="${unit!""}"></td>
+    <td><input name="publicDescription" class="value form-control" placeholder="Avalik kirjeldus" value="${publicDescription!""}"></td>
+    <td><input name="privateDescription" class="value form-control" placeholder="Mitteavalik kirjeldus" value="${privateDescription!""}"></td>
+    <td><input name="startLevel" type="number" class="value form-control" placeholder="Algtase" value="${(startLevel?c)!0}"></td>
+    <td><input name="commentOnStartLevel" class="value form-control" placeholder="Algtaseme kommentaar" value="${commentOnStartLevel!""}"></td>
+    <td><input name="targetLevel" type="number" class="value form-control" placeholder="Sihttase" value="${(targetLevel?c)!0}"></td>
+    <td><input name="commentOnTargetLevel" class="value form-control" placeholder="Sihttaseme kommentaar" value="${commentOnTargetLevel!""}"></td>
+    <td><input name="infoSource" class="value form-control" placeholder="Infoallikas" value="${infoSource!""}"></td>
+    <td><input name="institutionToReport" class="value form-control" placeholder="Asutus, kuhu raporteerida" value="${institutionToReport!""}"></td>
+    <td>
+      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Lisa" data-action="add">
+      <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+    </td>
+  </tr>
   </tbody>
 </table>
 
-<button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'">
-  Pealehele
-</button>
-<form action="add">
-  <input type="hidden" value="${goal.id?c}" name="goalId">
-<button type="submit" id="addMetricButton" class="btn btn-default btn-sm">
-  Lisa mõõdik
-</button>
-</form>
+<span id="errors"></span>
+
+<button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'">Pealehele</button>
+
+
+<script>
+  $(function () {
+
+    var responseHandler = function (response) {
+      if (response.trim() == "") {
+        window.location = window.location;
+      }
+      $("#errors").html(response);
+    };
+
+    var saveClickHandler = function (event) {
+      var button = $(event.target);
+      var values = button.closest('tr').find('input.value');
+      $.post(button.data("action"), values.serialize(), responseHandler);
+    };
+
+    $('.saveGoalButton').click(saveClickHandler);
+
+    var modifyClickHandler = function (event) {
+      $("input.value").hide();
+      $("span.value").show();
+      var row = $(event.target).closest('tr');
+      row.find("span.value").hide();
+      row.find("input.value").show();
+    };
+
+    $('.modifyButton').click(modifyClickHandler);
+  });
+</script>
 
 <script>
   $(function() {

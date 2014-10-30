@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -46,29 +45,31 @@ public class MetricsModifyingTest extends UITest {
 
   @Test
   public void adminClicksOnModifyButton() {
-    $(By.name("name")).shouldHave(text("Some metric"));
-    $(By.name("publicDescription")).shouldHave(text(""));
+    $(".name").$("input").shouldHave(value("Some metric"));
+    $(".publicDescription").$("input").shouldHave(value("abc"));
   }
 
   @Test
   public void adminModifiesMetric(){
-    $(By.name("name")).shouldHave(text("Some metric"));
-    $(By.name("unit")).shouldHave(text("%"));
-    $(By.name("publicDescription")).shouldHave(text("abc"));
-    $(By.name("privateDescription")).shouldHave(text("def"));
-    $(By.name("startLevel")).shouldHave(value("10"));
-    $(By.name("commentOnStartLevel")).shouldHave(text("ghi"));
-    $(By.name("targetLevel")).shouldHave(value("10"));
-    $(By.name("commentOnTargetLevel")).shouldHave(text("jkl"));
-    $(By.name("infoSource")).shouldHave(value("mno"));
-    $(By.name("institutionToReport")).shouldHave(value("pqr"));
+    $(".name").$("input").shouldHave(value("Some metric"));
+    $(".unit").$("input").shouldHave(value("%"));
+    $(".publicDescription").$("input").shouldHave(value("abc"));
+    $(".privateDescription").$("input").shouldHave(value("def"));
+    $(".startLevel").$("input").shouldHave(value("10"));
+    $(".commentOnStartLevel").$("input").shouldHave(value("ghi"));
+    $(".targetLevel").$("input").shouldHave(value("10"));
+    $(".commentOnTargetLevel").$("input").shouldHave(value("jkl"));
+    $(".infoSource").$("input").shouldHave(value("mno"));
+    $(".institutionToReport").$("input").shouldHave(value("pqr"));
 
-    $(By.name("name")).setValue("Metric");
-    $(By.name("unit")).setValue("EUR");
 
-    $(".submitButton").click();
+    $(".name").$("input").setValue("Metric");
+    $(".unit").$("input").setValue("EUR");
 
-    assertEquals("Metric (EUR)", $$("tr.metric").get(0).$(".name").getText());
+    $(".saveGoalButton").click();
+
+    assertEquals("Metric", $$("tr.metric").get(0).$(".name").getText());
+    assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
   }
 }
 

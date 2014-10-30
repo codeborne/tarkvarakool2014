@@ -148,7 +148,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     controller.name = "metric";
     controller.goalId = 5L;
 
-    assertRedirect("/admin/metrics/metrics?goalId=5", controller.post());
+    assertRender(controller.post());
 
     verify(controller).save();
   }
@@ -177,7 +177,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     controller.institutionToReport = "f   ";
     controller.goalId = 5L;
 
-    assertRedirect("/admin/metrics/metrics?goalId=5", controller.post());
+    assertRender(controller.post());
 
     assertEquals("metric",controller.name);
     assertEquals("%",controller.unit);

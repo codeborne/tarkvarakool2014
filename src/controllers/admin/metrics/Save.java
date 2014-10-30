@@ -18,9 +18,9 @@ public abstract class Save extends UserAwareController {
   public String unit;
   public String publicDescription;
   public String privateDescription;
-  public Integer startLevel = 0;
+  public Integer startLevel;
   public String commentOnStartLevel;
-  public Integer targetLevel = 0;
+  public Integer targetLevel;
   public String commentOnTargetLevel;
   public String infoSource;
   public String institutionToReport;
@@ -41,7 +41,6 @@ public abstract class Save extends UserAwareController {
       try {
         trimAllInput();
         save();
-        return redirect(Metrics.class).withParam("goalId", goalId);
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
         errorsList.add("See mõõdik on juba sisestatud.");

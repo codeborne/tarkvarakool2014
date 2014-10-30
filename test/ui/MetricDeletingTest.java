@@ -66,7 +66,7 @@ public class MetricDeletingTest extends UITest {
 
     assertEquals("another metric", metrics.get(0).$(".name").getText());
     assertEquals("Some metric", metrics.get(1).$(".name").getText());
-    assertEquals("zzz (USD)", metrics.get(2).$(".name").getText());
+    assertEquals("zzz", metrics.get(2).$(".name").getText());
   }
 
 

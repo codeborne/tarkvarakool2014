@@ -28,7 +28,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.id = 2L;
     when(hibernate.get(Goal.class, 2L)).thenReturn(null);
 
-    assertRedirect(Add.class, controller.get());
+    assertRedirect(Home.class, controller.get());
   }
 
   @Test

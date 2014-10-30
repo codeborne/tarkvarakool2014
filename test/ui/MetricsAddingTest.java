@@ -37,59 +37,47 @@ public class MetricsAddingTest extends UITest {
   @Test
   public void submitFailsWithoutMetricName() throws Exception {
     $$(".metricsButton").get(0).click();
-    $("#addMetricButton").click();
 
-
-    $(".submitButton").click();
+    $(".saveGoalButton").click();
 
     $(".alert-danger").shouldHave(text("Sisestage mõõdik."));
-    $("h3").shouldHave(text("Lisage uus mõõdik: Tere"));
+
   }
 
   @Test
   public void submitSuccessWithMetricName() throws Exception {
     $$(".metricsButton").get(0).click();
-    $("#addMetricButton").click();
 
-    $(By.name("name")).setValue("Koer");
-    $(".submitButton").click();
+    $(".addMetric").$(By.name("name")).setValue("Koer");
+    $(".saveGoalButton").click();
 
     assertEquals("Koer", $$("tr.metric").get(0).$(".name").getText());
   }
 
-  @Test
-  public void adminCancelsAddingMetric() throws Exception {
-    $$(".metricsButton").get(0).click();
-
-    $("#goBackButton").click();
-    SelenideElement row = $$("tr.goal").get(0);
-
-    row.$(".nameInTable").getText();
-  }
 
   @Test
   public void successIfAllFieldsHaveValue() throws Exception {
     $$(".metricsButton").get(0).click();
-    $("#addMetricButton").click();
 
-    $(By.name("name")).setValue("Koer");
-    $(By.name("unit")).setValue("%");
-    $(By.name("publicDescription")).setValue("trallalaa");
-    $(By.name("privateDescription")).setValue("trullalaa");
-    $(By.name("startLevel")).setValue("435");
-    $(By.name("commentOnStartLevel")).setValue("blahblah");
-    $(By.name("targetLevel")).setValue("1");
-    $(By.name("commentOnTargetLevel")).setValue("iejoja");
-    $(By.name("infoSource")).setValue("ioejoia");
-    $(By.name("institutionToReport")).setValue("koht");
+    $(".addMetric").$(By.name("name")).setValue("Koer");
+    $(".addMetric").$(By.name("unit")).setValue("%");
+    $(".addMetric").$(By.name("publicDescription")).setValue("trallalaa");
+    $(".addMetric").$(By.name("privateDescription")).setValue("trullalaa");
+    $(".addMetric").$(By.name("startLevel")).setValue("435");
+    $(".addMetric").$(By.name("commentOnStartLevel")).setValue("blahblah");
+    $(".addMetric").$(By.name("targetLevel")).setValue("1");
+    $(".addMetric").$(By.name("commentOnTargetLevel")).setValue("iejoja");
+    $(".addMetric").$(By.name("infoSource")).setValue("ioejoia");
+    $(".addMetric").$(By.name("institutionToReport")).setValue("koht");
 
-    $(".submitButton").click();
+    $(".saveGoalButton").click();
 
     $$("tr.metric").shouldHaveSize(1);
 
     SelenideElement row = $$("tr.metric").get(0);
 
-    row.$(".name").shouldHave(text("Koer (%)"));
+    row.$(".name").shouldHave(text("Koer"));
+    row.$(".unit").shouldHave(text("%"));
     row.$(".publicDescription").shouldHave(text("trallalaa"));
     row.$(".privateDescription").shouldHave(text("trullalaa"));
     row.$(".startLevel").shouldHave(text("435"));

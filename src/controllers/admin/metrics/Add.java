@@ -28,6 +28,12 @@ public class Add extends Save {
 
   @Override
   protected void save() {
+    goal = (Goal) hibernate.get(Goal.class, goalId);
+    orderNumber = (Double) hibernate.createCriteria(Metric.class)
+      .add(Restrictions.eq("goal", goal))
+      .setProjection(Projections.max("orderNumber")).uniqueResult();
+    orderNumber = Math.ceil(orderNumber == null ? 0 : orderNumber) + 1;
+
     hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevel, commentOnStartLevel,
       targetLevel, commentOnTargetLevel, infoSource, institutionToReport, orderNumber));
     hibernate.flush();

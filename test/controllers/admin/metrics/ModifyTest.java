@@ -35,7 +35,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 3L;
     when(hibernate.get(Metric.class, 2L)).thenReturn(null);
 
-    assertRedirect("/admin/metrics/add?goalId=3", controller.get());
+    assertRedirect("/admin/metrics/metrics?goalId=3", controller.get());
   }
 
   @Test

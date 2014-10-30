@@ -2,18 +2,30 @@ package controllers.admin.metrics;
 
 import controllers.ControllerTest;
 import model.Metric;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.AggregateProjection;
+import org.hibernate.criterion.Criterion;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 public class AddTest extends ControllerTest<Add> {
+
 
   @Test
   public void saveRequiredFieldsOnly() {
     controller.name = "metric";
     controller.goalId = 5L;
-    controller.orderNumber = 5.5;
+
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
+    when(criteria.createCriteria(anyString())).thenReturn(criteria);
+    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
+    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
+    when(criteria.uniqueResult()).thenReturn(6.2);
 
     controller.save();
 
@@ -23,15 +35,17 @@ public class AddTest extends ControllerTest<Add> {
     assertEquals(null,savedMetric.getUnit());
     assertEquals(null,savedMetric.getPublicDescription());
     assertEquals(null,savedMetric.getPrivateDescription());
-    assertEquals(0, (int) savedMetric.getStartLevel());
+    assertEquals(null,savedMetric.getStartLevel());
     assertEquals(null,savedMetric.getCommentOnStartLevel());
-    assertEquals(0,(int) savedMetric.getTargetLevel());
+    assertEquals(null,savedMetric.getTargetLevel());
     assertEquals(null,savedMetric.getCommentOnTargetLevel());
     assertEquals(null,savedMetric.getInfoSource());
     assertEquals(null, savedMetric.getInstitutionToReport());
-    assertEquals((Double) 5.5, savedMetric.getOrderNumber());
+    assertEquals((Double) 8.0, savedMetric.getOrderNumber());
     verify(hibernate).save(savedMetric);
   }
+
+
 
   @Test
   public void saveAllFields()  {
@@ -45,7 +59,13 @@ public class AddTest extends ControllerTest<Add> {
     controller.commentOnTargetLevel = "d";
     controller.infoSource = "e";
     controller.institutionToReport = "f";
-    controller.orderNumber = 1.0;
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
+    when(criteria.createCriteria(anyString())).thenReturn(criteria);
+    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
+    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
+    when(criteria.uniqueResult()).thenReturn(2.2);
+
 
     controller.save();
 
@@ -61,7 +81,7 @@ public class AddTest extends ControllerTest<Add> {
     assertEquals("d",savedMetric.getCommentOnTargetLevel());
     assertEquals("e",savedMetric.getInfoSource());
     assertEquals("f",savedMetric.getInstitutionToReport());
-    assertEquals((Double) 1.0, savedMetric.getOrderNumber());
+    assertEquals((Double) 4.0, savedMetric.getOrderNumber());
     verify(hibernate).save(savedMetric);
   }
 }

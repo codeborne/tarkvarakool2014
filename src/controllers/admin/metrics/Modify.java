@@ -19,8 +19,9 @@ public class Modify extends Save {
     Metric metric = (Metric)hibernate.get(Metric.class, metricId);
 
     if(metric == null) {
-      return redirect(Add.class).withParam("goalId", goalId);
-    } else {
+      return redirect(Metrics.class).withParam("goalId", goalId);
+    }
+    else {
       name = metric.getName();
       unit = metric.getUnit();
       publicDescription = metric.getPublicDescription();

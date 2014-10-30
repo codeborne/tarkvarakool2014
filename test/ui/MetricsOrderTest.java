@@ -47,8 +47,8 @@ public class MetricsOrderTest extends UITest {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
 
-    $$("td.name").get(0).shouldHave(text("Some metric1 (%)"));
-    $$("td.name").get(1).shouldHave(text("Some metric2 (%)"));
+    $$("td.name").get(0).shouldHave(text("Some metric1"));
+    $$("td.name").get(1).shouldHave(text("Some metric2"));
     $$("td.name").get(2).shouldHave(text("Some metric3"));
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
