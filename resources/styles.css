@@ -159,7 +159,7 @@ body, td {
   text-align: center;
 }
 .ui-state-highlight {
-  background-color: lightgreen;
+  background-color: #E0E0E0;
 }
 
 input.modify-value {
@@ -188,7 +188,31 @@ input.modify-value {
   box-shadow:         0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   z-index: 999;
   position: relative;
+
 }
+.panel-login {
+  height: 600px;
+  background-color: #fff;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border: 10;
+  padding: 25px 40px;
+  box-shadow:         0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  position: relative;
+
+}
+.login-center {
+  padding: 140px 470px;
+}
+
+#login-h3 {
+  color: #069;
+  font-size: 30px;
+
+}
+
 
 .panel {
   border: 0;
@@ -242,5 +266,5 @@ input.modify-value {
   margin-top: -50px;
   height: 100px;
   z-index: -1;
-
 }
+

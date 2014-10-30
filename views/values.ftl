@@ -1,6 +1,6 @@
 <@html values_active=true>
   <#list goals as goal>
-  <div class="panel panel-default goal">
+  <div class="panel panel-default">
   <div class="goal">
     <div class="panel-heading">
       <h4 class="name"> ${goal.name}</h4>
@@ -32,5 +32,6 @@
   </div>
   </div>
   </#list>
+
 </@html>
 
