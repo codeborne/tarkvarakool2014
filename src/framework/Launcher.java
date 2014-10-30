@@ -7,6 +7,8 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.server.session.SessionHandler;
 
+import java.net.BindException;
+
 public class Launcher {
 
   private final static Logger LOG = LogManager.getLogger();
@@ -16,7 +18,11 @@ public class Launcher {
     if (args.length == 1) port = Integer.parseInt(args[0]);
     prepareLogging();
     Server server = createServer(port);
-    server.start();
+    try {
+      server.start();
+    } catch (BindException e) {
+      System.err.println(e);
+    }
     server.join();
   }
 
