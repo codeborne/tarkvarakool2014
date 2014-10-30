@@ -11,10 +11,10 @@
 
 cd `dirname $(readlink -f $0)`
 
-PID=`cat moodikud.pid`
+PID=`cat server.pid`
 PS=`ps -p $PID | grep $PID | awk '{ print $1 }' | head -1`
 
-EXEC="java -cp conf:classes:lib/* -Djetty.port=7000 Launcher >> moodikud.out 2>> moodikud.err &"
+EXEC="java -cp classes:lib/* Launcher 11001 >> moodikud.out 2>> moodikud.err &"
 
 start () {
   if [ "$PS" = "" ]
