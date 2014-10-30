@@ -1,15 +1,10 @@
 <@html>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-default active" onclick="location='/admin/goals/home'">Eesmärgid</button>
-  <button type="button" id="addMetricsValue" class="btn btn-default" onclick="location='/admin/values/value'">
-    Väärtused
-  </button>
-</div>
-<br><br>
-
-<h3>Eesmärgid</h3>
-
+<div class="panel panel-default">
+<div class="panel-heading">
+  <h4 class="name">Eesmärgid</h4>
+  </div>
+<div class="panel-body">
 <table class="table table-hover">
   <thead>
   <tr>
@@ -101,6 +96,8 @@
   </tr>
   </tbody>
 </table>
+</div>
+  </div>
 
 <span id="errors"></span>
 

@@ -79,7 +79,7 @@ public class HomeViewValuesTest extends UITest {
 
     $$(".switch-button").get(1).click();
 
-    $$(".goal").shouldHaveSize(2);
+    $$(".goal").shouldHaveSize(1);
 
     SelenideElement goalBlock = $$(".goal").get(0);
     $(goalBlock, "h4.name").shouldHave(text("Eesmark"));

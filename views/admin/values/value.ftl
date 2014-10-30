@@ -50,18 +50,13 @@
 
 </script>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-default" onclick="location='/admin/goals/home'">Eesmärgid</button>
-  <button type="button" id="addMetricsValue" class="btn btn-default active" onclick="location='/admin/values/value'">
-    Väärtused
-  </button>
-</div>
+
 <br><br>
 <span class="forecast-indicator">P - prognoositav väärtus</span>
 <br><br>
   <#list goals as goal>
   <div class="goal">
-    <h4 class="name"> Eesmärk: ${goal.name}</h4>
+    <h4 class="name"> ${goal.name}</h4>
 
 
     <table class="table">
