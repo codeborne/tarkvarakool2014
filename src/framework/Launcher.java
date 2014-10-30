@@ -22,6 +22,7 @@ public class Launcher {
       server.start();
       server.join();
     } catch (BindException e) {
+      System.err.println("Using port " + port);
       System.err.println(e.toString());
       System.exit(-1);
     }
