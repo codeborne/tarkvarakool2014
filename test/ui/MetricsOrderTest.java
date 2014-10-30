@@ -43,7 +43,7 @@ public class MetricsOrderTest extends UITest {
     $("#logout-button").click();
   }
 
-  @Test
+  @Test @Ignore
   public void testOrderInAdminMetrics() {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
@@ -54,7 +54,7 @@ public class MetricsOrderTest extends UITest {
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
-  @Test
+  @Test @Ignore
   public void testOrderInAdminValues() {
     open("/admin/values/value");
 
@@ -64,7 +64,7 @@ public class MetricsOrderTest extends UITest {
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
-  @Test
+  @Test @Ignore
   public void testOrderInAnonymousHome() {
     open("/home");
 
@@ -74,7 +74,7 @@ public class MetricsOrderTest extends UITest {
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
-  @Test
+  @Test @Ignore
   public void testOrderInAnonymousValues() {
     open("/values");
 
@@ -115,7 +115,7 @@ public class MetricsOrderTest extends UITest {
       "Some metric4"));
   }
 
-  @Test
+  @Test @Ignore
   public void testAdminMoveElementToFirstPosition() {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
