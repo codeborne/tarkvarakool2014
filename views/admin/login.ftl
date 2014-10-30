@@ -12,7 +12,7 @@
         <input type="text" name="username" class="form-control">
       </label><br>
       <label>Parool: <input type="password" class="form-control" name="password"></label><br>
-      <button id="submit" class="btn btn-default btn-sm">Sisene</button>
+      <button id="submit" class="btn btn-default btn-sm"><span id="enter">Sisene</span><span class= "glyphicon glyphicon-arrow-right"</span></button>
     </div>
   </form>
     <#if error??>
