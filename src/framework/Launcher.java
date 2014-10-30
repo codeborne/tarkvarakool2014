@@ -12,8 +12,10 @@ public class Launcher {
   private final static Logger LOG = LogManager.getLogger();
 
   public static void main(String... args) throws Exception {
+    int port = 8080;
+    if (args.length == 1) port = Integer.parseInt(args[0]);
     prepareLogging();
-    Server server = createServer(8080);
+    Server server = createServer(port);
     server.start();
     server.join();
   }
