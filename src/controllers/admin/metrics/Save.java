@@ -4,6 +4,9 @@ import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
 import model.Goal;
+import model.Metric;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.HashSet;
@@ -11,7 +14,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public abstract class Save extends UserAwareController {
+public class Save extends UserAwareController {
 
   public Long goalId;
   public String name;
@@ -26,11 +29,8 @@ public abstract class Save extends UserAwareController {
   public String institutionToReport;
   public Double orderNumber;
   public Set<String> errorsList = new HashSet<>();
-
+  public Long metricId;
   public Goal goal;
-  public String title;
-  public String buttonTitle;
-
 
   @Override
   @Role("admin")
@@ -46,10 +46,8 @@ public abstract class Save extends UserAwareController {
         errorsList.add("See mõõdik on juba sisestatud.");
       }
     }
-
-    return render("admin/metrics/form");
+    return render("admin/metrics/errors");
   }
-
 
   private void trimAllInput() {
     name = name.trim();
@@ -67,6 +65,45 @@ public abstract class Save extends UserAwareController {
       infoSource = infoSource.trim();
     if (institutionToReport != null)
       institutionToReport = institutionToReport.trim();
+  }
+
+  private void save() {
+    if (metricId != null) {
+      Metric metric = (Metric) hibernate.get(Metric.class, metricId);
+      if (metric == null) {
+        addSave();
+      } else {
+        modifySave(metric);
+      }
+    } else {
+      addSave();
+    }
+  }
+
+  private void modifySave(Metric metric) {
+    metric.setName(name);
+    metric.setUnit(unit);
+    metric.setPublicDescription(publicDescription);
+    metric.setPrivateDescription(privateDescription);
+    metric.setStartLevel(startLevel);
+    metric.setTargetLevel(targetLevel);
+    metric.setCommentOnStartLevel(commentOnStartLevel);
+    metric.setCommentOnTargetLevel(commentOnTargetLevel);
+    metric.setInfoSource(infoSource);
+    metric.setInstitutionToReport(institutionToReport);
+    metric.setOrderNumber(orderNumber);
+    hibernate.update(metric);
+    hibernate.flush();
+  }
+
+  private void addSave() {
+    goal = (Goal) hibernate.get(Goal.class, goalId);
+    orderNumber = (Double) hibernate.createCriteria(Metric.class)
+      .add(Restrictions.eq("goal", goal)).setProjection(Projections.max("orderNumber")).uniqueResult();
+    orderNumber = Math.ceil(orderNumber == null ? 0 : orderNumber) + 1;
+    hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevel, commentOnStartLevel,
+      targetLevel, commentOnTargetLevel, infoSource, institutionToReport, orderNumber));
+    hibernate.flush();
   }
 
   private void checkErrors() {
@@ -133,6 +170,4 @@ public abstract class Save extends UserAwareController {
     if (errors.containsKey("orderNumber"))
       errorsList.add("Sisestage korrektne järjekorra number");
   }
-
-  protected abstract void save();
 }

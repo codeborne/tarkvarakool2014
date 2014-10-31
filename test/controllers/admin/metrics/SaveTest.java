@@ -1,6 +1,11 @@
 package controllers.admin.metrics;
 
 import controllers.ControllerTest;
+import model.Goal;
+import model.Metric;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.AggregateProjection;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,11 +14,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class SaveTest extends ControllerTest<SaveTest.TestSave> {
+public class SaveTest extends ControllerTest<Save> {
 
   @Before
   public void setUp() throws Exception {
-    controller = spy(controller);
+    when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
+
   }
 
   @Test
@@ -22,7 +28,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -33,7 +39,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -44,7 +50,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -56,7 +62,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Viga avalikus kirjelduses"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -68,7 +74,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Viga mitteavalikus kirjelduses"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -80,7 +86,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Algtase peab olema number"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -92,7 +98,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Viga algtaseme kommentaaris"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -104,7 +110,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Sihttase peab olema number"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -116,7 +122,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Viga sihttaseme kommentaaris"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -128,7 +134,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Viga infoallika sisestamisel"));
-    verify(controller, never()).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
@@ -140,23 +146,19 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains("Viga raporteeritava asutuse sisestamisel"));
-    verify(controller, never()).save();
-  }
-
-  @Test
-  public void postCallsSave() {
-    controller.name = "metric";
-    controller.goalId = 5L;
-
-    assertRender(controller.post());
-
-    verify(controller).save();
+    verify(hibernate, never()).save(any(Metric.class));
   }
 
   @Test
   public void postWithDuplicateGoalThrowsConstraintViolation() {
     controller.name = "asd";
-    doThrow(mock(ConstraintViolationException.class)).when(controller).save();
+    doThrow(mock(ConstraintViolationException.class)).when(hibernate).save(any(Metric.class));
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
+    when(criteria.createCriteria(anyString())).thenReturn(criteria);
+    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
+    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
+    when(criteria.uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
 
@@ -166,7 +168,7 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
   }
 
   @Test
-  public void postCallsSaveWithTrimmedFields() {
+  public void postIfNewMetricIsAddedAndNameTrimmed() {
     controller.name = "metric    ";
     controller.unit = "  %";
     controller.publicDescription = "a b    ";
@@ -176,25 +178,91 @@ public class SaveTest extends ControllerTest<SaveTest.TestSave> {
     controller.infoSource = "  e";
     controller.institutionToReport = "f   ";
     controller.goalId = 5L;
+    controller.startLevel = 5;
+    controller.targetLevel = 6;
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
+    when(criteria.createCriteria(anyString())).thenReturn(criteria);
+    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
+    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
+    when(criteria.uniqueResult()).thenReturn(6.2);
+
+    assertRender(controller.post());
+    Metric savedMetric = (Metric) getSavedEntity();
+
+    assertEquals("metric", savedMetric.getName());
+    assertEquals("%", savedMetric.getUnit());
+    assertEquals("a b", savedMetric.getPublicDescription());
+    assertEquals("b", savedMetric.getPrivateDescription());
+    assertEquals("c", savedMetric.getCommentOnStartLevel());
+    assertEquals("d", savedMetric.getCommentOnTargetLevel());
+    assertEquals("e", savedMetric.getInfoSource());
+    assertEquals("f", savedMetric.getInstitutionToReport());
+    assertEquals((Double) 8.0, savedMetric.getOrderNumber());
+    assertEquals(5, (int) savedMetric.getStartLevel());
+    assertEquals(6, (int) savedMetric.getTargetLevel());
+  }
+
+
+  @Test
+  public void postIfNewMetricAddedWithNameOnly() {
+    controller.name = "metric";
+
+    Criteria criteria = mock(Criteria.class);
+    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
+    when(criteria.createCriteria(anyString())).thenReturn(criteria);
+    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
+    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
+    when(criteria.uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
 
-    assertEquals("metric",controller.name);
-    assertEquals("%",controller.unit);
-    assertEquals("a b",controller.publicDescription);
-    assertEquals("b",controller.privateDescription);
-    assertEquals("c",controller.commentOnStartLevel);
-    assertEquals("d",controller.commentOnTargetLevel);
-    assertEquals("e",controller.infoSource);
-    assertEquals("f",controller.institutionToReport);
-    verify(controller).save();
+    Metric savedMetric = (Metric) getSavedEntity();
+
+    assertEquals("metric", savedMetric.getName());
+    assertEquals(null, savedMetric.getUnit());
+    assertEquals(null, savedMetric.getPublicDescription());
+    assertEquals(null, savedMetric.getPrivateDescription());
+    assertEquals(null, savedMetric.getStartLevel());
+    assertEquals(null, savedMetric.getCommentOnStartLevel());
+    assertEquals(null, savedMetric.getTargetLevel());
+    assertEquals(null, savedMetric.getCommentOnTargetLevel());
+    assertEquals(null, savedMetric.getInfoSource());
+    assertEquals(null, savedMetric.getInstitutionToReport());
+    assertEquals((Double) 8.0, savedMetric.getOrderNumber());
   }
 
-  public static class TestSave extends controllers.admin.metrics.Save {
-    @Override
-    protected void save() {
-    }
+  @Test
+  public void updateSuccess() {
+    controller.metricId = 2L;
+    controller.name = "metric";
+    controller.unit = "%";
+    controller.publicDescription = "a a a";
+    controller.privateDescription = "b";
+    controller.startLevel = 5;
+    controller.commentOnStartLevel = "c";
+    controller.targetLevel = 6;
+    controller.commentOnTargetLevel = "d";
+    controller.infoSource = "e";
+    controller.institutionToReport = "f";
+    controller.orderNumber = 5.0;
+
+    Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0, null, 0, null, null, null, 1.0);
+    when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
+
+    assertRender(controller.post());
+    Metric updatedMetric = (Metric) getUpdatedEntity();
+
+    assertEquals("metric", updatedMetric.getName());
+    assertEquals("%", updatedMetric.getUnit());
+    assertEquals("a a a", updatedMetric.getPublicDescription());
+    assertEquals("b", updatedMetric.getPrivateDescription());
+    assertEquals(5, (int) updatedMetric.getStartLevel());
+    assertEquals("c", updatedMetric.getCommentOnStartLevel());
+    assertEquals(6, (int) updatedMetric.getTargetLevel());
+    assertEquals("d", updatedMetric.getCommentOnTargetLevel());
+    assertEquals("e", updatedMetric.getInfoSource());
+    assertEquals("f", updatedMetric.getInstitutionToReport());
+    assertEquals((Double) 5.0, updatedMetric.getOrderNumber());
   }
-
-
 }

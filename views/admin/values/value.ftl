@@ -66,9 +66,11 @@
       <thead>
         <tr>
           <th>Mõõdik</th>
+          <th>Algtase</th>
           <#list minimumYear..maximumYear as year>
             <th> ${year?c}</th>
           </#list>
+          <th>Sihttase</th>
         </tr>
         </thead>
       <tbody>
@@ -77,7 +79,7 @@
         <tr class="metric">
           <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
           <td class="startLevel">${metric.startLevel?c}</td>
-          <#list (minimumYear+1)..maximumYear as year>
+          <#list (minimumYear)..maximumYear as year>
             <td>
               <div class="measured">
                 <span class="value">${((metric.values.get(year))?c)!""}</span> <span
@@ -100,11 +102,13 @@
               </div>
             </td>
           </#list>
+          <td class="targetLevel">${metric.targetLevel?c}</td>
         </tr>
       </#list>
 
       <tr class="yearlyBudget">
         <td>Kulutatud raha eurodes</td>
+        <td></td>
         <#list minimumYear..maximumYear as year>
           <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span
             class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>

@@ -25,7 +25,8 @@ public class Save extends UserAwareController {
     checkErrors();
     if (errorsList.isEmpty()) {
       try {
-        trimAndSave();
+        trimAllInput();
+        save();
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
         errorsList.add("See eesmärk on juba sisestatud.");
@@ -34,13 +35,11 @@ public class Save extends UserAwareController {
     return render("/admin/goals/errors");
   }
 
-  private void trimAndSave() {
+  private void trimAllInput() {
     name = name.trim();
     if (comment != null) {
       comment = comment.trim();
     }
-    save();
-    hibernate.flush();
   }
 
   private void save() {
@@ -61,11 +60,13 @@ public class Save extends UserAwareController {
     goal.setName(name);
     goal.setComment(comment);
     hibernate.update(goal);
+    hibernate.flush();
   }
 
   private void addSave() {
     Integer sequenceNumber = hibernate.createCriteria(Goal.class).list().size() + 1;
     hibernate.save(new Goal(name, comment, budget, sequenceNumber));
+    hibernate.flush();
   }
 
   private void checkErrors() {
