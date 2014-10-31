@@ -97,10 +97,10 @@
         <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
         <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
         <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Salvesta"
-               style="display: none" data-action="modify">
+               style="display: none" data-action="save">
         <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
                onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="Tühista" style="display:none"
-               data-action="modify">
+               data-action="save">
           <span class="value">
             <button class="modifyButton" type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
@@ -137,7 +137,7 @@
     <td><input name="institutionToReport" class="value form-control" placeholder="Asutus, kuhu raporteerida"
                value="${institutionToReport!""}"></td>
     <td>
-      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Lisa" data-action="add">
+      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Lisa" data-action="save">
       <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
     </td>
   </tr>
