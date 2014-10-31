@@ -159,5 +159,7 @@ public class ValuesModifyingTest extends UITest {
     $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".startLevel").get(0).shouldHave(text("0"));
 
+    System.out.println("");
+
   }
 }
