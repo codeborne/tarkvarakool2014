@@ -18,7 +18,6 @@ public class SaveTest extends ControllerTest<Save> {
 
   @Before
   public void setUp() throws Exception {
-    controller = spy(controller);
     when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
 
   }

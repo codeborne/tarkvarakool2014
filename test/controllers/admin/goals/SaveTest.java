@@ -4,7 +4,6 @@ import controllers.ControllerTest;
 import model.Goal;
 import org.hibernate.Criteria;
 import org.hibernate.exception.ConstraintViolationException;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,11 +13,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class SaveTest extends ControllerTest<Save> {
-
-  @Before
-  public void setUp() throws Exception {
-    controller = spy(controller);
-  }
 
   @Test
   public void postIfNameNull() {
