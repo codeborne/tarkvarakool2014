@@ -26,8 +26,6 @@ public class EnforceAuthentication extends UITest {
   @Test
   public void UnauthorizedUserGetsRedirectedWhenTryingToAccessAdminPAges() throws MalformedURLException {
     assertEquals("/home", getFinalUrl("/admin/goals"));
-    assertEquals("/home", getFinalUrl("/admin/goals/add"));
-    assertEquals("/home", getFinalUrl("/admin/goals/modify?id=1"));
     assertEquals("/home", getFinalUrl("/admin/metrics/metrics?goalId=1"));
     assertEquals("/home", getFinalUrl("/admin/metrics/add?goalId=1"));
   }
