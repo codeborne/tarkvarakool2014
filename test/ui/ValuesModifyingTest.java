@@ -30,8 +30,8 @@ public class ValuesModifyingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 0, "", "", "", 1.0));
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", "", 2.0));
+    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 100000, "", "", "", 1.0));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 20, "", "", "", 2.0));
 
   }
 
@@ -48,7 +48,7 @@ public class ValuesModifyingTest extends UITest {
     $$(".glyphicon-pencil").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
     input.setValue("4564.656").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
 
     $$(".value").get(0).shouldHave(text("4564.656"));
   }
@@ -60,7 +60,7 @@ public class ValuesModifyingTest extends UITest {
     $$(".glyphicon-pencil").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
     input.setValue("4345356498989898989898999118.65689898989555").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
 
     $$(".value").get(0).shouldHave(text("4345356498989898989898999118.656899"));
 
@@ -69,7 +69,7 @@ public class ValuesModifyingTest extends UITest {
     input.shouldHave(value("4345356498989898989898999118.656899"));
 
     input.setValue("-4345356498989898989898999118.65").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
 
     $$(".value").get(0).shouldHave(text("-4345356498989898989898999118.65"));
 
@@ -82,7 +82,7 @@ public class ValuesModifyingTest extends UITest {
     $$(".glyphicon-pencil").get(1).click();
     SelenideElement input = $$(".modify-value").get(1);
     input.setValue("0").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
     $$(".value").get(1).shouldHave(text("0"));
   }
 
@@ -93,13 +93,13 @@ public class ValuesModifyingTest extends UITest {
     $$(".glyphicon-pencil").get(1).click();
     SelenideElement input = $$(".modify-value").get(1);
     input.setValue("53453").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
     $$(".value").get(1).shouldHave(text("53453"));
 
     $$(".glyphicon-pencil").get(1).click();
     input = $$(".modify-value").get(1);
     input.setValue("-4").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
     $$(".value").get(1).shouldHave(text("-4"));
   }
 
@@ -110,14 +110,14 @@ public class ValuesModifyingTest extends UITest {
     $$(".glyphicon-pencil").get(0).click();
     SelenideElement input = $$(".modify-value").get(0);
     input.setValue("-4564.656").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
 
     $$(".value").get(0).shouldHave(text("-4564.656"));
 
     $$(".glyphicon-pencil").get(0).click();
     input = $$(".modify-value").get(0);
     input.setValue("").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
 
     $$(".value").get(0).shouldHave(text(""));
   }
@@ -129,13 +129,13 @@ public class ValuesModifyingTest extends UITest {
     $$(".glyphicon-pencil").get(3).click();
     SelenideElement input = $$(".modify-value").get(3);
     input.setValue("53453").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
     $$(".value").get(3).shouldHave(text("53453"));
 
     $$(".glyphicon-pencil").get(3).click();
     input = $$(".modify-value").get(3);
     input.setValue("").pressEnter();
-    input.shouldNotBe(visible); // wait for response
+    input.shouldNotBe(visible);
     $$(".value").get(3).shouldHave(text(""));
   }
 
@@ -153,13 +153,12 @@ public class ValuesModifyingTest extends UITest {
   }
 
   @Test
-  public void startLevelShownInValuesTable() throws Exception {
+  public void startLevelAndTargetLevelShownInValuesTable() throws Exception {
     open("/admin/values/value");
 
     $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".startLevel").get(0).shouldHave(text("0"));
-
-    System.out.println("");
-
+    $$(".goal").get(0).$$(".metric").get(0).$$(".targetLevel").get(0).shouldHave(text("100000"));
+    $$(".goal").get(0).$$(".metric").get(1).$$(".targetLevel").get(0).shouldHave(text("20"));
   }
 }
