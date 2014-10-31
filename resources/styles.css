@@ -15,19 +15,108 @@ body, td {
 }
 
 .saveGoalButton {
-  height:30px;
-  width: 55px;
+  height:35px;
+  width: 35px;
+  background-color: Transparent;
+  background: url(/image/btn.png) no-repeat;
+  font-family: "Glyphicons Halflings";
+  padding: 0;
+  font-size: 16px;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  color: lightgray;
+  margin-left: -15px;
+
+}
+.saveGoalButton:hover {
+  color: green;
+  background-color: transparent;
 }
 .cancelGoalButton{
-  height:30px;
-  width: 55px;
+  height:35px;
+  width: 35px;
+  background-color: Transparent;
+  border: none;
+  background: url(/image/btn.png) no-repeat;
+  font-family: "Glyphicons Halflings";
+  padding: 0;
+  font-size: 16px;
+  background-repeat:no-repeat;
+  cursor:pointer;
+  overflow: hidden;
+  color: lightgray;
+  margin-left: -15px;
+}
+.cancelGoalButton:hover {
+  color: red;
+  background-color: transparent;
+}
+
+.modifyButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-right: 10px;
 
 }
 
-.modifyButton{
-  display: inline;
+.modifyButton:hover {
+  color:#ffcc00;
 }
 
+.metricsButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-right: 14px;
+  margin-top: -7px;
+}
+.metricsButton:hover {
+  color: #ffcc00;
+  background-color: transparent;
+}
+
+.deleteButton{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.deleteButton:hover {
+  color: #ffcc00;
+  background-color: transparent;
+}
+
+.glyphicon-sort{
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.glyphicon-sort:hover {
+  color: #ffcc00;
+  background-color: transparent;
+
+}
 .navbar {
   border: 0;
   color: #fff;
@@ -89,14 +178,14 @@ body, td {
   background: linear-gradient(to right, #084381 0%, #0081b2 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1); /* IE6-9 */
 
-
+  box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.2);
   border: 0;
   width: 120px;
   height: 30px;
   padding: 0px;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 11px;
+  font-size: 12px;
   color:white;
 }
 
@@ -166,10 +255,7 @@ body, td {
   width: 100%;
 }
 
-.glyphicon-pencil{
-  color:lightgray;
 
-}
 
 .table th, .table td {
   text-align: right;
@@ -370,3 +456,18 @@ input.modify-value {
   z-index: -1; !important;
 }
 
+.alert-danger{
+width: 250px;
+  text-align: center;
+  margin:auto;
+  padding: 8px 0px;
+  font-size: 16px;
+  color: red;
+  background-color: transparent;
+  border: none;
+
+}
+
+#errors{
+
+}

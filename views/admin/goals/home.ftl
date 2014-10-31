@@ -8,7 +8,7 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th>Jrk nr</th>
+        <th>Sorteeri</th>
         <th>Eesmärk</th>
         <th>Kommentaar</th>
         <th>Eelarve</th>
@@ -45,12 +45,14 @@
                      style="display: none;">
             </td>
             <td>
+              <div class="buttons">
               <input type="hidden" class="value" value="${goal.id?c}" name="id">
-              <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Salvesta"
+              <input type="button " class="saveGoalButton value btn btn-default btn-sm" value=""
                      style="display: none" data-action="save">
               <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
-                     onclick="location='/admin/goals/home'; return false;" value="Tühista" style="display:none"
+                     onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
                      data-action="save">
+              </div>
           <span class="value">
             <button class="modifyButton" type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
@@ -94,10 +96,11 @@
       </tr>
       </tbody>
     </table>
+    <span id="errors"></span>
   </div>
 </div>
 
-<span id="errors"></span>
+
 
 <script>
 
