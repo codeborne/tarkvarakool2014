@@ -1,4 +1,4 @@
-<@html>
+<@html values_active=true>
 
 <script>
   function sendData(goalId, metricId, year, isForecast, thisObject) {
@@ -50,28 +50,32 @@
 
 </script>
 
-
 <br><br>
+<#list goals as goal>
+<div class="panel panel-default">
+  <div class="goal">
+<div class="panel-heading">
 <span class="forecast-indicator">P - prognoositav väärtus</span>
 <br><br>
-  <#list goals as goal>
-  <div class="goal">
+
     <h4 class="name"> ${goal.name}</h4>
 
-
+</div>
+  <div class="panel-body">
     <table class="table">
-      <div class="tableHead">
+      <thead>
         <tr>
           <th>Mõõdik</th>
           <#list minimumYear..maximumYear as year>
             <th> ${year?c}</th>
           </#list>
         </tr>
-      </div>
+        </thead>
+      <tbody>
 
       <#list goal.metrics as metric>
         <tr class="metric">
-          <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
+          <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
           <td class="startLevel">${metric.startLevel?c}</td>
           <#list (minimumYear+1)..maximumYear as year>
             <td>
@@ -98,6 +102,7 @@
           </#list>
         </tr>
       </#list>
+
       <tr class="yearlyBudget">
         <td>Kulutatud raha eurodes</td>
         <#list minimumYear..maximumYear as year>
@@ -110,10 +115,14 @@
             </form>
           </td>
         </#list>
-      </tr>
-    </table>
-    <br>
-    <br>
+        </tr>
+        </tbody>
 
-  </#list>
+
+    </table>
+</div>
+</div>
+    <br>
+  </div>
+    </#list>
 </@html>

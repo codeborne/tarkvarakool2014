@@ -3,7 +3,7 @@
 <form method="get">
   <input type="hidden" value="${goal.id?c}" name="goalID">
 </form>
-<div class="panel-metrics panel-default">
+<div class="panel-metrics panel panel-default">
   <div class="panel-heading">
     <h4 class="headingName">${goal.name}</h4>
   </div>
