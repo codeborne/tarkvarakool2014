@@ -50,7 +50,7 @@ public class ValuesModifyingTest extends UITest {
     input.setValue("4564.656").pressEnter();
     input.shouldNotBe(visible);
 
-    $$(".value").get(0).shouldHave(text("4564.656"));
+    $$(".value").get(0).shouldHave(text("4564.7"));
   }
 
   @Test
@@ -62,16 +62,16 @@ public class ValuesModifyingTest extends UITest {
     input.setValue("4345356498989898989898999118.65689898989555").pressEnter();
     input.shouldNotBe(visible);
 
-    $$(".value").get(0).shouldHave(text("4345356498989898989898999118.656899"));
+    $$(".value").get(0).shouldHave(text("4345356498989898989898999118.7"));
 
     $$(".glyphicon-pencil").get(0).click();
     input = $$(".modify-value").get(0);
-    input.shouldHave(value("4345356498989898989898999118.656899"));
+    input.shouldHave(value("4345356498989898989898999118.7"));
 
     input.setValue("-4345356498989898989898999118.65").pressEnter();
     input.shouldNotBe(visible);
 
-    $$(".value").get(0).shouldHave(text("-4345356498989898989898999118.65"));
+    $$(".value").get(0).shouldHave(text("-4345356498989898989898999118.7"));
 
   }
 
@@ -112,7 +112,7 @@ public class ValuesModifyingTest extends UITest {
     input.setValue("-4564.656").pressEnter();
     input.shouldNotBe(visible);
 
-    $$(".value").get(0).shouldHave(text("-4564.656"));
+    $$(".value").get(0).shouldHave(text("-4564.7"));
 
     $$(".glyphicon-pencil").get(0).click();
     input = $$(".modify-value").get(0);
@@ -156,9 +156,9 @@ public class ValuesModifyingTest extends UITest {
   public void startLevelAndTargetLevelShownInValuesTable() throws Exception {
     open("/admin/values/value");
 
-    $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".startLevel").get(0).shouldHave(text("0"));
     $$(".goal").get(0).$$(".metric").get(0).$$(".targetLevel").get(0).shouldHave(text("100000"));
+    $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".targetLevel").get(0).shouldHave(text("20"));
   }
 }
