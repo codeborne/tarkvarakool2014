@@ -11,27 +11,6 @@ import static org.mockito.Mockito.when;
 public class ModifyTest extends ControllerTest<Modify> {
 
   @Test
-  public void getWhenObjectFound() {
-    controller.id = 2L;
-    when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("name", "abc" ,10, 1));
-
-    assertRender(controller.get());
-
-    assertEquals("name", controller.name);
-    assertEquals(10, (int) controller.budget);
-    assertEquals("abc", controller.comment);
-
-  }
-
-  @Test
-  public void getWhenObjectNotFound() {
-    controller.id = 2L;
-    when(hibernate.get(Goal.class, 2L)).thenReturn(null);
-
-    assertRedirect(Home.class, controller.get());
-  }
-
-  @Test
   public void updateSuccess() {
     controller.id = 2L;
     controller.name = "name";

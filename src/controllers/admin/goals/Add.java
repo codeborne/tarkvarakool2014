@@ -1,24 +1,10 @@
 package controllers.admin.goals;
 
-import framework.Result;
-import framework.Role;
 import model.Goal;
 
 public class Add extends Save {
 
   Integer sequenceNumber;
-
-
-  public Add() {
-    title = "Lisage uus eesmärk";
-    buttonTitle = "Lisa";
-  }
-
-  @Override
-  @Role("admin")
-  public Result get(){
-    return render("admin/goals/add");
-  }
 
   @Override
   protected void save() {

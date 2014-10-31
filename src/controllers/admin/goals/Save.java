@@ -15,8 +15,6 @@ public abstract class Save extends UserAwareController {
   public String comment;
   public Integer budget;
   public Set<String> errorsList = new HashSet<>();
-  public String title;
-  public String buttonTitle;
 
   @Override
   @Role("admin")
