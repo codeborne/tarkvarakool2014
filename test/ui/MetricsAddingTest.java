@@ -91,7 +91,7 @@ public class MetricsAddingTest extends UITest {
   @Test
   public void goalNameIsShownInTheMetricsTable() throws Exception {
     $$(".metricsButton").get(0).click();
-    $("h3").shouldHave(text("Tere"));
+    $("h4").shouldHave(text("Tere"));
   }
 
 }
