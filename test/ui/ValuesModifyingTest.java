@@ -30,8 +30,8 @@ public class ValuesModifyingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 100000, "", "", "", 1.0));
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 20, "", "", "", 2.0));
+    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 100000, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 20, "", "", "", 2.0, true));
 
   }
 

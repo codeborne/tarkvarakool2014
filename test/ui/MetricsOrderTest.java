@@ -32,10 +32,10 @@ public class MetricsOrderTest extends UITest {
     $("#submit").click();
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric1", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -5.5));
-    hibernate.save(new Metric(goal, "Some metric4", "", "", "", 0, "", 0, "", "", "", 5.0));
-    hibernate.save(new Metric(goal, "Some metric3", "", "", "", 0, "", 0, "", "", "", 0.0));
-    hibernate.save(new Metric(goal, "Some metric2", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -1.5));
+    hibernate.save(new Metric(goal, "Some metric1", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -5.5, true));
+    hibernate.save(new Metric(goal, "Some metric4", "", "", "", 0, "", 0, "", "", "", 5.0, true));
+    hibernate.save(new Metric(goal, "Some metric3", "", "", "", 0, "", 0, "", "", "", 0.0, true));
+    hibernate.save(new Metric(goal, "Some metric2", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -1.5, true));
   }
 
   @After

@@ -34,9 +34,9 @@ public class YearlyBudgetsModifyingTest extends UITest {
 
     hibernate.save(goal);
     hibernate.save(goal2);
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", "", 1.0));
-    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 0, "", "", "", 2.0));
-    hibernate.save(new Metric(goal2, "metric", "", "", "", 23, "", 45, "", "", "", 1.0));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 0, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal2, "metric", "", "", "", 23, "", 45, "", "", "", 1.0, true));
   }
 
   @After
