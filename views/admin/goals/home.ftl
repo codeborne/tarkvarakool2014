@@ -32,17 +32,20 @@
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
               <input type="text" class="value form-control" name="name" value="${goal.name}" style="display: none;">
+
             </td>
             <td class="commentInTable">
               <span class="value">${goal.comment!""}</span>
               <input type="text" class="value form-control" name="comment"
                      <#if goal.comment??>value="${goal.comment}"</#if>
                      style="display: none;">
+
             </td>
             <td class="budgetInTable">
               <span class="value">${goal.budget?c}</span>
               <input type="number" class="value form-control" name="budget" value="${goal.budget?c}"
                      style="display: none;">
+
             </td>
             <td>
               <div class="buttons">
@@ -92,6 +95,7 @@
         <td>
           <input type="button" id="add" value="Lisa" class="saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
+
         </td>
       </tr>
       </tbody>
