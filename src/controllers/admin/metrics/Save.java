@@ -162,9 +162,12 @@ public class Save extends UserAwareController {
   }
 
   private void checkInfoSource() {
-    if (errors.containsKey("infoSource"))
+    if (infoSource!=null && !infoSource.equals("") && !infoSource.contains("http://")) {
       errorsList.add("Viga infoallika sisestamisel");
-  }
+    }
+    if (errors.containsKey("infoSource")) {
+      errorsList.add("Viga infoallika sisestamisel");
+  }}
 
   private void checkInstitutionToReport() {
     if (errors.containsKey("institutionToReport"))

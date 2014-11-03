@@ -3,7 +3,7 @@
 <form method="get">
   <input type="hidden" value="${goal.id?c}" name="goalID">
 </form>
-<div class="panel-metrics panel panel-default">
+<div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="headingName">${goal.name}</h4>
   </div>
@@ -86,7 +86,7 @@
                style="display: none;">
       </td>
       <td class="infoSource">
-        <span class="value">${metric.infoSource}</span>
+        <span class="value"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank">Link</a></#if></span>
         <input class="value form-control" name="infoSource" value="${metric.infoSource}" style="display: none;">
       </td>
       <td class="institutionToReport">

@@ -1,122 +1,11 @@
 body {
   background: #F2F0E7 url(/images/bg1.png) no-repeat center 60px;
-}
-
-body, td {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   color: #333;
   font-weight: 300;
 }
 
-.container {
-  width: 1170px;
-  padding: 0;
-}
-
-.saveGoalButton {
-  height:35px;
-  width: 35px;
-  background-color: Transparent;
-  background: url(/image/btn.png) no-repeat;
-  font-family: "Glyphicons Halflings";
-  padding: 0;
-  font-size: 16px;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  color: lightgray;
-  margin-left: -15px;
-
-}
-.saveGoalButton:hover {
-  color: green;
-  background-color: transparent;
-}
-.cancelGoalButton{
-  height:35px;
-  width: 35px;
-  background-color: Transparent;
-  border: none;
-  background: url(/image/btn.png) no-repeat;
-  font-family: "Glyphicons Halflings";
-  padding: 0;
-  font-size: 16px;
-  background-repeat:no-repeat;
-  cursor:pointer;
-  overflow: hidden;
-  color: lightgray;
-  margin-left: -15px;
-}
-.cancelGoalButton:hover {
-  color: red;
-  background-color: transparent;
-}
-
-.modifyButton {
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-  margin-right: 10px;
-
-}
-
-.modifyButton:hover {
-  color:#ffcc00;
-}
-
-.metricsButton {
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-  margin-right: 14px;
-  margin-top: -7px;
-}
-.metricsButton:hover {
-  color: #ffcc00;
-  background-color: transparent;
-}
-
-.deleteButton{
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-  margin-right: 10px;
-}
-.deleteButton:hover {
-  color: #ffcc00;
-  background-color: transparent;
-}
-
-.glyphicon-sort{
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-.glyphicon-sort:hover {
-  color: #ffcc00;
-  background-color: transparent;
-
-}
 .navbar {
   border: 0;
   color: #fff;
@@ -128,18 +17,181 @@ body, td {
   margin-bottom: 60px;
 }
 
-.footer {
-  background: url(/images/bottom.png) repeat scroll 0px 100% transparent;
-  height: 295px;
-  border-radius: 0px;
+.container {
+  width: 1170px;
+  padding: 0;
 }
 
 .container-top {
   margin-top: 6px;
 }
 
+.panel {
+  border: 0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  min-height: 600px;
+  margin-bottom: -10px;
+
+}
+
 .panel-body {
-  background-color: #F8F9FA;
+  padding: 0px 40px;
+
+}
+
+.panel-heading {
+  padding: 25px 40px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+}
+
+.panel-heading .name {
+  color: #006699;
+  font-size: 30px;
+}
+.panel-heading .budget {
+  color: #6f6d65;
+}
+
+.panel-login {
+  height: 600px;
+  background-color: #fff;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  border: 10;
+  padding: 25px 40px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  position: relative;
+}
+
+
+
+
+
+
+
+.saveGoalButton {
+  height: 35px;
+  width: 35px;
+  background-color: Transparent;
+  background: url(/image/btn.png) no-repeat;
+  font-family: "Glyphicons Halflings";
+  padding: 0;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: lightgray;
+  margin-left: -15px;
+
+}
+
+.saveGoalButton:hover {
+  color: green;
+  background-color: transparent;
+}
+
+.cancelGoalButton {
+  height: 35px;
+  width: 35px;
+  background-color: Transparent;
+  border: none;
+  background: url(/image/btn.png) no-repeat;
+  font-family: "Glyphicons Halflings";
+  padding: 0;
+  font-size: 16px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  overflow: hidden;
+  color: lightgray;
+  margin-left: -15px;
+}
+
+.cancelGoalButton:hover {
+  color: red;
+  background-color: transparent;
+}
+
+.modifyButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-right: 10px;
+
+}
+
+.modifyButton:hover {
+  color: #ffcc00;
+}
+
+.metricsButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-right: 14px;
+  margin-top: -7px;
+}
+
+.metricsButton:hover {
+  color: #ffcc00;
+  background-color: transparent;
+}
+
+.deleteButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.deleteButton:hover {
+  color: #ffcc00;
+  background-color: transparent;
+}
+
+.glyphicon-sort {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  color: lightgray;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.glyphicon-sort:hover {
+  color: #ffcc00;
+  background-color: transparent;
+
+}
+
+.footer {
+  background: url(/images/bottom.png) repeat scroll 0px 100% transparent;
+  height: 295px;
+  border-radius: 0px;
+
 }
 
 .hand-pointer {
@@ -167,18 +219,17 @@ body, td {
   font-weight: bold;
   font-size: 11px;
 }
-#add{
-  margin-left: 20px;
-  background: #084381;  Old browsers
-  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);  FF3.6+
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2));  Chrome,Safari4+
-  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%);  Chrome10+,Safari5.1+
-  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%);  Opera 11.10+
-  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%);  IE10+
-  background: linear-gradient(to right, #084381 0%, #0081b2 100%);  W3C
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1);  IE6-9
 
-  box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.2);
+#add {
+  margin-left: 20px;
+  background: #084381;
+  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2));
+  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: linear-gradient(to right, #084381 0%, #0081b2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1) box-shadow : 0 0 0 px 2 px rgba(0, 0, 0, 0.2);
   border: 0;
   width: 120px;
   height: 30px;
@@ -186,20 +237,20 @@ body, td {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
-  color:white;
+  color: white;
   font-family: "Roboto Condensed";
 }
 
 #goBackButton {
   margin-left: 20px;
   background: #084381; /* Old browsers */
-  background: -moz-linear-gradient(left,  #084381 0%, #0081b2 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#084381), color-stop(100%,#0081b2)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left,  #084381 0%,#0081b2 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left,  #084381 0%,#0081b2 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left,  #084381 0%,#0081b2 100%); /* IE10+ */
-  background: linear-gradient(to right,  #084381 0%,#0081b2 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#084381', endColorstr='#0081b2',GradientType=1 ); /* IE6-9 */
+  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%); /* IE10+ */
+  background: linear-gradient(to right, #084381 0%, #0081b2 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1); /* IE6-9 */
 
   box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.2);
   border: 0;
@@ -211,8 +262,8 @@ body, td {
   font-size: 11px;
   margin-bottom: -75px;
 
-
 }
+
 #submit {
   margin-left: 20px;
   background: #084381; /* Old browsers */
@@ -234,18 +285,21 @@ body, td {
   font-size: 11px;
 
 }
+
 .enter {
-  color:white;
+  color: white;
 }
+
 .glyphicon-arrow-right {
   color: #ffffff;
   padding-left: 10px;
 }
+
 .glyphicon-lock {
   font-size: 10px;
 }
 
-.forecasted>span.value, .forecast-indicator {
+.forecasted > span.value, .forecast-indicator {
   color: #D44E2B;
 }
 
@@ -256,8 +310,6 @@ body, td {
   width: 100%;
 }
 
-
-
 .table th {
   text-align: center;
 }
@@ -265,6 +317,7 @@ body, td {
 .table th:first-child, .table td:first-child {
   text-align: center;
 }
+
 .title {
   margin-top: 12px;
   font-weight: bold;
@@ -330,6 +383,7 @@ body, td {
 .sort {
   text-align: center;
 }
+
 .ui-state-highlight {
   background-color: #E0E0E0;
 }
@@ -346,35 +400,19 @@ input.modify-value {
   clear: both;
   height: 0;
 }
-.clearfix { display: inline-block; }
-* html .clearfix { height: 1%; }
-.clearfix { display: block; }
 
-.panel-heading {
-  background-color: #fff;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  border: 10;
-  padding: 25px 40px;
-  box-shadow:         0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-  position: relative;
-
+.clearfix {
+  display: inline-block;
 }
-.panel-login {
-  height: 600px;
-  background-color: #fff;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  border: 10;
-  padding: 25px 40px;
-  box-shadow:         0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-  position: relative;
 
+* html .clearfix {
+  height: 1%;
 }
+
+.clearfix {
+  display: block;
+}
+
 .login-center {
   padding: 140px 470px;
 }
@@ -385,46 +423,9 @@ input.modify-value {
 
 }
 
-.panel {
-  border: 0;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow:    0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  box-shadow:         0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  height:600px;
-
-}
-
-.panel-metrics{
-  border: 0;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow:    0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  box-shadow:         0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  margin-bottom: -10px;
-  height:600px;
-
-}
-
-.panel-body {
-  padding: 0px 40px;
-}
-
-.panel-heading .name {
-  color: #006699;
-  font-size: 30px;
-}
 .headingName {
   color: #006699;
   font-size: 30px;
-}
-
-.panel-heading .budget {
-  color: #6f6d65;
 }
 
 .table > thead > tr > th {
@@ -451,27 +452,21 @@ input.modify-value {
 .table > thead > tr > th {
   padding: 30px 20px;
 }
+
 .footer {
   position: relative;
   padding-top: 300px;
   margin-top: -50px;
   height: 100px;
-  z-index: -1; !important;
+  z-index: -1;
+!important;
 }
 
-.alert-danger{
+.alert-danger {
 
   width: 450px;
   text-align: center;
   padding: 8px 0px;
-  margin:auto;
-  margin-bottom: 10px ;
-
-
+  margin: auto;
+  margin-bottom: 10px;
 }
-#errors{
-  padding-left:200px;
-
-}
-
-

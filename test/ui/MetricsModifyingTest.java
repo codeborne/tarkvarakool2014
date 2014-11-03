@@ -29,7 +29,7 @@ public class MetricsModifyingTest extends UITest {
     $("#submit").click();
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10, "ghi", 10, "jkl", "mno", "pqr", -5.5, true));
+    hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10, "ghi", 10, "jkl", "http://", "pqr", -5.5, true));
     hibernate.save(new Metric(goal, "Some metric1", "", "", "", 0, "", 0, "", "", "", 5.0, true));
 
     open("/admin/goals/home");
@@ -59,7 +59,7 @@ public class MetricsModifyingTest extends UITest {
     $(".commentOnStartLevel").$("input").shouldHave(value("ghi"));
     $(".targetLevel").$("input").shouldHave(value("10"));
     $(".commentOnTargetLevel").$("input").shouldHave(value("jkl"));
-    $(".infoSource").$("input").shouldHave(value("mno"));
+    $(".infoSource").$("input").shouldHave(value("http://"));
     $(".institutionToReport").$("input").shouldHave(value("pqr"));
 
 

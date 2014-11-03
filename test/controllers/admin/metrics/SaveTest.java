@@ -175,7 +175,7 @@ public class SaveTest extends ControllerTest<Save> {
     controller.privateDescription = "\n b \n";
     controller.commentOnStartLevel = "    c";
     controller.commentOnTargetLevel = "\r d";
-    controller.infoSource = "  e";
+    controller.infoSource = "http://";
     controller.institutionToReport = "f   ";
     controller.goalId = 5L;
     controller.startLevel = 5;
@@ -196,7 +196,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("b", savedMetric.getPrivateDescription());
     assertEquals("c", savedMetric.getCommentOnStartLevel());
     assertEquals("d", savedMetric.getCommentOnTargetLevel());
-    assertEquals("e", savedMetric.getInfoSource());
+    assertEquals("http://", savedMetric.getInfoSource());
     assertEquals("f", savedMetric.getInstitutionToReport());
     assertEquals((Double) 8.0, savedMetric.getOrderNumber());
     assertEquals(5, (int) savedMetric.getStartLevel());
@@ -244,7 +244,7 @@ public class SaveTest extends ControllerTest<Save> {
     controller.commentOnStartLevel = "c";
     controller.targetLevel = 6;
     controller.commentOnTargetLevel = "d";
-    controller.infoSource = "e";
+    controller.infoSource = "http://";
     controller.institutionToReport = "f";
     controller.orderNumber = 5.0;
     controller.isPublic = true;
@@ -263,7 +263,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("c", updatedMetric.getCommentOnStartLevel());
     assertEquals(6, (int) updatedMetric.getTargetLevel());
     assertEquals("d", updatedMetric.getCommentOnTargetLevel());
-    assertEquals("e", updatedMetric.getInfoSource());
+    assertEquals("http://", updatedMetric.getInfoSource());
     assertEquals("f", updatedMetric.getInstitutionToReport());
     assertEquals((Double) 5.0, updatedMetric.getOrderNumber());
     assertEquals(true, updatedMetric.getIsPublic());
