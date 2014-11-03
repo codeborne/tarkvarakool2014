@@ -21,6 +21,7 @@
           </thead>
           <tbody>
           <#list goal.metrics as metric>
+          <#if metric.isPublic == true>
               <tr class="metric">
                 <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
                 <td class="publicDescription">${metric.publicDescription}</td>
@@ -30,6 +31,7 @@
                 <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
                 <td class="infoSource">${metric.infoSource}</td>
               </tr>
+          </#if>
           </#list>
           </tbody>
         </table>

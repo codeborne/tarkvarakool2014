@@ -201,6 +201,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals((Double) 8.0, savedMetric.getOrderNumber());
     assertEquals(5, (int) savedMetric.getStartLevel());
     assertEquals(6, (int) savedMetric.getTargetLevel());
+    assertEquals(false, savedMetric.getIsPublic());
   }
 
 
@@ -246,8 +247,9 @@ public class SaveTest extends ControllerTest<Save> {
     controller.infoSource = "e";
     controller.institutionToReport = "f";
     controller.orderNumber = 5.0;
+    controller.isPublic = true;
 
-    Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0, null, 0, null, null, null, 1.0);
+    Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0, null, 0, null, null, null, 1.0, false);
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
 
     assertRender(controller.post());
@@ -264,5 +266,6 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("e", updatedMetric.getInfoSource());
     assertEquals("f", updatedMetric.getInstitutionToReport());
     assertEquals((Double) 5.0, updatedMetric.getOrderNumber());
+    assertEquals(true, updatedMetric.getIsPublic());
   }
 }

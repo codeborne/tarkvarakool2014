@@ -30,7 +30,7 @@ public class MetricDeletingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", "", 1.0));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 0, "", "", "", 1.0, true));
 
   }
 
@@ -51,9 +51,9 @@ public class MetricDeletingTest extends UITest {
 
   @Test
   public void testSuccessfullyDeleteMetricWhenThereAreSeveralMetrics() throws Exception {
-    hibernate.save(new Metric(goal, "zzz", "USD", "", "xdfghj", 70, "",40, "", "", "", 2.0));
-    hibernate.save(new Metric(goal, "another metric", "", "", "", 7, "",4, "", "", "", -5.0));
-    hibernate.save(new Metric(goal, "bbb", "", "", "xdfghj", 70, "",40, "", "", "", 0.0));
+    hibernate.save(new Metric(goal, "zzz", "USD", "", "xdfghj", 70, "",40, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal, "another metric", "", "", "", 7, "",4, "", "", "", -5.0, true));
+    hibernate.save(new Metric(goal, "bbb", "", "", "xdfghj", 70, "",40, "", "", "", 0.0, true));
     open("/admin/goals/home");
 
     $$(".metricsButton").get(0).click();

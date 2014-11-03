@@ -22,6 +22,7 @@
         <th>Sihttaseme kommentaar</th>
         <th>Infoallikas</th>
         <th>Asutus, kuhu raporteerida</th>
+        <th>Avalik</th>
         <th>Muuda</th>
         <th>Kustuta</th>
       </tr>
@@ -45,6 +46,7 @@
           <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
           <input type="hidden" name="infoSource" value="${metric.infoSource}">
           <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
+          <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
         </form>
       </td>
       <td class="name">
@@ -92,6 +94,10 @@
         <input class="value form-control" name="institutionToReport" value="${metric.institutionToReport}"
                style="display: none;">
       </td>
+      <td class="isPublic">
+        <span class="value"> <#if metric.isPublic?? && metric.isPublic == true> Avalik <#else>Mitteavalik</#if></span>
+        <input class="value" type="checkbox" name="isPublic" value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if> style="display: none;">
+      </td>
       <td>
         <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
         <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
@@ -136,6 +142,8 @@
     <td><input name="infoSource" class="value form-control" placeholder="Infoallikas" value="${infoSource!""}"></td>
     <td><input name="institutionToReport" class="value form-control" placeholder="Asutus, kuhu raporteerida"
                value="${institutionToReport!""}"></td>
+
+    <td> <input class="value" type="checkbox" name="isPublic" value="true" ></td>
     <td>
       <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Lisa" data-action="save">
       <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
@@ -148,10 +156,6 @@
 <span id="errors"></span>
 <button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'"><span
   class="enter">Pealehele</span></button>
-
-
-
-
 
 
 <script>
@@ -209,7 +213,7 @@
 
         $.ajax({
           type: "POST",
-          url: "/admin/metrics/modify",
+          url: "/admin/metrics/save",
           data: ui.item.find(".orderNumberForm").serialize(),
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Tekkis viga");

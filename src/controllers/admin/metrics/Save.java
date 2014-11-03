@@ -31,6 +31,7 @@ public class Save extends UserAwareController {
   public Set<String> errorsList = new HashSet<>();
   public Long metricId;
   public Goal goal;
+  public Boolean isPublic;
 
   @Override
   @Role("admin")
@@ -39,7 +40,7 @@ public class Save extends UserAwareController {
     checkErrors();
     if (errorsList.isEmpty()) {
       try {
-        trimAllInput();
+        trimAndPrepareAllInput();
         save();
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
@@ -49,7 +50,10 @@ public class Save extends UserAwareController {
     return render("admin/metrics/errors");
   }
 
-  private void trimAllInput() {
+  private void trimAndPrepareAllInput() {
+    if (isPublic == null){
+      isPublic = false;
+    }
     name = name.trim();
     if (unit != null)
       unit = unit.trim();
@@ -92,6 +96,7 @@ public class Save extends UserAwareController {
     metric.setInfoSource(infoSource);
     metric.setInstitutionToReport(institutionToReport);
     metric.setOrderNumber(orderNumber);
+    metric.setIsPublic(isPublic);
     hibernate.update(metric);
     hibernate.flush();
   }
@@ -102,7 +107,7 @@ public class Save extends UserAwareController {
       .add(Restrictions.eq("goal", goal)).setProjection(Projections.max("orderNumber")).uniqueResult();
     orderNumber = Math.ceil(orderNumber == null ? 0 : orderNumber) + 1;
     hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevel, commentOnStartLevel,
-      targetLevel, commentOnTargetLevel, infoSource, institutionToReport, orderNumber));
+      targetLevel, commentOnTargetLevel, infoSource, institutionToReport, orderNumber, isPublic));
     hibernate.flush();
   }
 

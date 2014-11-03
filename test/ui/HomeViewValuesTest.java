@@ -29,10 +29,11 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Mood1", "", "", "", 100, "", 150, "", "", "", 1.0));
-    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200, "", 220, "", "", "", 2.0));
-    hibernate.save(new Metric(goal2, "Mood3", "", "", "", 300, "", 340, "", "", "", 1.0));
-    hibernate.save(new Metric(goal2, "Mood4", "", "", "", 400, "", 500, "", "", "", 2.0));
+    hibernate.save(new Metric(goal1, "Mood1", "", "", "", 100, "", 150, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200, "", 220, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal2, "Mood3", "", "", "", 300, "", 340, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal2, "Mood4", "", "", "", 400, "", 500, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal2, "Mood5", "", "", "", 400, "", 500, "", "", "", 2.1, false));
 
     $(".switch-button.active").click();
 
@@ -58,13 +59,14 @@ public class HomeViewValuesTest extends UITest {
     goal2Metrics.get(0).$(".targetLevel").shouldHave(text("340"));
     goal2Metrics.get(1).$(".startLevel").shouldHave(text("400"));
     goal2Metrics.get(1).$(".targetLevel").shouldHave(text("500"));
+    goalBlock2.$(".name").shouldNotHave(text("Mood5"));
   }
 
   @Test
   public void userShouldSeeMetricValuesPerYear() throws Exception {
     Goal goal = new Goal("Eesmark", "", 10, 1);
     hibernate.save(goal);
-    Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "", 1.0);
+    Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "", 1.0, true);
     metric.getValues().put(2014, new BigDecimal(12));
     metric.getValues().put(2015, new BigDecimal(13));
     metric.getValues().put(2016, new BigDecimal(14));

@@ -21,14 +21,22 @@
       </thead>
       <tbody>
         <#list goal.metrics as metric>
+          <#if metric.isPublic == true>
         <tr class="metric">
           <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
           <td class="startLevel">${metric.startLevel?c}</td>
           <#list minimumYear..maximumYear as year>
-            <td><span class="value">${((metric.values.get(year))?c)!""}</span></td>
+            <td>
+              <span class="value">
+                <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year))?c)}
+                <#elseif (currentYear>year)>N/A
+                <#else></#if>
+              </span>
+            </td>
           </#list>
           <td class="targetLevel">${metric.targetLevel?c}</td>
         </tr>
+          </#if>
         </#list>
       </tbody>
       </table>

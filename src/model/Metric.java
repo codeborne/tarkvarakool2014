@@ -26,6 +26,7 @@ public class Metric {
   private String commentOnTargetLevel;
   private String infoSource;
   private String institutionToReport;
+  private Boolean isPublic = true;
 
   @ElementCollection
   @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
@@ -48,7 +49,7 @@ public class Metric {
 
   public Metric(Goal goal, String name, String unit, String publicDescription, String privateDescription, Integer startLevel,
                 String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
-                String infoSource, String institutionToReport, Double orderNumber) {
+                String infoSource, String institutionToReport, Double orderNumber, Boolean isPublic) {
     this.goal = goal;
     this.name = name;
     this.unit = unit;
@@ -61,6 +62,7 @@ public class Metric {
     this.infoSource = infoSource;
     this.institutionToReport = institutionToReport;
     this.orderNumber = orderNumber;
+    this.isPublic = isPublic;
   }
 
   public Goal getGoal() {
@@ -105,6 +107,10 @@ public class Metric {
 
   public String getInstitutionToReport() {
     return institutionToReport;
+  }
+
+  public Boolean getIsPublic() {
+    return isPublic;
   }
 
   public Map<Integer, BigDecimal> getValues() {
@@ -165,6 +171,14 @@ public class Metric {
 
   public void setForecasts(Map<Integer, BigDecimal> forecasts) {
     this.forecasts = forecasts;
+  }
+
+  public void setIsPublic(Boolean isPublic) {
+    if (isPublic == null){
+      this.isPublic = false;
+    }
+    else
+    this.isPublic = isPublic;
   }
 
   public String getUnit() {
