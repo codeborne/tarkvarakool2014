@@ -21,16 +21,18 @@ public class Modify extends UserAwareController {
   public BigDecimal value;
   public Boolean isForecast;
   public String jsonResponse;
-
+  public BigDecimal comparableValue;
   public Set<String> errorsList = new HashSet<>();
 
   private class JsonResponse {
     public Set<String> errorsList;
     public String value;
+    public String comparableValue;
 
-    private JsonResponse(Set<String> errorsList, String value) {
+    private JsonResponse(Set<String> errorsList, String value, String comparableValue) {
       this.errorsList = errorsList;
       this.value = value;
+      this.comparableValue = comparableValue;
     }
   }
 
@@ -38,7 +40,6 @@ public class Modify extends UserAwareController {
   @Role("admin")
   public Result post() {
     checkErrors();
-
     if (errorsList.isEmpty()) {
       List metricList = hibernate.createCriteria(Metric.class).add(Restrictions.eq("id", metricId))
                              .createCriteria("goal").add(Restrictions.eq("id", goalId))
@@ -46,11 +47,15 @@ public class Modify extends UserAwareController {
       if (metricList.size()==1) {
         Metric metric = (Metric) metricList.get(0);
 
-        if(isForecast)
-          metric.getForecasts().put(year, value);
-        else
-          metric.getValues().put(year, value);
 
+        if(isForecast) {
+          metric.getForecasts().put(year, value);
+          comparableValue = metric.getValues().get(year);
+        }
+        else {
+          metric.getValues().put(year, value);
+          comparableValue = metric.getForecasts().get(year);
+        }
         hibernate.update(metric);
         hibernate.flush();
       } else {
@@ -59,7 +64,8 @@ public class Modify extends UserAwareController {
 
     }
 
-    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, value == null ? "" : value.toString()));
+    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, value == null ? "" : value.toString(),
+      comparableValue == null ? "" : comparableValue.toString()));
     return render();
   }
 

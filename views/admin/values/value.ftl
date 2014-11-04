@@ -4,16 +4,35 @@
   function sendData(goalId, metricId, year, isForecast, thisObject) {
     inputValue = thisObject.children('input').val();
     $.post("/admin/values/modify", {goalId: goalId, metricId: metricId, year: year, value: inputValue, isForecast: isForecast},
+
       function (text) {
         var data = JSON.parse(text.replace(/&quot;/g, '"'));
         if (data.errorsList.length > 0) {
           alert(data.errorsList.join("\n"));
         } else {
+
           thisObject.parent().children('span.value').text(data.value);
+
+          var changedValue = parseFloat(data.value);
+          if(data.comparableValue!=""){
+          var comparableValue2 = parseFloat(data.comparableValue);
+          if (isForecast && comparableValue2 >= changedValue){
+            thisObject.parent().parent().children('div.measured').children('span.value').css('color', 'green');
+          }
+          else if (isForecast && comparableValue2 < changedValue){
+            thisObject.parent().parent().children('div.measured').children('span.value').css('color', 'red');
+          }
+          else if (!isForecast && changedValue >= comparableValue2) {
+            thisObject.parent().children('span.value').css('color', 'green');
+          }
+          else if (!isForecast && changedValue < comparableValue2 ){
+            thisObject.parent().children('span.value').css('color', 'red');
+          }
+          }
           thisObject.hide();
           thisObject.parent().children('span.glyphicon').show();
           thisObject.parent().children('span.value').show();
-//          window.location = window.location;
+
         }
       }
     );

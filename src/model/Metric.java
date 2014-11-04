@@ -37,7 +37,7 @@ public class Metric {
   @ElementCollection
   @JoinTable(name = "MetricForecast", joinColumns = @JoinColumn(name = "metric_id"))
   @MapKeyColumn(name = "year")
-  @Column(name = "forecast", precision = 38, scale = 1)
+  @Column(name = "comparableValue", precision = 38, scale = 1)
   private Map<Integer, BigDecimal> forecasts = new HashMap<>();
   private String unit;
 
