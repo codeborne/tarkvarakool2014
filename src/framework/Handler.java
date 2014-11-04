@@ -26,6 +26,9 @@ public class Handler extends AbstractHandler {
   private final static Logger LOG = LogManager.getLogger();
 
   public static final String THE_ENCODING = "UTF-8";
+  static {
+    System.setProperty("file.encoding", THE_ENCODING);
+  }
 
   private boolean devMode = isRunningInDebugMode();
 
