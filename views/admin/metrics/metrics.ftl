@@ -1,5 +1,5 @@
 <@html>
-
+<br><br>
 <form method="get">
   <input type="hidden" value="${goal.id?c}" name="goalID">
 </form>

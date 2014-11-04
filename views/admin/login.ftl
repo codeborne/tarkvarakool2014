@@ -1,4 +1,5 @@
 <@html>
+<br><br>
   <#if loggedInUsername??>
   <p>Olete sisse loginud kasutajanimega ${loggedInUsername}</p>
   <button class="btn btn-default btn-sm" onclick="location='/admin/logout'">Valju</button>
