@@ -100,7 +100,7 @@ public class YearlyBudgetsModifyingTest extends UITest {
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(0);
     input.setValue("-1").pressEnter();
 
-    confirm("Sisestage korrektne väärtus.");
+    confirm(messages.get("errorInsertValue"));
     input.shouldBe(visible);
     input.shouldHave(value("-1"));
     open("/admin/values/value");
@@ -119,7 +119,7 @@ public class YearlyBudgetsModifyingTest extends UITest {
     $$(".goal").get(0).$(".yearlyBudget").$$(".glyphicon").get(4).click();
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(4);
     input.setValue("-5").pressEnter();
-    confirm("Sisestage korrektne väärtus.");
+    confirm(messages.get("errorInsertValue"));
     input.shouldBe(visible);
 
     input.shouldHave(value("-5"));

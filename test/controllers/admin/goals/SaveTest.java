@@ -21,7 +21,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertGoal")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -33,7 +33,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertGoal")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -45,7 +45,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertGoal")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -57,7 +57,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertBudget")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -69,7 +69,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertBudget")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -81,7 +81,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertGoal")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -94,7 +94,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage kommentaar."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertComment")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -106,7 +106,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertBudget")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -119,9 +119,9 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(3, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage eesmärk."));
-    assertTrue(controller.errorsList.contains("Sisestage kommentaar."));
-    assertTrue(controller.errorsList.contains("Sisestage korrektne eelarve."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertGoal")));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertComment")));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertBudget")));
     verify(hibernate, never()).save(any(Goal.class));
   }
 
@@ -138,7 +138,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("See eesmärk on juba sisestatud."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertedGoal")));
     verify(transaction).rollback();
   }
 

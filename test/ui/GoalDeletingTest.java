@@ -41,7 +41,7 @@ public class GoalDeletingTest extends UITest {
 
     $(".deleteButton").click();
 
-    confirm("Kas oled kustutamises kindel?");
+    confirm(messages.get("errorDeletingConfirmation"));
 
     $("tr.goal").shouldNotBe(visible);
 
@@ -55,7 +55,7 @@ public class GoalDeletingTest extends UITest {
 
     $$(".deleteButton").get(0).click();
 
-    confirm("Kas oled kustutamises kindel?");
+    confirm(messages.get("errorDeletingConfirmation"));
 
     SelenideElement row = $$("tr.goal").get(0);
 
@@ -70,7 +70,7 @@ public class GoalDeletingTest extends UITest {
 
     $(".deleteButton").click();
 
-    dismiss("Kas oled kustutamises kindel?");
+    dismiss(messages.get("errorDeletingConfirmation"));
 
     SelenideElement row = $$("tr.goal").get(0);
 

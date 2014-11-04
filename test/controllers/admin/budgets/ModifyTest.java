@@ -23,7 +23,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
   }
 
   @Test
@@ -34,7 +34,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
   }
 
   @Test
@@ -45,7 +45,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
   }
 
   @Test
@@ -55,7 +55,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
 
   }
 
@@ -68,7 +68,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
 
   }
 
@@ -81,7 +81,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
 
   }
 
@@ -94,7 +94,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
   }
 
 
@@ -107,7 +107,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage korrektne väärtus."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
   }
 
   @Test
@@ -161,6 +161,6 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1,controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Tekkis viga."));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
   }
 }

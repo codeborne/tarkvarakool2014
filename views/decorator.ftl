@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Infoühiskonna arendamise mõõdikud</title>
+  <title><@m'title'/></title>
   <link rel="shortcut icon" href="/favicon.png"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles.css"/>
@@ -17,15 +17,15 @@
     <div class="navbar-collapse collapse navbar-right">
       <#if loggedInUsername??>
         <form class="navbar-form navbar-left" action="/admin/logout">
-          <span class="greetings">Tere, <strong>${loggedInUsername}</strong></span>
+          <span class="greetings"><@m'hello'/> <strong>${loggedInUsername}</strong></span>
           <button id="logout-button" type="submit" class="authentication-button"><span
-            class="glyphicon glyphicon-lock"></span> Logi välja
+            class="glyphicon glyphicon-lock"></span> <@m'exit'/>
           </button>
         </form>
       <#else>
         <form class="navbar-form navbar-left" action="/admin/login">
           <button id="login-button" type="submit" class="authentication-button"><span
-            class="glyphicon glyphicon-lock"></span> Logi sisse
+            class="glyphicon glyphicon-lock"></span><@m'login'/>
           </button>
         </form>
       </#if>
@@ -40,14 +40,14 @@
       <td>
         <div class="symbol"></div>
       </td>
-      <td>Infoühiskonna arendamise mõõdikud</td>
+      <td><@m'title'/></td>
       <td>
         <div class="btn-group button-menu-inner">
           <button type="button" class="switch-button<#if !values_active> active</#if>" onclick="location='${homeUrl}'">
-            Eesmärgid
+            <@m'goals'/>
           </button>
           <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
-                  onclick="location='${valuesUrl}'">Väärtused
+                  onclick="location='${valuesUrl}'"><@m'values'/>
           </button>
         </div>
       </td>

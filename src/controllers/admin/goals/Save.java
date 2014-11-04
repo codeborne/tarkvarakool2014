@@ -29,7 +29,7 @@ public class Save extends UserAwareController {
         save();
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
-        errorsList.add("See eesmärk on juba sisestatud.");
+        errorsList.add(messages.get("errorInsertedGoal"));
       }
     }
     return render("/admin/goals/errors");
@@ -77,16 +77,16 @@ public class Save extends UserAwareController {
 
   private void checkName() {
     if (errors.containsKey("name") || isBlank(name))
-      errorsList.add("Sisestage eesmärk.");
+      errorsList.add(messages.get("errorInsertGoal"));
   }
 
   private void checkComment() {
     if (errors.containsKey("comment"))
-      errorsList.add("Sisestage kommentaar.");
+      errorsList.add(messages.get("errorInsertComment"));
   }
 
   private void checkBudget() {
     if (errors.containsKey("budget") || budget == null || budget <= 0)
-      errorsList.add("Sisestage korrektne eelarve.");
+      errorsList.add(messages.get("errorInsertBudget"));
   }
 }

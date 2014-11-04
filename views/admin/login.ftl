@@ -1,19 +1,19 @@
 <@html>
 <br><br>
   <#if loggedInUsername??>
-  <p>Olete sisse loginud kasutajanimega ${loggedInUsername}</p>
-  <button class="btn btn-default btn-sm" onclick="location='/admin/logout'">Valju</button>
+  <p><@m'loggedIn'/> ${loggedInUsername}</p>
+  <button class="btn btn-default btn-sm" onclick="location='/admin/logout'"><@m'exit'/> </button>
   <#else>
   <form method="post" class="form-horizontal">
     <div class="panel-login">
       <div class="login-center">
-      <h3 id="login-h3">Sisselogimine</h3>
+      <h3 id="login-h3"><@m'login'/></h3>
       <label>
-        Kasutajanimi:
+        <@m'username'/>
         <input type="text" name="username" class="form-control">
       </label><br>
-      <label>Parool: <input type="password" class="form-control" name="password"></label><br>
-      <button id="submit" class="btn btn-default btn-sm"><span class="enter">Sisene</span><span class= "glyphicon glyphicon-arrow-right"</span></button>
+      <label> <@m'password'/><input type="password" class="form-control" name="password"></label><br>
+      <button id="submit" class="btn btn-default btn-sm"><span class="enter"> <@m'enter'/></span><span class= "glyphicon glyphicon-arrow-right"</span></button>
     </div>
   </form>
     <#if error??>

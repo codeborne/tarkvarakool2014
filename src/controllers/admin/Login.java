@@ -30,7 +30,7 @@ public class Login extends UserAwareController {
   public Result post() throws InvalidKeySpecException, NoSuchAlgorithmException, DecoderException {
     List<User> userList = (ArrayList<User>) hibernate.createCriteria(User.class).add(Restrictions.eq("username", username)).list();
     if (userList.isEmpty() || !validatePassword(password, userList.get(0).getPassword())) {
-      error = "Vale kasutajanimi või parool";
+      error = (messages.get("errorUsernameAndPassword"));
       return render();
     } else {
       session.setAttribute("username", username);

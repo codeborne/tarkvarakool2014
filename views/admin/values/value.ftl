@@ -55,7 +55,7 @@
 <div class="panel panel-default">
   <div class="goal">
 <div class="panel-heading">
-<span class="forecast-indicator">P - prognoositav väärtus</span>
+<span class="forecast-indicator"><@m'estimatedValue'/></span>
 <br><br>
 
     <h4 class="name"> ${goal.name}</h4>
@@ -65,12 +65,12 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Mõõdik</th>
-          <th>Algtase</th>
+          <th><@m'metric'/></th>
+          <th><@m'startLevel'/></th>
           <#list minimumYear..maximumYear as year>
             <th> ${year?c}</th>
           </#list>
-          <th>Sihttase</th>
+          <th><@m'targetLevel'/></th>
         </tr>
         </thead>
       <tbody>
@@ -91,7 +91,7 @@
                 </form>
               </div>
               <div class="forecasted">
-                <span class="value">${((metric.values.get(year))?c)!""}</span><sup class="forecast-indicator">P</sup>
+                <span class="value">${((metric.values.get(year))?c)!""}</span><sup class="forecast-indicator"><@m'valueSymbol'/></sup>
                 <span class="glyphicon glyphicon-pencil hand-pointer"
                       onclick="showInputHideIconAndValue($(this));"></span>
 
@@ -107,7 +107,7 @@
       </#list>
 
       <tr class="yearlyBudget">
-        <td>Kulutatud raha eurodes</td>
+        <td><@m'moneySpent'/></td>
         <td></td>
         <#list minimumYear..maximumYear as year>
           <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span
@@ -132,7 +132,7 @@
   <#else>
   <div class="panel-login">
     <div class="missingGoals">
-      <h3 id="login-h3">Väärtused puuduvad</h3>
+      <h3 id="login-h3"><@m'noValues'/></h3>
     </div>
   </div>
   </#if>

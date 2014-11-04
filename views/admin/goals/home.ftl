@@ -2,19 +2,19 @@
 <br><br>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h4 class="name">Eesmärgid</h4>
+    <h4 class="name"><@m'goals'/></h4>
   </div>
   <div class="panel-body">
     <table class="table table-hover">
       <thead>
       <tr>
-        <th>Sorteeri</th>
-        <th>Eesmärk</th>
-        <th>Kommentaar</th>
-        <th>Eelarve</th>
-        <th>Muuda</th>
-        <th>Mõõdikud</th>
-        <th>Kustuta</th>
+        <th><@m'sort'/></th>
+        <th><@m'goal'/></th>
+        <th><@m'comment'/></th>
+        <th><@m'budget'/></th>
+        <th><@m'modify'/></th>
+        <th><@m'metrics'/></th>
+        <th><@m'delete'/></th>
       </tr>
       </thead>
       <tbody id="sortableGoals">
@@ -72,7 +72,7 @@
             </td>
             <td>
               <#if !goal.metrics?has_content>
-                <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
+                <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
                   <input type="hidden" name="id" value="${goal.id?c}"/>
                   <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
@@ -86,14 +86,14 @@
       <tr>
         <td></td>
         <td>
-          <input name="name" class="value form-control" rows="1" placeholder="Sisesta eesmärk"
+          <input name="name" class="value form-control" rows="1" placeholder="<@m'insertGoal'/>"
                  maxlength="255" value="${name!""}"></td>
-        <td><input name="comment" class="value form-control" rows="1" placeholder="Kommentaar"
+        <td><input name="comment" class="value form-control" rows="1" placeholder="<@m'insertComment'/>"
                    maxlength="255" value="${comment!""}"></td>
-        <td><input type="number" class="value form-control" placeholder="Eelarve" name="budget"
+        <td><input type="number" class="value form-control" placeholder="<@m'insertBudget'/>" name="budget"
                    <#if budget?? && (budget>0)>value=${budget?c}</#if>></td>
         <td>
-          <input type="button" id="add" value="Lisa" class="saveGoalButton value btn btn-default btn-sm"
+          <input type="button" id="add" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
 
         </td>
@@ -160,7 +160,7 @@
           url: "/admin/goals/home",
           data: { sequenceNumber: order, id: id },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Tekkis viga");
+            alert("<@m'error'/>");
           }
         });
       }
