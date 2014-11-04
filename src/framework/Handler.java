@@ -34,7 +34,7 @@ public class Handler extends AbstractHandler {
 
   private SessionFactory hibernateSessionFactory;
 
-  private Messages messages = new Messages();
+  private Messages messages = new Messages(devMode);
 
   private Binder binder = new Binder("dd.MM.yyyy");
 
