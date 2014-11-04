@@ -473,3 +473,10 @@ input.modify-value {
   margin: auto;
   margin-bottom: 10px;
 }
+.greenValue{
+  color: green;
+}
+
+.redValue{
+  color: red;
+}

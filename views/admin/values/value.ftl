@@ -12,22 +12,31 @@
         } else {
 
           thisObject.parent().children('span.value').text(data.value);
-
-          var changedValue = parseFloat(data.value);
-          if(data.comparableValue!=""){
-          var comparableValue2 = parseFloat(data.comparableValue);
-          if (isForecast && comparableValue2 >= changedValue){
-            thisObject.parent().parent().children('div.measured').children('span.value').css('color', 'green');
+          if(data.value!="") {
+            var changedValue = parseFloat(data.value);
+            if (data.comparableValue != "") {
+              var comparableValue2 = parseFloat(data.comparableValue);
+              if (isForecast && comparableValue2 >= changedValue) {
+                thisObject.parent().parent().children('div.measured').children('span.value').removeClass("redValue");
+                thisObject.parent().parent().children('div.measured').children('span.value').addClass("greenValue");
+              }
+              else if (isForecast && comparableValue2 < changedValue) {
+                thisObject.parent().parent().children('div.measured').children('span.value').removeClass("greenValue");
+                thisObject.parent().parent().children('div.measured').children('span.value').addClass("redValue");
+              }
+              else if (!isForecast && changedValue >= comparableValue2) {
+                thisObject.parent().children('span.value').removeClass("redValue");
+                thisObject.parent().children('span.value').addClass("greenValue");
+              }
+              else if (!isForecast && changedValue < comparableValue2) {
+                thisObject.parent().children('span.value').removeClass("greenValue");
+                thisObject.parent().children('span.value').addClass("redValue");
+              }
+            }
           }
-          else if (isForecast && comparableValue2 < changedValue){
-            thisObject.parent().parent().children('div.measured').children('span.value').css('color', 'red');
-          }
-          else if (!isForecast && changedValue >= comparableValue2) {
-            thisObject.parent().children('span.value').css('color', 'green');
-          }
-          else if (!isForecast && changedValue < comparableValue2 ){
-            thisObject.parent().children('span.value').css('color', 'red');
-          }
+          else{
+            thisObject.parent().parent().children('div.measured').children('span.value').removeClass("greenValue");
+            thisObject.parent().parent().children('div.measured').children('span.value').removeClass("redValue");
           }
           thisObject.hide();
           thisObject.parent().children('span.glyphicon').show();
@@ -103,8 +112,8 @@
           <#list (minimumYear)..maximumYear as year>
             <td>
               <div class="measured">
-                <span class="value" <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))> style="color: green"
-                <#elseif (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))> style="color: red"</#if>  <#--<#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content &&-->
+                <span <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))> class="value greenValue"
+                <#elseif (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))> class="value redValue"<#else>class="value" </#if>
                 >${((metric.values.get(year))?c)!""}</span> <span
                 class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
 

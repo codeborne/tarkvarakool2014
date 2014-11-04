@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
+import java.math.BigDecimal;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -16,6 +18,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class ValuesModifyingTest extends UITest {
 
   Goal goal = new Goal("Sisestatud eesmark","", 100,1);
+  Metric metric = new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 100000, "", "", "", 1.0, true);
 
   @Before
   public void setUp() throws Exception {
@@ -30,7 +33,8 @@ public class ValuesModifyingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 100000, "", "", "", 1.0, true));
+
+    hibernate.save(metric);
     hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 20, "", "", "", 2.0, true));
 
   }
@@ -160,5 +164,52 @@ public class ValuesModifyingTest extends UITest {
     $$(".goal").get(0).$$(".metric").get(0).$$(".targetLevel").get(0).shouldHave(text("100000"));
     $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".targetLevel").get(0).shouldHave(text("20"));
+  }
+
+  @Test
+  public void measuredValueChangesColor() throws Exception {
+    open("/admin/values/value");
+
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(3);
+    tableCell.$$("div.forecasted").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("45").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("50").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
+
+    tableCell.$$("div.measured").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("10").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("redValue"));
+
+    tableCell.$$("div.forecasted").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("redValue"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("greenValue"));
+
+    tableCell.$$("div.forecasted").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("5").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
+  }
+
+  @Test
+  public void measuredValueHaveCorrectColor() throws Exception {
+    metric.getValues().put(2014, new BigDecimal(12));
+    metric.getForecasts().put(2014, new BigDecimal(30));
+    metric.getValues().put(2015, new BigDecimal(80));
+    metric.getForecasts().put(2015, new BigDecimal(10));
+    metric.getValues().put(2018, new BigDecimal(75));
+    metric.getForecasts().put(2018, new BigDecimal(75));
+    metric.getValues().put(2016, new BigDecimal(75));
+
+    hibernate.update(metric);
+    hibernate.flush();
+
+    open("/admin/values/value");
+
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(2).$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("redValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(3).$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(6).$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(4).$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("greenValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(4).$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("redValue"));
   }
 }
