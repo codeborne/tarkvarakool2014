@@ -1,4 +1,6 @@
 <@html values_active=true>
+<br><br>
+  <#if goals?has_content>
   <#list goals as goal>
   <div class="panel panel-default">
   <div class="goal">
@@ -44,6 +46,13 @@
   </div>
   </div>
   </#list>
+  <#else>
+  <div class="panel-login">
+    <div class="missingGoals">
+      <h3 id="login-h3">Väärtused puuduvad</h3>
+    </div>
+  </div>
+  </#if>
 
 </@html>
 
