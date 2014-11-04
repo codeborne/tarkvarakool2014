@@ -13,6 +13,7 @@
           thisObject.hide();
           thisObject.parent().children('span.glyphicon').show();
           thisObject.parent().children('span.value').show();
+//          window.location = window.location;
         }
       }
     );
@@ -41,6 +42,7 @@
       $('.metric-value-form :visible').submit();
     }
     ;
+
     thisObject.hide();
     thisObject.parent().children('span.value').hide();
     thisObject.parent().children('form').children('input').val(thisObject.parent().children('span.value').text());
@@ -82,7 +84,9 @@
           <#list (minimumYear)..maximumYear as year>
             <td>
               <div class="measured">
-                <span class="value">${((metric.values.get(year))?c)!""}</span> <span
+                <span class="value" <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))> style="color: green"
+                <#elseif (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))> style="color: red"</#if>  <#--<#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content &&-->
+                >${((metric.values.get(year))?c)!""}</span> <span
                 class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
 
                 <form class="metric-value-form" style="display: none;"
@@ -91,7 +95,7 @@
                 </form>
               </div>
               <div class="forecasted">
-                <span class="value">${((metric.values.get(year))?c)!""}</span><sup class="forecast-indicator">P</sup>
+                <span class="value">${((metric.forecasts.get(year))?c)!""}</span><sup class="forecast-indicator">P</sup>
                 <span class="glyphicon glyphicon-pencil hand-pointer"
                       onclick="showInputHideIconAndValue($(this));"></span>
 

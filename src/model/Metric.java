@@ -174,10 +174,6 @@ public class Metric {
   }
 
   public void setIsPublic(Boolean isPublic) {
-    if (isPublic == null){
-      this.isPublic = false;
-    }
-    else
     this.isPublic = isPublic;
   }
 
