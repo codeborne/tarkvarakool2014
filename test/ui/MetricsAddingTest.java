@@ -67,7 +67,7 @@ public class MetricsAddingTest extends UITest {
     $(".addMetric").$(By.name("commentOnStartLevel")).setValue("blahblah");
     $(".addMetric").$(By.name("targetLevel")).setValue("1");
     $(".addMetric").$(By.name("commentOnTargetLevel")).setValue("iejoja");
-    $(".addMetric").$(By.name("infoSource")).setValue("ioejoia");
+    $(".addMetric").$(By.name("infoSource")).setValue("http://");
     $(".addMetric").$(By.name("institutionToReport")).setValue("koht");
 
     $(".saveGoalButton").click();
@@ -84,7 +84,7 @@ public class MetricsAddingTest extends UITest {
     row.$(".commentOnStartLevel").shouldHave(text("blahblah"));
     row.$(".targetLevel").shouldHave(text("1"));
     row.$(".commentOnTargetLevel").shouldHave(text("iejoja"));
-    row.$(".infoSource").shouldHave(text("ioejoia"));
+    row.$(".infoSource").shouldHave(text("Link"));
     row.$(".institutionToReport").shouldHave(text("koht"));
   }
 

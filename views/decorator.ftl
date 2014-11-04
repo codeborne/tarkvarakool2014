@@ -55,7 +55,8 @@
   </table>
   <#nested>
 </div>
-<div class="footer"></div>
+
 </body>
+<div class="footer"></div>
 </html>
 </#macro>

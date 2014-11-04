@@ -70,7 +70,7 @@
   }
 
 </script>
-
+  <#if goals?has_content>
 <br><br>
 <#list goals as goal>
 <div class="panel panel-default">
@@ -152,4 +152,11 @@
     <br>
   </div>
     </#list>
+  <#else>
+  <div class="panel-login">
+    <div class="missingGoals">
+      <h3 id="login-h3">Väärtused puuduvad</h3>
+    </div>
+  </div>
+  </#if>
 </@html>
