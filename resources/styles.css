@@ -78,9 +78,6 @@ body {
   padding: 200px;
 }
 
-
-
-
 .saveGoalButton {
   height: 35px;
   width: 35px;
@@ -472,11 +469,4 @@ input.modify-value {
   padding: 8px 0px;
   margin: auto;
   margin-bottom: 10px;
-}
-.greenValue{
-  color: green;
-}
-
-.redValue{
-  color: red;
 }

@@ -16,7 +16,7 @@
             <th><@m'metric'/></th>
             <th><@m'publicDescription'/></th>
             <th><@m'startLevel'/></th>
-            <th><@m'startLevelComment'/>r</th>
+            <th><@m'startLevelComment'/></th>
             <th><@m'targetLevel'/></th>
             <th><@m'targetLevelComment'/></th>
             <th><@m'infoSource'/></th>

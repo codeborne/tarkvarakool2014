@@ -2,7 +2,7 @@
 <br><br>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h4 class="name"><@m'goals'/></h4>
+    <h4 class="name"><@m'Goals>'/></h4>
   </div>
   <div class="panel-body">
     <table class="table table-hover">
