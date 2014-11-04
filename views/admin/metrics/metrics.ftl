@@ -11,20 +11,20 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th>Sorteeri</th>
-        <th>Mõõdik</th>
-        <th>Ühik</th>
-        <th>Avalik kirjeldus</th>
-        <th>Mitteavalik kirjeldus</th>
-        <th>Algtase</th>
-        <th>Algtaseme kommentaar</th>
-        <th>Sihttase</th>
-        <th>Sihttaseme kommentaar</th>
-        <th>Infoallikas</th>
-        <th>Asutus, kuhu raporteerida</th>
-        <th>Avalik</th>
-        <th>Muuda</th>
-        <th>Kustuta</th>
+        <th><@m'sort'/></th>
+        <th><@m'metric'/></th>
+        <th><@m'unit'/></th>
+        <th><@m'publicDescription'/></th>
+        <th><@m'privateDescription'/></th>
+        <th><@m'startLevel'/></th>
+        <th><@m'startLevelComment'/></th>
+        <th><@m'targetLevel'/></th>
+        <th><@m'targetLevelComment'/></th>
+        <th><@m'infoSource'/></th>
+        <th><@m'institutionReport'/></th>
+        <th><@m'public'/></th>
+        <th><@m'modify'/></th>
+        <th><@m'delete'/></th>
       </tr>
       </thead>
   <tbody id="sortable">
@@ -102,10 +102,10 @@
         <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
         <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
         <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
-        <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Salvesta"
+        <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'save'/>"
                style="display: none" data-action="save">
         <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
-               onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="Tühista" style="display:none"
+               onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="<@m'cancel'/>" style="display:none"
                data-action="save">
           <span class="value">
             <button class="modifyButton" type="button" class="btn btn-default btn-sm">
@@ -114,7 +114,7 @@
           </span>
       </td>
       <td>
-        <form action="delete" method="post" onsubmit="return confirm('Kas oled kustutamises kindel?')">
+        <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
           <input type="hidden" value="${goal.id?c}" name="goalId">
           <input type="hidden" name="id" value="${metric.id?c}"/>
           <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
@@ -125,27 +125,27 @@
     </#list>
   <tr class="addMetric">
     <td></td>
-    <td><input name="name" class="value form-control" placeholder="Mõõdik" value="${name!""}"></td>
-    <td><input name="unit" class="value form-control" placeholder="Ühik" value="${unit!""}"></td>
-    <td><input name="publicDescription" class="value form-control" placeholder="Avalik kirjeldus"
+    <td><input name="name" class="value form-control" placeholder="<@m'metric'/>" value="${name!""}"></td>
+    <td><input name="unit" class="value form-control" placeholder="<@m'unit'/>" value="${unit!""}"></td>
+    <td><input name="publicDescription" class="value form-control" placeholder="<@m'publicDescription'/>"
                value="${publicDescription!""}"></td>
-    <td><input name="privateDescription" class="value form-control" placeholder="Mitteavalik kirjeldus"
+    <td><input name="privateDescription" class="value form-control" placeholder="<@m'privateDescription'/>"
                value="${privateDescription!""}"></td>
-    <td><input name="startLevel" type="number" class="value form-control" placeholder="Algtase"
+    <td><input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
                value="${(startLevel?c)!0}"></td>
-    <td><input name="commentOnStartLevel" class="value form-control" placeholder="Algtaseme kommentaar"
+    <td><input name="commentOnStartLevel" class="value form-control" placeholder="<@m'startLevelComment'/>"
                value="${commentOnStartLevel!""}"></td>
-    <td><input name="targetLevel" type="number" class="value form-control" placeholder="Sihttase"
+    <td><input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
                value="${(targetLevel?c)!0}"></td>
-    <td><input name="commentOnTargetLevel" class="value form-control" placeholder="Sihttaseme kommentaar"
+    <td><input name="commentOnTargetLevel" class="value form-control" placeholder="<@m'targetLevelComment'/>"
                value="${commentOnTargetLevel!""}"></td>
-    <td><input name="infoSource" class="value form-control" placeholder="Infoallikas" value="${infoSource!""}"></td>
-    <td><input name="institutionToReport" class="value form-control" placeholder="Asutus, kuhu raporteerida"
+    <td><input name="infoSource" class="value form-control" placeholder="<@m'infoSource'/>" value="${infoSource!""}"></td>
+    <td><input name="institutionToReport" class="value form-control" placeholder="<@m'institutionReport'/>"
                value="${institutionToReport!""}"></td>
 
     <td> <input class="value" type="checkbox" name="isPublic" value="true" ></td>
     <td>
-      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="Lisa" data-action="save">
+      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>" data-action="save">
       <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
     </td>
   </tr>
@@ -155,7 +155,7 @@
 </div>
 <span id="errors"></span>
 <button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'"><span
-  class="enter">Pealehele</span></button>
+  class="enter"><@m'goToMainPage'/></span></button>
 
 
 <script>
@@ -216,7 +216,7 @@
           url: "/admin/metrics/save",
           data: ui.item.find(".orderNumberForm").serialize(),
           error: function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Tekkis viga");
+            alert("<@m'error'/>");
           }
         });
       }

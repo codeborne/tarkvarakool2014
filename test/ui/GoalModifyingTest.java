@@ -77,7 +77,7 @@ public class GoalModifyingTest extends UITest {
 
     $(".saveGoalButton").click();
 
-    $(".alert-danger").shouldHave(text("Sisestage eesmärk."));
+    $(".alert-danger").shouldHave(text(messages.get("errorInsertGoal")));
     $(By.name("budget")).shouldHave(value("15"));
 
   }

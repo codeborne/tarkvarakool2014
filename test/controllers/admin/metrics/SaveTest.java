@@ -27,7 +27,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertMetric")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -38,7 +38,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertMetric")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -49,7 +49,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sisestage mõõdik."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertMetric")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -61,7 +61,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga avalikus kirjelduses"));
+    assertTrue(controller.errorsList.contains(messages.get("errorPublicDescription")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -73,7 +73,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga mitteavalikus kirjelduses"));
+    assertTrue(controller.errorsList.contains(messages.get("errorPrivateDescription")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -85,7 +85,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Algtase peab olema number"));
+    assertTrue(controller.errorsList.contains(messages.get("errorStartLevel")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -97,7 +97,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga algtaseme kommentaaris"));
+    assertTrue(controller.errorsList.contains(messages.get("errorStartLevelComment")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -109,7 +109,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Sihttase peab olema number"));
+    assertTrue(controller.errorsList.contains(messages.get("errorTargetLevel")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -121,7 +121,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga sihttaseme kommentaaris"));
+    assertTrue(controller.errorsList.contains(messages.get("errorTargetLevelComment")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -133,7 +133,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga infoallika sisestamisel"));
+    assertTrue(controller.errorsList.contains(messages.get("errorInfoSource")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -145,7 +145,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("Viga raporteeritava asutuse sisestamisel"));
+    assertTrue(controller.errorsList.contains(messages.get("errorInstitutionReport")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -163,7 +163,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains("See mõõdik on juba sisestatud."));
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertedMetric")));
     verify(transaction).rollback();
   }
 

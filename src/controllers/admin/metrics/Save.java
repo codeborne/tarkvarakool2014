@@ -44,7 +44,8 @@ public class Save extends UserAwareController {
         save();
       } catch (ConstraintViolationException e) {
         hibernate.getTransaction().rollback();
-        errorsList.add("See mõõdik on juba sisestatud.");
+        errorsList.add(messages.get("errorInsertedMetric"));
+
       }
     }
     return render("admin/metrics/errors");
@@ -126,56 +127,57 @@ public class Save extends UserAwareController {
 
   private void checkName() {
     if (errors.containsKey("name") || isBlank(name))
-      errorsList.add("Sisestage mõõdik.");
+      errorsList.add(messages.get("errorInsertMetric"));
   }
 
   private void checkPublicDescription() {
     if (errors.containsKey("publicDescription"))
-      errorsList.add("Viga avalikus kirjelduses");
+      errorsList.add(messages.get("errorPublicDescription"));
   }
 
   private void checkPrivateDescription() {
     if (errors.containsKey("privateDescription"))
-      errorsList.add("Viga mitteavalikus kirjelduses");
+      errorsList.add(messages.get("errorPrivateDescription"));
 
   }
 
   private void checkStartLevel() {
     if (errors.containsKey("startLevel"))
-      errorsList.add("Algtase peab olema number");
+      errorsList.add(messages.get("errorStartLevel"));
 
   }
 
   private void checkCommentOnStartLevel() {
     if (errors.containsKey("commentOnStartLevel"))
-      errorsList.add("Viga algtaseme kommentaaris");
+      errorsList.add(messages.get("errorStartLevelComment"));
   }
 
   private void checkTargetLevel() {
     if (errors.containsKey("targetLevel"))
-      errorsList.add("Sihttase peab olema number");
+      errorsList.add(messages.get("errorTargetLevel"));
   }
 
   private void checkCommentOnTargetLevel() {
     if (errors.containsKey("commentOnTargetLevel"))
-      errorsList.add("Viga sihttaseme kommentaaris");
+      errorsList.add(messages.get("errorTargetLevelComment"));
   }
 
   private void checkInfoSource() {
     if (infoSource!=null && !infoSource.equals("") && !infoSource.contains("http://")) {
-      errorsList.add("Viga infoallika sisestamisel");
+      errorsList.add(messages.get("errorInfoSource"));
     }
     if (errors.containsKey("infoSource")) {
-      errorsList.add("Viga infoallika sisestamisel");
+      errorsList.add(messages.get("errorInfoSource"));
   }}
 
   private void checkInstitutionToReport() {
     if (errors.containsKey("institutionToReport"))
-      errorsList.add("Viga raporteeritava asutuse sisestamisel");
+      errorsList.add(messages.get("errorInstitutionReport"));
   }
 
   private void checkOrderNumber() {
     if (errors.containsKey("orderNumber"))
-      errorsList.add("Sisestage korrektne järjekorra number");
+      errorsList.add(messages.get("errorSequenceNumber"));
+
   }
 }

@@ -32,7 +32,7 @@ public class Modify extends UserAwareController {
         hibernate.update(goal);
         hibernate.flush();
       } else {
-        errorsList.add("Tekkis viga.");
+        errorsList.add(messages.get("error"));
       }
 
     }
@@ -50,17 +50,17 @@ public class Modify extends UserAwareController {
 
   public void checkGoalId() {
     if (errors.containsKey("goalId") || goalId==null)
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
 
   public void checkYear() {
     if (errors.containsKey("year") || year==null || year>MAXIMUM_YEAR || year<MINIMUM_YEAR)
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
   public void checkYearlyBudget() {
     if (errors.containsKey("yearlyBudget") || (yearlyBudget!=null && yearlyBudget < 0))
-      errorsList.add("Sisestage korrektne väärtus.");
+      errorsList.add(messages.get("errorInsertValue"));
   }
 }

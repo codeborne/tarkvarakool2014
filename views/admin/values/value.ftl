@@ -4,13 +4,11 @@
   function sendData(goalId, metricId, year, isForecast, thisObject) {
     inputValue = thisObject.children('input').val();
     $.post("/admin/values/modify", {goalId: goalId, metricId: metricId, year: year, value: inputValue, isForecast: isForecast},
-
       function (text) {
         var data = JSON.parse(text.replace(/&quot;/g, '"'));
         if (data.errorsList.length > 0) {
           alert(data.errorsList.join("\n"));
         } else {
-
           thisObject.parent().children('span.value').text(data.value);
           if(data.value!="") {
             var changedValue = parseFloat(data.value);
@@ -41,7 +39,6 @@
           thisObject.hide();
           thisObject.parent().children('span.glyphicon').show();
           thisObject.parent().children('span.value').show();
-
         }
       }
     );
@@ -70,7 +67,6 @@
       $('.metric-value-form :visible').submit();
     }
     ;
-
     thisObject.hide();
     thisObject.parent().children('span.value').hide();
     thisObject.parent().children('form').children('input').val(thisObject.parent().children('span.value').text());
@@ -85,7 +81,7 @@
 <div class="panel panel-default">
   <div class="goal">
 <div class="panel-heading">
-<span class="forecast-indicator">P - prognoositav väärtus</span>
+<span class="forecast-indicator"><@m'estimatedValue'/></span>
 <br><br>
 
     <h4 class="name"> ${goal.name}</h4>
@@ -95,12 +91,12 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Mõõdik</th>
-          <th>Algtase</th>
+          <th><@m'metric'/></th>
+          <th><@m'startLevel'/></th>
           <#list minimumYear..maximumYear as year>
             <th> ${year?c}</th>
           </#list>
-          <th>Sihttase</th>
+          <th><@m'targetLevel'/></th>
         </tr>
         </thead>
       <tbody>
@@ -123,7 +119,7 @@
                 </form>
               </div>
               <div class="forecasted">
-                <span class="value">${((metric.forecasts.get(year))?c)!""}</span><sup class="forecast-indicator">P</sup>
+                <span class="value">${((metric.forecasts.get(year))?c)!""}</span><sup class="forecast-indicator"><@m'valueSymbol'/></sup>
                 <span class="glyphicon glyphicon-pencil hand-pointer"
                       onclick="showInputHideIconAndValue($(this));"></span>
 
@@ -139,7 +135,7 @@
       </#list>
 
       <tr class="yearlyBudget">
-        <td>Kulutatud raha eurodes</td>
+        <td><@m'moneySpent'/></td>
         <td></td>
         <#list minimumYear..maximumYear as year>
           <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span
@@ -164,7 +160,7 @@
   <#else>
   <div class="panel-login">
     <div class="missingGoals">
-      <h3 id="login-h3">Väärtused puuduvad</h3>
+      <h3 id="login-h3"><@m'noValues'/></h3>
     </div>
   </div>
   </#if>

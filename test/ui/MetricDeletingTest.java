@@ -45,7 +45,7 @@ public class MetricDeletingTest extends UITest {
     $$(".metricsButton").get(0).click();
     $$("tr.metric").shouldHaveSize(1);
     $$(".deleteButton").get(0).click();
-    confirm("Kas oled kustutamises kindel?");
+    confirm(messages.get("errorDeletingConfirmation"));
     $$("tr.metric").shouldHaveSize(0);
   }
 
@@ -60,7 +60,7 @@ public class MetricDeletingTest extends UITest {
     $$("tr.metric").shouldHaveSize(4);
     $$(".deleteButton").get(1).click();
 
-    confirm("Kas oled kustutamises kindel?");
+    confirm(messages.get("errorDeletingConfirmation"));
     ElementsCollection metrics = $$("tr.metric");
     metrics.shouldHaveSize(3);
 
@@ -76,7 +76,7 @@ public class MetricDeletingTest extends UITest {
       $$(".metricsButton").get(0).click();
       $$("tr.metric").shouldHaveSize(1);
       $$(".deleteButton").get(0).click();
-      dismiss("Kas oled kustutamises kindel?");
+      dismiss(messages.get("errorDeletingConfirmation"));
       $$("tr.metric").get(0).$(".name").shouldHave(text("Some metric"));
 
     }

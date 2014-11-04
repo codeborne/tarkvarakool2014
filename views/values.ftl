@@ -7,18 +7,18 @@
     <div class="panel-heading">
       <h4 class="name"> ${goal.name}</h4>
       <div style="white-space: pre;">${goal.comment!""}</div>
-      <h4 class="budget">Eelarve: €${goal.budget?c} </h4>
+      <h4 class="budget"><@m'budget'/>${goal.budget?c} €</h4>
     </div>
     <div class="panel-body">
       <table class="table">
       <thead>
       <tr>
-        <th>Mõõdik</th>
-        <th>Algtase</th>
+        <th><@m'metric'/></th>
+        <th><@m'startLevel'/></th>
         <#list minimumYear..maximumYear as year>
           <th> ${year?c}</th>
         </#list>
-        <th>Sihttase</th>
+        <th><@m'targetLevel'/></th>
       </tr>
       </thead>
       <tbody>
@@ -49,7 +49,7 @@
   <#else>
   <div class="panel-login">
     <div class="missingGoals">
-      <h3 id="login-h3">Väärtused puuduvad</h3>
+      <h3 id="login-h3"><@m'noValues'/></h3>
     </div>
   </div>
   </#if>

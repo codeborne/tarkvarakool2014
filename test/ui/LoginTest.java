@@ -21,7 +21,7 @@ public class LoginTest extends UITest {
 
     $("#submit").click();
 
-    $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
+    $(".alert-danger").shouldHave(text(messages.get("errorUsernameAndPassword")));
   }
 
   @Test
@@ -35,7 +35,7 @@ public class LoginTest extends UITest {
 
     $("#submit").click();
 
-    $(".greetings").shouldHave(text("Tere, johny"));
+    $(".greetings").shouldHave(text("Hello, johny"));
     $("#logout-button").click();
   }
 
@@ -50,7 +50,7 @@ public class LoginTest extends UITest {
 
     $("#submit").click();
 
-    $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
+    $(".alert-danger").shouldHave(text(messages.get("errorUsernameAndPassword")));
 
   }
 
@@ -65,7 +65,7 @@ public class LoginTest extends UITest {
 
     $("#submit").click();
 
-    $(".alert-danger").shouldHave(text("Vale kasutajanimi või parool"));
+    $(".alert-danger").shouldHave(text(messages.get("errorUsernameAndPassword")));
 
   }
 
@@ -79,7 +79,7 @@ public class LoginTest extends UITest {
     $(By.name("password")).setValue("p2s3w04d");
 
     $("#submit").click();
-    $(".greetings").shouldHave(text("Tere, johny"));
+    $(".greetings").shouldHave(text("Hello, johny"));
 
     $("#logout-button").click();
     $("#login-button").exists();

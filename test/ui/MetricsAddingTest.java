@@ -40,7 +40,7 @@ public class MetricsAddingTest extends UITest {
 
     $(".saveGoalButton").click();
 
-    $(".alert-danger").shouldHave(text("Sisestage mõõdik."));
+    $(".alert-danger").shouldHave(text(messages.get("errorInsertMetric")));
 
   }
 
