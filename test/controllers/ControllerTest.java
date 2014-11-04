@@ -9,6 +9,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import static framework.Messages.DEFAULT;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -18,6 +19,7 @@ public abstract class ControllerTest<T extends Controller> {
   protected HttpSession session = mock(HttpSession.class);
   protected Session hibernate = mock(Session.class);
   protected Transaction transaction = mock(Transaction.class);
+  protected Messages.Resolver messages = new Messages(false).getResolverFor(DEFAULT);
   protected T controller;
 
   public ControllerTest() {
@@ -29,6 +31,7 @@ public abstract class ControllerTest<T extends Controller> {
     this.controller = createController(actualTypeArguments[0].getTypeName());
     this.controller.session = session;
     this.controller.hibernate = hibernate;
+    this.controller.messages = messages;
     when(hibernate.getTransaction()).thenReturn(transaction);
   }
 
