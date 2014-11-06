@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <!--
+  <changeSet author="anton (generated)" id="1415301167093-1">
+    <createTable tableName="GOAL">
+      <column autoIncrement="true" name="ID" type="BIGINT(19)">
+        <constraints primaryKey="true" primaryKeyName="CONSTRAINT_2"/>
+      </column>
+      <column name="BUDGET" type="INT(10)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="COMMENT" type="VARCHAR(255)"/>
+      <column name="NAME" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="SEQUENCENUMBER" type="INT(10)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ENGCOMMENT" type="VARCHAR(255)"/>
+      <column name="ENGNAME" type="VARCHAR(255)"/>
+    </createTable>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-2">
+    <createTable tableName="METRIC">
+      <column autoIncrement="true" name="ID" type="BIGINT(19)">
+        <constraints primaryKey="true" primaryKeyName="CONSTRAINT_8"/>
+      </column>
+    </createTable>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-3">
+    <createTable tableName="METRICFORECAST">
+      <column name="METRIC_ID" type="BIGINT(19)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="FORECAST" type="DECIMAL(38, 1)"/>
+      <column name="YEAR" type="INT(10)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="COMPARABLEVALUE" type="DECIMAL(38, 1)"/>
+    </createTable>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-4">
+    <createTable tableName="METRICVALUE">
+      <column name="METRIC_ID" type="BIGINT(19)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="VALUE" type="DECIMAL(38, 1)"/>
+      <column name="YEAR" type="INT(10)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-5">
+    <createTable tableName="USER">
+      <column autoIncrement="true" name="ID" type="BIGINT(19)">
+        <constraints primaryKey="true" primaryKeyName="CONSTRAINT_27"/>
+      </column>
+      <column name="PASSWORD" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="USERNAME" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-6">
+    <createTable tableName="YEARLYBUDGET">
+      <column name="GOAL_ID" type="BIGINT(19)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="YEARLYBUDGET" type="BIGINT(19)"/>
+      <column name="YEAR" type="INT(10)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-7">
+    <addColumn tableName="METRIC">
+      <column name="GOAL_ID" type="BIGINT(19)"/>
+    </addColumn>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-8">
+    <addPrimaryKey columnNames="METRIC_ID, YEAR" constraintName="CONSTRAINT_1" tableName="METRICVALUE"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-9">
+    <addPrimaryKey columnNames="METRIC_ID, YEAR" constraintName="CONSTRAINT_3" tableName="METRICFORECAST"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-10">
+    <addPrimaryKey columnNames="GOAL_ID, YEAR" constraintName="CONSTRAINT_34" tableName="YEARLYBUDGET"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-11">
+    <addUniqueConstraint columnNames="SEQUENCENUMBER" constraintName="UK_26JV2KJP7AH1Y52PO0H9BYNBD" tableName="GOAL"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-12">
+    <addUniqueConstraint columnNames="NAME" constraintName="UK_CLKWQODVHYHKGH0DGKFTENQMQ" tableName="GOAL"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-13">
+    <addUniqueConstraint columnNames="USERNAME" constraintName="UK_JREODF78A7PL5QIDFH43AXDFB" tableName="USER"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-14">
+    <addForeignKeyConstraint baseColumnNames="GOAL_ID" baseTableName="METRIC" constraintName="FK_588VKJMUW2Q0M00EO1YL0AFEA" referencedColumnNames="ID" referencedTableName="GOAL"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-15">
+    <addForeignKeyConstraint baseColumnNames="METRIC_ID" baseTableName="METRICFORECAST" constraintName="FK_5T8NDEEM4EVP4SO5NB7VH21SV" referencedColumnNames="ID" referencedTableName="METRIC"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-16">
+    <addForeignKeyConstraint baseColumnNames="GOAL_ID" baseTableName="YEARLYBUDGET" constraintName="FK_FRKEJN5LK1N8SHM69J1SNOTR4" referencedColumnNames="ID" referencedTableName="GOAL"/>
+  </changeSet>
+  
+  <changeSet author="anton (generated)" id="1415301167093-17">
+    <addForeignKeyConstraint baseColumnNames="METRIC_ID" baseTableName="METRICVALUE" constraintName="FK_THC1E3Y3YDGR6X1TDI5M1LIM3" referencedColumnNames="ID" referencedTableName="METRIC"/>
+  </changeSet>
+  -->
+
+  <changeSet id="1" author="Erik">
+    <sql>
+      merge into User (username, password) key(username) values ('Delia', '10000:96d507a23649a3e6ce5b26ad219c81fb:0d9e7549fddd7502fb3939c0c5589c9aec07c759fc763235901d380b83c7a0dc0d728239093fec14ecdec5455d975f09a2b0b99167835d5ddbc29a550dd65fd0');
+    </sql>
+  </changeSet>
+
+</databaseChangeLog>
