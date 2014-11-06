@@ -58,7 +58,7 @@
                      data-action="save">
               </div>
           <span class="value">
-            <button class="modifyButton" type="button" class="btn btn-default btn-sm">
+            <button class="modifyButton"type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </span>

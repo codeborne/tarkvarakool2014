@@ -300,7 +300,7 @@ body {
 }
 
 .forecasted > span.value, .forecast-indicator {
-  color: #D44E2B;
+  color:#333
 }
 
 .toprow {
