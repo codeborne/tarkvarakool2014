@@ -1,6 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.ElementsCollection;
+import framework.Messages;
 import model.Goal;
 import model.Metric;
 import model.User;
@@ -19,9 +20,11 @@ public class MetricDeletingTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
+    messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
+    $(".language-button-est").click();
 
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
@@ -42,6 +45,7 @@ public class MetricDeletingTest extends UITest {
   @Test
   public void testSuccessfullyDeleteMetricWhenThereIsOneMetric() {
     open("/admin/goals/home");
+
     $$(".metricsButton").get(0).click();
     $$("tr.metric").shouldHaveSize(1);
     $$(".deleteButton").get(0).click();
@@ -55,6 +59,7 @@ public class MetricDeletingTest extends UITest {
     hibernate.save(new Metric(goal, "another metric", "", "", "", 7, "",4, "", "", "", -5.0, true));
     hibernate.save(new Metric(goal, "bbb", "", "", "xdfghj", 70, "",40, "", "", "", 0.0, true));
     open("/admin/goals/home");
+
 
     $$(".metricsButton").get(0).click();
     $$("tr.metric").shouldHaveSize(4);

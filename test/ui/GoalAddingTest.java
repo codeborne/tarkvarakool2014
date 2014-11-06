@@ -1,6 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.SelenideElement;
+import framework.Messages;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
@@ -16,6 +17,8 @@ public class GoalAddingTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
+    messages = new Messages(false).getResolverFor("et");
+
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
@@ -37,6 +40,7 @@ public class GoalAddingTest extends UITest {
   public void adminCanSuccessfullyInsertGoal() throws Exception {
 
     open("/admin/goals/home");
+    $(".language-button-est").click();
 
     $(By.name("name")).setValue("Sisestatud eesmark");
     $(By.name("budget")).setValue("100");
@@ -53,6 +57,7 @@ public class GoalAddingTest extends UITest {
   public void adminInsertsInvalidGoal() throws Exception {
 
     open("/admin/goals/home");
+    $(".language-button-est").click();
 
     $(By.name("name")).setValue("");
     $(By.name("budget")).setValue("10");
@@ -62,9 +67,5 @@ public class GoalAddingTest extends UITest {
     $(".alert-danger").shouldHave(text(messages.get("errorInsertGoal")));
     $(By.name("budget")).shouldHave(value("10"));
   }
-
-
-
-
 }
 

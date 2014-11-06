@@ -18,6 +18,11 @@ public abstract class UserAwareController extends Controller {
   public String getLoggedInUsername() {
     return (String) session.getAttribute("username");
   }
+  public String getLanguage() {
+    if (session.getAttribute("locale") == null)
+      session.setAttribute("locale", "en");
+    return (String) session.getAttribute("locale");
+  }
 
   @Override
   protected Set<String> getRoles() {
@@ -53,4 +58,5 @@ public abstract class UserAwareController extends Controller {
 
     return super.render(template);
   }
+
 }
