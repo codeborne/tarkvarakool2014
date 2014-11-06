@@ -14,8 +14,10 @@ public class Goal {
 
   @Column(nullable = false, unique = true)
   private String name;
+  private String engName;
 
   private String comment;
+  private String engComment;
 
   @Column(nullable = false)
   private Integer budget;
@@ -97,4 +99,18 @@ public class Goal {
     this.sequenceNumber = sequenceNumber;
   }
 
+  public String getEngComment() {
+    return engComment;
+  }
+
+  public void setEngComment(String engComment) {
+    this.engComment = engComment;
+  }
+  public String getEngName() {
+    return engName;
+  }
+
+  public void setEngName(String engName) {
+    this.engName = engName;
+  }
 }

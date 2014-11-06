@@ -28,6 +28,11 @@ public class Metric {
   private String institutionToReport;
   private Boolean isPublic = true;
 
+
+  private String engName;
+  private String engUnit;
+  private String engPublicDescription;
+
   @ElementCollection
   @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
   @MapKeyColumn(name="year")
@@ -192,4 +197,29 @@ public class Metric {
   public void setOrderNumber(Double orderNumber) {
     this.orderNumber = orderNumber;
   }
+
+  public String getEngName() {
+    return engName;
+  }
+
+  public void setEngName(String engName) {
+    this.engName = engName;
+  }
+
+  public String getEngUnit() {
+    return engUnit;
+  }
+
+  public void setEngUnit(String engUnit) {
+    this.engUnit = engUnit;
+  }
+
+  public String getEngPublicDescription() {
+    return engPublicDescription;
+  }
+
+  public void setEngPublicDescription(String engPublicDescription) {
+    this.engPublicDescription = engPublicDescription;
+  }
+
 }

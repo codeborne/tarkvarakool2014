@@ -2,7 +2,7 @@
 <br><br>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h4 class="name"><@m'Goals>'/></h4>
+    <h4 class="name"><@m'Goals'/></h4>
   </div>
   <div class="panel-body">
     <table class="table table-hover">
@@ -15,6 +15,7 @@
         <th><@m'modify'/></th>
         <th><@m'metrics'/></th>
         <th><@m'delete'/></th>
+        <th><@m'translate'/></th>
       </tr>
       </thead>
       <tbody id="sortableGoals">
@@ -79,6 +80,14 @@
                   </button>
                 </form>
               </#if>
+            </td>
+            <td>
+              <form action="/admin/goals/translation">
+                <input type="hidden" value="${goal.id?c}" name="goalId">
+                <button type="submit" class="translationButton btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-font"></span>
+                </button>
+              </form>
             </td>
           </tr>
           </#list>
