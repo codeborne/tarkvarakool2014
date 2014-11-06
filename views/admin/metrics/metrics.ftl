@@ -95,7 +95,7 @@
                style="display: none;">
       </td>
       <td class="isPublic">
-        <span class="value"> <#if metric.isPublic?? && metric.isPublic == true> Avalik <#else>Mitteavalik</#if></span>
+        <span class="value"> <#if metric.isPublic?? && metric.isPublic == true> <@m'public'/> <#else><@m'private'/></#if></span>
         <input class="value" type="checkbox" name="isPublic" value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if> style="display: none;">
       </td>
       <td>

@@ -1,6 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.SelenideElement;
+import framework.Messages;
 import model.Goal;
 import model.User;
 import org.junit.After;
@@ -17,6 +18,7 @@ public class GoalModifyingTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
+    messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
@@ -39,6 +41,7 @@ public class GoalModifyingTest extends UITest {
   public void adminClicksOnModifyButton () {
 
     open("/admin/goals/home");
+    $(".language-button-est").click();
 
     $(".modifyButton").click();
 
@@ -50,6 +53,7 @@ public class GoalModifyingTest extends UITest {
   public void adminModifiesGoal() throws Exception {
 
     open("/admin/goals/home");
+    $(".language-button-est").click();
 
     $(".modifyButton").click();
 
@@ -69,6 +73,7 @@ public class GoalModifyingTest extends UITest {
   public void adminFailsModifyingGoal() throws Exception {
 
     open("/admin/goals/home");
+    $(".language-button-est").click();
 
     $(".modifyButton").click();
 

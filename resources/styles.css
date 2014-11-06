@@ -55,6 +55,7 @@ body {
   color: #006699;
   font-size: 30px;
 }
+
 .panel-heading .budget {
   color: #6f6d65;
 }
@@ -72,14 +73,10 @@ body {
   position: relative;
 }
 
-
-.missingGoals{
+.missingGoals {
   text-align: center;
   padding: 200px;
 }
-
-
-
 
 .saveGoalButton {
   height: 35px;
@@ -321,11 +318,6 @@ body {
   text-align: center;
 }
 
-.title {
-  margin-top: 12px;
-  font-weight: bold;
-}
-
 .toprow td:nth-child(3) {
   color: #fff;
   font-size: 30px;
@@ -350,6 +342,12 @@ body {
   width: 2px;
   background-color: #fff;
 }
+
+/*.language-symbol {*/
+/*height: 55px;*/
+/*width: 1px;*/
+/*background-color: #fff;*/
+/*}*/
 
 .switch-button {
   display: inline-block;
@@ -473,10 +471,59 @@ input.modify-value {
   margin: auto;
   margin-bottom: 10px;
 }
-.greenValue{
+
+.greenValue {
   color: green;
 }
 
-.redValue{
+.redValue {
   color: red;
+}
+
+.languageButtons {
+  font-size: 11px;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background-color: transparent;
+  margin-top: 8px;
+  position:relative;
+  margin-right: 40px;
+}
+
+.languageButtons:before,
+.languageButtons:after {
+  content:'';
+  position:absolute;
+  display:block;
+  left:-10px;
+  top:6px;
+  height:15px;
+  border-left:1px solid #fff;
+}
+
+.languageButtons:after {
+  left:auto;
+  right:-10px;
+}
+
+.languageButtons a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 6px;
+}
+
+.languageButtons a.active {
+  color: #ffcc00;
+  background-color: rgba(0, 0, 0, 0.5);
 }

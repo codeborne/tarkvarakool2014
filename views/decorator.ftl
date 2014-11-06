@@ -14,16 +14,23 @@
 <body>
 <div class="navbar navbar-default" role="navigation">
   <div class="container container-top">
+
     <div class="navbar-collapse collapse navbar-right">
+
+      <div class="languageButtons btn-group button-menu-inner pull-left">
+        <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
+        <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
+      </div>
+
       <#if loggedInUsername??>
-        <form class="navbar-form navbar-left" action="/admin/logout">
+        <form class="navbar-form pull-left" action="/admin/logout">
           <span class="greetings"><@m'hello'/> <strong>${loggedInUsername}</strong></span>
           <button id="logout-button" type="submit" class="authentication-button"><span
             class="glyphicon glyphicon-lock"></span> <@m'exit'/>
           </button>
         </form>
       <#else>
-        <form class="navbar-form navbar-left" action="/admin/login">
+        <form class="navbar-form pull-left" action="/admin/login">
           <button id="login-button" type="submit" class="authentication-button"><span
             class="glyphicon glyphicon-lock"></span><@m'login'/>
           </button>
@@ -40,7 +47,7 @@
       <td>
         <div class="symbol"></div>
       </td>
-      <td><@m'title'/></td>
+      <td class="title"><@m'title'/></td>
       <td>
         <div class="btn-group button-menu-inner">
           <button type="button" class="switch-button<#if !values_active> active</#if>" onclick="location='${homeUrl}'">

@@ -1,6 +1,7 @@
 package ui;
 
 import com.codeborne.selenide.SelenideElement;
+import framework.Messages;
 import model.Goal;
 import model.Metric;
 import model.User;
@@ -22,9 +23,11 @@ public class YearlyBudgetsModifyingTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
+    messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
+    $(".language-button-est").click();
 
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
