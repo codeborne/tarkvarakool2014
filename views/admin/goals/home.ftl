@@ -57,7 +57,7 @@
                      data-action="save">
               </div>
           <span class="value">
-            <button class="modifyButton" type="button" class="btn btn-default btn-sm">
+            <button class="modifyButton"type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </span>
@@ -92,7 +92,7 @@
                    maxlength="255" value="${comment!""}"></td>
         <td><input type="number" class="value form-control" placeholder="<@m'insertBudget'/>" name="budget"
                    <#if budget?? && (budget>0)>value=${budget?c}</#if>></td>
-        <td colspan=3>
+        <td colspan=>
           <input type="button" id="add" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
 

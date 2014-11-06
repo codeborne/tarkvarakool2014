@@ -300,8 +300,10 @@ body {
 }
 
 .forecasted > span.value, .forecast-indicator {
-  color: #D44E2B;
+  color:#333
 }
+
+
 
 .toprow {
   margin: 0 0 30px 0;
@@ -343,11 +345,7 @@ body {
   background-color: #fff;
 }
 
-/*.language-symbol {*/
-/*height: 55px;*/
-/*width: 1px;*/
-/*background-color: #fff;*/
-/*}*/
+
 
 .switch-button {
   display: inline-block;
