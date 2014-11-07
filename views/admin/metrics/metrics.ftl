@@ -161,7 +161,7 @@
 </div>
 </div>
 <span id="errors"></span>
-<button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'"><span
+<button type="submit" class="blueButton goBackButton btn btn-default btn-sm" onclick="location='/admin/goals'"><span
   class="enter"><@m'goToMainPage'/></span></button>
 
 
