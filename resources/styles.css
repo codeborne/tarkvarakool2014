@@ -376,16 +376,14 @@ body {
   color: #ffcc00;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
-.table {
-  table-layout: fixed;
+th.actions, td.actions {
+  white-space: nowrap;
+  text-align: center !important;
 }
-
-.table tr.metric td span.value {
-  word-wrap: break-word;
+td.actions .action-button{
+  display: inline-block;
 }
-
-.sort {
+td.sort {
   text-align: center;
 }
 

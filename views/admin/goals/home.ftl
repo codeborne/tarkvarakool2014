@@ -8,14 +8,13 @@
     <table class="table table-hover">
       <thead>
       <tr>
-        <th><@m'sort'/></th>
+        <th class="sort"><@m'sort'/></th>
         <th><@m'goal'/></th>
         <th><@m'comment'/></th>
         <th><@m'budget'/></th>
-        <th><@m'modify'/></th>
         <th><@m'metrics'/></th>
-        <th><@m'delete'/></th>
-        <th><@m'translate'/></th>
+        <th class="actions"><@m'actions'/></th>
+
       </tr>
       </thead>
       <tbody id="sortableGoals">
@@ -24,6 +23,7 @@
           <tr class="goal">
             <td class="sort">
               <span class="glyphicon glyphicon-sort hand-pointer"></span>
+
               <form class="orderNumberForm">
                 <input type="hidden" value="${goal.id?c}" name="id">
                 <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
@@ -48,21 +48,7 @@
                      style="display: none;">
 
             </td>
-            <td>
-              <div class="buttons">
-              <input type="hidden" class="value" value="${goal.id?c}" name="id">
-              <input type="button " class="saveGoalButton value btn btn-default btn-sm" value=""
-                     style="display: none" data-action="save">
-              <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
-                     onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
-                     data-action="save">
-              </div>
-          <span class="value">
-            <button class="modifyButton"type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-pencil"></span>
-            </button>
-          </span>
-            </td>
+
             <td>
               <form action="/admin/metrics/metrics">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -71,23 +57,42 @@
                 </button>
               </form>
             </td>
-            <td>
+
+            <td class="actions">
+              <div class="action-button">
+                <input type="hidden" class="value" value="${goal.id?c}" name="id">
+                <input type="button " class="saveGoalButton value btn btn-default btn-sm" value=""
+                       style="display: none" data-action="save">
+                <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
+                       onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
+                       data-action="save">
+              </div>
+
+              <div class="action-button">
+              <span class="value">
+                <button class="modifyButton" type="button" class="btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+              </span>
+              </div>
+
+              <form action="/admin/goals/translation" class="action-button">
+                <input type="hidden" value="${goal.id?c}" name="goalId">
+                <button type="submit" class="translationButton btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-font"></span>
+                </button>
+              </form>
+
               <#if !goal.metrics?has_content>
-                <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
+                <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
+                      class="action-button">
                   <input type="hidden" name="id" value="${goal.id?c}"/>
                   <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
                 </form>
               </#if>
-            </td>
-            <td>
-              <form action="/admin/goals/translation">
-                <input type="hidden" value="${goal.id?c}" name="goalId">
-                <button type="submit" class="translationButton btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-font"></span>
-                </button>
-              </form>
+
             </td>
           </tr>
           </#list>
@@ -112,7 +117,6 @@
     <span id="errors"></span>
   </div>
 </div>
-
 
 
 <script>
