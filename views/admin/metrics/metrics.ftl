@@ -40,9 +40,9 @@
           <input type="hidden" name="unit" value="${metric.unit}">
           <input type="hidden" name="publicDescription" value="${metric.publicDescription}">
           <input type="hidden" name="privateDescription" value="${metric.privateDescription}">
-          <input type="hidden" name="startLevel" value="${metric.startLevel?c}">
+          <input type="hidden" name="startLevel" <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if>>
           <input type="hidden" name="commentOnStartLevel" value="${metric.commentOnStartLevel}">
-          <input type="hidden" name="targetLevel" value="${metric.targetLevel?c}">
+          <input type="hidden" name="targetLevel" <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if>>
           <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
           <input type="hidden" name="infoSource" value="${metric.infoSource}">
           <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
@@ -68,8 +68,8 @@
                style="display: none;">
       </td>
       <td class="startLevel">
-        <span class="value">${metric.startLevel}</span>
-        <input class="value form-control" name="startLevel" value="${metric.startLevel}" style="display: none;">
+        <span class="value"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></span>
+        <input class="value form-control" name="startLevel" <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if> style="display: none;">
       </td>
       <td class="commentOnStartLevel">
         <span class="value">${metric.commentOnStartLevel}</span>
@@ -77,8 +77,8 @@
                style="display: none;">
       </td>
       <td class="targetLevel">
-        <span class="value">${metric.targetLevel}</span>
-        <input class="value form-control" name="targetLevel" value="${metric.targetLevel}" style="display: none;">
+        <span class="value"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></span>
+        <input class="value form-control" name="targetLevel" <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if> style="display: none;">
       </td>
       <td class="commentOnTargetLevel">
         <span class="value">${metric.commentOnTargetLevel}</span>
@@ -132,11 +132,11 @@
     <td><input name="privateDescription" class="value form-control" placeholder="<@m'privateDescription'/>"
                value="${privateDescription!""}"></td>
     <td><input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
-               value="${(startLevel?c)!0}"></td>
+               <#if startLevel??>value="${(startLevel?c)}"</#if></td>
     <td><input name="commentOnStartLevel" class="value form-control" placeholder="<@m'startLevelComment'/>"
                value="${commentOnStartLevel!""}"></td>
     <td><input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
-               value="${(targetLevel?c)!0}"></td>
+               <#if targetLevel??>value="${(targetLevel?c)}"</#if></td>
     <td><input name="commentOnTargetLevel" class="value form-control" placeholder="<@m'targetLevelComment'/>"
                value="${commentOnTargetLevel!""}"></td>
     <td><input name="infoSource" class="value form-control" placeholder="<@m'infoSource'/>" value="${infoSource!""}"></td>
