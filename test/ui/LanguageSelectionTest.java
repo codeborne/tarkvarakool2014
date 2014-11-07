@@ -29,9 +29,8 @@ public class LanguageSelectionTest extends UITest {
     hibernate.save(metric);
 
     open("/admin/login");
-
-
   }
+
   @Test
   public void languageButtonEst(){
 
