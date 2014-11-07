@@ -100,7 +100,7 @@
         <td><input name="comment" class="value form-control" rows="1" placeholder="<@m'insertComment'/>"
                    maxlength="255" value="${comment!""}"></td>
         <td><input type="number" class="value form-control" placeholder="<@m'insertBudget'/>" name="budget"
-                   <#if budget?? && (budget>0)>value=${budget?c}</#if>></td>
+                   <#if budget?? && (budget>=0)>value=${budget?c}</#if>></td>
         <td colspan=3>
           <input type="button" id="add" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
