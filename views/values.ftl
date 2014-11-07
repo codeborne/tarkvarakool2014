@@ -5,9 +5,9 @@
   <div class="panel panel-default">
   <div class="goal">
     <div class="panel-heading">
-      <h4 class="name"> <#if language == 'et'>${goal.name}<#elseif language == 'en'>${goal.engName}</#if></h4>
-      <div style="white-space: pre;"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'>${goal.engComment!""}</#if></div>
-      <h4 class="budget"><@m'budget'/>${goal.budget?c} €</h4>
+      <h4 class="name"> <#if language == 'et'>${goal.name}<#elseif language == 'en'>${goal.engName!"Translation missing"}</#if></h4>
+      <div style="white-space: pre;"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'>${goal.engComment!"Translation missing"}</#if></div>
+      <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
     </div>
     <div class="panel-body">
       <table class="table">
@@ -26,8 +26,8 @@
           <#if metric.isPublic == true>
         <tr class="metric">
           <td class="name"><#if language == 'et'>${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if>
-          <#elseif language == 'en'>${metric.engName} <#if metric.engUnit?has_content>(${metric.engUnit})</#if></#if></td>
-          <td class="startLevel">${metric.startLevel?c}</td>
+          <#elseif language == 'en'>${metric.engName!"Translation missing"} <#if metric.engUnit?has_content>(${metric.engUnit})</#if></#if></td>
+          <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
           <#list minimumYear..maximumYear as year>
             <td>
               <span class="value">
@@ -37,7 +37,7 @@
               </span>
             </td>
           </#list>
-          <td class="targetLevel">${metric.targetLevel?c}</td>
+          <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
         </tr>
           </#if>
         </#list>

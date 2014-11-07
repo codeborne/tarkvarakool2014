@@ -76,13 +76,17 @@
 
 </script>
   <#if goals?has_content>
-<br><br>
+<br>
 <#list goals as goal>
 <div class="panel panel-default">
   <div class="goal">
 <div class="panel-heading">
-<span class="forecast-indicator"><@m'estimatedValue'/></span>
-<br><br>
+  <#if goal_index ==0>
+    <span class="forecast-indicator"><@m'estimatedValue'/></span><br>
+  <br>
+    <span class="valueInstruction"><@m'valueInstruction'/></span><br><br>
+   </#if>
+
 
     <h4 class="name"> ${goal.name}</h4>
 
@@ -104,7 +108,7 @@
       <#list goal.metrics as metric>
         <tr class="metric">
           <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
-          <td class="startLevel">${metric.startLevel?c}</td>
+          <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
           <#list (minimumYear)..maximumYear as year>
             <td>
               <div class="measured">
@@ -130,7 +134,7 @@
               </div>
             </td>
           </#list>
-          <td class="targetLevel">${metric.targetLevel?c}</td>
+          <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
         </tr>
       </#list>
 

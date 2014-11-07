@@ -27,138 +27,131 @@
         <th><@m'delete'/></th>
       </tr>
       </thead>
-      <tbody id="sortable">
-        <#list goal.metrics as metric>
-        <tr class="metric">
-          <td class="sort">
-            <span class="glyphicon glyphicon-sort hand-pointer"></span>
-
-            <form class="orderNumberForm" goalId="post" action="/admin/metrics/modify">
-              <input type="hidden" name="goalId" value="${goal.id?c}">
-              <input type="hidden" name="metricId" value="${metric.id?c}">
-              <input type="hidden" name="orderNumber" value="${metric.orderNumber?c}">
-              <input type="hidden" name="name" value="${metric.name}">
-              <input type="hidden" name="unit" value="${metric.unit}">
-              <input type="hidden" name="publicDescription" value="${metric.publicDescription}">
-              <input type="hidden" name="privateDescription" value="${metric.privateDescription}">
-              <input type="hidden" name="startLevel" value="${metric.startLevel?c}">
-              <input type="hidden" name="commentOnStartLevel" value="${metric.commentOnStartLevel}">
-              <input type="hidden" name="targetLevel" value="${metric.targetLevel?c}">
-              <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
-              <input type="hidden" name="infoSource" value="${metric.infoSource}">
-              <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
-              <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
-            </form>
-          </td>
-          <td class="name">
-            <span class="value">${metric.name}</span>
-            <input class="value form-control" name="name" value="${metric.name}" style="display: none;">
-          </td>
-          <td class="unit">
-            <span class="value">${metric.unit}</span>
-            <input class="value form-control" name="unit" value="${metric.unit}" style="display: none;">
-          </td>
-          <td class="publicDescription">
-            <span class="value">${metric.publicDescription}</span>
-            <input class="value form-control" name="publicDescription" value="${metric.publicDescription}"
-                   style="display: none;">
-          </td>
-          <td class="privateDescription">
-            <span class="value">${metric.privateDescription}</span>
-            <input class="value form-control" name="privateDescription" value="${metric.privateDescription}"
-                   style="display: none;">
-          </td>
-          <td class="startLevel">
-            <span class="value">${metric.startLevel}</span>
-            <input class="value form-control" name="startLevel" value="${metric.startLevel}" style="display: none;">
-          </td>
-          <td class="commentOnStartLevel">
-            <span class="value">${metric.commentOnStartLevel}</span>
-            <input class="value form-control" name="commentOnStartLevel" value="${metric.commentOnStartLevel}"
-                   style="display: none;">
-          </td>
-          <td class="targetLevel">
-            <span class="value">${metric.targetLevel}</span>
-            <input class="value form-control" name="targetLevel" value="${metric.targetLevel}" style="display: none;">
-          </td>
-          <td class="commentOnTargetLevel">
-            <span class="value">${metric.commentOnTargetLevel}</span>
-            <input class="value form-control" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}"
-                   style="display: none;">
-          </td>
-          <td class="infoSource">
-            <span class="value"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank"><span
-              class="glyphicon glyphicon-info-sign"></span></a></#if></span>
-            <input class="value form-control" name="infoSource" value="${metric.infoSource}" style="display: none;">
-          </td>
-          <td class="institutionToReport">
-            <span class="value">${metric.institutionToReport}</span>
-            <input class="value form-control" name="institutionToReport" value="${metric.institutionToReport}"
-                   style="display: none;">
-          </td>
-          <td class="isPublic">
-            <span
-              class="value"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
-            <input class="value" type="checkbox" name="isPublic"
-                   value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if> style="display: none;">
-          </td>
-          <td>
-            <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
-            <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
-            <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
-            <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'save'/>"
-                   style="display: none" data-action="save">
-            <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
-                   onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="<@m'cancel'/>"
-                   style="display:none"
-                   data-action="save">
+  <tbody id="sortable">
+    <#list goal.metrics as metric>
+    <tr class="metric">
+      <td class="sort">
+        <span class="glyphicon glyphicon-sort hand-pointer"></span>
+        <form class="orderNumberForm" goalId="post" action="/admin/metrics/modify">
+          <input type="hidden" name="goalId" value="${goal.id?c}">
+          <input type="hidden" name="metricId" value="${metric.id?c}">
+          <input type="hidden" name="orderNumber" value="${metric.orderNumber?c}">
+          <input type="hidden" name="name" value="${metric.name}">
+          <input type="hidden" name="unit" value="${metric.unit}">
+          <input type="hidden" name="publicDescription" value="${metric.publicDescription}">
+          <input type="hidden" name="privateDescription" value="${metric.privateDescription}">
+          <input type="hidden" name="startLevel" <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if>>
+          <input type="hidden" name="commentOnStartLevel" value="${metric.commentOnStartLevel}">
+          <input type="hidden" name="targetLevel" <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if>>
+          <input type="hidden" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}">
+          <input type="hidden" name="infoSource" value="${metric.infoSource}">
+          <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
+          <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
+        </form>
+      </td>
+      <td class="name">
+        <span class="value">${metric.name}</span>
+        <input class="value form-control" name="name" value="${metric.name}" style="display: none;">
+      </td>
+      <td class="unit">
+        <span class="value">${metric.unit}</span>
+        <input class="value form-control" name="unit" value="${metric.unit}" style="display: none;">
+      </td>
+      <td class="publicDescription">
+        <span class="value">${metric.publicDescription}</span>
+        <input class="value form-control" name="publicDescription" value="${metric.publicDescription}"
+               style="display: none;">
+      </td>
+      <td class="privateDescription">
+        <span class="value">${metric.privateDescription}</span>
+        <input class="value form-control" name="privateDescription" value="${metric.privateDescription}"
+               style="display: none;">
+      </td>
+      <td class="startLevel">
+        <span class="value"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></span>
+        <input class="value form-control" name="startLevel" <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if> style="display: none;">
+      </td>
+      <td class="commentOnStartLevel">
+        <span class="value">${metric.commentOnStartLevel}</span>
+        <input class="value form-control" name="commentOnStartLevel" value="${metric.commentOnStartLevel}"
+               style="display: none;">
+      </td>
+      <td class="targetLevel">
+        <span class="value"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></span>
+        <input class="value form-control" name="targetLevel" <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if> style="display: none;">
+      </td>
+      <td class="commentOnTargetLevel">
+        <span class="value">${metric.commentOnTargetLevel}</span>
+        <input class="value form-control" name="commentOnTargetLevel" value="${metric.commentOnTargetLevel}"
+               style="display: none;">
+      </td>
+      <td class="infoSource">
+        <span class="value"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank">Link</a></#if></span>
+        <input class="value form-control" name="infoSource" value="${metric.infoSource}" style="display: none;">
+      </td>
+      <td class="institutionToReport">
+        <span class="value">${metric.institutionToReport}</span>
+        <input class="value form-control" name="institutionToReport" value="${metric.institutionToReport}"
+               style="display: none;">
+      </td>
+      <td class="isPublic">
+        <span class="value"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
+        <input class="value" type="checkbox" name="isPublic" value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if> style="display: none;">
+      </td>
+      <td>
+        <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
+        <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+        <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
+        <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'save'/>"
+               style="display: none" data-action="save">
+        <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
+               onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="<@m'cancel'/>" style="display:none"
+               data-action="save">
           <span class="value">
             <button class="modifyButton" type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </span>
-          </td>
-          <td>
-            <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
-              <input type="hidden" value="${goal.id?c}" name="goalId">
-              <input type="hidden" name="id" value="${metric.id?c}"/>
-              <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-trash"></span></button>
-            </form>
-          </td>
-        </tr>
-        </#list>
-      <tr class="addMetric">
-        <td></td>
-        <td><input name="name" class="value form-control" placeholder="<@m'metric'/>" value="${name!""}"></td>
-        <td><input name="unit" class="value form-control" placeholder="<@m'unit'/>" value="${unit!""}"></td>
-        <td><input name="publicDescription" class="value form-control" placeholder="<@m'publicDescription'/>"
-                   value="${publicDescription!""}"></td>
-        <td><input name="privateDescription" class="value form-control" placeholder="<@m'privateDescription'/>"
-                   value="${privateDescription!""}"></td>
-        <td><input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
-                   value="${(startLevel?c)!0}"></td>
-        <td><input name="commentOnStartLevel" class="value form-control" placeholder="<@m'startLevelComment'/>"
-                   value="${commentOnStartLevel!""}"></td>
-        <td><input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
-                   value="${(targetLevel?c)!0}"></td>
-        <td><input name="commentOnTargetLevel" class="value form-control" placeholder="<@m'targetLevelComment'/>"
-                   value="${commentOnTargetLevel!""}"></td>
-        <td><input name="infoSource" class="value form-control" placeholder="<@m'infoSource'/>"
-                   value="${infoSource!""}"></td>
-        <td><input name="institutionToReport" class="value form-control" placeholder="<@m'institutionReport'/>"
-                   value="${institutionToReport!""}"></td>
+      </td>
+      <td>
+        <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
+          <input type="hidden" value="${goal.id?c}" name="goalId">
+          <input type="hidden" name="id" value="${metric.id?c}"/>
+          <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-trash"></span></button>
+        </form>
+      </td>
+    </tr>
+    </#list>
+  <tr class="addMetric">
+    <td></td>
+    <td><input name="name" class="value form-control" placeholder="<@m'metric'/>" value="${name!""}"></td>
+    <td><input name="unit" class="value form-control" placeholder="<@m'unit'/>" value="${unit!""}"></td>
+    <td><input name="publicDescription" class="value form-control" placeholder="<@m'publicDescription'/>"
+               value="${publicDescription!""}"></td>
+    <td><input name="privateDescription" class="value form-control" placeholder="<@m'privateDescription'/>"
+               value="${privateDescription!""}"></td>
+    <td><input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
+               <#if startLevel??>value="${(startLevel?c)}"</#if></td>
+    <td><input name="commentOnStartLevel" class="value form-control" placeholder="<@m'startLevelComment'/>"
+               value="${commentOnStartLevel!""}"></td>
+    <td><input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
+               <#if targetLevel??>value="${(targetLevel?c)}"</#if></td>
+    <td><input name="commentOnTargetLevel" class="value form-control" placeholder="<@m'targetLevelComment'/>"
+               value="${commentOnTargetLevel!""}"></td>
+    <td><input name="infoSource" class="value form-control" placeholder="<@m'infoSource'/>" value="${infoSource!""}"></td>
+    <td><input name="institutionToReport" class="value form-control" placeholder="<@m'institutionReport'/>"
+               value="${institutionToReport!""}"></td>
 
-        <td><input class="value" type="checkbox" name="isPublic" value="true"></td>
-        <td>
-          <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>"
-                 data-action="save">
-          <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <td> <input class="value" type="checkbox" name="isPublic" value="true" ></td>
+    <td>
+      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>" data-action="save">
+      <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+    </td>
+  </tr>
+  </tbody>
+  </table>
+</div>
 </div>
 <span id="errors"></span>
 <button type="submit" id="goBackButton" class="btn btn-default btn-sm" onclick="location='/admin/goals'"><span
