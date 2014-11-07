@@ -74,6 +74,7 @@
                 </button>
               </form>
               <#if !goal.metrics?has_content>
+
                 <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                       class="action-button">
                   <input type="hidden" name="id" value="${goal.id?c}"/>

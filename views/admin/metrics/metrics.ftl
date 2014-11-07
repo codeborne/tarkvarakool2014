@@ -86,7 +86,7 @@
                style="display: none;">
       </td>
       <td class="infoSource">
-        <span class="value"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank">Link</a></#if></span>
+        <span class="value"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a></#if></span>
         <input class="value form-control" name="infoSource" value="${metric.infoSource}" style="display: none;">
       </td>
       <td class="institutionToReport">
@@ -102,16 +102,23 @@
         <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
         <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
         <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
-        <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'save'/>"
+
+        <div class="action-button">
+          <input type="hidden" class="value" value="${metric.id?c}" name="id">
+        <input type="button" class="saveGoalButton value btn btn-default btn-sm" value=""
                style="display: none" data-action="save">
         <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
-               onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="<@m'cancel'/>" style="display:none"
-               data-action="save">
+               onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="" style="display:none"
+               data-action="save"></div>
+
+
+          <div class="action-button">
           <span class="value">
             <button class="modifyButton" type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </span>
+            </div>
       </td>
       <td>
         <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
@@ -144,8 +151,8 @@
                value="${institutionToReport!""}"></td>
 
     <td> <input class="value" type="checkbox" name="isPublic" value="true" ></td>
-    <td>
-      <input type="button" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>" data-action="save">
+    <td colspan="3">
+      <input type="button" id="add" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>" data-action="save">
       <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
     </td>
   </tr>
