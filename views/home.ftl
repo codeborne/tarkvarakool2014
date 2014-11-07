@@ -51,11 +51,3 @@
 </@html>
 
 
-<#--<div class="languageButtons btn-group button-menu-inner">-->
-
-
-  <#--<a href="/language?locale=en" class="language-button-eng">ENG</a>-->
-
-
-  <#--<a href="/language?locale=et" class="language-button-est">EST</a>-->
-<#--</div>-->
