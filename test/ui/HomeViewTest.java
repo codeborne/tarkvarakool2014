@@ -5,14 +5,23 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.Goal;
 import model.Metric;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
 
 public class HomeViewTest extends UITest {
 
+  @Before
+  public void setUp() throws Exception {
+    open("/home");
+
+    $(".language-button-est").click();
+
+  }
 
   @Test
   public void GoalAndBudgetWithCorrectMetrics() {
@@ -23,7 +32,7 @@ public class HomeViewTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "http://", "", 2.0, true));
     hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", "", 10.0, false));
     hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", "", 5.8, true));
 
@@ -35,6 +44,7 @@ public class HomeViewTest extends UITest {
     SelenideElement goalBlock1 = goals.get(0);
     goalBlock1.$(".name").shouldHave(text("Eesmark1"));
     goalBlock1.$(".budget").shouldHave(text("10"));
+    goalBlock1.$(".infoSource").shouldHave(text("Link"));
     assertEquals("Moodik1", goalBlock1.$$(".metric").get(0).$(".name").getText());
     goalBlock1.$(".name").shouldNotHave(text("Moodik2 (EUR)"));
 

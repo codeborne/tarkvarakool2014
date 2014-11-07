@@ -86,7 +86,7 @@ public class Save extends UserAwareController {
   }
 
   private void checkBudget() {
-    if (errors.containsKey("budget") || budget == null || budget <= 0)
+    if (errors.containsKey("budget") || budget == null || budget < 0)
       errorsList.add(messages.get("errorInsertBudget"));
   }
 }
