@@ -34,8 +34,8 @@ body {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  min-height: 600px;
-  margin-bottom: -10px;
+background-color: #ffffff;
+
 
 }
 
@@ -48,6 +48,8 @@ body {
   padding: 25px 40px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   position: relative;
+  background-color: #ffffff !important;
+
 
 }
 
@@ -129,10 +131,7 @@ body {
   overflow: hidden;
   color: lightgray;
   font-size: 16px;
-  margin-right: 10px;
-
 }
-
 .modifyButton:hover {
   color: #ffcc00;
 }
@@ -145,8 +144,7 @@ body {
   overflow: hidden;
   color: lightgray;
   font-size: 16px;
-  margin-right: 14px;
-  margin-top: -7px;
+
 }
 
 .metricsButton:hover {
@@ -162,13 +160,14 @@ body {
   overflow: hidden;
   color: lightgray;
   font-size: 16px;
-  margin-right: 10px;
+
 }
 
 .translationButton {
   background-color: transparent;
   border:none;
   color:lightgrey;
+  font-size: 14px;
 }
 
 .translationButton:hover {
@@ -188,7 +187,7 @@ body {
   overflow: hidden;
   color: lightgray;
   font-size: 16px;
-  margin-left: 10px;
+
 }
 
 .glyphicon-sort:hover {
@@ -211,14 +210,14 @@ body {
 
 .authentication-button {
   margin-left: 20px;
-  background: #084381; /* Old browsers */
-  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%); /* IE10+ */
-  background: linear-gradient(to right, #084381 0%, #0081b2 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1); /* IE6-9 */
+  background: #084381;
+  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2));
+  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: linear-gradient(to right, #084381 0%, #0081b2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1);
 
   box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.2);
   border: 0;
@@ -229,7 +228,6 @@ body {
   font-weight: bold;
   font-size: 11px;
 }
-
 #add {
   margin-left: 20px;
   background: #084381;
@@ -275,7 +273,7 @@ body {
 }
 
 #submit {
-  margin-left: 20px;
+  margin-left: 2px;
   background: #084381; /* Old browsers */
   background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2)); /* Chrome,Safari4+ */
@@ -307,6 +305,7 @@ body {
 
 .glyphicon-lock {
   font-size: 10px;
+  padding-right: 5px;
 }
 
 .forecasted > span.value, .forecast-indicator {
@@ -324,9 +323,6 @@ body {
   text-align: center;
 }
 
-.table th:first-child, .table td:first-child {
-  text-align: center;
-}
 
 .toprow td:nth-child(3) {
   color: #fff;
@@ -379,9 +375,12 @@ body {
 th.actions, td.actions {
   white-space: nowrap;
   text-align: center !important;
+
 }
 td.actions .action-button{
   display: inline-block;
+  text-align: left !important;
+
 }
 td.sort {
   text-align: center;

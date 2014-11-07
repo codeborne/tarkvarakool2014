@@ -2,7 +2,7 @@
 <br><br>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h4 class="name"><@m'Goals'/></h4>
+    <h4 class="name"><@m'goals'/></h4>
   </div>
   <div class="panel-body">
     <table class="table table-hover">
@@ -14,7 +14,6 @@
         <th><@m'budget'/></th>
         <th><@m'metrics'/></th>
         <th class="actions"><@m'actions'/></th>
-
       </tr>
       </thead>
       <tbody id="sortableGoals">
@@ -23,32 +22,27 @@
           <tr class="goal">
             <td class="sort">
               <span class="glyphicon glyphicon-sort hand-pointer"></span>
-
               <form class="orderNumberForm">
                 <input type="hidden" value="${goal.id?c}" name="id">
                 <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
               </form>
             </td>
-
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
-              <input type="text" class="value form-control" name="name" value="${goal.name}" style="display: none;">
-
+              <input type="text" class="value form-control" name="name" value="${goal.name}"
+                     style="display: none;">
             </td>
             <td class="commentInTable">
               <span class="value">${goal.comment!""}</span>
               <input type="text" class="value form-control" name="comment"
                      <#if goal.comment??>value="${goal.comment}"</#if>
                      style="display: none;">
-
             </td>
             <td class="budgetInTable">
               <span class="value">${goal.budget?c}</span>
               <input type="number" class="value form-control" name="budget" value="${goal.budget?c}"
-                     style="display: none;">
-
+                    style="display: none;">
             </td>
-
             <td>
               <form action="/admin/metrics/metrics">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -57,7 +51,6 @@
                 </button>
               </form>
             </td>
-
             <td class="actions">
               <div class="action-button">
                 <input type="hidden" class="value" value="${goal.id?c}" name="id">
@@ -67,7 +60,6 @@
                        onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
                        data-action="save">
               </div>
-
               <div class="action-button">
               <span class="value">
                 <button class="modifyButton" type="button" class="btn btn-default btn-sm">
@@ -75,14 +67,12 @@
                 </button>
               </span>
               </div>
-
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
                 <button type="submit" class="translationButton btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-font"></span>
+                  <span class="glyphicon glyphicon-globe"></span>
                 </button>
               </form>
-
               <#if !goal.metrics?has_content>
                 <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                       class="action-button">
@@ -92,7 +82,6 @@
                   </button>
                 </form>
               </#if>
-
             </td>
           </tr>
           </#list>
@@ -109,8 +98,6 @@
         <td colspan=3>
           <input type="button" id="add" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
-
-
         </td>
       </tr>
       </tbody>

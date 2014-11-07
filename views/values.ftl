@@ -13,7 +13,7 @@
       <table class="table">
       <thead>
       <tr>
-        <th><@m'metric'/></th>
+        <th class="valuesMetric"><@m'metric'/></th>
         <th><@m'startLevel'/></th>
         <#list minimumYear..maximumYear as year>
           <th> ${year?c}</th>
