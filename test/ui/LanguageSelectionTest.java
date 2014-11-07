@@ -24,8 +24,6 @@ public class LanguageSelectionTest extends UITest {
     hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200, "", 220, "", "", "", 2.0, true));
 
 
-
-
   }
   @Test
   public void languageButtonEst(){
