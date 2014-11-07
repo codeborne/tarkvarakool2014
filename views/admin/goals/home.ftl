@@ -107,7 +107,7 @@
         <td><input type="number" class="value form-control" placeholder="<@m'insertBudget'/>" name="budget"
                    <#if budget?? && (budget>=0)>value=${budget?c}</#if>></td>
         <td colspan=3>
-          <input type="button" id="add" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm"
+          <input type="button" value="<@m'add'/>" class="blueButton saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
 
 
