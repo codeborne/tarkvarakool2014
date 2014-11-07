@@ -40,10 +40,12 @@ public class Translation extends UserAwareController {
       goal.setEngComment(engComment);
       int i = 0;
       for(Metric metric : metrics){
-        metric.setEngName(engMetricName[i]);
-        metric.setEngUnit(engUnit[i]);
-        metric.setEngPublicDescription(engPublicDescription[i]);
-        i++;
+        if(metric.getIsPublic()==true) {
+          metric.setEngName(engMetricName[i]);
+          metric.setEngUnit(engUnit[i]);
+          metric.setEngPublicDescription(engPublicDescription[i]);
+          i++;
+        }
       }
       hibernate.update(goal);
       hibernate.flush();

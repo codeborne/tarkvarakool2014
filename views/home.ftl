@@ -4,9 +4,9 @@
     <#list goals as goal>
     <div class="panel panel-default goal">
       <div class="panel-heading">
-        <h4 class="name">${goal.name}</h4>
+        <h4 class="name"><#if language == 'et'>${goal.name}<#elseif language == 'en'>${goal.engName!""}</#if></h4>
 
-        <div style="white-space: pre;">${goal.comment!""}</div>
+        <div style="white-space: pre;"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'>${goal.engComment!""}</#if></div>
         <h4 class="budget"><@m'budget'/>${goal.budget?c} €</h4>
       </div>
       <div class="panel-body">
@@ -26,13 +26,16 @@
             <#list goal.metrics as metric>
               <#if metric.isPublic == true>
               <tr class="metric">
-                <td class="name">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
-                <td class="publicDescription">${metric.publicDescription}</td>
+                <td class="name">
+                  <#if language == 'et'>${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if>
+                  <#elseif language == 'en'>${metric.engName!""} <#if metric.engUnit?has_content>(${metric.engUnit})</#if></#if>
+                </td>
+                <td class="publicDescription"><#if language == 'et'>${metric.publicDescription}<#elseif language == 'en'>${metric.engPublicDescription!""}</#if></td>
                 <td class="startLevel">${metric.startLevel?c}</td>
                 <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
                 <td class="targetLevel">${metric.targetLevel?c}</td>
                 <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
-                <td class="infoSource">${metric.infoSource}</td>
+                <td class="infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank">Link</a></#if></td>
               </tr>
               </#if>
             </#list>
@@ -50,12 +53,3 @@
 </#if>
 </@html>
 
-
-<#--<div class="languageButtons btn-group button-menu-inner">-->
-
-
-  <#--<a href="/language?locale=en" class="language-button-eng">ENG</a>-->
-
-
-  <#--<a href="/language?locale=et" class="language-button-est">EST</a>-->
-<#--</div>-->

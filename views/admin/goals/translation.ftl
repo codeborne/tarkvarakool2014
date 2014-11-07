@@ -23,7 +23,7 @@
   </tr>
   <tbody>
     <#list goal.metrics as metric>
-      <#--<#if metric.isPublic == true>-->
+      <#if metric.isPublic == true>
       <tr class="metric">
 
         <td class="name">${metric.name} <input type="hidden" value="${metric.id}"></td>
@@ -33,7 +33,7 @@
         <td class="publicDescription">${metric.publicDescription!""}</td>
         <td><textarea name="engPublicDescription" rows="2" placeholder="<@m'translatePublicDescription'/>">${metric.engPublicDescription!""}</textarea></td>
       </tr>
-      <#--</#if>-->
+      </#if>
     </#list>
   <tr>
     <td></td>
