@@ -7,7 +7,7 @@
     <div class="panel-heading">
       <h4 class="name"> <#if language == 'et'>${goal.name}<#elseif language == 'en'>${goal.engName!"Translation missing"}</#if></h4>
       <div style="white-space: pre;"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'>${goal.engComment!"Translation missing"}</#if></div>
-      <h4 class="budget"><@m'budget'/>${goal.budget?c} €</h4>
+      <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
     </div>
     <div class="panel-body">
       <table class="table">
