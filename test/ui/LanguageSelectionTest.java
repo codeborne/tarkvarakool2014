@@ -31,8 +31,6 @@ public class LanguageSelectionTest extends UITest {
     open("/admin/login");
 
 
-
-
   }
   @Test
   public void languageButtonEst(){
