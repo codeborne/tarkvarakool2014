@@ -105,6 +105,7 @@
           <input type="button" id="add" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm"
                  data-action="save">
 
+
         </td>
       </tr>
       </tbody>
