@@ -30,6 +30,7 @@
                   <#if language == 'et'>${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if>
                   <#elseif language == 'en'>${metric.engName!""} <#if metric.engUnit?has_content>(${metric.engUnit})</#if></#if>
                 </td>
+
                 <td class="publicDescription"><#if language == 'et'>${metric.publicDescription}<#elseif language == 'en'>${metric.engPublicDescription!""}</#if></td>
                 <td class="startLevel">${metric.startLevel?c}</td>
                 <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
