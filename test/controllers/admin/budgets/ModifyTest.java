@@ -5,6 +5,7 @@ import model.Goal;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.SimpleExpression;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -15,6 +16,12 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class ModifyTest extends ControllerTest<Modify> {
+
+  @Before
+  public void setUp() throws Exception {
+    when(request.getPathInfo()).thenReturn("admin/");
+  }
+
   @Test
   public void postIfErrorsContainsGoalId() throws Exception {
     controller.yearlyBudget = 123L;

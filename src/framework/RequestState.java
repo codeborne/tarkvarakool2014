@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public abstract class RequestState {
-  protected HttpServletRequest request;
+  public HttpServletRequest request;
   protected HttpServletResponse response;
   public HttpSession session;
   public Session hibernate;
