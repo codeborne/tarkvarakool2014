@@ -9,9 +9,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import static org.hibernate.cfg.AvailableSettings.*;
 
@@ -21,7 +25,7 @@ public class HibernateHelper {
   private static boolean migrateDatabaseNeeded = true;
 
   static {
-    configuration.setProperty(URL, "jdbc:h2:./moodikud");
+    configuration.setProperty(URL, "jdbc:h2:./moodikud;DB_CLOSE_DELAY=-1");
     configuration.setProperty(USER, "sa");
     configuration.setProperty(PASS, "sa");
     configuration.setProperty(DRIVER, "org.h2.Driver");
@@ -33,10 +37,10 @@ public class HibernateHelper {
   }
 
   public static SessionFactory createTestSessionFactory() throws IOException {
+    migrateDatabaseNeeded = false;
     configuration.setProperty(AUTOCOMMIT, "true");
     configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
     sessionFactory = buildSessionFactory();
-    migrateDatabaseNeeded = false;
     return sessionFactory;
   }
 
@@ -62,9 +66,22 @@ public class HibernateHelper {
   }
 
   private static SessionFactory buildSessionFactory() throws IOException {
+    prepareDatabase();
     addMappedClasses(configuration);
+    migrateDatabase();
     //noinspection deprecation
     return configuration.buildSessionFactory();
+  }
+
+  private static void prepareDatabase() {
+    try {
+      Connection connection = DriverManager.getConnection(configuration.getProperty(URL), configuration.getProperty(USER), configuration.getProperty(PASS));
+      connection.createStatement().execute("SET DATABASE COLLATION ESTONIAN STRENGTH SECONDARY");
+      connection.close();
+    }
+    catch (SQLException e) {
+      LoggerFactory.getLogger(HibernateHelper.class).warn(e.toString());
+    }
   }
 
   private static void addMappedClasses(Configuration configuration1) throws IOException {
