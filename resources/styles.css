@@ -104,6 +104,8 @@ background-color: #ffffff;
   background-color: transparent;
 }
 
+
+
 .cancelGoalButton {
   height: 35px;
   width: 35px;
@@ -136,8 +138,13 @@ background-color: #ffffff;
   margin-right: 10px;
 
 }
-
 .modifyButton:hover {
+  color: #ffcc00 !important;
+}
+.glyphicon-pencil {
+  color:lightgrey;
+}
+.glyphicon-pencil:hover {
   color: #ffcc00;
 }
 
@@ -368,8 +375,14 @@ th.actions, td.actions {
 td.actions .action-button{
   display: inline-block;
   text-align: left !important;
-
 }
+
+td.actions{
+  white-space: nowrap;
+  text-align: center !important;
+}
+
+
 td.sort {
   text-align: center;
 }
@@ -423,25 +436,20 @@ input.modify-value {
   color: #000;
   font-weight: 300;
   text-align: left;
+  padding: 30px 20px;
 
 }
 
 .table > tbody > tr > td {
   border-top: 0;
+  text-align: left;
+  padding: 20px;
 }
 
 .table {
   margin-top: 20px;
 }
 
-.table > tbody > tr > td {
-  padding: 20px;
-
-}
-
-.table > thead > tr > th {
-  padding: 30px 20px;
-}
 
 .footer {
   position: relative;
@@ -516,3 +524,4 @@ input.modify-value {
   color: #ffcc00;
   background-color: rgba(0, 0, 0, 0.5);
 }
+

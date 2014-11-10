@@ -23,8 +23,7 @@
         <th><@m'infoSource'/></th>
         <th><@m'institutionReport'/></th>
         <th><@m'public'/></th>
-        <th><@m'modify'/></th>
-        <th><@m'delete'/></th>
+        <th><@m'actions'/></th>
       </tr>
       </thead>
   <tbody id="sortable">
@@ -98,7 +97,7 @@
         <span class="value"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
         <input class="value" type="checkbox" name="isPublic" value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if> style="display: none;">
       </td>
-      <td>
+      <td class="actions">
         <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
         <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
         <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
@@ -110,8 +109,6 @@
         <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
                onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="" style="display:none"
                data-action="save"></div>
-
-
           <div class="action-button">
           <span class="value">
             <button class="modifyButton" type="button" class="btn btn-default btn-sm">
@@ -119,8 +116,6 @@
             </button>
           </span>
             </div>
-      </td>
-      <td>
         <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
           <input type="hidden" value="${goal.id?c}" name="goalId">
           <input type="hidden" name="id" value="${metric.id?c}"/>
