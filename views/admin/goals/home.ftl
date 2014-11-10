@@ -14,7 +14,6 @@
         <th><@m'budget'/></th>
         <th><@m'metrics'/></th>
         <th class="actions"><@m'actions'/></th>
-
       </tr>
       </thead>
       <tbody id="sortableGoals">
@@ -23,13 +22,11 @@
           <tr class="goal">
             <td class="sort">
               <span class="glyphicon glyphicon-sort hand-pointer"></span>
-
               <form class="orderNumberForm">
                 <input type="hidden" value="${goal.id?c}" name="id">
                 <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
               </form>
             </td>
-
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
               <textarea class="nameValue form-control" name="name" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
@@ -75,7 +72,7 @@
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
                 <button type="submit" class="translationButton btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-font"></span>
+                  <span class="glyphicon glyphicon-globe"></span>
                 </button>
               </form>
 
