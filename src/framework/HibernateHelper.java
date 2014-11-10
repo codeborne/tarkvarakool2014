@@ -12,9 +12,6 @@ import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
 import javax.persistence.Entity;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 import static org.hibernate.cfg.AvailableSettings.*;
 
@@ -65,20 +62,9 @@ public class HibernateHelper {
   }
 
   private static SessionFactory buildSessionFactory() throws IOException {
-    prepareDatabase();
     addMappedClasses(configuration);
     //noinspection deprecation
     return configuration.buildSessionFactory();
-  }
-
-  private static void prepareDatabase() {
-    try {
-      Connection connection = DriverManager.getConnection(configuration.getProperty(URL), configuration.getProperty(USER), configuration.getProperty(PASS));
-      connection.createStatement().execute("SET DATABASE COLLATION ESTONIAN STRENGTH SECONDARY");
-      connection.close();
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   private static void addMappedClasses(Configuration configuration1) throws IOException {
