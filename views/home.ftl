@@ -10,7 +10,7 @@
         <h4 class="budget"><@m'budget'/>${goal.budget?c} €</h4>
       </div>
       <div class="panel-body">
-        <table class="table">
+        <table class="table table-striped">
           <thead>
           <tr>
             <th><@m'metric'/></th>
@@ -36,7 +36,9 @@
                 <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
                 <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
                 <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
-                <td class="infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}" target="_blank">Link</a></#if></td>
+                <td class="infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}"
+                                                                             target="_blank"><span
+                  class="glyphicon glyphicon-info-sign"></span></a></#if></td>
               </tr>
               </#if>
             </#list>
@@ -45,12 +47,12 @@
       </div>
     </div>
     </#list>
-    <#else>
-    <div class="panel-login">
-      <div class="missingGoals">
-<h3 id="login-h3"><@m'noGoals'/></h3>
-</div>
+  <#else>
+  <div class="panel-login">
+    <div class="missingGoals">
+      <h3 id="login-h3"><@m'noGoals'/></h3>
+    </div>
   </div>
-</#if>
+  </#if>
 </@html>
 

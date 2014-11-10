@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
@@ -44,7 +45,7 @@ public class HomeViewTest extends UITest {
     SelenideElement goalBlock1 = goals.get(0);
     goalBlock1.$(".name").shouldHave(text("Eesmark1"));
     goalBlock1.$(".budget").shouldHave(text("10"));
-    goalBlock1.$(".infoSource").shouldHave(text("Link"));
+    goalBlock1.$(".infoSource").$(".glyphicon-info-sign").shouldBe(visible);
     assertEquals("Moodik1", goalBlock1.$$(".metric").get(0).$(".name").getText());
     goalBlock1.$(".name").shouldNotHave(text("Moodik2 (EUR)"));
 

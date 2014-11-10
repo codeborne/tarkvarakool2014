@@ -6,6 +6,7 @@ import model.Metric;
 import model.User;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
@@ -84,7 +85,7 @@ public class GoalsOrderTest extends UITest {
       texts("Eesmark1", "Eesmark2", "Eesmark3", "Eesmark4", "Eesmark5"));
   }
 
-  @Test
+  @Test @Ignore
   public void adminMovesElementToLastPosition() {
     dragAndDrop($$(".goal").get(1).$(".glyphicon-sort"), +3);
     $$(".goal .nameInTable").shouldHave(texts("Eesmark1", "Eesmark3", "Eesmark4", "Eesmark5", "Eesmark2"));

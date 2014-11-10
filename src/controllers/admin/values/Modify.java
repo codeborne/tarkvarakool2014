@@ -59,7 +59,7 @@ public class Modify extends UserAwareController {
         hibernate.update(metric);
         hibernate.flush();
       } else {
-        errorsList.add("Tekkis viga.");
+        errorsList.add(messages.get("error"));
       }
 
     }
@@ -78,22 +78,22 @@ public class Modify extends UserAwareController {
 
   public void checkGoalId() {
     if (errors.containsKey("goalId") || goalId==null)
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
   public void checkMetricId() {
     if (errors.containsKey("metricId") || metricId==null)
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
   public void checkYear() {
     if (errors.containsKey("year") || year==null || year>MAXIMUM_YEAR || year<MINIMUM_YEAR)
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
   public void checkValue() {
     if (errors.containsKey("value")) {
-      errorsList.add("Sisestage korrektne väärtus.");
+      errorsList.add(messages.get("errorInsertValue"));
     } else if (value != null) {
       if(value.remainder(new BigDecimal(1)).equals(new BigDecimal(0))){
         value = value.setScale(0, HALF_UP);
@@ -102,7 +102,7 @@ public class Modify extends UserAwareController {
         value = value.setScale(1, HALF_UP);
       }
       if(value.toString().length()>38)
-        errorsList.add("Väärtus on liiga suur või väike.");
+        errorsList.add(messages.get("errorValue"));
     }
   }
 }
