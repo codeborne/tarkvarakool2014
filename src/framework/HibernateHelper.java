@@ -8,7 +8,6 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
-import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
@@ -46,9 +45,6 @@ public class HibernateHelper {
 
   public static void migrateDatabase() {
     if (!migrateDatabaseNeeded) return;
-
-    // use schema update for now, todo: later uncomment creating scripts in db.xml and keep using only liquibase
-    new SchemaUpdate(configuration).execute(true, true);
 
     try {
       ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor();
