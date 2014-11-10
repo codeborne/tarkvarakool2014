@@ -21,6 +21,7 @@ import static org.hibernate.cfg.AvailableSettings.*;
 public class HibernateHelper {
   private static Configuration configuration = new Configuration();
   private static SessionFactory sessionFactory;
+  private static boolean runLiquibase = true;
 
   static {
     configuration.setProperty(URL, "jdbc:h2:./moodikud");
@@ -38,6 +39,7 @@ public class HibernateHelper {
     configuration.setProperty(AUTOCOMMIT, "true");
     configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
     sessionFactory = buildSessionFactory();
+    runLiquibase = false;
     return sessionFactory;
   }
 

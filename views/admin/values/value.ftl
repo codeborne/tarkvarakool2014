@@ -42,7 +42,6 @@
         }
       }
     );
-
   }
 
   function sendBudgetData(goalId, year, thisObject) {
