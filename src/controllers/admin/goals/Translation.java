@@ -66,29 +66,29 @@ public class Translation extends UserAwareController {
 
   public void checkGoalId() {
     if (errors.containsKey("goalId") || goalId == null)
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
   public void checkEngName() {
     if (errors.containsKey("engName"))
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
   public void checkEngUnit() {
     if (errors.containsKey("engUnit"))
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
   public void checkEngPublicDescription() {
     if (errors.containsKey("engPublicDescription"))
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
   public void checkEngComment() {
     if (errors.containsKey("engComment"))
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
   public void checkEngMetricName() {
     if (errors.containsKey("engMetricName"))
-      errorsList.add("Tekkis viga.");
+      errorsList.add(messages.get("error"));
   }
 
 

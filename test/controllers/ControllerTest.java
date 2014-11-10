@@ -4,6 +4,7 @@ import framework.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -19,6 +20,7 @@ public abstract class ControllerTest<T extends Controller> {
   protected HttpSession session = mock(HttpSession.class);
   protected Session hibernate = mock(Session.class);
   protected Transaction transaction = mock(Transaction.class);
+  protected HttpServletRequest request = mock(HttpServletRequest.class);
   protected Messages.Resolver messages = new Messages(false).getResolverFor(DEFAULT);
   protected T controller;
 
@@ -32,6 +34,7 @@ public abstract class ControllerTest<T extends Controller> {
     this.controller.session = session;
     this.controller.hibernate = hibernate;
     this.controller.messages = messages;
+    this.controller.request = request;
     when(hibernate.getTransaction()).thenReturn(transaction);
   }
 

@@ -5,6 +5,7 @@ import model.Goal;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,6 +17,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 public class HomeTest extends ControllerTest<Home> {
+
+  @Before
+  public void setUp() throws Exception {
+    when(request.getPathInfo()).thenReturn("admin/");
+  }
 
   @Test
   public void postIfChangedSequenceNumberIsGreaterThanPreviousSequenceNumber() throws Exception {

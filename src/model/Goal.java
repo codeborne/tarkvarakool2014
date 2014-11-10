@@ -25,6 +25,8 @@ public class Goal {
   @Column(nullable = false, unique = true)
   private Integer sequenceNumber;
 
+
+
   @OrderBy("orderNumber")
   @OneToMany(mappedBy = "goal")
   private Set<Metric> metrics;
@@ -106,11 +108,16 @@ public class Goal {
   public void setEngComment(String engComment) {
     this.engComment = engComment;
   }
+
   public String getEngName() {
     return engName;
   }
 
   public void setEngName(String engName) {
     this.engName = engName;
+  }
+
+  public void setMetrics(Set<Metric> metrics) {
+    this.metrics = metrics;
   }
 }

@@ -28,6 +28,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(criteria.createCriteria(anyString())).thenReturn(criteria);
     when(criteria.add(any(Criterion.class))).thenReturn(criteria);
     when(criteria.list()).thenReturn(Arrays.asList(new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777, "", 55, "", "", "abc", 1.0, true)));
+    when(request.getPathInfo()).thenReturn("admin/");
   }
 
   @Test

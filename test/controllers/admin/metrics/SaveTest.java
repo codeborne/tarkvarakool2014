@@ -19,7 +19,7 @@ public class SaveTest extends ControllerTest<Save> {
   @Before
   public void setUp() throws Exception {
     when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
-
+    when(request.getPathInfo()).thenReturn("admin/");
   }
 
   @Test
