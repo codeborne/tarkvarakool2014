@@ -63,7 +63,7 @@
 
               <div class="action-button">
               <span class="value">
-                <button class="modifyButton" type="button" class="btn btn-default btn-sm">
+                <button type="button" class="modifyButton btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-pencil"></span>
                 </button>
               </span>

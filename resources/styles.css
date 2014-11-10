@@ -34,7 +34,7 @@ body {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-background-color: #ffffff;
+  background-color: #ffffff;
 
 }
 
@@ -51,7 +51,7 @@ background-color: #ffffff;
 
 }
 
-.panel-heading>.name, .translationHeading{
+.panel-heading > .name, .translationHeading {
   color: #006699;
   font-size: 30px;
 }
@@ -78,7 +78,7 @@ background-color: #ffffff;
   padding: 200px;
 }
 
-.saveGoalButton {
+.saveGoalButton, .cancelGoalButton {
   height: 35px;
   width: 35px;
   background-color: Transparent;
@@ -93,10 +93,6 @@ background-color: #ffffff;
   color: lightgray;
   margin-left: -15px;
 
-}
-
-.blueButton:hover {
-  color:white;
 }
 
 .action-button .saveGoalButton:hover {
@@ -104,115 +100,37 @@ background-color: #ffffff;
   background-color: transparent;
 }
 
-
-
-.cancelGoalButton {
-  height: 35px;
-  width: 35px;
-  background-color: Transparent;
-  border: none;
-  background: url(/image/btn.png) no-repeat;
-  font-family: "Glyphicons Halflings";
-  padding: 0;
-  font-size: 16px;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  overflow: hidden;
-  color: lightgray;
-  margin-left: -15px;
-}
-
 .cancelGoalButton:hover {
   color: red;
   background-color: transparent;
 }
 
-.modifyButton {
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort {
   background-color: Transparent;
-  background-repeat: no-repeat;
   border: none;
   cursor: pointer;
   overflow: hidden;
   color: lightgray;
   font-size: 16px;
-  margin-right: 10px;
-
-}
-.modifyButton:hover {
-  color: #ffcc00 !important;
-}
-.glyphicon-pencil {
-  color:lightgrey;
-}
-.glyphicon-pencil:hover {
-  color: #ffcc00;
 }
 
-.metricsButton {
-  background-color: Transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-
-}
-
-.metricsButton:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .translationButton:hover, .glyphicon-sort:hover {
   color: #ffcc00;
   background-color: transparent;
 }
 
-.deleteButton {
-  background-color: Transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-
+.measured .glyphicon-pencil, .forecasted .glyphicon-pencil, .yearlyBudget .glyphicon-pencil {
+  color: lightgrey;
 }
 
-.translationButton {
-  background-color: transparent;
-  border:none;
-  color:lightgrey;
-  font-size: 14px;
-}
-
-.translationButton:hover {
+.measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover {
   color: #ffcc00;
-  background-color: transparent;
-}
-.deleteButton:hover {
-  color: #ffcc00;
-  background-color: transparent;
-}
-
-.glyphicon-sort {
-  background-color: Transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  color: lightgray;
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-.glyphicon-sort:hover {
-  color: #ffcc00;
-  background-color: transparent;
-
 }
 
 .footer {
   background: url(/images/bottom.png) repeat scroll 0px 100% transparent;
   height: 295px;
   border-radius: 0px;
-
 }
 
 .hand-pointer {
@@ -220,28 +138,7 @@ background-color: #ffffff;
   cursor: hand;
 }
 
-.authentication-button {
-  margin-left: 20px;
-  background: #084381;
-  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2));
-  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%);
-  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%);
-  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%);
-  background: linear-gradient(to right, #084381 0%, #0081b2 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1);
-
-  box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.2);
-  border: 0;
-  width: 120px;
-  height: 30px;
-  padding: 0px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 11px;
-}
-
-.blueButton {
+.blueButton, .authentication-button, #submit {
   margin-left: 20px;
   background: #084381;
   background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
@@ -260,37 +157,20 @@ background-color: #ffffff;
   font-size: 11px;
   color: white;
   font-family: "Roboto Condensed";
+  border-radius: 2px;
 }
 
-.goBackButton {
-  margin-bottom: -75px;
-
+.blueButton:hover {
+  color: white;
 }
 
 #submit {
   margin-left: 2px;
-  background: #084381; /* Old browsers */
-  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%); /* IE10+ */
-  background: linear-gradient(to right, #084381 0%, #0081b2 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1); /* IE6-9 */
-
-  box-shadow: 0 0 0px 2px rgba(0, 0, 0, 0.2);
-  border: 0;
-  width: 120px;
-  height: 30px;
   padding: 0px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 11px;
-
 }
 
-.enter {
-  color: white;
+.goBackButton {
+  margin-bottom: -75px;
 }
 
 .glyphicon-arrow-right {
@@ -304,20 +184,13 @@ background-color: #ffffff;
 }
 
 .forecasted > span.value, .forecast-indicator {
-  color:#333
+  color: #333
 }
 
 .toprow {
   margin: 0 0 30px 0;
-  padding: 0;
-  border: 0;
   width: 100%;
 }
-
-.table td:first-child{
-  text-align: left;
-}
-
 
 .toprow td:nth-child(3) {
   color: #fff;
@@ -334,7 +207,6 @@ background-color: #ffffff;
 
 .toprow td:last-child {
   text-align: right;
-  border: 0;
   background-color: transparent;
 }
 
@@ -352,11 +224,6 @@ background-color: #ffffff;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
   border: 1px solid transparent;
   border-radius: 2px;
   background-color: transparent;
@@ -367,24 +234,56 @@ background-color: #ffffff;
   color: #ffcc00;
   background-color: rgba(0, 0, 0, 0.5);
 }
-th.actions, td.actions {
-  white-space: nowrap;
-  text-align: center !important;
 
-}
-td.actions .action-button{
-  display: inline-block;
-  text-align: left !important;
-}
-
-td.actions{
-  white-space: nowrap;
-  text-align: center !important;
-}
-
-
-td.sort {
+.languageButtons {
+  font-size: 11px;
+  margin-bottom: 6px;
   text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background-color: transparent;
+  margin-top: 8px;
+  position: relative;
+  margin-right: 40px;
+}
+
+.languageButtons:before,
+.languageButtons:after {
+  content: '';
+  position: absolute;
+  display: block;
+  left: -10px;
+  top: 6px;
+  height: 15px;
+  border-left: 1px solid #fff;
+}
+
+.languageButtons:after {
+  left: auto;
+  right: -10px;
+}
+
+.languageButtons a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 6px;
+}
+
+.languageButtons a.active {
+  color: #ffcc00;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+td.actions .action-button {
+  display: inline-block;
+}
+
+td.actions {
+  white-space: nowrap;
 }
 
 .ui-state-highlight {
@@ -436,20 +335,19 @@ input.modify-value {
   color: #000;
   font-weight: 300;
   text-align: left;
-  padding: 30px 20px;
+  padding: 20px 10px;
 
 }
 
 .table > tbody > tr > td {
   border-top: 0;
   text-align: left;
-  padding: 20px;
+  padding: 10px;
 }
 
 .table {
   margin-top: 20px;
 }
-
 
 .footer {
   position: relative;
@@ -461,7 +359,6 @@ input.modify-value {
 }
 
 .alert-danger {
-
   width: 450px;
   text-align: center;
   padding: 8px 0px;
@@ -477,51 +374,4 @@ input.modify-value {
   color: red;
 }
 
-.languageButtons {
-  font-size: 11px;
-  margin-bottom: 6px;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  background-color: transparent;
-  margin-top: 8px;
-  position:relative;
-  margin-right: 40px;
-}
-
-.languageButtons:before,
-.languageButtons:after {
-  content:'';
-  position:absolute;
-  display:block;
-  left:-10px;
-  top:6px;
-  height:15px;
-  border-left:1px solid #fff;
-}
-
-.languageButtons:after {
-  left:auto;
-  right:-10px;
-}
-
-.languageButtons a {
-  color: rgba(255, 255, 255, 0.5);
-  text-decoration: none;
-  cursor: pointer;
-  display: inline-block;
-  padding: 6px;
-}
-
-.languageButtons a.active {
-  color: #ffcc00;
-  background-color: rgba(0, 0, 0, 0.5);
-}
 

@@ -25,14 +25,14 @@
       <#if loggedInUsername??>
         <form class="navbar-form pull-left" action="/admin/logout">
           <span class="greetings"><@m'hello'/> <strong>${loggedInUsername}</strong></span>
-          <button id="logout-button" type="submit" class="authentication-button"><span
-            class="glyphicon glyphicon-lock"></span> <@m'exit'/>
+          <button id="logout-button" type="submit" class="authentication-button">
+            <span class="glyphicon glyphicon-lock"></span> <@m'exit'/>
           </button>
         </form>
       <#else>
         <form class="navbar-form pull-left" action="/admin/login">
-          <button id="login-button" type="submit" class="authentication-button"><span
-            class="glyphicon glyphicon-lock"></span><@m'login'/>
+          <button id="login-button" type="submit" class="authentication-button">
+            <span class="glyphicon glyphicon-lock"></span><@m'login'/>
           </button>
         </form>
       </#if>
