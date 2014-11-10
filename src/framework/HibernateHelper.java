@@ -21,7 +21,7 @@ import static org.hibernate.cfg.AvailableSettings.*;
 public class HibernateHelper {
   private static Configuration configuration = new Configuration();
   private static SessionFactory sessionFactory;
-  private static boolean runLiquibase = true;
+  private static boolean migrateDatabaseNeeded = true;
 
   static {
     configuration.setProperty(URL, "jdbc:h2:./moodikud");
@@ -39,11 +39,13 @@ public class HibernateHelper {
     configuration.setProperty(AUTOCOMMIT, "true");
     configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
     sessionFactory = buildSessionFactory();
-    runLiquibase = false;
+    migrateDatabaseNeeded = false;
     return sessionFactory;
   }
 
   public static void migrateDatabase() {
+    if (!migrateDatabaseNeeded) return;
+
     // use schema update for now, todo: later uncomment creating scripts in db.xml and keep using only liquibase
     new SchemaUpdate(configuration).execute(true, true);
 
