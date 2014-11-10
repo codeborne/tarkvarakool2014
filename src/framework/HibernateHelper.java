@@ -37,10 +37,10 @@ public class HibernateHelper {
   }
 
   public static SessionFactory createTestSessionFactory() throws IOException {
+    migrateDatabaseNeeded = false;
     configuration.setProperty(AUTOCOMMIT, "true");
     configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
     sessionFactory = buildSessionFactory();
-    migrateDatabaseNeeded = false;
     return sessionFactory;
   }
 
