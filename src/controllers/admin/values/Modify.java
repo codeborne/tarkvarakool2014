@@ -95,7 +95,12 @@ public class Modify extends UserAwareController {
     if (errors.containsKey("value")) {
       errorsList.add("Sisestage korrektne väärtus.");
     } else if (value != null) {
-      value = value.setScale(1, HALF_UP);
+      if(value.remainder(new BigDecimal(1)).equals(new BigDecimal(0))){
+        value = value.setScale(0, HALF_UP);
+      }
+      else {
+        value = value.setScale(1, HALF_UP);
+      }
       if(value.toString().length()>38)
         errorsList.add("Väärtus on liiga suur või väike.");
     }

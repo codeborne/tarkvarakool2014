@@ -85,9 +85,10 @@ public class ValuesModifyingTest extends UITest {
 
     $$(".glyphicon-pencil").get(1).click();
     SelenideElement input = $$(".modify-value").get(1);
-    input.setValue("0").pressEnter();
+    input.setValue("56").pressEnter();
     input.shouldNotBe(visible);
-    $$(".value").get(1).shouldHave(text("0"));
+    $$(".value").get(1).shouldHave(text("56"));
+    $$(".value").get(1).shouldNotHave(text("56.0"));
   }
 
   @Test
