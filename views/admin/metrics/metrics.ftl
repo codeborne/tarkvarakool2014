@@ -36,6 +36,7 @@
         <th><@m'infoSource'/></th>
         <th><@m'institutionReport'/></th>
         <th><@m'public'/></th>
+        <th></th>
         <#--<th><@m'actions'/></th>-->
       </tr>
       </thead>

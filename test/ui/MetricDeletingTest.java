@@ -47,10 +47,10 @@ public class MetricDeletingTest extends UITest {
     open("/admin/goals/home");
 
     $$(".metricsButton").get(0).click();
-    $$("tr.metric").shouldHaveSize(1);
+    $$("tbody.metric").shouldHaveSize(1);
     $$(".deleteButton").get(0).click();
     confirm(messages.get("errorDeletingConfirmation"));
-    $$("tr.metric").shouldHaveSize(0);
+    $$("tbody.metric").shouldHaveSize(0);
   }
 
   @Test
@@ -62,11 +62,11 @@ public class MetricDeletingTest extends UITest {
 
 
     $$(".metricsButton").get(0).click();
-    $$("tr.metric").shouldHaveSize(4);
+    $$("tbody.metric").shouldHaveSize(4);
     $$(".deleteButton").get(1).click();
 
     confirm(messages.get("errorDeletingConfirmation"));
-    ElementsCollection metrics = $$("tr.metric");
+    ElementsCollection metrics = $$("tbody.metric");
     metrics.shouldHaveSize(3);
 
     assertEquals("another metric", metrics.get(0).$(".name").getText());
@@ -79,10 +79,10 @@ public class MetricDeletingTest extends UITest {
     public void adminCancelsMetricDelete() throws Exception {
       open("/admin/goals/home");
       $$(".metricsButton").get(0).click();
-      $$("tr.metric").shouldHaveSize(1);
+      $$("tbody.metric").shouldHaveSize(1);
       $$(".deleteButton").get(0).click();
       dismiss(messages.get("errorDeletingConfirmation"));
-      $$("tr.metric").get(0).$(".name").shouldHave(text("Some metric"));
+      $$("tbody.metric").get(0).$(".name").shouldHave(text("Some metric"));
 
     }
 }

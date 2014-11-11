@@ -55,7 +55,7 @@ public class MetricsAddingTest extends UITest {
     $(".addMetric").$(By.name("name")).setValue("Koer");
     $(".saveGoalButton").click();
 
-    assertEquals("Koer", $$("tr.metric").get(0).$(".name").getText());
+    assertEquals("Koer", $$("tbody.metric").get(0).$(".name").getText());
   }
 
 
@@ -76,9 +76,9 @@ public class MetricsAddingTest extends UITest {
 
     $(".saveGoalButton").click();
 
-    $$("tr.metric").shouldHaveSize(1);
+    $$("tbody.metric").shouldHaveSize(1);
 
-    SelenideElement row = $$("tr.metric").get(0);
+    SelenideElement row = $$("tbody.metric").get(0);
 
     row.$(".name").shouldHave(text("Koer"));
     row.$(".unit").shouldHave(text("%"));
