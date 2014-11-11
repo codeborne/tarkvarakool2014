@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 
 import static framework.FreemarkerHelper.initializeFreemarker;
 import static framework.HibernateHelper.createSessionFactory;
-import static framework.HibernateHelper.migrateDatabase;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
@@ -40,7 +39,6 @@ public class Handler extends AbstractHandler {
 
   public void initialize() throws IOException {
     Render.freemarker = initializeFreemarker(devMode);
-    migrateDatabase();
     hibernateSessionFactory = createSessionFactory();
   }
 

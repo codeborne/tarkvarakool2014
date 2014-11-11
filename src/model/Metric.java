@@ -26,7 +26,7 @@ public class Metric {
   private String commentOnTargetLevel;
   private String infoSource;
   private String institutionToReport;
-  private Boolean isPublic = true;
+  private Boolean isPublic = false;
 
 
   private String engName;
