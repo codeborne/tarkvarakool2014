@@ -126,11 +126,11 @@ public class HomeTest extends ControllerTest<Home> {
   public void postFailure() throws Exception {
     controller.id = 8L;
     controller.sequenceNumber = 2;
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
-    when(criteria.addOrder(any(Order.class))).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", "", 1000, 1), new Goal("second goal", "", 2000, 2),
+    when(hibernate.createCriteria(Goal.class).addOrder(any(Order.class)).list()).thenReturn(asList(
+      new Goal("some goal", "", 1000, 1),
+      new Goal("second goal", "", 2000, 2),
       new Goal("third goal", "", 3000, 3)));
+
     when(hibernate.get(Goal.class, 8L)).thenReturn(new Goal("some goal", "", 1000, 1));
     doThrow(mock(HibernateException.class)).when(hibernate).update(any(Goal.class));
 

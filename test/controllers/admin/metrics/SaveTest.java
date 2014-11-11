@@ -15,10 +15,12 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class SaveTest extends ControllerTest<Save> {
+  public static final long GOAL_ID = 2L;
 
   @Before
   public void setUp() throws Exception {
-    when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
+    controller.goalId = GOAL_ID;
+    when(hibernate.get(Goal.class, GOAL_ID)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -177,7 +179,7 @@ public class SaveTest extends ControllerTest<Save> {
     controller.commentOnTargetLevel = "\r d";
     controller.infoSource = "http://";
     controller.institutionToReport = "f   ";
-    controller.goalId = 5L;
+    controller.goalId = GOAL_ID;
     controller.startLevel = 5;
     controller.targetLevel = 6;
     Criteria criteria = mock(Criteria.class);
