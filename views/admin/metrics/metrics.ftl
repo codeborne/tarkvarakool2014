@@ -3,17 +3,30 @@
 <form method="get">
   <input type="hidden" value="${goal.id?c}" name="goalID">
 </form>
+<style type="text/css">
+  #metrics-table tbody {
+    border: none;
+  }
+
+  #metrics-table tbody:nth-child(odd) {
+    background: rgba(240, 240, 240, 0.5);
+  }
+
+  #metrics-table tbody:hover {
+    background: rgba(240, 240, 240, 1);
+  }
+</style>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="headingName">${goal.name}</h4>
   </div>
   <div class="panel-body">
-    <table class="table table-hover">
+    <table id="metrics-table" class="table">
       <thead>
       <tr>
         <th><@m'sort'/></th>
-        <th><@m'metric'/></th>
-        <th><@m'unit'/></th>
+        <#--<th><@m'metric'/></th>-->
+        <#--<th><@m'unit'/></th>-->
         <th><@m'publicDescription'/></th>
         <th><@m'privateDescription'/></th>
         <th><@m'startLevel'/></th>
@@ -23,13 +36,14 @@
         <th><@m'infoSource'/></th>
         <th><@m'institutionReport'/></th>
         <th><@m'public'/></th>
-        <th><@m'actions'/></th>
+        <th></th>
+        <#--<th><@m'actions'/></th>-->
       </tr>
       </thead>
-  <tbody id="sortable">
     <#list goal.metrics as metric>
-    <tr class="metric">
-      <td class="sort">
+    <tbody class="metric sortable">
+    <tr>
+      <td class="sort" rowspan="2">
         <span class="glyphicon glyphicon-sort hand-pointer"></span>
         <form class="orderNumberForm" goalId="post" action="/admin/metrics/modify">
           <input type="hidden" name="goalId" value="${goal.id?c}">
@@ -48,7 +62,7 @@
           <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
         </form>
       </td>
-      <td class="name">
+      <td class="name" colspan="8">
         <span class="value">${metric.name}</span>
         <input class="value form-control" name="name" value="${metric.name}" style="display: none;">
       </td>
@@ -56,6 +70,34 @@
         <span class="value">${metric.unit}</span>
         <input class="value form-control" name="unit" value="${metric.unit}" style="display: none;">
       </td>
+      <td class="actions" rowspan="2">
+        <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
+        <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+        <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
+
+        <div class="action-button">
+          <input type="hidden" class="value" value="${metric.id?c}" name="id">
+          <input type="button" class="saveGoalButton value btn btn-default btn-sm" value=""
+                 style="display: none" data-action="save">
+          <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
+                 onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="" style="display:none"
+                 data-action="save"></div>
+        <div class="action-button">
+          <span class="value">
+            <button class="modifyButton" type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </span>
+        </div>
+        <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
+          <input type="hidden" value="${goal.id?c}" name="goalId">
+          <input type="hidden" name="id" value="${metric.id?c}"/>
+          <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-trash"></span></button>
+        </form>
+      </td>
+    </tr>
+    <tr>
       <td class="publicDescription">
         <span class="value">${metric.publicDescription}</span>
         <input class="value form-control" name="publicDescription" value="${metric.publicDescription}"
@@ -97,61 +139,42 @@
         <span class="value"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
         <input class="value" type="checkbox" name="isPublic" value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if> style="display: none;">
       </td>
-      <td class="actions">
-        <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
-        <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
-        <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
-
-        <div class="action-button">
-          <input type="hidden" class="value" value="${metric.id?c}" name="id">
-        <input type="button" class="saveGoalButton value btn btn-default btn-sm" value=""
-               style="display: none" data-action="save">
-        <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
-               onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="" style="display:none"
-               data-action="save"></div>
-          <div class="action-button">
-          <span class="value">
-            <button class="modifyButton" type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-pencil"></span>
-            </button>
-          </span>
-            </div>
-        <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
-          <input type="hidden" value="${goal.id?c}" name="goalId">
-          <input type="hidden" name="id" value="${metric.id?c}"/>
-          <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-trash"></span></button>
-        </form>
-      </td>
     </tr>
+    </tbody>
     </#list>
-  <tr class="addMetric">
-    <td></td>
-    <td><input name="name" class="value form-control" placeholder="<@m'metric'/>" value="${name!""}"></td>
-    <td><input name="unit" class="value form-control" placeholder="<@m'unit'/>" value="${unit!""}"></td>
-    <td><input name="publicDescription" class="value form-control" placeholder="<@m'publicDescription'/>"
-               value="${publicDescription!""}"></td>
-    <td><input name="privateDescription" class="value form-control" placeholder="<@m'privateDescription'/>"
-               value="${privateDescription!""}"></td>
-    <td><input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
-               <#if startLevel??>value="${(startLevel?c)}"</#if></td>
-    <td><input name="commentOnStartLevel" class="value form-control" placeholder="<@m'startLevelComment'/>"
-               value="${commentOnStartLevel!""}"></td>
-    <td><input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
-               <#if targetLevel??>value="${(targetLevel?c)}"</#if></td>
-    <td><input name="commentOnTargetLevel" class="value form-control" placeholder="<@m'targetLevelComment'/>"
-               value="${commentOnTargetLevel!""}"></td>
-    <td><input name="infoSource" class="value form-control" placeholder="<@m'infoSource'/>" value="${infoSource!""}"></td>
-    <td><input name="institutionToReport" class="value form-control" placeholder="<@m'institutionReport'/>"
-               value="${institutionToReport!""}"></td>
-
-    <td> <input class="value" type="checkbox" name="isPublic" value="true" ></td>
-    <td colspan="3">
-      <input type="button" id="add" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>" data-action="save">
-      <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
-    </td>
-  </tr>
-  </tbody>
+    <tbody class="addMetric">
+      <tr>
+        <td rowspan="2"></td>
+        <td colspan="8">
+          <input name="name" class="value form-control" placeholder="<@m'metric'/>" value="${name!""}">
+        </td>
+        <td>
+          <input name="unit" class="value form-control" placeholder="<@m'unit'/>" value="${unit!""}">
+        </td>
+        <td rowspan="2">
+          <input type="button" id="add" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>" data-action="save">
+          <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+        </td>
+      </tr>
+      <tr>
+        <td><input name="publicDescription" class="value form-control" placeholder="<@m'publicDescription'/>"
+                   value="${publicDescription!""}"></td>
+        <td><input name="privateDescription" class="value form-control" placeholder="<@m'privateDescription'/>"
+                   value="${privateDescription!""}"></td>
+        <td><input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
+                   <#if startLevel??>value="${(startLevel?c)}"</#if></td>
+        <td><input name="commentOnStartLevel" class="value form-control" placeholder="<@m'startLevelComment'/>"
+                   value="${commentOnStartLevel!""}"></td>
+        <td><input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
+                   <#if targetLevel??>value="${(targetLevel?c)}"</#if></td>
+        <td><input name="commentOnTargetLevel" class="value form-control" placeholder="<@m'targetLevelComment'/>"
+                   value="${commentOnTargetLevel!""}"></td>
+        <td><input name="infoSource" class="value form-control" placeholder="<@m'infoSource'/>" value="${infoSource!""}"></td>
+        <td><input name="institutionToReport" class="value form-control" placeholder="<@m'institutionReport'/>"
+                   value="${institutionToReport!""}"></td>
+        <td><input class="value" type="checkbox" name="isPublic" value="true" ></td>
+      </tr>
+    </tbody>
   </table>
 </div>
 </div>
@@ -171,7 +194,7 @@
 
     var saveClickHandler = function (event) {
       var button = $(event.target);
-      var values = button.closest('tr').find('input.value');
+      var values = button.closest('tbody').find('input.value');
       $.post(button.data("action"), values.serialize(), responseHandler);
     };
 
@@ -180,7 +203,7 @@
     var modifyClickHandler = function (event) {
       $("input.value").hide();
       $("span.value").show();
-      var row = $(event.target).closest('tr');
+      var row = $(event.target).closest('tbody');
       row.find("span.value").hide();
       row.find("input.value").show();
     };
@@ -191,7 +214,7 @@
 
 <script>
   $(function () {
-    $("#sortable").sortable({
+    $(".sortable").sortable({
       placeholder: "ui-state-highlight",
       handle: '.glyphicon-sort',
       cursor: "move",

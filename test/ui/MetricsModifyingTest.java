@@ -68,8 +68,8 @@ public class MetricsModifyingTest extends UITest {
 
     $(".saveGoalButton").click();
 
-    assertEquals("Metric", $$("tr.metric").get(0).$(".name").getText());
-    assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
+    assertEquals("Metric", $$("tbody.metric").get(0).$(".name").getText());
+    assertEquals("EUR", $$("tbody.metric").get(0).$(".unit").getText());
   }
 }
 
