@@ -15,9 +15,7 @@
             <th><@m'metric'/></th>
             <th><@m'publicDescription'/></th>
             <th><@m'startLevel'/></th>
-            <th><@m'startLevelComment'/></th>
             <th><@m'targetLevel'/></th>
-            <th><@m'targetLevelComment'/></th>
             <th><@m'infoSource'/></th>
           </tr>
           </thead>
@@ -29,15 +27,11 @@
                   <#if language == 'et'>${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if>
                   <#elseif language == 'en'>${metric.engName!"Translation missing"} <#if metric.engUnit?has_content>(${metric.engUnit})</#if></#if>
                 </td>
-
                 <td class="publicDescription"><#if language == 'et'>${metric.publicDescription}<#elseif language == 'en'>${metric.engPublicDescription!"Translation missing"}</#if></td>
-                <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
-                <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
-                <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
-                <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
+                <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#if metric.commentOnStartLevel?has_content> (${metric.commentOnStartLevel})</#if><#else>N/A</#if></td>
+                <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#if metric.commentOnTargetLevel?has_content> (${metric.commentOnTargetLevel})</#if><#else>N/A</#if></td>
                 <td class="infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}"
-                                                                             target="_blank"><span
-                  class="glyphicon glyphicon-info-sign"></span></a></#if></td>
+                    target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a></#if></td>
               </tr>
               </#if>
             </#list>

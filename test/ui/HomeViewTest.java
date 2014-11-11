@@ -33,9 +33,9 @@ public class HomeViewTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", 0, "", 0, "", "http://", "", 2.0, true));
-    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", 0, "", "", "", 10.0, false));
-    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 0, "", 0, "", "", "", 5.8, true));
+    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", null, "", 23, "2014", "http://", "", 2.0, true));
+    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0, "", null, "", "", "", 10.0, false));
+    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 15, "", null, "", "", "", 5.8, true));
 
     open("/home");
 
@@ -45,6 +45,8 @@ public class HomeViewTest extends UITest {
     SelenideElement goalBlock1 = goals.get(0);
     goalBlock1.$(".name").shouldHave(text("Eesmark1"));
     goalBlock1.$(".budget").shouldHave(text("10"));
+    goalBlock1.$$(".metric").get(0).$(".startLevel").shouldHave(text("N/A"));
+    goalBlock1.$$(".metric").get(0).$(".targetLevel").shouldHave(text("23 (2014)"));
     goalBlock1.$(".infoSource").$(".glyphicon-info-sign").shouldBe(visible);
     assertEquals("Moodik1", goalBlock1.$$(".metric").get(0).$(".name").getText());
     goalBlock1.$(".name").shouldNotHave(text("Moodik2 (EUR)"));
@@ -54,6 +56,10 @@ public class HomeViewTest extends UITest {
     SelenideElement goalBlock2 = goals.get(1);
     goalBlock2.$(".name").shouldHave(text("Eesmark2"));
     goalBlock2.$(".budget").shouldHave(text("12"));
+    goalBlock2.$$(".metric").get(0).$(".targetLevel").shouldHave(text("N/A"));
+    goalBlock2.$$(".metric").get(0).$(".startLevel").shouldHave(text("15"));
+    goalBlock2.$$(".metric").get(0).$(".startLevel").shouldNotHave(text("("));
+
     assertEquals("Moodik3", goalBlock2.$$(".metric").get(0).$(".name").getText());
   }
 

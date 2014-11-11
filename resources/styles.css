@@ -165,6 +165,12 @@ body {
   color: white;
 }
 
+#saveTranslationButton{
+  float:right;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 #submit {
   margin-left: 2px;
   padding: 0px;

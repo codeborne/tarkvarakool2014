@@ -12,8 +12,8 @@
         <th><@m'goal'/></th>
         <th><@m'comment'/></th>
         <th><@m'budget'/></th>
-        <th><@m'metrics'/></th>
-        <th class="actions"><@m'actions'/></th>
+        <th><#if goals?has_content><@m'metrics'/></#if></th>
+        <th class="actions"><#if goals?has_content><@m'actions'/></#if></th>
       </tr>
       </thead>
       <tbody id="sortableGoals">
