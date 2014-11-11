@@ -67,5 +67,6 @@ public class GoalAddingTest extends UITest {
     $(".alert-danger").shouldHave(text(messages.get("errorInsertGoal")));
     $(By.name("budget")).shouldHave(value("10"));
   }
+
 }
 
