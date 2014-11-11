@@ -21,7 +21,7 @@ public class TranslationTest extends ControllerTest<Translation>{
   public void setUp() throws Exception {
     when(request.getParameterValues("engUnit")).thenReturn(new String[]{"people","%"});
     when(request.getParameterValues("engMetricName")).thenReturn(new String[]{"metric1","metric2"});
-    when(request.getParameterValues("engPublicDescription")).thenReturn(new String[]{"descr1","descr2"});
+    when(request.getParameterValues("engPublicDescription")).thenReturn(new String[]{"descr1",""});
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -131,6 +131,9 @@ public class TranslationTest extends ControllerTest<Translation>{
     assertEquals("people", updatedMetric1.getEngUnit());
     assertEquals("metric1", updatedMetric1.getEngName());
     assertEquals("descr1", updatedMetric1.getEngPublicDescription());
+    assertEquals("%", updatedMetric2.getEngUnit());
+    assertEquals("metric2", updatedMetric2.getEngName());
+    assertEquals(null, updatedMetric2.getEngPublicDescription());
 
   }
 
