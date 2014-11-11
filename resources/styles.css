@@ -26,7 +26,7 @@ body {
   margin-top: 6px;
 }
 
-.panel {
+.panel, .panel-login {
   border: 0;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -34,10 +34,10 @@ body {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
+  background-color: #f8f9fa;
   min-height: 600px;
   margin-bottom: 0px;
-  margin-top: 55px;
+  margin-top: 40px;
 
 }
 
@@ -50,7 +50,7 @@ body {
   padding: 25px 40px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   position: relative;
-  background-color: #ffffff !important;
+  background-color: #fff !important;
 
 }
 
@@ -61,19 +61,6 @@ body {
 
 .panel-heading .budget {
   color: #6f6d65;
-}
-
-.panel-login {
-  height: 600px;
-  background-color: #fff;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  border: 10;
-  padding: 25px 40px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  z-index: 999;
-  position: relative;
 }
 
 .missingGoals {
