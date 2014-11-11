@@ -40,7 +40,7 @@ public class Translation extends UserAwareController {
       goal.setEngComment(trimInput(engComment));
       int i = 0;
       for(Metric metric : metrics){
-        if(metric.getIsPublic()==true) {
+        if(metric.getIsPublic()) {
           metric.setEngName(trimInput(engMetricName[i]));
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
