@@ -159,7 +159,7 @@ public class SaveTest extends ControllerTest<Save> {
 
     assertRender(controller.post());
 
-    Goal savedGoal = (Goal) getSavedEntity();
+    Goal savedGoal = getSavedEntity();
 
     assertEquals("asd", savedGoal.getName());
     assertEquals(123, (int) savedGoal.getBudget());
@@ -178,7 +178,7 @@ public class SaveTest extends ControllerTest<Save> {
 
     assertRender(controller.post());
 
-    Goal savedGoal = (Goal) getSavedEntity();
+    Goal savedGoal = getSavedEntity();
 
     assertEquals("ab cd",savedGoal.getName());
     assertEquals("test",savedGoal.getComment());
@@ -217,7 +217,7 @@ public class SaveTest extends ControllerTest<Save> {
     when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", 1000)));
 
     assertRender(controller.post());
-    Goal goal = (Goal) getSavedEntity();
+    Goal goal = getSavedEntity();
 
     assertEquals("kool",goal.getName() );
     assertEquals("maja",goal.getComment());

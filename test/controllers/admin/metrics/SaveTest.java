@@ -188,7 +188,7 @@ public class SaveTest extends ControllerTest<Save> {
     when(criteria.uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
-    Metric savedMetric = (Metric) getSavedEntity();
+    Metric savedMetric = getSavedEntity();
 
     assertEquals("metric", savedMetric.getName());
     assertEquals("%", savedMetric.getUnit());
@@ -218,7 +218,7 @@ public class SaveTest extends ControllerTest<Save> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getSavedEntity();
+    Metric savedMetric = getSavedEntity();
 
     assertEquals("metric", savedMetric.getName());
     assertEquals(null, savedMetric.getUnit());
