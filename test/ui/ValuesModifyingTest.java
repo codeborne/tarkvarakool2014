@@ -18,7 +18,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class ValuesModifyingTest extends UITest {
 
   Goal goal = new Goal("Sisestatud eesmark","", 100,1);
-  Metric metric = new Metric(goal, "Another metric", "", "erarara", "", 34363, "", 100000, "", "", "", 1.0, true);
+  Metric metric = new Metric(goal, "Another metric", "", "erarara", "", 34363.0, "", 100000.0, "", "", "", 1.0, true);
 
   @Before
   public void setUp() throws Exception {
@@ -35,7 +35,7 @@ public class ValuesModifyingTest extends UITest {
     hibernate.save(goal);
 
     hibernate.save(metric);
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0, "", 20, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0.0, "", 20.0, "", "", "", 2.0, true));
 
   }
 

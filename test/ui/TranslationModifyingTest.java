@@ -34,7 +34,7 @@ public class TranslationModifyingTest extends UITest {
     $("#submit").click();
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "üks mõõdik", "inimest", "Loeb kokku mitu inimest on", "", 1, "2014", 0, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal, "üks mõõdik", "inimest", "Loeb kokku mitu inimest on", "", 1.0, "2014", 0.0, "", "", "", 1.0, true));
   }
 
   @After

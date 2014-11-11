@@ -111,8 +111,8 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.engName = "goal";
     controller.engComment = "comment";
     Goal goal = new Goal("Eesmark", "kommentaar", 100, 1);
-    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0, null, 0, null, null, null, 1.0, true);
-    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0, null, 0, null, null, null, 1.0, true);
+    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0.0, null, 0.0, null, null, null, 1.0, true);
+    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0.0, null, 0.0, null, null, null, 1.0, true);
     Set<Metric> metrics = new HashSet<>();
     metrics.add(metric1);
     metrics.add(metric2);
@@ -143,8 +143,8 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.engName = "goal";
     controller.engComment = "comment";
     Goal goal = new Goal("Eesmark", "kommentaar", 100, 1);
-    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0, null, 0, null, null, null, 1.0, true);
-    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0, null, 0, null, null, null, 1.0, true);
+    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0.0, null, 0.0, null, null, null, 1.0, true);
+    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0.0, null, 0.0, null, null, null, 1.0, true);
     Set<Metric> metrics = new HashSet<>();
     metrics.add(metric1);
     metrics.add(metric2);
