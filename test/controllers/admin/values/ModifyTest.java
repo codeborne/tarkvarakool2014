@@ -41,7 +41,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getValues().get(controller.year));
@@ -60,7 +60,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));
@@ -79,7 +79,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getValues().get(controller.year));
@@ -98,7 +98,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));

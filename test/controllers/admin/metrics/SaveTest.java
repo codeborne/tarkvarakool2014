@@ -15,10 +15,12 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class SaveTest extends ControllerTest<Save> {
+  public static final long GOAL_ID = 2L;
 
   @Before
   public void setUp() throws Exception {
-    when(hibernate.get(Goal.class, 2L)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
+    controller.goalId = GOAL_ID;
+    when(hibernate.get(Goal.class, GOAL_ID)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -178,8 +180,8 @@ public class SaveTest extends ControllerTest<Save> {
     controller.infoSource = "http://";
     controller.institutionToReport = "f   ";
     controller.goalId = 5L;
-    controller.startLevel = 5.0;
-    controller.targetLevel = 6.0;
+    controller.startLevel = 5;
+    controller.targetLevel = 6;
     Criteria criteria = mock(Criteria.class);
     when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
     when(criteria.createCriteria(anyString())).thenReturn(criteria);
@@ -199,8 +201,8 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("http://", savedMetric.getInfoSource());
     assertEquals("f", savedMetric.getInstitutionToReport());
     assertEquals((Double) 8.0, savedMetric.getOrderNumber());
-    assertEquals((Double)5.0, savedMetric.getStartLevel());
-    assertEquals((Double)6.0, savedMetric.getTargetLevel());
+    assertEquals(5, (int) savedMetric.getStartLevel());
+    assertEquals(6, (int) savedMetric.getTargetLevel());
     assertEquals(false, savedMetric.getIsPublic());
   }
 
@@ -240,16 +242,16 @@ public class SaveTest extends ControllerTest<Save> {
     controller.unit = "%";
     controller.publicDescription = "a a a";
     controller.privateDescription = "b";
-    controller.startLevel = 5.0;
+    controller.startLevel = 5;
     controller.commentOnStartLevel = "c";
-    controller.targetLevel = 6.0;
+    controller.targetLevel = 6;
     controller.commentOnTargetLevel = "d";
     controller.infoSource = "http://";
     controller.institutionToReport = "f";
     controller.orderNumber = 5.0;
     controller.isPublic = true;
 
-    Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0.0, null, 0.0, null, null, null, 1.0, false);
+    Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0, null, 0, null, null, null, 1.0, false);
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
 
     assertRender(controller.post());
@@ -259,9 +261,9 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("%", updatedMetric.getUnit());
     assertEquals("a a a", updatedMetric.getPublicDescription());
     assertEquals("b", updatedMetric.getPrivateDescription());
-    assertEquals((Double)5.0,updatedMetric.getStartLevel());
+    assertEquals(5, (int) updatedMetric.getStartLevel());
     assertEquals("c", updatedMetric.getCommentOnStartLevel());
-    assertEquals((Double)6.0, updatedMetric.getTargetLevel());
+    assertEquals(6, (int) updatedMetric.getTargetLevel());
     assertEquals("d", updatedMetric.getCommentOnTargetLevel());
     assertEquals("http://", updatedMetric.getInfoSource());
     assertEquals("f", updatedMetric.getInstitutionToReport());

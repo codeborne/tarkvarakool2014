@@ -122,7 +122,7 @@ public class TranslationTest extends ControllerTest<Translation>{
 
     assertRender(controller.post());
 
-    Goal updatedGoal = (Goal) getUpdatedEntity();
+    Goal updatedGoal = getUpdatedEntity();
     Metric updatedMetric1 = (Metric)updatedGoal.getMetrics().toArray()[0];
     Metric updatedMetric2 = (Metric)updatedGoal.getMetrics().toArray()[1];
 
