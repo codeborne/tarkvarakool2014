@@ -120,4 +120,28 @@
     </sql>
   </changeSet>
 
+  <changeSet id="9" author="Tarkvarakool">
+    <addColumn tableName="metric">
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="publicDescription" type="VARCHAR(255)"/>
+      <column name="privateDescription" type="VARCHAR(255)"/>
+      <column name="startLevel" type="number"/>
+      <column name="commentOnStartLevel" type="VARCHAR(255)"/>
+      <column name="targetLevel" type="number"/>
+      <column name="commentOnTargetLevel" type="VARCHAR(255)"/>
+      <column name="infoSource" type="VARCHAR(255)"/>
+      <column name="institutionToReport" type="VARCHAR(255)"/>
+      <column name="isPublic" type="boolean" defaultValueBoolean="false"/>
+      <column name="engName" type="VARCHAR(255)"/>
+      <column name="engUnit" type="VARCHAR(255)"/>
+      <column name="engPublicDescription" type="VARCHAR(255)"/>
+      <column name="unit" type="VARCHAR(255)"/>
+      <column name="orderNumber" type="Double">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+  </changeSet>
+
 </databaseChangeLog>
