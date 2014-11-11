@@ -36,6 +36,8 @@ body {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   min-height: 600px;
+  margin-bottom: 0px;
+  margin-top: 55px;
 
 }
 
@@ -139,7 +141,7 @@ body {
   cursor: hand;
 }
 
-.blueButton, .authentication-button, #submit {
+#saveTranslationButton, #goalSaveButton, .authentication-button, #submit {
   margin-left: 20px;
   background: #084381;
   background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
@@ -161,23 +163,15 @@ body {
   border-radius: 2px;
 }
 
-.blueButton:hover {
-  color: white;
-}
-
 #saveTranslationButton{
   float:right;
   margin-right: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 #submit {
   margin-left: 2px;
   padding: 0px;
-}
-
-.goBackButton {
-  margin-bottom: -75px;
 }
 
 .glyphicon-arrow-right {
@@ -381,4 +375,7 @@ input.modify-value {
   color: red;
 }
 
+.metricTable td:nth-child(2) textarea, .metricTable td:nth-child(4) textarea{
+  margin-right: 20px;
+}
 

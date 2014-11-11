@@ -75,7 +75,6 @@
 
 </script>
   <#if goals?has_content>
-<br>
 <#list goals as goal>
 <div class="panel panel-default">
   <div class="goal">
@@ -157,7 +156,6 @@
     </table>
 </div>
 </div>
-    <br>
   </div>
     </#list>
   <#else>

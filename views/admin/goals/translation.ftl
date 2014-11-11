@@ -1,10 +1,5 @@
 <@html>
-
-<br>
-<br>
-
 <div class="panel panel-default goal">
-
   <div class="panel-heading">
     <h4 class="translationHeading"><@m'translationHeading'/></h4>
   </div>
@@ -29,10 +24,8 @@
       </tr>
       </tbody>
     </table>
-
     <#if goal.metrics?has_content>
     <table class="table table-hover metricTable">
-
         <thead>
         <tr>
           <th><@m'metric'/></th>
@@ -47,7 +40,6 @@
         <#list goal.metrics as metric>
           <#if metric.isPublic == true>
           <tr class="metric">
-
             <td class="name">${metric.name} <input type="hidden" value="${metric.id}"></td>
             <td><textarea name="engMetricName" rows="2"
                           placeholder="<@m'translateMetric'/>">${metric.engName!""}</textarea></td>
@@ -64,12 +56,9 @@
       </tbody>
     </table>
     </#if>
-    <input type="submit" value="<@m'save'/>" class="blueButton saveGoalButton btn btn-default btn-sm" id="saveTranslationButton">
+    <input type="submit" value="<@m'save'/>" class="saveGoalButton btn btn-default btn-sm" id="saveTranslationButton">
   </form>
   <span id="errors"></span>
 </div>
 </div>
-
-<button type="submit" class="blueButton goBackButton btn btn-default btn-sm" onclick="location='/admin/goals'">
-  <span><@m'goToMainPage'/></span></button>
 </@html>

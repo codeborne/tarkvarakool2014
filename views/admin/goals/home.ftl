@@ -1,5 +1,4 @@
 <@html>
-<br><br>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="name"><@m'goals'/></h4>
@@ -101,7 +100,7 @@
         <td><input type="number" class="value form-control" placeholder="<@m'budget'/>" name="budget"
                    <#if budget?? && (budget>=0)>value=${budget?c}</#if>></td>
         <td colspan=3>
-          <input type="button" value="<@m'add'/>" class="blueButton saveGoalButton value btn btn-default btn-sm"
+          <input type="button" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm" id="goalSaveButton"
                  data-action="save">
 
 

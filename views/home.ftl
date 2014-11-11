@@ -1,5 +1,4 @@
 <@html>
-<br><br>
   <#if goals?has_content>
     <#list goals as goal>
     <div class="panel panel-default goal">
