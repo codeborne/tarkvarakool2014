@@ -197,7 +197,7 @@ public class SaveTest extends ControllerTest<Save> {
     when(hibernate.get(Goal.class, 2L)).thenReturn(goalBeingChanged);
 
     assertRender(controller.post());
-    Goal updatedGoal = (Goal) getUpdatedEntity();
+    Goal updatedGoal = getUpdatedEntity();
 
     assertEquals(10, (int)updatedGoal.getBudget());
     assertEquals("name", updatedGoal.getName());

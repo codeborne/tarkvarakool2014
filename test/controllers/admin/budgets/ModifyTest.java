@@ -129,7 +129,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Goal updatedGoal = (Goal) getUpdatedEntity();
+    Goal updatedGoal = getUpdatedEntity();
     assertTrue(controller.errorsList.isEmpty());
     assertTrue(updatedGoal.getYearlyBudgets().containsKey(2015));
     Assert.assertEquals((Long) 555L, updatedGoal.getYearlyBudgets().get(2015));
@@ -148,7 +148,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Goal updatedGoal = (Goal) getUpdatedEntity();
+    Goal updatedGoal = getUpdatedEntity();
     assertTrue(controller.errorsList.isEmpty());
     assertTrue(updatedGoal.getYearlyBudgets().containsKey(2017));
     Assert.assertEquals(null, updatedGoal.getYearlyBudgets().get(2015));

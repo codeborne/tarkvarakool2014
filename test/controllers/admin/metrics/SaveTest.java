@@ -253,7 +253,7 @@ public class SaveTest extends ControllerTest<Save> {
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
 
     assertRender(controller.post());
-    Metric updatedMetric = (Metric) getUpdatedEntity();
+    Metric updatedMetric = getUpdatedEntity();
 
     assertEquals("metric", updatedMetric.getName());
     assertEquals("%", updatedMetric.getUnit());

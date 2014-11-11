@@ -61,31 +61,31 @@ public abstract class ControllerTest<T extends Controller> {
     assertEquals(Render.class, result.getClass());
   }
 
-  public Object getDeletedEntity() {
+  public <E> E getDeletedEntity() {
     return getSingleItem(getDeletedEntities());
   }
 
-  public Object getSavedEntity() {
+  public <E> E getSavedEntity() {
     return getSingleItem(getSavedEntities());
   }
 
-  public Object getUpdatedEntity() {
+  public <E> E getUpdatedEntity() {
     return getSingleItem(getUpdatedEntities());
   }
 
-  public List<Object> getDeletedEntities() {
+  public <E> List<E> getDeletedEntities() {
     return HibernateMockHelper.getDeletedEntities(hibernate);
   }
 
-  public List<Object> getSavedEntities() {
+  public <E> List<E> getSavedEntities() {
     return HibernateMockHelper.getSavedEntities(hibernate);
   }
 
-  public List<Object> getUpdatedEntities() {
-    return HibernateMockHelper.getUpdatedEntities(hibernate);
+  public <E> List<E> getUpdatedEntities() {
+    return HibernateMockHelper.<E>getUpdatedEntities(hibernate);
   }
 
-  private Object getSingleItem(List<Object> list) {
+  private <E> E getSingleItem(List<E> list) {
     assertEquals(1, list.size());
     return list.get(0);
   }
