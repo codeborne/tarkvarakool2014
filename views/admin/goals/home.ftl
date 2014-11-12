@@ -1,6 +1,9 @@
 <@html>
 <div class="panel panel-default">
   <div class="panel-heading">
+    <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/charts'">
+      <span class="glyphicon glyphicon-stats"></span>
+    </button>
     <h4 class="name"><@m'goals'/></h4>
   </div>
   <div class="panel-body">

@@ -85,6 +85,7 @@ body {
 
 }
 
+
 .action-button .saveGoalButton:hover {
   color: green;
   background-color: transparent;
@@ -95,7 +96,7 @@ body {
   background-color: transparent;
 }
 
-.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort {
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button {
   background-color: Transparent;
   border: none;
   cursor: pointer;
@@ -104,7 +105,7 @@ body {
   font-size: 16px;
 }
 
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .translationButton:hover, .glyphicon-sort:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .translationButton:hover, .glyphicon-sort:hover, .chart-button:hover {
   color: #ffcc00;
   background-color: transparent;
 }
@@ -121,6 +122,12 @@ body {
   background: url(/images/bottom.png) repeat scroll 0px 100% transparent;
   height: 295px;
   border-radius: 0px;
+}
+
+
+.chart-button {
+  float: right;
+  font-size: 30px;
 }
 
 .hand-pointer {

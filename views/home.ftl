@@ -3,6 +3,9 @@
     <#list goals as goal>
     <div class="panel panel-default goal">
       <div class="panel-heading">
+            <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/charts'">
+              <span class="glyphicon glyphicon-stats"></span>
+            </button>
         <h4 class="name"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>Translation missing</i></#if></#if></h4>
         <div style="white-space: pre;"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>Translation missing</i></#if></#if></div>
         <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
