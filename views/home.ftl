@@ -30,11 +30,11 @@
                   <#elseif language == 'en'>${metric.engName!"Translation missing"} <#if metric.engUnit?has_content>(${metric.engUnit})</#if></#if>
                 </td>
 
-                <td class="publicDescription"><#if language == 'et'>${metric.publicDescription}<#elseif language == 'en'>${metric.engPublicDescription!"Translation missing"}</#if></td>
+                <td class="publicDescription"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'>${metric.engPublicDescription!"Translation missing"}</#if></td>
                 <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
-                <td class="commantOnStartLevel">${metric.commentOnStartLevel}</td>
+                <td class="commantOnStartLevel">${metric.commentOnStartLevel!""}</td>
                 <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
-                <td class="commentOnTargetLevel">${metric.commentOnTargetLevel}</td>
+                <td class="commentOnTargetLevel">${metric.commentOnTargetLevel!""}</td>
                 <td class="infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}"
                                                                              target="_blank"><span
                   class="glyphicon glyphicon-info-sign"></span></a></#if></td>

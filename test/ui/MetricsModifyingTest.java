@@ -46,21 +46,21 @@ public class MetricsModifyingTest extends UITest {
   @Test
   public void adminClicksOnModifyButton() {
     $(".name").$("input").shouldHave(value("Some metric"));
-    $(".publicDescription").$("input").shouldHave(value("abc"));
+    $(".publicDescription").$("textarea").shouldHave(value("abc"));
   }
 
   @Test
   public void adminModifiesMetric(){
     $(".name").$("input").shouldHave(value("Some metric"));
     $(".unit").$("input").shouldHave(value("%"));
-    $(".publicDescription").$("input").shouldHave(value("abc"));
-    $(".privateDescription").$("input").shouldHave(value("def"));
+    $(".publicDescription").$("textarea").shouldHave(value("abc"));
+    $(".privateDescription").$("textarea").shouldHave(value("def"));
     $(".startLevel").$("input").shouldHave(value("10"));
     $(".commentOnStartLevel").$("input").shouldHave(value("ghi"));
     $(".targetLevel").$("input").shouldHave(value("10"));
     $(".commentOnTargetLevel").$("input").shouldHave(value("jkl"));
     $(".infoSource").$("input").shouldHave(value("http://"));
-    $(".institutionToReport").$("input").shouldHave(value("pqr"));
+    $(".institutionToReport").$("textarea").shouldHave(value("pqr"));
 
 
     $(".name").$("input").setValue("Metric");

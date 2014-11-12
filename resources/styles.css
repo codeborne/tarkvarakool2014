@@ -44,6 +44,18 @@ body {
 
 }
 
+#metrics-table tbody {
+  border: none;
+}
+
+#metrics-table tbody:nth-child(odd) {
+  background: rgba(240, 240, 240, 0.5);
+}
+
+#metrics-table tbody:hover {
+  background: rgba(240, 240, 240, 1);
+}
+
 .panel-heading {
   padding: 25px 40px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
