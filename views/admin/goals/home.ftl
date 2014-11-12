@@ -28,11 +28,11 @@
             </td>
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
-              <textarea class="nameValue form-control" name="name" maxlength="255" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
+              <textarea class="value form-control" name="name" maxlength="255" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
             </td>
             <td class="commentInTable">
               <span class="value">${goal.comment!""}</span>
-              <textarea class="commentValue form-control" name="comment" maxlength="255" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
+              <textarea class="value form-control" name="comment" maxlength="255" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
             </td>
             <td class="budgetInTable">
               <span class="value">${goal.budget?c}</span>
@@ -52,10 +52,10 @@
 
             <td class="actions">
               <div class="action-button">
-                <input type="hidden" class="goalIdValue" value="${goal.id?c}" name="id">
-                <input type="button " class="saveGoalButton value btn btn-default btn-sm" value=""
+                <input type="hidden" class="value" value="${goal.id?c}" name="id">
+                <input type="button " title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
                        style="display: none" data-action="save">
-                <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
+                <input type="button" title="<@m'cancel'/>" class="cancelGoalButton value btn btn-default btn-sm"
                        onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
                        data-action="save">
               </div>
@@ -70,18 +70,22 @@
 
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
+                <span class="value">
                 <button type="submit" class="translationButton btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-globe"></span>
                 </button>
+                  </span>
               </form>
 
               <#if !goal.metrics?has_content>
                 <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                       class="action-button">
                   <input type="hidden" name="id" value="${goal.id?c}"/>
+                  <span class="value">
                   <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
+                  </span>
                 </form>
               </#if>
 
@@ -92,10 +96,10 @@
       <tr>
         <td></td>
         <td>
-          <textarea class="nameValue form-control" name="name" maxlength="255" placeholder="<@m'goal'/>"><#if name??> ${name}</#if></textarea>
+          <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'goal'/>"><#if name??> ${name}</#if></textarea>
           </td>
         <td>
-          <textarea class="commentValue form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>"><#if comment??> ${comment}</#if></textarea>
+          <textarea class="value form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>"><#if comment??> ${comment}</#if></textarea>
           </td>
         <td><input type="number" class="value form-control" placeholder="<@m'budget'/>" name="budget"
                    <#if budget?? && (budget>=0)>value=${budget?c}</#if>></td>
@@ -126,31 +130,25 @@
 
     var saveClickHandler = function (event) {
       var button = $(event.target);
-      var budgetValue = button.closest('tr').find('input.value').val();
-      var goalIdValue = button.closest('tr').find('input.goalIdValue').val();
-      var nameValue = button.closest('tr').find('textarea.nameValue').val();
-      var commentValue = button.closest('tr').find('textarea.commentValue').val();
-
-
-      $.post(button.data("action"), {name: nameValue, comment:commentValue, budget: budgetValue, id: goalIdValue}, responseHandler);
+      var values = button.closest('tr').find('.value');
+      $.post(button.data("action"), values.serialize(), responseHandler);
     };
 
     $('.saveGoalButton').click(saveClickHandler);
 
     var modifyClickHandler = function (event) {
-      $("input.value").hide();
-      $("textarea.nameValue").hide();
-      $("textarea.commentValue").hide();
+      $(".value").hide();
       $("span.value").show();
       var row = $(event.target).closest('tr');
       row.find("span.value").hide();
       row.find("input.value").show();
-      row.find("textarea.nameValue").show();
-      row.find("textarea.commentValue").show();
+      row.find("textarea.value").show();
     };
 
     $('.modifyButton').click(modifyClickHandler);
   });
+
+
 </script>
 
 <script>

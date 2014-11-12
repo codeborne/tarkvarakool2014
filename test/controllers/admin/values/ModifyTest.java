@@ -4,7 +4,6 @@ import controllers.ControllerTest;
 import controllers.UserAwareController;
 import model.Goal;
 import model.Metric;
-import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.junit.Assert;
 import org.junit.Before;
@@ -12,8 +11,8 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -22,12 +21,6 @@ public class ModifyTest extends ControllerTest<Modify> {
 
   @Before
   public void setUp() throws Exception {
-    when(session.getAttribute("username")).thenReturn("Some username");
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
-    when(criteria.createCriteria(anyString())).thenReturn(criteria);
-    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -38,6 +31,9 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2015;
     controller.value = new BigDecimal(777);
     controller.isForecast = false;
+
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
+      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
 
     assertRender(controller.post());
 
@@ -58,6 +54,9 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.value = new BigDecimal(777);
     controller.isForecast = true;
 
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
+      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
+
     assertRender(controller.post());
 
     Metric savedMetric = getUpdatedEntity();
@@ -77,6 +76,9 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.value = null;
     controller.isForecast = false;
 
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
+      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
+
     assertRender(controller.post());
 
     Metric savedMetric = getUpdatedEntity();
@@ -95,6 +97,9 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2015;
     controller.value = null;
     controller.isForecast = true;
+
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
+      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
 
     assertRender(controller.post());
 
@@ -234,13 +239,11 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.metricId = 21L;
     controller.year = 2016;
     controller.value = new BigDecimal(744);
+    controller.isForecast = true;
 
     when(session.getAttribute("username")).thenReturn("Some username");
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
-    when(criteria.createCriteria(anyString())).thenReturn(criteria);
-    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.list()).thenReturn(new ArrayList<Metric>());
+    when(hibernate.createCriteria(Goal.class).add(any(Criterion.class)).list()).thenReturn(new ArrayList<Metric>());
+
 
     assertRender(controller.post());
 
