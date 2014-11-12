@@ -179,7 +179,6 @@ public class SaveTest extends ControllerTest<Save> {
     controller.commentOnTargetLevel = "\r d";
     controller.infoSource = "http://";
     controller.institutionToReport = "f   ";
-    controller.goalId = 5L;
     controller.startLevel = 5.0;
     controller.targetLevel = 6.0;
     Criteria criteria = mock(Criteria.class);
@@ -201,8 +200,8 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("http://", savedMetric.getInfoSource());
     assertEquals("f", savedMetric.getInstitutionToReport());
     assertEquals((Double) 8.0, savedMetric.getOrderNumber());
-    assertEquals((Double) 5.0,savedMetric.getStartLevel());
-    assertEquals((Double) 6.0,savedMetric.getTargetLevel());
+    assertEquals((Double) 5.0, savedMetric.getStartLevel());
+    assertEquals((Double) 6.0, savedMetric.getTargetLevel());
     assertEquals(false, savedMetric.getIsPublic());
   }
 
