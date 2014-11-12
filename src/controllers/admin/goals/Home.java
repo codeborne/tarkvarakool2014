@@ -34,7 +34,7 @@ public class Home extends UserAwareController {
     if (sequenceNumber > goals.size()) {
       sequenceNumber = goals.size();
     }
-    if (previousSequenceNumber != sequenceNumber) {
+    if (!previousSequenceNumber.equals(sequenceNumber)) {
       goalToBeChanged.setSequenceNumber(0);
       hibernate.update(goalToBeChanged);
       hibernate.flush();

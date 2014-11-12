@@ -2,13 +2,11 @@ package controllers.admin.goals;
 
 import controllers.ControllerTest;
 import model.Goal;
-import org.hibernate.Criteria;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
@@ -135,9 +133,7 @@ public class SaveTest extends ControllerTest<Save> {
   public void postWithDuplicateGoalThrowsConstraintViolation() {
     controller.name = "asd";
     controller.budget = 123;
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", 1000), new Goal("goal", 100)));
+    when(hibernate.createCriteria(Goal.class).list()).thenReturn(asList(new Goal("some goal", 1000), new Goal("goal", 100)));
 
     doThrow(mock(ConstraintViolationException.class)).when(hibernate).save(any(Goal.class));
 
@@ -153,9 +149,7 @@ public class SaveTest extends ControllerTest<Save> {
     controller.name = "asd";
     controller.budget = 123;
     controller.comment = "";
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", 1000), new Goal("goal", 100)));
+    when(hibernate.createCriteria(Goal.class).list()).thenReturn(asList(new Goal("some goal", 1000), new Goal("goal", 100)));
 
     assertRender(controller.post());
 
@@ -172,9 +166,7 @@ public class SaveTest extends ControllerTest<Save> {
     controller.name = "\n \r\n ab cd \n \r\n ";
     controller.comment = "\ntest\n  ";
     controller.budget = 123;
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", 1000)));
+    when(hibernate.createCriteria(Goal.class).list()).thenReturn(asList(new Goal("some goal", 1000)));
 
     assertRender(controller.post());
 
@@ -210,11 +202,9 @@ public class SaveTest extends ControllerTest<Save> {
     controller.name = "kool";
     controller.budget = 41;
     controller.comment = "maja";
-
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Goal.class)).thenReturn(criteria);
     when(hibernate.get(Goal.class, 4L )).thenReturn(null);
-    when(criteria.list()).thenReturn(Arrays.asList(new Goal("some goal", 1000)));
+
+    when(hibernate.createCriteria(Goal.class).list()).thenReturn(asList(new Goal("some goal", 1000)));
 
     assertRender(controller.post());
     Goal goal = getSavedEntity();

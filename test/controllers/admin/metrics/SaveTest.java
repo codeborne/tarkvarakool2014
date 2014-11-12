@@ -3,7 +3,6 @@ package controllers.admin.metrics;
 import controllers.ControllerTest;
 import model.Goal;
 import model.Metric;
-import org.hibernate.Criteria;
 import org.hibernate.criterion.AggregateProjection;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.exception.ConstraintViolationException;
@@ -155,12 +154,7 @@ public class SaveTest extends ControllerTest<Save> {
   public void postWithDuplicateGoalThrowsConstraintViolation() {
     controller.name = "asd";
     doThrow(mock(ConstraintViolationException.class)).when(hibernate).save(any(Metric.class));
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
-    when(criteria.createCriteria(anyString())).thenReturn(criteria);
-    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
-    when(criteria.uniqueResult()).thenReturn(6.2);
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).setProjection(any(AggregateProjection.class)).uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
 
@@ -181,12 +175,7 @@ public class SaveTest extends ControllerTest<Save> {
     controller.institutionToReport = "f   ";
     controller.startLevel = 5.0;
     controller.targetLevel = 6.0;
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
-    when(criteria.createCriteria(anyString())).thenReturn(criteria);
-    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
-    when(criteria.uniqueResult()).thenReturn(6.2);
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).setProjection(any(AggregateProjection.class)).uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
     Metric savedMetric = (Metric) getSavedEntity();
@@ -210,12 +199,7 @@ public class SaveTest extends ControllerTest<Save> {
   public void postIfNewMetricAddedWithNameOnly() {
     controller.name = "metric";
 
-    Criteria criteria = mock(Criteria.class);
-    when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
-    when(criteria.createCriteria(anyString())).thenReturn(criteria);
-    when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.setProjection(any(AggregateProjection.class))).thenReturn(criteria);
-    when(criteria.uniqueResult()).thenReturn(6.2);
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).setProjection(any(AggregateProjection.class)).uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
 
