@@ -53,9 +53,9 @@
             <td class="actions">
               <div class="action-button">
                 <input type="hidden" class="value" value="${goal.id?c}" name="id">
-                <input type="button " class="saveGoalButton value btn btn-default btn-sm" value=""
+                <input type="button " title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
                        style="display: none" data-action="save">
-                <input type="button" class="cancelGoalButton value btn btn-default btn-sm"
+                <input type="button" title="<@m'cancel'/>" class="cancelGoalButton value btn btn-default btn-sm"
                        onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
                        data-action="save">
               </div>
@@ -70,18 +70,22 @@
 
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
+                <span class="value">
                 <button type="submit" class="translationButton btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-globe"></span>
                 </button>
+                  </span>
               </form>
 
               <#if !goal.metrics?has_content>
                 <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                       class="action-button">
                   <input type="hidden" name="id" value="${goal.id?c}"/>
+                  <span class="value">
                   <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
+                  </span>
                 </form>
               </#if>
 
