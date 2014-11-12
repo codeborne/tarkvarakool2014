@@ -1,5 +1,4 @@
 <@html>
-<br><br>
   <#if loggedInUsername??>
   <p><@m'loggedIn'/> ${loggedInUsername}</p>
   <button class="btn btn-default btn-sm" onclick="location='/admin/logout'"><@m'exit'/> </button>

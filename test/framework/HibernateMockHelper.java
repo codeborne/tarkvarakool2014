@@ -10,21 +10,21 @@ import static org.mockito.Mockito.verify;
 
 public class HibernateMockHelper {
 
-  public static List<Object> getDeletedEntities(Session hibernateMock) {
+  public static <E> List<E> getDeletedEntities(Session hibernateMock) {
     ArgumentCaptor<Object> captor = ArgumentCaptor.forClass(Object.class);
     verify(hibernateMock).delete(captor.capture());
-    return captor.getAllValues();
+    return (List<E>) captor.getAllValues();
   }
 
-  public static List<Object> getSavedEntities(Session hibernateMock) {
+  public static <E> List<E> getSavedEntities(Session hibernateMock) {
     ArgumentCaptor<Object> captor = ArgumentCaptor.forClass(Object.class);
     verify(hibernateMock).save(captor.capture());
-    return captor.getAllValues();
+    return (List<E>) captor.getAllValues();
   }
 
-  public static List<Object> getUpdatedEntities(Session hibernateMock) {
+  public static <E> List<E> getUpdatedEntities(Session hibernateMock) {
     ArgumentCaptor<Object> captor = ArgumentCaptor.forClass(Object.class);
     verify(hibernateMock, atLeastOnce()).update(captor.capture());
-    return captor.getAllValues();
+    return (List<E>) captor.getAllValues();
   }
 }

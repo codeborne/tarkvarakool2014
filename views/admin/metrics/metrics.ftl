@@ -1,5 +1,4 @@
 <@html>
-<br><br>
 <form method="get">
   <input type="hidden" value="${goal.id?c}" name="goalID">
 </form>
@@ -198,8 +197,7 @@
   </div>
 </div>
 <span id="errors"></span>
-<button type="submit" class="blueButton goBackButton btn btn-default btn-sm" onclick="location='/admin/goals'">
-  <span><@m'goToMainPage'/></span></button>
+<button type="submit" class="blueButton goBackButton btn btn-default btn-sm" onclick="location='/admin/goals'"><span><@m'goToMainPage'/></span></button>
 
 
 <script>
@@ -250,7 +248,6 @@
       $("input.nameValue").hide();
       $("input.isPublicValue").hide();
       $("span.value").show();
-
       var row = $(event.target).closest('tbody');
       row.find("span.value").hide();
       row.find("input.value").hide()

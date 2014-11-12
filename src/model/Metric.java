@@ -20,9 +20,9 @@ public class Metric {
 
   private String publicDescription;
   private String privateDescription;
-  private Integer startLevel;
+  private Double startLevel;
   private String commentOnStartLevel;
-  private Integer targetLevel;
+  private Double targetLevel;
   private String commentOnTargetLevel;
   private String infoSource;
   private String institutionToReport;
@@ -52,8 +52,8 @@ public class Metric {
   private Metric() {
   }
 
-  public Metric(Goal goal, String name, String unit, String publicDescription, String privateDescription, Integer startLevel,
-                String commentOnStartLevel, Integer targetLevel, String commentOnTargetLevel,
+  public Metric(Goal goal, String name, String unit, String publicDescription, String privateDescription, Double startLevel,
+                String commentOnStartLevel, Double targetLevel, String commentOnTargetLevel,
                 String infoSource, String institutionToReport, Double orderNumber, Boolean isPublic) {
     this.goal = goal;
     this.name = name;
@@ -90,7 +90,7 @@ public class Metric {
     return privateDescription;
   }
 
-  public Integer getStartLevel() {
+  public Double getStartLevel() {
     return startLevel;
   }
 
@@ -98,7 +98,7 @@ public class Metric {
     return commentOnStartLevel;
   }
 
-  public Integer getTargetLevel() {
+  public Double getTargetLevel() {
     return targetLevel;
   }
 
@@ -142,7 +142,7 @@ public class Metric {
     this.privateDescription = privateDescription;
   }
 
-  public void setStartLevel(Integer startLevel) {
+  public void setStartLevel(Double startLevel) {
     this.startLevel = startLevel;
   }
 
@@ -150,7 +150,7 @@ public class Metric {
     this.commentOnStartLevel = commentOnStartLevel;
   }
 
-  public void setTargetLevel(Integer targetLevel) {
+  public void setTargetLevel(Double targetLevel) {
     this.targetLevel = targetLevel;
   }
 

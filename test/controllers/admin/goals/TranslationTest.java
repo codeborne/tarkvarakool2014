@@ -21,7 +21,7 @@ public class TranslationTest extends ControllerTest<Translation>{
   public void setUp() throws Exception {
     when(request.getParameterValues("engUnit")).thenReturn(new String[]{"people","%"});
     when(request.getParameterValues("engMetricName")).thenReturn(new String[]{"metric1","metric2"});
-    when(request.getParameterValues("engPublicDescription")).thenReturn(new String[]{"descr1","descr2"});
+    when(request.getParameterValues("engPublicDescription")).thenReturn(new String[]{"descr1",""});
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -111,8 +111,8 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.engName = "goal";
     controller.engComment = "comment";
     Goal goal = new Goal("Eesmark", "kommentaar", 100, 1);
-    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0, null, 0, null, null, null, 1.0, true);
-    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0, null, 0, null, null, null, 1.0, true);
+    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0.0, null, 0.0, null, null, null, 1.0, true);
+    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0.0, null, 0.0, null, null, null, 1.0, true);
     Set<Metric> metrics = new HashSet<>();
     metrics.add(metric1);
     metrics.add(metric2);
@@ -122,7 +122,7 @@ public class TranslationTest extends ControllerTest<Translation>{
 
     assertRender(controller.post());
 
-    Goal updatedGoal = (Goal) getUpdatedEntity();
+    Goal updatedGoal = getUpdatedEntity();
     Metric updatedMetric1 = (Metric)updatedGoal.getMetrics().toArray()[0];
     Metric updatedMetric2 = (Metric)updatedGoal.getMetrics().toArray()[1];
 
@@ -131,6 +131,9 @@ public class TranslationTest extends ControllerTest<Translation>{
     assertEquals("people", updatedMetric1.getEngUnit());
     assertEquals("metric1", updatedMetric1.getEngName());
     assertEquals("descr1", updatedMetric1.getEngPublicDescription());
+    assertEquals("%", updatedMetric2.getEngUnit());
+    assertEquals("metric2", updatedMetric2.getEngName());
+    assertEquals(null, updatedMetric2.getEngPublicDescription());
 
   }
 
@@ -140,8 +143,8 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.engName = "goal";
     controller.engComment = "comment";
     Goal goal = new Goal("Eesmark", "kommentaar", 100, 1);
-    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0, null, 0, null, null, null, 1.0, true);
-    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0, null, 0, null, null, null, 1.0, true);
+    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0.0, null, 0.0, null, null, null, 1.0, true);
+    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0.0, null, 0.0, null, null, null, 1.0, true);
     Set<Metric> metrics = new HashSet<>();
     metrics.add(metric1);
     metrics.add(metric2);

@@ -1,5 +1,4 @@
 <@html>
-<br><br>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 class="name"><@m'goals'/></h4>
@@ -12,8 +11,8 @@
         <th><@m'goal'/></th>
         <th><@m'comment'/></th>
         <th><@m'budget'/></th>
-        <th><@m'metrics'/></th>
-        <th class="actions"><@m'actions'/></th>
+        <th><#if goals?has_content><@m'metrics'/></#if></th>
+        <th class="actions"><#if goals?has_content><@m'actions'/></#if></th>
       </tr>
       </thead>
       <tbody id="sortableGoals">
@@ -29,11 +28,11 @@
             </td>
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
-              <textarea class="nameValue form-control" name="name" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
+              <textarea class="nameValue form-control" name="name" maxlength="255" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
             </td>
             <td class="commentInTable">
               <span class="value">${goal.comment!""}</span>
-              <textarea class="commentValue form-control" name="comment" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
+              <textarea class="commentValue form-control" name="comment" maxlength="255" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
             </td>
             <td class="budgetInTable">
               <span class="value">${goal.budget?c}</span>
@@ -93,15 +92,15 @@
       <tr>
         <td></td>
         <td>
-          <textarea class="nameValue form-control" name="name" placeholder="<@m'goal'/>"><#if name??> ${name}</#if></textarea>
+          <textarea class="nameValue form-control" name="name" maxlength="255" placeholder="<@m'goal'/>"><#if name??> ${name}</#if></textarea>
           </td>
         <td>
-          <textarea class="commentValue form-control" name="comment" placeholder="<@m'comment'/>"><#if comment??> ${comment}</#if></textarea>
+          <textarea class="commentValue form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>"><#if comment??> ${comment}</#if></textarea>
           </td>
         <td><input type="number" class="value form-control" placeholder="<@m'budget'/>" name="budget"
                    <#if budget?? && (budget>=0)>value=${budget?c}</#if>></td>
         <td colspan=3>
-          <input type="button" value="<@m'add'/>" class="blueButton saveGoalButton value btn btn-default btn-sm"
+          <input type="button" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm" id="goalSaveButton"
                  data-action="save">
 
 

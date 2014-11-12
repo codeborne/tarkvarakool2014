@@ -34,7 +34,7 @@ public class GoalsOrderTest extends UITest {
     hibernate.save(new Goal("Eesmark3", "", 103, 3));
     hibernate.save(new Goal("Eesmark4", "", 104, 4));
     hibernate.save(new Goal("Eesmark2", "", 105, 2));
-    hibernate.save(new Metric(goal,"Metric1", "m", "","", 100,"", 1,"","","",1.0, true));
+    hibernate.save(new Metric(goal,"Metric1", "m", "","", 100.0,"", 1.0,"","","",1.0, true));
     open("/admin/goals/home");
 
   }

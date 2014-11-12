@@ -36,14 +36,14 @@ public class Translation extends UserAwareController {
 
       goal = (Goal) hibernate.get(Goal.class, goalId);
       Set<Metric> metrics = goal.getMetrics();
-      goal.setEngName(engName);
-      goal.setEngComment(engComment);
+      goal.setEngName(trimInput(engName));
+      goal.setEngComment(trimInput(engComment));
       int i = 0;
       for(Metric metric : metrics){
-        if(metric.getIsPublic()==true) {
-          metric.setEngName(engMetricName[i]);
-          metric.setEngUnit(engUnit[i]);
-          metric.setEngPublicDescription(engPublicDescription[i]);
+        if(metric.getIsPublic()) {
+          metric.setEngName(trimInput(engMetricName[i]));
+          metric.setEngUnit(trimInput(engUnit[i]));
+          metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
           i++;
         }
       }
@@ -52,6 +52,16 @@ public class Translation extends UserAwareController {
     }
 
     return render();
+  }
+
+  public String trimInput(String input){
+    input = input.trim();
+    if("".equals(input)){
+      return null;
+    }
+    else {
+      return input;
+    }
   }
 
   public void checkErrors() {

@@ -29,11 +29,11 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Mood1", "", "", "", 100, "", 150, "", "", "", 1.0, true));
-    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200, "", 220, "", "", "", 2.0, true));
-    hibernate.save(new Metric(goal2, "Mood3", "", "", "", 300, "", 340, "", "", "", 1.0, true));
-    hibernate.save(new Metric(goal2, "Mood4", "", "", "", 400, "", 500, "", "", "", 2.0, true));
-    hibernate.save(new Metric(goal2, "Mood5", "", "", "", 400, "", 500, "", "", "", 2.1, false));
+    hibernate.save(new Metric(goal1, "Mood1", "", "", "", 100.0, "", 150.0, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200.0, "", 220.0, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal2, "Mood3", "", "", "", 300.0, "", 340.0, "", "", "", 1.0, true));
+    hibernate.save(new Metric(goal2, "Mood4", "", "", "", 400.0, "", 500.0, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal2, "Mood5", "", "", "", 400.0, "", 500.0, "", "", "", 2.1, false));
 
     $(".switch-button.active").click();
 
@@ -66,7 +66,7 @@ public class HomeViewValuesTest extends UITest {
   public void userShouldSeeMetricValuesPerYear() throws Exception {
     Goal goal = new Goal("Eesmark", "", 10, 1);
     hibernate.save(goal);
-    Metric metric = new Metric(goal, "Moodik", "", "", "", 0, "", 0, "", "", "", 1.0, true);
+    Metric metric = new Metric(goal, "Moodik", "", "", "", 0.0, "", 0.0, "", "", "", 1.0, true);
     metric.getValues().put(2014, new BigDecimal(12));
     metric.getValues().put(2015, new BigDecimal(13));
     metric.getValues().put(2016, new BigDecimal(14));

@@ -27,7 +27,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Metric.class)).thenReturn(criteria);
     when(criteria.createCriteria(anyString())).thenReturn(criteria);
     when(criteria.add(any(Criterion.class))).thenReturn(criteria);
-    when(criteria.list()).thenReturn(Arrays.asList(new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777, "", 55, "", "", "abc", 1.0, true)));
+    when(criteria.list()).thenReturn(Arrays.asList(new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -41,7 +41,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getValues().get(controller.year));
@@ -60,7 +60,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));
@@ -79,7 +79,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getValues().get(controller.year));
@@ -98,7 +98,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getUpdatedEntity();
+    Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
     assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));

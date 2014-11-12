@@ -12,13 +12,14 @@ import java.util.List;
 
 import static framework.Messages.DEFAULT;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public abstract class ControllerTest<T extends Controller> {
 
   protected HttpSession session = mock(HttpSession.class);
-  protected Session hibernate = mock(Session.class);
+  protected Session hibernate = mock(Session.class, RETURNS_DEEP_STUBS);
   protected Transaction transaction = mock(Transaction.class);
   protected HttpServletRequest request = mock(HttpServletRequest.class);
   protected Messages.Resolver messages = new Messages(false).getResolverFor(DEFAULT);
@@ -61,31 +62,31 @@ public abstract class ControllerTest<T extends Controller> {
     assertEquals(Render.class, result.getClass());
   }
 
-  public Object getDeletedEntity() {
+  public <E> E getDeletedEntity() {
     return getSingleItem(getDeletedEntities());
   }
 
-  public Object getSavedEntity() {
+  public <E> E getSavedEntity() {
     return getSingleItem(getSavedEntities());
   }
 
-  public Object getUpdatedEntity() {
+  public <E> E getUpdatedEntity() {
     return getSingleItem(getUpdatedEntities());
   }
 
-  public List<Object> getDeletedEntities() {
+  public <E> List<E> getDeletedEntities() {
     return HibernateMockHelper.getDeletedEntities(hibernate);
   }
 
-  public List<Object> getSavedEntities() {
+  public <E> List<E> getSavedEntities() {
     return HibernateMockHelper.getSavedEntities(hibernate);
   }
 
-  public List<Object> getUpdatedEntities() {
-    return HibernateMockHelper.getUpdatedEntities(hibernate);
+  public <E> List<E> getUpdatedEntities() {
+    return HibernateMockHelper.<E>getUpdatedEntities(hibernate);
   }
 
-  private Object getSingleItem(List<Object> list) {
+  private <E> E getSingleItem(List<E> list) {
     assertEquals(1, list.size());
     return list.get(0);
   }

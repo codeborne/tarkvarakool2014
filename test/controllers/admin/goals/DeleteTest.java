@@ -23,7 +23,7 @@ public class DeleteTest extends ControllerTest<Delete> {
     when(hibernate.get(Goal.class, 5L)).thenReturn(goal);
     doThrow(mock(HibernateException.class)).when(hibernate).delete(goal);
 
-  assertRender(controller.post());
+    assertRender(controller.post());
   }
 
   @Test
@@ -47,12 +47,11 @@ public class DeleteTest extends ControllerTest<Delete> {
 
     assertRedirect(Home.class, controller.post());
 
-    List<Object> updatedGoals = getUpdatedEntities();
+    List<Goal> updatedGoals = getUpdatedEntities();
 
     assertTrue(updatedGoals.size() == 2);
 
-    for (Object goal : updatedGoals) {
-      Goal updatedGoal = (Goal) goal;
+    for (Goal updatedGoal : updatedGoals) {
       verify(hibernate).update(updatedGoal);
       if ("third goal".equals(updatedGoal.getName())) {
         assertEquals(2, (int) updatedGoal.getSequenceNumber());
@@ -64,5 +63,4 @@ public class DeleteTest extends ControllerTest<Delete> {
 
     verify(hibernate).delete(deletableGoal);
   }
-
 }

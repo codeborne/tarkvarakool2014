@@ -21,9 +21,9 @@ public class Save extends UserAwareController {
   public String unit;
   public String publicDescription;
   public String privateDescription;
-  public Integer startLevel;
+  public Double startLevel;
   public String commentOnStartLevel;
-  public Integer targetLevel;
+  public Double targetLevel;
   public String commentOnTargetLevel;
   public String infoSource;
   public String institutionToReport;
