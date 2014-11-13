@@ -62,7 +62,7 @@
 
               <div class="action-button">
               <span class="value">
-                <button type="button" class="modifyButton btn btn-default btn-sm">
+                <button type="button" title="<@m'modify'/>" class="modifyButton btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-pencil"></span>
                 </button>
               </span>
@@ -71,7 +71,7 @@
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
                 <span class="value">
-                <button type="submit" class="translationButton btn btn-default btn-sm">
+                <button type="submit" title="<@m'translate'/>" class="translationButton btn btn-default btn-sm">
                   <span class="glyphicon glyphicon-globe"></span>
                 </button>
                   </span>
@@ -82,7 +82,7 @@
                       class="action-button">
                   <input type="hidden" name="id" value="${goal.id?c}"/>
                   <span class="value">
-                  <button class="deleteButton" type="submit" class="btn btn-default btn-sm">
+                  <button class="deleteButton" title="<@m'delete'/>" type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
                   </button>
                   </span>
