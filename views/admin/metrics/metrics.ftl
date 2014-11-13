@@ -139,7 +139,7 @@
 
             <div class="action-button">
              <span class="value">
-              <button class="modifyButton" type="button" class="btn btn-default btn-sm">
+              <button class="modifyButton" title="<@m'modify'/>" type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
              </span>
@@ -150,7 +150,7 @@
               <input type="hidden" value="${goal.id?c}" name="goalId">
               <input type="hidden" name="id" value="${metric.id?c}"/>
               <span class="value">
-              <button class="deleteButton " type="submit" class="btn btn-default btn-sm">
+              <button class="deleteButton " title="<@m'delete'/>" type="submit" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
               </span>
