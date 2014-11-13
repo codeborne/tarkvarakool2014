@@ -10,7 +10,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
@@ -55,7 +54,7 @@ public class MetricsAddingTest extends UITest {
     $(".addMetric").$(By.name("name")).setValue("Koer");
     $(".saveGoalButton").click();
 
-    assertEquals("Koer", $$("tbody.metric").get(0).$(".name").getText());
+    assertEquals("Koer", $$("tr.metric").get(0).$(".name").getText());
   }
 
 
@@ -76,9 +75,9 @@ public class MetricsAddingTest extends UITest {
 
     $(".saveGoalButton").click();
 
-    $$("tbody.metric").shouldHaveSize(1);
+    $$("tr.metric").shouldHaveSize(1);
 
-    SelenideElement row = $$("tbody.metric").get(0);
+    SelenideElement row = $$("tr.metric").get(0);
 
     row.$(".name").shouldHave(text("Koer"));
     row.$(".unit").shouldHave(text("%"));
@@ -88,7 +87,7 @@ public class MetricsAddingTest extends UITest {
     row.$(".commentOnStartLevel").shouldHave(text("blahblah"));
     row.$(".targetLevel").shouldHave(text("1"));
     row.$(".commentOnTargetLevel").shouldHave(text("iejoja"));
-    row.$(".infoSource").$(".glyphicon-info-sign").shouldBe(visible);
+    row.$(".infoSource").shouldHave(text("http://"));
     row.$(".institutionToReport").shouldHave(text("koht"));
 
 
