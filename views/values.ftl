@@ -4,7 +4,7 @@
   <div class="panel panel-default">
   <div class="goal">
     <div class="panel-heading">
-      <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/valuescharts'">
+      <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/charts'">
         <span class="glyphicon glyphicon-stats"></span>
       </button>
       <h4 class="name"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>Translation missing</i></#if></#if></h4>

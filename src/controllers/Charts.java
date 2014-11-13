@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 import static org.hibernate.criterion.Order.asc;
 
-public class Valuescharts extends UserAwareController {
+public class Charts extends UserAwareController {
 
 
   public java.util.List<Goal> goals = new ArrayList<>();

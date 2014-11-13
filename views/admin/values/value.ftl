@@ -79,6 +79,9 @@
 <div class="panel panel-default">
   <div class="goal">
 <div class="panel-heading">
+  <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/admin/goals/charts'">
+    <span class="glyphicon glyphicon-stats"></span>
+  </button>
   <#if goal_index ==0>
     <span class="forecast-indicator"><@m'estimatedValue'/></span><br>
   <br>
