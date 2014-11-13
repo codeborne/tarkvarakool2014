@@ -146,6 +146,12 @@ tr.metric .glyphicon-sort{
   font-size: 30px;
 }
 
+#chart{
+  width: 900px;
+  height: 400px;
+  margin:auto
+}
+
 
 .hand-pointer {
   cursor: pointer;

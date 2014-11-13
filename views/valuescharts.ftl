@@ -9,9 +9,9 @@
           <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
         </div>
       </div>
-    </#list>
-    <div class="panel-body"id="chart"></div>
+      <div class="panel-body"id="chart"></div>
     </div>
+    </#list>
   </#if>
 
 <script>
