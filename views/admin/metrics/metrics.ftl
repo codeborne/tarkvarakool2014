@@ -46,22 +46,19 @@
         <li>
           <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
           <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
-          <input class="value form-control" name="name" maxlength="255" value="${metric.name}" style="display: none;">
+          <textarea class="value form-control" name="name" maxlength="255" style="display: none;">${metric.name}</textarea>
         </li>
 
         <li>
           <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
           <span class="value publicDescription">${metric.publicDescription}</span>
-          <input class="value form-control" name="publicDescription" maxlength="255" value="${metric.publicDescription}"
-                 style="display: none;">
+          <textarea class="value form-control" name="publicDescription" maxlength="255" style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
         </li>
 
         <li>
           <span class="labels labelsStyle"><@m'privateDescription'/>: </span>
           <span class="value privateDescription">${metric.privateDescription}</span>
-          <input class="value form-control" name="privateDescription" maxlength="255"
-                 value="${metric.privateDescription}"
-                 style="display: none;">
+          <textarea class="value form-control" name="privateDescription" maxlength="255" style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
         </li>
 
         <li>
@@ -86,7 +83,7 @@
                    style="display: none;">
           </div>
           <div>
-            <span class="labels labelsStyle"> &nbsp; &nbsp; <@m'targetLevel'/>: </span>
+            <span class="labels labelsStyle"> &nbsp; &nbsp;<@m'targetLevel'/>: </span>
             <#if metric.targetLevel??>
               <span class="value targetLevel">${metric.targetLevel?c}</span>
               <span class="value unit">${metric.unit}</span>
@@ -94,7 +91,7 @@
                 <#if metric.commentOnTargetLevel?length!=0>(${metric.commentOnTargetLevel})</#if>
               </span>
             <#else>
-                   <span class="value targetLevel">N/A</span>
+              <span class="value targetLevel">N/A</span>
             </#if>
             <input class="value form-control" name="targetLevel" type="number"
                    <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if> style="display: none;">
@@ -184,21 +181,17 @@
     <ul>
       <li>
         <span class="addLabel"><@m'metric'/>: </span>
-        <input name="name" class="value form-control" maxlength="255" placeholder="<@m'metric'/>" value="${name!""}">
+        <textarea name="name" class="value form-control" maxlength="255" placeholder="<@m'metric'/>">${name!""}</textarea>
       </li>
 
       <li>
         <span class="addLabel"><@m'publicDescription'/>: </span>
-        <input name="publicDescription" class="value form-control" maxlength="255"
-               placeholder="<@m'publicDescription'/>"
-               value="${publicDescription!""}">
+        <textarea name="publicDescription" class="value form-control" maxlength="255" placeholder="<@m'publicDescription'/>">${publicDescription!""}</textarea>
       </li>
 
       <li>
         <span class="addLabel"><@m'privateDescription'/>: </span>
-        <input name="privateDescription" class="value form-control" maxlength="255"
-               placeholder="<@m'privateDescription'/>"
-               value="${privateDescription!""}">
+        <textarea name="privateDescription" class="value form-control" maxlength="255" placeholder="<@m'privateDescription'/>">${privateDescription!""}</textarea>
       </li>
 
       <li>
@@ -275,14 +268,14 @@
 
     var saveClickHandler = function (event) {
       var button = $(event.target);
-      var values = button.closest('tr').find('input.value');
+      var values = button.closest('tr').find('.value');
       $.post(button.data("action"), values.serialize(), responseHandler);
     };
 
     $('.saveGoalButton').click(saveClickHandler);
 
     var modifyClickHandler = function (event) {
-      $("input.value").hide();
+      $(".value").hide();
       $("span.value").show();
       var row = $(event.target).closest('tr');
       row.find("span.labels").removeClass("labelsStyle");
@@ -290,6 +283,7 @@
       row.find("span.value").hide();
       row.find("span.labelOnlyShownWhenModifying").show();
       row.find("input.value").show();
+      row.find("textarea.value").show();
     };
 
     $('.modifyButton').click(modifyClickHandler);
