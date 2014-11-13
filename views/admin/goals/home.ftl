@@ -28,7 +28,7 @@
             </td>
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
-              <textarea class="value form-control" name="name" maxlength="255" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
+              <textarea class="value form-control" name="name" maxlength="255" style="display: none">${goal.name}</textarea>
             </td>
             <td class="commentInTable">
               <span class="value">${goal.comment!""}</span>
