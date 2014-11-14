@@ -184,11 +184,8 @@ public class Save extends UserAwareController {
   }
 
   private void checkInfoSource() {
-    if (infoSource!=null && !infoSource.equals("") && !infoSource.contains("http://")&&!infoSource.contains("https://")) {
-      errorsList.add(messages.get("errorInfoSource"));
-    }
     if (errors.containsKey("infoSource")) {
-      errorsList.add(messages.get("errorInfoSource"));
+      errorsList.add(messages.get("error"));
   }}
 
   private void checkInstitutionToReport() {

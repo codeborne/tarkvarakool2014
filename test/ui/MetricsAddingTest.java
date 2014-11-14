@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
@@ -103,6 +104,7 @@ public class MetricsAddingTest extends UITest {
     row.$(".targetLevel").shouldHave(text("1"));
     row.$(".commentOnTargetLevel").shouldHave(text("iejoja"));
     row.$(".infoSource").shouldHave(text("http://"));
+    row.$(".infoSource").$("a").shouldBe(visible);
     row.$(".institutionToReport").shouldHave(text("koht"));
 
 

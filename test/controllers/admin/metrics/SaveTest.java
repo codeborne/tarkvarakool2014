@@ -134,7 +134,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorInfoSource")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 

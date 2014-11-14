@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
@@ -65,11 +66,15 @@ public class MetricsModifyingTest extends UITest {
 
     $$(".metricContent").get(0).$(By.name("name")).setValue("Metric");
     $$(".metricContent").get(0).$(By.name("unit")).setValue("EUR");
+    $$(".metricContent").get(0).$(By.name("infoSource")).setValue("source");
 
     $(".saveGoalButton").click();
 
     assertEquals("Metric", $$("tr.metric").get(0).$(".name").getText());
     assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
+    assertEquals("source", $$("tr.metric").get(0).$(".infoSource").getText());
+    $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
+
   }
 }
 
