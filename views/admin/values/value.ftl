@@ -111,7 +111,7 @@
           <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
           <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
           <#list (minimumYear)..maximumYear as year>
-            <td>
+            <td class="values">
               <div class="measured">
                 <span <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))> class="value greenValue"
                 <#elseif (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))> class="value redValue"<#else>class="value" </#if>
@@ -143,7 +143,7 @@
         <td><@m'moneySpent'/></td>
         <td></td>
         <#list minimumYear..maximumYear as year>
-          <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span title="<@m'modify'/>"
+          <td class="values"><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span title="<@m'modify'/>"
             class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
 
             <form class="metric-value-form" style="display: none;"

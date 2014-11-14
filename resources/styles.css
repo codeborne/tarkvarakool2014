@@ -79,6 +79,9 @@ body {
   text-align: center;
   padding: 200px;
 }
+.startLevel, .targetLevel{
+  text-align: right !important;
+}
 
 .saveGoalButton, .cancelGoalButton {
   height: 35px;
@@ -212,6 +215,11 @@ tr.metric .glyphicon-sort{
 
 .forecasted > span.value, .forecast-indicator {
   color: #333
+}
+
+
+.values{
+  text-align:right !important;
 }
 
 .toprow {
@@ -426,6 +434,8 @@ tr.metric div, .addMetric div {
 
 li span.value {
   padding-right: 10px;
+
+
 }
 
 

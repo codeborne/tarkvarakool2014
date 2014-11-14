@@ -36,7 +36,7 @@
           </td>
           <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
           <#list minimumYear..maximumYear as year>
-            <td>
+            <td class="values">
               <span class="value">
                 <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year))?c)}
                 <#elseif (currentYear>year)>N/A
