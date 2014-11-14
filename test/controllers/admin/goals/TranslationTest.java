@@ -29,7 +29,7 @@ public class TranslationTest extends ControllerTest<Translation>{
   public void postIfGoalIdHasErrors() throws Exception {
     controller.errors.put("goalId",new RuntimeException());
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -38,7 +38,7 @@ public class TranslationTest extends ControllerTest<Translation>{
 
   @Test
   public void postIfGoalIdIsNull() throws Exception {
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -50,7 +50,7 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.goalId = 1L;
     controller.errors.put("engName",new RuntimeException());
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -62,7 +62,7 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.goalId = 1L;
     controller.errors.put("engUnit",new RuntimeException());
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -74,7 +74,7 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.goalId = 1L;
     controller.errors.put("engComment",new RuntimeException());
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -86,7 +86,8 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.goalId = 1L;
     controller.errors.put("engMetricName",new RuntimeException());
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
+
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -98,7 +99,7 @@ public class TranslationTest extends ControllerTest<Translation>{
     controller.goalId = 1L;
     controller.errors.put("engPublicDescription",new RuntimeException());
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -120,7 +121,7 @@ public class TranslationTest extends ControllerTest<Translation>{
 
     when(hibernate.get(Goal.class, 3L)).thenReturn(goal);
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
     Goal updatedGoal = getUpdatedEntity();
     Metric updatedMetric1 = (Metric)updatedGoal.getMetrics().toArray()[0];
@@ -153,7 +154,7 @@ public class TranslationTest extends ControllerTest<Translation>{
     when(hibernate.get(Goal.class, 3L)).thenReturn(goal);
     doThrow(mock(HibernateException.class)).when(hibernate).update(goal);
 
-    assertRender(controller.post());
+    assertRedirect(Home.class, controller.post());
 
   }
 }
