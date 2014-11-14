@@ -79,6 +79,9 @@
 <div class="panel panel-default">
   <div class="goal">
 <div class="panel-heading">
+  <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/admin/goals/charts'">
+    <span class="glyphicon glyphicon-stats"></span>
+  </button>
   <#if goal_index ==0>
     <span class="forecast-indicator"><@m'estimatedValue'/></span><br>
   <br>
@@ -108,7 +111,7 @@
           <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
           <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
           <#list (minimumYear)..maximumYear as year>
-            <td>
+            <td class="values">
               <div class="measured">
                 <span
                   <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))>
@@ -145,7 +148,7 @@
         <td><@m'moneySpent'/></td>
         <td></td>
         <#list minimumYear..maximumYear as year>
-          <td><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span title="<@m'modify'/>"
+          <td class="values"><span class="value">${((goal.yearlyBudgets.get(year))?c)!""}</span> <span title="<@m'modify'/>"
             class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
 
             <form class="metric-value-form" style="display: none;"
