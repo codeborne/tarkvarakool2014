@@ -46,22 +46,26 @@
         <li>
           <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
           <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
-          <textarea class="value form-control" name="name" maxlength="255" style="display: none;">${metric.name}</textarea>
+          <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>" style="display: none;">${metric.name}</textarea>
         </li>
 
         <li>
           <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
           <span class="value publicDescription">${metric.publicDescription}</span>
-          <textarea class="value form-control" name="publicDescription" maxlength="255" style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
+          <textarea class="value form-control" name="publicDescription" maxlength="255" placeholder="<@m'publicDescription'/>" style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
         </li>
 
         <li>
           <span class="labels labelsStyle"><@m'privateDescription'/>: </span>
           <span class="value privateDescription">${metric.privateDescription}</span>
-          <textarea class="value form-control" name="privateDescription" maxlength="255" style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
+          <textarea class="value form-control" name="privateDescription" maxlength="255" placeholder="<@m'privateDescription'/>" style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
         </li>
 
         <li>
+          <div>
+            <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'unit'/>: </span>
+            <input class="value form-control smallInputFields" name="unit" maxlength="255" placeholder="<@m'unit'/>" value="${metric.unit}" style="display: none;">
+          </div>
           <div>
             <span class="labels labelsStyle"><@m'startLevel'/>: </span>
             <#if metric.startLevel??>
@@ -70,15 +74,17 @@
               <span class="value commentOnStartLevel">
                 <#if metric.commentOnStartLevel?length!=0>(${metric.commentOnStartLevel})</#if>
               </span>
+            <#elseif metric.commentOnStartLevel?length!=0>
+              <span class="value commentOnStartLevel">${metric.commentOnStartLevel}</span>
             <#else>
               <span class="value startLevel">N/A</span>
             </#if>
-            <input class="value form-control" name="startLevel" type="number"
+            <input class="value form-control smallInputFields" name="startLevel" type="number" placeholder="<@m'startLevel'/>"
                    <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if> style="display: none;">
           </div>
           <div>
             <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'startLevelComment'/>: </span>
-            <input class="value form-control" name="commentOnStartLevel" maxlength="255"
+            <input class="value form-control smallInputFields" name="commentOnStartLevel" maxlength="255" placeholder="<@m'startLevelComment'/>"
                    value="${metric.commentOnStartLevel}"
                    style="display: none;">
           </div>
@@ -90,22 +96,21 @@
               <span class="value commentOnTargetLevel">
                 <#if metric.commentOnTargetLevel?length!=0>(${metric.commentOnTargetLevel})</#if>
               </span>
+            <#elseif metric.commentOnTargetLevel?length!=0>
+              <span class="value commentOnTargetLevel">${metric.commentOnTargetLevel}</span>
             <#else>
               <span class="value targetLevel">N/A</span>
             </#if>
-            <input class="value form-control" name="targetLevel" type="number"
+            <input class="value form-control smallInputFields" name="targetLevel" type="number" placeholder="<@m'targetLevel'/>"
                    <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if> style="display: none;">
           </div>
           <div>
             <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'targetLevelComment'/>: </span>
-            <input class="value form-control" name="commentOnTargetLevel" maxlength="255"
+            <input class="value form-control smallInputFields" name="commentOnTargetLevel" maxlength="255" placeholder="<@m'targetLevelComment'/>"
                    value="${metric.commentOnTargetLevel}"
                    style="display: none;">
           </div>
-          <div>
-            <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'unit'/>: </span>
-            <input class="value form-control" name="unit" maxlength="255" value="${metric.unit}" style="display: none;">
-          </div>
+
         </li>
 
         <li>
@@ -114,13 +119,13 @@
                   <span class="value infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}"
                                                                                        target="_blank">${metric.infoSource}</a></#if>
                   </span>
-            <input class="value form-control" name="infoSource" maxlength="255" value="${metric.infoSource}"
+            <input class="value form-control smallInputFields" name="infoSource" placeholder="<@m'infoSource'/>" maxlength="255" value="${metric.infoSource}"
                    style="display: none;">
           </div>
           <div>
             <span class="labels labelsStyle"> &nbsp; &nbsp;<@m'institutionReport'/>: </span>
             <span class="value institutionToReport">${metric.institutionToReport}</span>
-            <input class="value form-control" name="institutionToReport" maxlength="255"
+            <input class="value form-control smallInputFields" name="institutionToReport" maxlength="255" placeholder="<@m'institutionReport'/>"
                    value="${metric.institutionToReport}"
                    style="display: none;">
           </div>
@@ -196,42 +201,42 @@
 
       <li>
         <div>
+          <span class="addLabel"><@m'unit'/>: </span>
+          <input name="unit" class="value form-control smallInputFields" maxlength="255" placeholder="<@m'unit'/>" value="${unit!""}">
+        </div>
+        <div>
           <span class="addLabel"><@m'startLevel'/>: </span>
-          <input name="startLevel" type="number" class="value form-control" placeholder="<@m'startLevel'/>"
+          <input name="startLevel" type="number" class="value form-control smallInputFields" placeholder="<@m'startLevel'/>"
                  <#if startLevel??>value="${(startLevel?c)}"</#if>>
         </div>
         <div>
           <span class="addLabel"><@m'startLevelComment'/>: </span>
-          <input name="commentOnStartLevel" class="value form-control" maxlength="255"
+          <input name="commentOnStartLevel" class="value form-control smallInputFields" maxlength="255"
                  placeholder="<@m'startLevelComment'/>"
                  value="${commentOnStartLevel!""}">
         </div>
         <div>
           <span class="addLabel"><@m'targetLevel'/>: </span>
-          <input name="targetLevel" type="number" class="value form-control" placeholder="<@m'targetLevel'/>"
+          <input name="targetLevel" type="number" class="value form-control smallInputFields" placeholder="<@m'targetLevel'/>"
                  <#if targetLevel??>value="${(targetLevel?c)}"</#if>>
         </div>
         <div>
           <span class="addLabel"><@m'targetLevelComment'/>: </span>
-          <input name="commentOnTargetLevel" class="value form-control" maxlength="255"
+          <input name="commentOnTargetLevel" class="value form-control smallInputFields" maxlength="255"
                  placeholder="<@m'targetLevelComment'/>"
                  value="${commentOnTargetLevel!""}">
-        </div>
-        <div>
-          <span class="addLabel"><@m'unit'/>: </span>
-          <input name="unit" class="value form-control" maxlength="255" placeholder="<@m'unit'/>" value="${unit!""}">
         </div>
       </li>
 
       <li>
         <div>
           <span class="addLabel"><@m'infoSource'/>: </span>
-          <input name="infoSource" class="value form-control" maxlength="255" placeholder="<@m'infoSource'/>"
+          <input name="infoSource" class="value form-control smallInputFields" maxlength="255" placeholder="<@m'infoSource'/>"
                  value="${infoSource!""}">
         </div>
         <div>
           <span class="addLabel"><@m'institutionReport'/>: </span>
-          <input name="institutionToReport" class="value form-control" maxlength="255"
+          <input name="institutionToReport" class="value form-control smallInputFields" maxlength="255"
                  placeholder="<@m'institutionReport'/>"
                  value="${institutionToReport!""}">
         </div>

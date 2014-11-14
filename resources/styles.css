@@ -43,7 +43,10 @@ body {
 
 .panel-body {
   padding: 0px 40px;
+}
 
+tr.metric {
+  border-bottom: solid 1px #DDD;
 }
 
 #metrics-table tbody {
@@ -57,7 +60,12 @@ body {
 #metrics-table tbody:hover {
   background: rgba(240, 240, 240, 1);
 }
-
+.form-control {
+  max-width:815px;
+  }
+.smallInputFields {
+  max-width:160px!important;
+}
 .panel-heading {
   padding: 25px 40px;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -391,9 +399,6 @@ input.modify-value {
   color: red;
 }
 
-.metricTable td:nth-child(2) textarea, .metricTable td:nth-child(4) textarea{
-  margin-right: 20px;
-}
 
 tr.metric div, .addMetric div {
   display: inline-block;
