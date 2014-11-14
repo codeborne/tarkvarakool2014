@@ -62,7 +62,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorPublicDescription")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -74,7 +74,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorPrivateDescription")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -86,7 +86,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorStartLevel")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -98,7 +98,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorStartLevelComment")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -110,7 +110,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorTargetLevel")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -122,7 +122,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorTargetLevelComment")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -146,7 +146,7 @@ public class SaveTest extends ControllerTest<Save> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorInstitutionReport")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
     verify(hibernate, never()).save(any(Metric.class));
   }
 
@@ -173,8 +173,8 @@ public class SaveTest extends ControllerTest<Save> {
     controller.commentOnTargetLevel = "\r d";
     controller.infoSource = "http://";
     controller.institutionToReport = "f   ";
-    controller.startLevel = 5.0;
-    controller.targetLevel = 6.0;
+    controller.startLevel = "5.0";
+    controller.targetLevel = "6.0";
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).setProjection(any(AggregateProjection.class)).uniqueResult()).thenReturn(6.2);
 
     assertRender(controller.post());
@@ -225,9 +225,9 @@ public class SaveTest extends ControllerTest<Save> {
     controller.unit = "%";
     controller.publicDescription = "a a a";
     controller.privateDescription = "b";
-    controller.startLevel = 5.0;
+    controller.startLevel = "5.0";
     controller.commentOnStartLevel = "c";
-    controller.targetLevel = 6.0;
+    controller.targetLevel = "6.0";
     controller.commentOnTargetLevel = "d";
     controller.infoSource = "http://";
     controller.institutionToReport = "f";
@@ -252,5 +252,33 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("f", updatedMetric.getInstitutionToReport());
     assertEquals((Double) 5.0, updatedMetric.getOrderNumber());
     assertEquals(true, updatedMetric.getIsPublic());
+  }
+
+  @Test
+  public void postIfTargetLevelIsNullAndStartLevelIsEmptyString() {
+    controller.name="Metric";
+    controller.startLevel="";
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).setProjection(any(AggregateProjection.class)).uniqueResult()).thenReturn(6.2);
+
+    assertRender(controller.post());
+
+    Metric savedMetric = (Metric) getSavedEntity();
+
+    assertEquals("Metric", savedMetric.getName());
+    assertEquals(null, savedMetric.getStartLevel());
+    assertEquals(null, savedMetric.getTargetLevel());
+  }
+
+  @Test
+  public void postIfStartLevelAndTargetLevelAreNotNumbers() {
+    controller.name="Metric";
+    controller.startLevel="A";
+    controller.targetLevel="5%";
+    assertRender(controller.post());
+
+    assertEquals(2, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("errorStartLevel")));
+    assertTrue(controller.errorsList.contains(messages.get("errorTargetLevel")));
+    verify(hibernate, never()).save(any(Metric.class));
   }
 }

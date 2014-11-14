@@ -79,7 +79,7 @@
             <#else>
               <span class="value startLevel">N/A</span>
             </#if>
-            <input class="value form-control smallInputFields" name="startLevel" type="number" placeholder="<@m'startLevel'/>"
+            <input class="value form-control smallInputFields" name="startLevel"  placeholder="<@m'startLevel'/>"
                    <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if> style="display: none;">
           </div>
           <div>
@@ -101,7 +101,7 @@
             <#else>
               <span class="value targetLevel">N/A</span>
             </#if>
-            <input class="value form-control smallInputFields" name="targetLevel" type="number" placeholder="<@m'targetLevel'/>"
+            <input class="value form-control smallInputFields" name="targetLevel" placeholder="<@m'targetLevel'/>"
                    <#if metric.targetLevel??>value="${(metric.targetLevel?c)}"</#if> style="display: none;">
           </div>
           <div>
@@ -206,7 +206,7 @@
         </div>
         <div>
           <span class="addLabel"><@m'startLevel'/>: </span>
-          <input name="startLevel" type="number" class="value form-control smallInputFields" placeholder="<@m'startLevel'/>"
+          <input name="startLevel" class="value form-control smallInputFields" placeholder="<@m'startLevel'/>"
                  <#if startLevel??>value="${(startLevel?c)}"</#if>>
         </div>
         <div>
@@ -217,7 +217,7 @@
         </div>
         <div>
           <span class="addLabel"><@m'targetLevel'/>: </span>
-          <input name="targetLevel" type="number" class="value form-control smallInputFields" placeholder="<@m'targetLevel'/>"
+          <input name="targetLevel"  class="value form-control smallInputFields" placeholder="<@m'targetLevel'/>"
                  <#if targetLevel??>value="${(targetLevel?c)}"</#if>>
         </div>
         <div>
@@ -256,9 +256,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-</div>
 <span id="errors"></span>
+</div>
+</div>
+
 
 
 <script>
