@@ -44,8 +44,8 @@
     <td class="metricContent">
       <ul>
         <li>
-          <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
           <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
+          <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
           <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>" style="display: none;">${metric.name}</textarea>
         </li>
 
@@ -66,6 +66,7 @@
             <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'unit'/>: </span>
             <input class="value form-control smallInputFields" name="unit" maxlength="255" placeholder="<@m'unit'/>" value="${metric.unit}" style="display: none;">
           </div>
+          <br class="value">
           <div>
             <span class="labels labelsStyle"><@m'startLevel'/>: </span>
             <#if metric.startLevel??>
@@ -116,8 +117,11 @@
         <li>
           <div>
             <span class="labels labelsStyle"><@m'infoSource'/>: </span>
-                  <span class="value infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}"
-                                                                                       target="_blank">${metric.infoSource}</a></#if>
+                  <span class="value infoSource">
+                      <#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
+                        <a href="${metric.infoSource}" target="_blank">${metric.infoSource}</a>
+                        <#else> ${metric.infoSource!""}
+                      </#if>
                   </span>
             <input class="value form-control smallInputFields" name="infoSource" placeholder="<@m'infoSource'/>" maxlength="255" value="${metric.infoSource}"
                    style="display: none;">

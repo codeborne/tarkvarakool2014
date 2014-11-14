@@ -110,8 +110,12 @@
           <#list (minimumYear)..maximumYear as year>
             <td>
               <div class="measured">
-                <span <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))> class="value greenValue"
-                <#elseif (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))> class="value redValue"<#else>class="value" </#if>
+                <span
+                  <#if (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))>
+                    class="value greenValue"
+                <#elseif (metric.values.get(year)?has_content && metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))>
+                    class="value redValue"
+                    <#else>class="value" </#if>
                 >${((metric.values.get(year))?c)!""}</span> <span title="<@m'modify'/>"
                 class="glyphicon glyphicon-pencil hand-pointer" onclick="showInputHideIconAndValue($(this));"></span>
 
@@ -120,6 +124,7 @@
                   <input type="text" step="any" class="modify-value">
                 </form>
               </div>
+              <br>
               <div class="forecasted">
                 <span class="value">${((metric.forecasts.get(year))?c)!""}</span><sup class="forecast-indicator"><@m'valueSymbol'/></sup>
                 <span title="<@m'modify'/>" class="glyphicon glyphicon-pencil hand-pointer"

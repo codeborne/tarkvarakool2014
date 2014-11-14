@@ -32,8 +32,12 @@
                 <td class="publicDescription"><#if language == 'et'>${metric.publicDescription}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>Translation missing</i></#if></#if></td>
                 <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#if metric.commentOnStartLevel?has_content> (${metric.commentOnStartLevel})</#if><#else>N/A</#if></td>
                 <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#if metric.commentOnTargetLevel?has_content> (${metric.commentOnTargetLevel})</#if><#else>N/A</#if></td>
-                <td class="infoSource"><#if metric.infoSource?has_content><a href="${metric.infoSource}"
-                    target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a></#if></td>
+                <td class="infoSource">
+                  <#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
+                   <a href="${metric.infoSource}" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
+                  <#else> ${metric.infoSource!""}
+                  </#if>
+                </td>
               </tr>
               </#if>
             </#list>

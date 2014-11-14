@@ -24,7 +24,7 @@
 
       <#if loggedInUsername??>
         <form class="navbar-form pull-left" action="/admin/logout">
-          <span class="greetings"><@m'hello'/> <strong>${loggedInUsername}</strong></span>
+          <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
           <button id="logout-button" type="submit" class="authentication-button">
             <span class="glyphicon glyphicon-lock"></span> <@m'exit'/>
           </button>
