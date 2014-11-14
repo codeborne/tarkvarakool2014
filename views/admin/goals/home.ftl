@@ -31,15 +31,15 @@
             </td>
             <td class="nameInTable">
               <span class="value">${goal.name}</span>
-              <textarea class="value form-control" name="name" maxlength="255" style="display: none"><#if goal.name??>${goal.name}</#if></textarea>
+              <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'goal'/>" style="display: none">${goal.name}</textarea>
             </td>
             <td class="commentInTable">
               <span class="value">${goal.comment!""}</span>
-              <textarea class="value form-control" name="comment" maxlength="255" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
+              <textarea class="value form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
             </td>
             <td class="budgetInTable">
               <span class="value">${goal.budget?c}</span>
-              <input type="number" class="value form-control" name="budget" value="${goal.budget?c}"
+              <input type="number" class="value form-control" name="budget" placeholder="<@m'budget'/>" value="${goal.budget?c}"
                      style="display: none;">
 
             </td>

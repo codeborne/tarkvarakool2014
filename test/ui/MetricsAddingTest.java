@@ -57,6 +57,21 @@ public class MetricsAddingTest extends UITest {
     assertEquals("Koer", $$("tr.metric").get(0).$(".name").getText());
   }
 
+  @Test
+  public void submitFailsWithIncorrectStartLevelAndTargetLevel() throws Exception {
+    $$(".metricsButton").get(0).click();
+    $(".addMetric").$(By.name("name")).setValue("Koer");
+    $(".addMetric").$(By.name("startLevel")).setValue("5%");
+    $(".saveGoalButton").click();
+
+    $(".alert-danger").shouldHave(text(messages.get("errorStartLevel")));
+
+    $(".addMetric").$(By.name("startLevel")).setValue("5");
+    $(".addMetric").$(By.name("targetLevel")).setValue("abc");
+    $(".saveGoalButton").click();
+
+    $(".alert-danger").shouldHave(text(messages.get("errorTargetLevel")));
+  }
 
   @Test
   public void successIfAllFieldsHaveValue() throws Exception {

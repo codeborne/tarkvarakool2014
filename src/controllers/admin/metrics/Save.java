@@ -21,9 +21,9 @@ public class Save extends UserAwareController {
   public String unit;
   public String publicDescription;
   public String privateDescription;
-  public Double startLevel;
+  public String startLevel;
   public String commentOnStartLevel;
-  public Double targetLevel;
+  public String targetLevel;
   public String commentOnTargetLevel;
   public String infoSource;
   public String institutionToReport;
@@ -33,11 +33,15 @@ public class Save extends UserAwareController {
   public Goal goal;
   public Boolean isPublic;
 
+  public Double startLevelAsNumber;
+  public Double targetLevelAsNumber;
+
   @Override
   @Role("admin")
   public Result post() {
     goal = (Goal) hibernate.get(Goal.class, goalId);
     checkErrors();
+    convertLevelsToNumbers();
     if (errorsList.isEmpty()) {
       try {
         trimAndPrepareAllInput();
@@ -90,8 +94,8 @@ public class Save extends UserAwareController {
     metric.setUnit(unit);
     metric.setPublicDescription(publicDescription);
     metric.setPrivateDescription(privateDescription);
-    metric.setStartLevel(startLevel);
-    metric.setTargetLevel(targetLevel);
+    metric.setStartLevel(startLevelAsNumber);
+    metric.setTargetLevel(targetLevelAsNumber);
     metric.setCommentOnStartLevel(commentOnStartLevel);
     metric.setCommentOnTargetLevel(commentOnTargetLevel);
     metric.setInfoSource(infoSource);
@@ -107,9 +111,26 @@ public class Save extends UserAwareController {
     orderNumber = (Double) hibernate.createCriteria(Metric.class)
       .add(Restrictions.eq("goal", goal)).setProjection(Projections.max("orderNumber")).uniqueResult();
     orderNumber = Math.ceil(orderNumber == null ? 0 : orderNumber) + 1;
-    hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevel, commentOnStartLevel,
-      targetLevel, commentOnTargetLevel, infoSource, institutionToReport, orderNumber, isPublic));
+    hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevelAsNumber, commentOnStartLevel,
+      targetLevelAsNumber, commentOnTargetLevel, infoSource, institutionToReport, orderNumber, isPublic));
     hibernate.flush();
+  }
+
+  private void convertLevelsToNumbers() {
+    if (!"".equals(startLevel) && startLevel!=null){
+      try {
+        startLevelAsNumber = Double.parseDouble(startLevel);
+      }catch (NumberFormatException e){
+        errorsList.add(messages.get("errorStartLevel"));
+      }
+    }
+    if (!"".equals(targetLevel)&& targetLevel!=null){
+      try {
+        targetLevelAsNumber = Double.parseDouble(targetLevel);
+      }catch (NumberFormatException e){
+        errorsList.add(messages.get("errorTargetLevel"));
+      }
+    }
   }
 
   private void checkErrors() {
@@ -132,34 +153,34 @@ public class Save extends UserAwareController {
 
   private void checkPublicDescription() {
     if (errors.containsKey("publicDescription"))
-      errorsList.add(messages.get("errorPublicDescription"));
+      errorsList.add(messages.get("error"));
   }
 
   private void checkPrivateDescription() {
     if (errors.containsKey("privateDescription"))
-      errorsList.add(messages.get("errorPrivateDescription"));
+      errorsList.add(messages.get("error"));
 
   }
 
   private void checkStartLevel() {
     if (errors.containsKey("startLevel"))
-      errorsList.add(messages.get("errorStartLevel"));
+      errorsList.add(messages.get("error"));
 
   }
 
   private void checkCommentOnStartLevel() {
     if (errors.containsKey("commentOnStartLevel"))
-      errorsList.add(messages.get("errorStartLevelComment"));
+      errorsList.add(messages.get("error"));
   }
 
   private void checkTargetLevel() {
     if (errors.containsKey("targetLevel"))
-      errorsList.add(messages.get("errorTargetLevel"));
+      errorsList.add(messages.get("error"));
   }
 
   private void checkCommentOnTargetLevel() {
     if (errors.containsKey("commentOnTargetLevel"))
-      errorsList.add(messages.get("errorTargetLevelComment"));
+      errorsList.add(messages.get("error"));
   }
 
   private void checkInfoSource() {
@@ -172,12 +193,12 @@ public class Save extends UserAwareController {
 
   private void checkInstitutionToReport() {
     if (errors.containsKey("institutionToReport"))
-      errorsList.add(messages.get("errorInstitutionReport"));
+      errorsList.add(messages.get("error"));
   }
 
   private void checkOrderNumber() {
     if (errors.containsKey("orderNumber"))
-      errorsList.add(messages.get("errorSequenceNumber"));
+      errorsList.add(messages.get("error"));
 
   }
 }
