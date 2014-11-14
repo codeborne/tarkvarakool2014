@@ -45,7 +45,7 @@ body {
   padding: 0px 40px;
 }
 
-tr.metric {
+#adminMetricTable tr.metric {
   border-bottom: solid 1px #DDD;
 }
 

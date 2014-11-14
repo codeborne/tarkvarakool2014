@@ -7,7 +7,7 @@
   <h4 class="headingName">${goal.name}</h4>
 </div>
 <div class="panel-body">
-<table class="table table-hover">
+<table class="table table-hover" id="adminMetricTable">
 <thead>
 <tr>
   <th><@m'sort'/></th>
