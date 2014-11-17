@@ -1,4 +1,5 @@
 <@html>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/charts'">
@@ -7,7 +8,6 @@
     <#if message??>
       <div class="alert alert-success"><@m message/></div>
     </#if>
-
     <h4 class="name"><@m'goals'/></h4>
   </div>
   <div class="panel-body">
@@ -45,9 +45,7 @@
               <span class="value">${goal.budget?c}</span>
               <input type="number" class="value form-control" name="budget" placeholder="<@m'budget'/>" value="${goal.budget?c}"
                      style="display: none;">
-
             </td>
-
             <td>
               <form action="/admin/metrics/metrics">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -56,7 +54,6 @@
                 </button>
               </form>
             </td>
-
             <td class="actions">
               <div class="action-button">
                 <input type="hidden" class="value" value="${goal.id?c}" name="id">
@@ -66,7 +63,6 @@
                        onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
                        data-action="save">
               </div>
-
               <div class="action-button">
               <span class="value">
                 <button type="button" title="<@m'modify'/>" class="modifyButton btn btn-default btn-sm">
@@ -74,7 +70,6 @@
                 </button>
               </span>
               </div>
-
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
                 <span class="value">
@@ -83,7 +78,6 @@
                 </button>
                   </span>
               </form>
-
               <#if !goal.metrics?has_content>
                 <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                       class="action-button">
@@ -112,8 +106,6 @@
         <td colspan=3>
           <input type="button" value="<@m'add'/>" class="saveGoalButton value btn btn-default btn-sm" id="goalSaveButton"
                  data-action="save">
-
-
         </td>
       </tr>
       </tbody>

@@ -87,7 +87,7 @@ body {
   margin-top: 20px;
 }
 
-.publicDescription {
+.userViewPublicDescription {
   font-size:12px;
 }
 
@@ -272,11 +272,18 @@ tr.metric .glyphicon-sort{
   font-size: 10px;
   padding-right: 5px;
 }
+.glyphicon-user{
+  margin-top: 14px;
+  margin-right: 20px;
+  background-color: transparent;
+  color: #ffcc00;
+  border: none;
+
+}
 
 .forecasted > span.value, .forecast-indicator {
   color: #333
 }
-
 
 .values{
   text-align:right !important;

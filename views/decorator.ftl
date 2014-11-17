@@ -1,4 +1,6 @@
 <#macro html values_active=false>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,19 +14,24 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-
 </head>
 <body>
 <div class="navbar navbar-default" role="navigation">
   <div class="container container-top">
-
     <div class="navbar-collapse collapse navbar-right">
+      <#if loggedInUsername??>
+        <#if homeUrl?contains("admin")>
+        <button id="userViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="Kasutaja vaade" onclick="location='/home'"></button>
+        <#else>
+          <button id="adminViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="Haldaja vaade" onclick="location='/admin/goals/home'"></button>
+        </#if>
+        </#if>
+
 
       <div class="languageButtons btn-group button-menu-inner pull-left">
         <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
         <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
       </div>
-
       <#if loggedInUsername??>
         <form class="navbar-form pull-left" action="/admin/logout">
           <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
@@ -42,7 +49,6 @@
     </div>
   </div>
 </div>
-
 <div class="container main-content" role="main">
   <table class="toprow">
     <tr>
@@ -65,8 +71,8 @@
   </table>
   <#nested>
 </div>
-
 </body>
 <div class="footer"></div>
 </html>
 </#macro>
+
