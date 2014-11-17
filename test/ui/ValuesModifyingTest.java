@@ -55,6 +55,7 @@ public class ValuesModifyingTest extends UITest {
     input.shouldNotBe(visible);
 
     $$(".value").get(0).shouldHave(text("4564.7"));
+    $$(".value").get(0).shouldNotHave(cssClass("glyphicon-pencil"));
   }
 
   @Test
@@ -68,7 +69,7 @@ public class ValuesModifyingTest extends UITest {
 
     $$(".value").get(0).shouldHave(text("4345356498989898989898999118.7"));
 
-    $$(".glyphicon-pencil").get(0).click();
+    $$(".value").get(0).click();
     input = $$(".modify-value").get(0);
     input.shouldHave(value("4345356498989898989898999118.7"));
 
@@ -101,7 +102,7 @@ public class ValuesModifyingTest extends UITest {
     input.shouldNotBe(visible);
     $$(".value").get(1).shouldHave(text("53453"));
 
-    $$(".glyphicon-pencil").get(1).click();
+    $$(".value").get(1).click();
     input = $$(".modify-value").get(1);
     input.setValue("-4").pressEnter();
     input.shouldNotBe(visible);
@@ -119,7 +120,7 @@ public class ValuesModifyingTest extends UITest {
 
     $$(".value").get(0).shouldHave(text("-4564.7"));
 
-    $$(".glyphicon-pencil").get(0).click();
+    $$(".value").get(0).click();
     input = $$(".modify-value").get(0);
     input.setValue("").pressEnter();
     input.shouldNotBe(visible);
@@ -137,11 +138,13 @@ public class ValuesModifyingTest extends UITest {
     input.shouldNotBe(visible);
     $$(".value").get(3).shouldHave(text("53453"));
 
-    $$(".glyphicon-pencil").get(3).click();
+    $$(".value").get(3).click();
     input = $$(".modify-value").get(3);
     input.setValue("").pressEnter();
     input.shouldNotBe(visible);
     $$(".value").get(3).shouldHave(text(""));
+    $$(".value").get(3).shouldHave(cssClass("glyphicon-pencil"));
+
   }
 
   @Test
@@ -172,22 +175,22 @@ public class ValuesModifyingTest extends UITest {
     open("/admin/values/value");
 
     SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(3);
-    tableCell.$$("div.forecasted").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("45").pressEnter();
-    tableCell.$$("div.measured").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("50").pressEnter();
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
 
-    tableCell.$$("div.measured").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("10").pressEnter();
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("redValue"));
 
-    tableCell.$$("div.forecasted").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("").pressEnter();
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("redValue"));
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("greenValue"));
 
-    tableCell.$$("div.forecasted").get(0).$$("span.glyphicon-pencil").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("5").pressEnter();
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
   }
