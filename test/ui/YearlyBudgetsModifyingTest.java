@@ -72,7 +72,7 @@ public class YearlyBudgetsModifyingTest extends UITest {
     hibernate.update(goal);
     hibernate.flush();
     open("/admin/values/value");
-    $$(".goal").get(0).$(".yearlyBudget").$$(".glyphicon").get(2).click();
+    $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(2).click();
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(2);
     input.setValue("11").pressEnter();
 
@@ -88,7 +88,7 @@ public class YearlyBudgetsModifyingTest extends UITest {
     hibernate.update(goal);
     hibernate.flush();
     open("/admin/values/value");
-    $$(".goal").get(0).$(".yearlyBudget").$$(".glyphicon").get(4).click();
+    $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(4).click();
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(4);
     input.setValue("").pressEnter();
 
@@ -119,7 +119,7 @@ public class YearlyBudgetsModifyingTest extends UITest {
     hibernate.flush();
 
     open("/admin/values/value");
-    $$(".goal").get(0).$(".yearlyBudget").$$(".glyphicon").get(4).click();
+    $$(".goal").get(0).$(".yearlyBudget").$$(".value").get(4).click();
     SelenideElement input = $$(".goal").get(0).$(".yearlyBudget").$$(".modify-value").get(4);
     input.setValue("-5").pressEnter();
     confirm(messages.get("errorInsertValue"));

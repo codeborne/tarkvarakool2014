@@ -191,6 +191,10 @@ tr.metric .glyphicon-sort{
   color: #ffcc00;
 }
 
+.forecasted{
+  white-space: nowrap;
+}
+
 .footer {
   background: url(/images/bottom.png) repeat scroll 0px 100% transparent;
   height: 295px;
