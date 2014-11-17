@@ -16,7 +16,7 @@ public class Translation extends UserAwareController {
   public String engComment;
   public Set<String> errorsList = new HashSet<>();
   public Goal goal;
-
+  public String translationSuccess;
   @Override
   @Role("admin")
   public Result get() {
@@ -39,8 +39,8 @@ public class Translation extends UserAwareController {
       goal.setEngName(trimInput(engName));
       goal.setEngComment(trimInput(engComment));
       int i = 0;
-      for(Metric metric : metrics){
-        if(metric.getIsPublic()) {
+      for (Metric metric : metrics) {
+        if (metric.getIsPublic()) {
           metric.setEngName(trimInput(engMetricName[i]));
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
@@ -51,7 +51,9 @@ public class Translation extends UserAwareController {
       hibernate.flush();
     }
 
-    return redirect(Home.class);
+      translationSuccess="Edukas";
+        return redirect(Home.class);
+
   }
 
   public String trimInput(String input){
@@ -100,6 +102,8 @@ public class Translation extends UserAwareController {
     if (errors.containsKey("engMetricName"))
       errorsList.add(messages.get("error"));
   }
+
+
 
 
 
