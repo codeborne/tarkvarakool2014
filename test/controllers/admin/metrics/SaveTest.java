@@ -15,11 +15,12 @@ import static org.mockito.Mockito.*;
 
 public class SaveTest extends ControllerTest<Save> {
   public static final long GOAL_ID = 2L;
+  public Goal goal = new Goal("Eesmark", "Kommentaar", 85, 1);
 
   @Before
   public void setUp() throws Exception {
     controller.goalId = GOAL_ID;
-    when(hibernate.get(Goal.class, GOAL_ID)).thenReturn(new Goal("Eesmark", "Kommentaar", 85, 1));
+    when(hibernate.get(Goal.class, GOAL_ID)).thenReturn(goal);
     when(request.getPathInfo()).thenReturn("admin/");
   }
 
@@ -233,11 +234,11 @@ public class SaveTest extends ControllerTest<Save> {
     controller.institutionToReport = "f";
     controller.orderNumber = 5.0;
 
-    Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0.0, null, 0.0, null, null, null, 1.0, false);
+    Metric metricBeingChanged = new Metric(goal, "TERE", null, null, null, 0.0, null, 0.0, null, null, null, 1.0, false);
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
 
     assertRender(controller.post());
-    Metric updatedMetric = (Metric) getUpdatedEntity();
+    Metric updatedMetric = getUpdatedEntity();
 
     assertEquals("metric", updatedMetric.getName());
     assertEquals("%", updatedMetric.getUnit());
@@ -260,7 +261,7 @@ public class SaveTest extends ControllerTest<Save> {
 
     assertRender(controller.post());
 
-    Metric savedMetric = (Metric) getSavedEntity();
+    Metric savedMetric = getSavedEntity();
 
     assertEquals("Metric", savedMetric.getName());
     assertEquals(null, savedMetric.getStartLevel());
@@ -278,5 +279,32 @@ public class SaveTest extends ControllerTest<Save> {
     assertTrue(controller.errorsList.contains(messages.get("errorStartLevel")));
     assertTrue(controller.errorsList.contains(messages.get("errorTargetLevel")));
     verify(hibernate, never()).save(any(Metric.class));
+  }
+
+  @Test
+  public void postIfStatusUpdateOnlyIsTrue() throws Exception {
+    controller.metricId = 2L;
+    controller.isStatusUpdateOnly = true;
+    controller.isPublic = true;
+
+    Metric metricBeingChanged = new Metric(goal, "TERE", null, null, null, 0.0, null, 0.0, null, null, null, 1.0, false);
+    when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
+
+    assertRender(controller.post());
+    Metric updatedMetric = getUpdatedEntity();
+
+    assertEquals("TERE", updatedMetric.getName());
+    assertEquals(null, updatedMetric.getUnit());
+    assertEquals(null, updatedMetric.getPublicDescription());
+    assertEquals(null, updatedMetric.getPrivateDescription());
+    assertEquals((Double) 0.0,updatedMetric.getStartLevel());
+    assertEquals(null, updatedMetric.getCommentOnStartLevel());
+    assertEquals((Double) 0.0, updatedMetric.getTargetLevel());
+    assertEquals(null, updatedMetric.getCommentOnTargetLevel());
+    assertEquals(null, updatedMetric.getInfoSource());
+    assertEquals(null, updatedMetric.getInstitutionToReport());
+    assertEquals((Double) 1.0, updatedMetric.getOrderNumber());
+    assertEquals(true, updatedMetric.getIsPublic());
+
   }
 }
