@@ -56,7 +56,7 @@
       </tbody>
     </table>
     </#if>
-    <input type="submit" value="<@m'save'/>" class="saveGoalButton btn btn-default btn-sm" id="saveTranslationButton">
+    <input type="submit" value="<@m'save'/>" class="saveGoalButton btn btn-default btn-sm" id="saveTranslationButton" onclick="/">
   </form>
   <span id="errors"></span>
 </div>

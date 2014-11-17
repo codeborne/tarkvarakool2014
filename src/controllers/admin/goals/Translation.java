@@ -51,7 +51,7 @@ public class Translation extends UserAwareController {
       hibernate.flush();
     }
 
-    return render();
+    return redirect(Home.class);
   }
 
   public String trimInput(String input){

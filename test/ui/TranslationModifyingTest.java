@@ -71,6 +71,7 @@ public class TranslationModifyingTest extends UITest {
     $(".metricTable").$(By.name("engMetricName")).setValue("a metric");
     $(".metricTable").$(By.name("engUnit")).setValue("people");
     $("#saveTranslationButton").click();
+    $$(".goal").get(0).$(".translationButton").click();
     $(".goalTable").$(By.name("engName")).shouldHave(value("inserted goal"));
     $(".goalTable").$(By.name("engComment")).shouldHave(value("This is a comment"));
     $(".metricTable").$(By.name("engMetricName")).shouldHave(value("a metric"));
@@ -92,6 +93,7 @@ public class TranslationModifyingTest extends UITest {
     $(".goalTable").$(By.name("engName")).setValue("added goal");
     $(".goalTable").$(By.name("engComment")).setValue("");
     $("#saveTranslationButton").click();
+    $$(".goal").get(0).$(".translationButton").click();
     $(".goalTable").$(By.name("engName")).shouldHave(value("added goal"));
     $(".goalTable").$(By.name("engComment")).shouldHave(value(""));
 
