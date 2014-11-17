@@ -232,7 +232,6 @@ public class SaveTest extends ControllerTest<Save> {
     controller.infoSource = "http://";
     controller.institutionToReport = "f";
     controller.orderNumber = 5.0;
-    controller.isPublic = true;
 
     Metric metricBeingChanged = new Metric(new Goal("", 10), "TERE", null, null, null, 0.0, null, 0.0, null, null, null, 1.0, false);
     when(hibernate.get(Metric.class, 2L)).thenReturn(metricBeingChanged);
@@ -251,7 +250,6 @@ public class SaveTest extends ControllerTest<Save> {
     assertEquals("http://", updatedMetric.getInfoSource());
     assertEquals("f", updatedMetric.getInstitutionToReport());
     assertEquals((Double) 5.0, updatedMetric.getOrderNumber());
-    assertEquals(true, updatedMetric.getIsPublic());
   }
 
   @Test

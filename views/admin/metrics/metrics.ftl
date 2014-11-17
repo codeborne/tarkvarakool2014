@@ -136,12 +136,8 @@
         </li>
 
         <li>
-          <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'public'/>: </span>
                 <span
                   class="value isPublic"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
-          <input class="value" type="checkbox" name="isPublic"
-                 value=true <#if metric.isPublic?? && metric.isPublic == true> checked </#if>
-                 style="display: none;">
         </li>
       </ul>
     </td>
@@ -178,6 +174,19 @@
               </button>
               </span>
         </form>
+      </div>
+
+      <div class="action-button">
+          <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
+          <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
+          <input class="isPublicValue" type="hidden" name="isStatusUpdateOnly" value="true"/>
+          <input class="isPublicValue" type="hidden" name="isPublic"
+          <#if metric.isPublic==false>value="true"<#else>value="false"</#if>/>
+          <span class="value">
+            <input type="button" title="<@m'public'/>/<@m'private'/>" class="isPublicValue btn btn-default btn-sm publicButton"
+              value="" data-action="save"
+              <#if metric.isPublic==true> style="color:green"<#else>style="color:red"</#if> />
+          </span>
       </div>
     </td>
   </tr>
@@ -282,7 +291,14 @@
       $.post(button.data("action"), values.serialize(), responseHandler);
     };
 
+    var saveIsPublicClickHandler = function (event) {
+      var button = $(event.target);
+      var values = button.closest('tr').find('.isPublicValue');
+      $.post(button.data("action"), values.serialize(), responseHandler);
+    };
+
     $('.saveGoalButton').click(saveClickHandler);
+    $('.publicButton').click(saveIsPublicClickHandler);
 
     var modifyClickHandler = function (event) {
       $(".value").hide();
@@ -297,6 +313,7 @@
     };
 
     $('.modifyButton').click(modifyClickHandler);
+
   });
 </script>
 

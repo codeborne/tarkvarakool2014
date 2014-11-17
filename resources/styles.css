@@ -91,7 +91,7 @@ body {
   text-align: right !important;
 }
 
-.saveGoalButton, .cancelGoalButton {
+.saveGoalButton, .cancelGoalButton, .publicButton {
   height: 35px;
   width: 35px;
   background-color: Transparent;
@@ -151,6 +151,12 @@ tr.metric .glyphicon-sort{
   border-radius: 0px;
 }
 
+.publicButton{
+  margin: 0 !important;
+  height: 23px !important;
+  width: 28px !important;
+  margin-bottom: 5px !important;
+}
 
 .chart-button {
   float: right;

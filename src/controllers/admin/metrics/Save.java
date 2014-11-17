@@ -32,6 +32,7 @@ public class Save extends UserAwareController {
   public Long metricId;
   public Goal goal;
   public Boolean isPublic;
+  public Boolean isStatusUpdateOnly;
 
   public Double startLevelAsNumber;
   public Double targetLevelAsNumber;
@@ -39,9 +40,14 @@ public class Save extends UserAwareController {
   @Override
   @Role("admin")
   public Result post() {
+    if(isStatusUpdateOnly==null){
+      isStatusUpdateOnly=false;
+    }
     goal = (Goal) hibernate.get(Goal.class, goalId);
+    if(!isStatusUpdateOnly) {
     checkErrors();
     convertLevelsToNumbers();
+    }
     if (errorsList.isEmpty()) {
       try {
         trimAndPrepareAllInput();
@@ -56,9 +62,10 @@ public class Save extends UserAwareController {
   }
 
   private void trimAndPrepareAllInput() {
-    if (isPublic == null){
+    if (isPublic == null) {
       isPublic = false;
     }
+    if (name != null)
     name = name.trim();
     if (unit != null)
       unit = unit.trim();
@@ -79,17 +86,18 @@ public class Save extends UserAwareController {
   private void save() {
     if (metricId != null) {
       Metric metric = (Metric) hibernate.get(Metric.class, metricId);
-      if (metric == null) {
+      if (metric == null && !isStatusUpdateOnly) {
         addSave();
       } else {
         modifySave(metric);
       }
-    } else {
+    } else if (!isStatusUpdateOnly) {
       addSave();
     }
   }
 
   private void modifySave(Metric metric) {
+    if(!isStatusUpdateOnly) {
     metric.setName(name);
     metric.setUnit(unit);
     metric.setPublicDescription(publicDescription);
@@ -101,7 +109,10 @@ public class Save extends UserAwareController {
     metric.setInfoSource(infoSource);
     metric.setInstitutionToReport(institutionToReport);
     metric.setOrderNumber(orderNumber);
-    metric.setIsPublic(isPublic);
+    }
+    else {
+      metric.setIsPublic(isPublic);
+    }
     hibernate.update(metric);
     hibernate.flush();
   }
@@ -117,17 +128,17 @@ public class Save extends UserAwareController {
   }
 
   private void convertLevelsToNumbers() {
-    if (!"".equals(startLevel) && startLevel!=null){
+    if (!"".equals(startLevel) && startLevel != null) {
       try {
         startLevelAsNumber = Double.parseDouble(startLevel);
-      }catch (NumberFormatException e){
+      } catch (NumberFormatException e) {
         errorsList.add(messages.get("errorStartLevel"));
       }
     }
-    if (!"".equals(targetLevel)&& targetLevel!=null){
+    if (!"".equals(targetLevel) && targetLevel != null) {
       try {
         targetLevelAsNumber = Double.parseDouble(targetLevel);
-      }catch (NumberFormatException e){
+      } catch (NumberFormatException e) {
         errorsList.add(messages.get("errorTargetLevel"));
       }
     }
@@ -186,7 +197,8 @@ public class Save extends UserAwareController {
   private void checkInfoSource() {
     if (errors.containsKey("infoSource")) {
       errorsList.add(messages.get("error"));
-  }}
+    }
+  }
 
   private void checkInstitutionToReport() {
     if (errors.containsKey("institutionToReport"))

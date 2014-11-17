@@ -8,8 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static org.junit.Assert.assertEquals;
@@ -22,36 +21,38 @@ public class MetricsModifyingTest extends UITest {
   public void setUp() throws Exception {
     hibernate.save(new User("johny", "p2s3w04d"));
 
-    open("/admin/login");
 
+    open("/admin/login");
+    $(".language-button-est").click();
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 
     $("#submit").click();
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "http://", "pqr", -5.5, true));
+    hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "http://", "pqr", -5.5, false));
     hibernate.save(new Metric(goal, "Some metric1", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true));
 
     open("/admin/goals/home");
 
     $$(".metricsButton").get(0).click();
-    $$(".modifyButton").get(0).click();
   }
 
   @After
   public void after() {
-    $("#logout-button").click();
+   $("#logout-button").click();
   }
 
   @Test
   public void adminClicksOnModifyButton() {
+    $$(".modifyButton").get(0).click();
     $$(".metricContent").get(0).$(By.name("name")).shouldHave(value("Some metric"));
     $$(".metricContent").get(0).$(By.name("publicDescription")).shouldHave(value("abc"));
   }
 
   @Test
   public void adminModifiesMetric(){
+    $$(".modifyButton").get(0).click();
     $$(".metricContent").get(0).$(By.name("name")).shouldHave(value("Some metric"));
     $$(".metricContent").get(0).$(By.name("unit")).shouldHave(value("%"));
     $$(".metricContent").get(0).$(By.name("publicDescription")).shouldHave(value("abc"));
@@ -63,7 +64,6 @@ public class MetricsModifyingTest extends UITest {
     $$(".metricContent").get(0).$(By.name("infoSource")).shouldHave(value("http://"));
     $$(".metricContent").get(0).$(By.name("institutionToReport")).shouldHave(value("pqr"));
 
-
     $$(".metricContent").get(0).$(By.name("name")).setValue("Metric");
     $$(".metricContent").get(0).$(By.name("unit")).setValue("EUR");
     $$(".metricContent").get(0).$(By.name("infoSource")).setValue("source");
@@ -73,8 +73,20 @@ public class MetricsModifyingTest extends UITest {
     assertEquals("Metric", $$("tr.metric").get(0).$(".name").getText());
     assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
     assertEquals("source", $$("tr.metric").get(0).$(".infoSource").getText());
-    $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
+    assertEquals("Mitteavalik", $$("tr.metric").get(0).$(".isPublic").getText());
 
+    $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
+  }
+
+  @Test
+  public void adminChangesMetricsPublicity() throws Exception {
+    $$(".publicButton").get(0).click();
+
+    $$("tr.metric").get(0).$(".name").shouldHave(text("Some metric"));
+    $$("tr.metric").get(0).$(".isPublic").shouldHave(text("Avalik"));
+
+    $$(".publicButton").get(0).click();
+    $$("tr.metric").get(0).$(".isPublic").shouldHave(text("Mitteavalik"));
   }
 }
 
