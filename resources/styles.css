@@ -26,6 +26,29 @@ body {
   margin-top: 6px;
 }
 
+.toprow {
+  margin: 0 0 30px 0;
+  width: 100%;
+}
+
+.toprow td:nth-child(3) {
+  color: #fff;
+  font-size: 30px;
+}
+
+.toprow td:first-child {
+  width: 289px;
+}
+
+.toprow td:nth-child(2) {
+  padding-right: 14px;
+}
+
+.toprow td:last-child {
+  text-align: right;
+  background-color: transparent;
+}
+
 .panel, .panel-login {
   border: 0;
   -webkit-border-radius: 0px;
@@ -43,6 +66,29 @@ body {
 
 .panel-body {
   padding: 0px 40px;
+}
+
+.table > thead > tr > th {
+  border-bottom: 1px solid #DDD;
+  color: #000;
+  font-weight: 300;
+  text-align: left;
+  padding: 20px 10px;
+
+}
+
+.table > tbody > tr > td {
+  border-top: 0;
+  text-align: left;
+  padding: 10px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.publicDescription {
+  font-size:12px;
 }
 
 #adminMetricTable tr.metric {
@@ -236,29 +282,6 @@ tr.metric .glyphicon-sort{
   text-align:right !important;
 }
 
-.toprow {
-  margin: 0 0 30px 0;
-  width: 100%;
-}
-
-.toprow td:nth-child(3) {
-  color: #fff;
-  font-size: 30px;
-}
-
-.toprow td:first-child {
-  width: 289px;
-}
-
-.toprow td:nth-child(2) {
-  padding-right: 14px;
-}
-
-.toprow td:last-child {
-  text-align: right;
-  background-color: transparent;
-}
-
 .symbol {
   height: 55px;
   width: 2px;
@@ -383,24 +406,6 @@ input.modify-value {
   color: #006699;
 }
 
-.table > thead > tr > th {
-  border-bottom: 1px solid #DDD;
-  color: #000;
-  font-weight: 300;
-  text-align: left;
-  padding: 20px 10px;
-
-}
-
-.table > tbody > tr > td {
-  border-top: 0;
-  text-align: left;
-  padding: 10px;
-}
-
-.table {
-  margin-top: 20px;
-}
 
 .footer {
   position: relative;
@@ -411,7 +416,7 @@ input.modify-value {
 !important;
 }
 
-.alert-danger {
+.alert-danger, .alert-success {
   width: 450px;
   text-align: center;
   padding: 8px 0px;

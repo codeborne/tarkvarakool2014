@@ -39,8 +39,8 @@ public class Translation extends UserAwareController {
       goal.setEngName(trimInput(engName));
       goal.setEngComment(trimInput(engComment));
       int i = 0;
-      for(Metric metric : metrics){
-        if(metric.getIsPublic()) {
+      for (Metric metric : metrics) {
+        if (metric.getIsPublic()) {
           metric.setEngName(trimInput(engMetricName[i]));
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
@@ -51,15 +51,17 @@ public class Translation extends UserAwareController {
       hibernate.flush();
     }
 
+    session.setAttribute("message",(messages.get("translationSuccess")));
+
     return redirect(Home.class);
+
   }
 
-  public String trimInput(String input){
+  public String trimInput(String input) {
     input = input.trim();
-    if("".equals(input)){
+    if ("".equals(input)) {
       return null;
-    }
-    else {
+    } else {
       return input;
     }
   }
@@ -83,6 +85,7 @@ public class Translation extends UserAwareController {
     if (errors.containsKey("engName"))
       errorsList.add(messages.get("error"));
   }
+
   public void checkEngUnit() {
     if (errors.containsKey("engUnit"))
       errorsList.add(messages.get("error"));
@@ -92,16 +95,16 @@ public class Translation extends UserAwareController {
     if (errors.containsKey("engPublicDescription"))
       errorsList.add(messages.get("error"));
   }
+
   public void checkEngComment() {
     if (errors.containsKey("engComment"))
       errorsList.add(messages.get("error"));
   }
+
   public void checkEngMetricName() {
     if (errors.containsKey("engMetricName"))
       errorsList.add(messages.get("error"));
   }
-
-
 
 
 }

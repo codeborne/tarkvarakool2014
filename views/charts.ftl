@@ -18,22 +18,24 @@
   google.load("visualization", "1", {packages:["corechart"]});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Year', 'Sinine', 'Punane'],
-      ['2004',  1000,      400],
-      ['2005',  1170,      460],
-      ['2006',  660,       1120],
-      ['2007',  1030,      540]
-    ]);
 
+    var jsonData = $.ajax({
+      url: "/chart",
+      type: "POST",
+      dataType:"json",
+      async: false
+    }).responseText;
+    var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
+  console.log(jsonData);
+  console.log(data1);
+    var data = google.visualization.arrayToDataTable(data1);
     var options = {
       title: 'Graafikud',
       curveType: 'function',
-      legend: { position: 'bottom' }
+      legend: { position: 'bottom'
+      }
     };
-
     var chart = new google.visualization.LineChart(document.getElementById('chart'));
-
     chart.draw(data, options);
   }
 </script>

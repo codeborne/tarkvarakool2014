@@ -9,9 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static com.codeborne.selenide.Condition.empty;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -25,6 +23,10 @@ public class TranslationModifyingTest extends UITest {
     messages = new Messages(false).getResolverFor("et");
 
     hibernate.save(new User("johny", "p2s3w04d"));
+
+    open("/home");
+
+    $(".language-button-est").click();
 
     open("/admin/login");
 
@@ -71,12 +73,14 @@ public class TranslationModifyingTest extends UITest {
     $(".metricTable").$(By.name("engMetricName")).setValue("a metric");
     $(".metricTable").$(By.name("engUnit")).setValue("people");
     $("#saveTranslationButton").click();
-    $$(".goal").get(0).$(".translationButton").click();
+    $(".alert-success").shouldHave(text("Tõlkimine õnnestus"));
+      $$(".goal").get(0).$(".translationButton").click();
     $(".goalTable").$(By.name("engName")).shouldHave(value("inserted goal"));
     $(".goalTable").$(By.name("engComment")).shouldHave(value("This is a comment"));
     $(".metricTable").$(By.name("engMetricName")).shouldHave(value("a metric"));
     $(".metricTable").$(By.name("engUnit")).shouldHave(value("people"));
     $(".metricTable").$(By.name("engPublicDescription")).shouldBe(empty);
+
   }
 
   @Test
@@ -93,6 +97,7 @@ public class TranslationModifyingTest extends UITest {
     $(".goalTable").$(By.name("engName")).setValue("added goal");
     $(".goalTable").$(By.name("engComment")).setValue("");
     $("#saveTranslationButton").click();
+    $(".alert-success").shouldHave(text("Tõlkimine õnnestus"));
     $$(".goal").get(0).$(".translationButton").click();
     $(".goalTable").$(By.name("engName")).shouldHave(value("added goal"));
     $(".goalTable").$(By.name("engComment")).shouldHave(value(""));
