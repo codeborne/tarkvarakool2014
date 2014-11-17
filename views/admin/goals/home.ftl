@@ -4,7 +4,9 @@
     <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/charts'">
       <span class="glyphicon glyphicon-stats"></span>
     </button>
-    <span id="translationSuccess"></span>
+    <#if message??>
+      <div class="alert alert-success"><@m message/></div>
+    </#if>
 
     <h4 class="name"><@m'goals'/></h4>
   </div>
@@ -120,14 +122,6 @@
   </div>
 </div>
 
-<script>
-
-  $(function () {
-
-    var responseHandler = function (response) {
-      $("#translationSuccess").html(response);
-    };
-</script>
 
 <script>
 

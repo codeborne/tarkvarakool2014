@@ -17,10 +17,14 @@ public class Home extends UserAwareController {
   public Long id;
   public Integer sequenceNumber;
   public Set<String> errorsList = new HashSet<>();
+  public String message;
 
   @Override
   @Role("admin")
   public Result get() {
+    message = (String) session.getAttribute("message");
+    session.removeAttribute("message");
+
     goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
     return render();
   }

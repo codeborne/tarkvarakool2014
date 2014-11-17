@@ -405,7 +405,7 @@ input.modify-value {
 !important;
 }
 
-.alert-danger {
+.alert-danger, .alert-success {
   width: 450px;
   text-align: center;
   padding: 8px 0px;
