@@ -102,14 +102,8 @@
     <span class="glyphicon glyphicon-stats"></span>
   </button>
   <#if goal_index ==0>
-    <span class="forecast-indicator"><@m'estimatedValue'/></span><br>
-  <br>
-    <span class="valueInstruction"><@m'valueInstruction'/></span><br><br>
    </#if>
-
-
     <h4 class="name"> ${goal.name}</h4>
-
 </div>
   <div class="panel-body">
     <table class="table">
@@ -124,7 +118,6 @@
         </tr>
         </thead>
       <tbody>
-
       <#list goal.metrics as metric>
         <tr class="metric">
           <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
@@ -142,13 +135,9 @@
                       <#else>
                       class="value glyphicon glyphicon-pencil hand-pointer"
                       </#if>>${((metric.values.get(year))?c)!""}</span>
-
-
-                <#--class="glyphicon glyphicon-pencil hand-pointer" ></span>-->
-
                 <form class="metric-value-form" style="display: none;"
                       onsubmit="sendData(${goal.id?c}, ${metric.id?c}, ${year?c}, false, $(this)); return false;">
-                  <input type="text" step="any" class="modify-value">
+                  <input type="text" step="any" class="modify-value" title="Vajuta enter">
                 </form>
               </div>
               <br>
@@ -156,7 +145,7 @@
                 <span <#if metric.forecasts.get(year)??>class="value hand-pointer"<#else> class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">${((metric.forecasts.get(year))?c)!""}</span><sup class="forecast-indicator"><@m'valueSymbol'/></sup>
                 <form class="metric-value-form" style="display: none;"
                       onsubmit="sendData(${goal.id?c}, ${metric.id?c}, ${year?c}, true, $(this)); return false;">
-                  <input type="text" step="any" class="modify-value">
+                  <input type="text" step="any" class="modify-value" title="Vajuta enter">
                 </form>
               </div>
             </td>
@@ -164,7 +153,6 @@
           <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
         </tr>
       </#list>
-
       <tr class="yearlyBudget">
         <td><@m'moneySpent'/></td>
         <td></td>
@@ -174,7 +162,6 @@
             <span <#if goal.yearlyBudgets.get(year)??>class="value hand-pointer"<#else>class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">
               ${((goal.yearlyBudgets.get(year))?c)!""}
             </span>
-
             <form class="metric-value-form" style="display: none;"
                   onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;">
               <input type="number" step="any" class="modify-value">
@@ -182,9 +169,12 @@
           </td>
         </#list>
         </tr>
+      <tr>
+        <td>
+          <br><br>
+          <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
+      </tr>
         </tbody>
-
-
     </table>
 </div>
 </div>
@@ -198,3 +188,5 @@
   </div>
   </#if>
 </@html>
+
+

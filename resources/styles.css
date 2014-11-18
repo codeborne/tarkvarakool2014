@@ -165,7 +165,7 @@ body {
   background-color: transparent;
 }
 
-.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button {
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button{
   background-color: Transparent;
   border: none;
   cursor: pointer;
@@ -209,7 +209,7 @@ tr.metric .glyphicon-sort{
   margin-bottom: 5px !important;
 }
 
-.chart-button {
+.chart-button{
   float: right;
   font-size: 30px;
 }
@@ -289,7 +289,9 @@ tr.metric .glyphicon-sort{
 .forecasted > span.value, .forecast-indicator {
   color: #333
 }
-
+.forecast-indicator{
+  font-size: 12px;
+}
 .values{
   text-align:right !important;
 }
@@ -375,7 +377,7 @@ td.actions {
 }
 
 input.modify-value {
-  max-width: 120px;
+  max-width: 60px;
 }
 
 .clearfix:after {

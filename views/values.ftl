@@ -48,6 +48,11 @@
         </tr>
           </#if>
         </#list>
+      <tr>
+        <td>
+          <br><br>
+          <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
+      </tr>
       </tbody>
       </table>
     </div>
