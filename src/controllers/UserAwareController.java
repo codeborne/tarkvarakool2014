@@ -20,7 +20,10 @@ public abstract class UserAwareController extends Controller {
   }
   public String getLanguage() {
     if (session.getAttribute("locale") == null)
-      session.setAttribute("locale", "en");
+      session.setAttribute("locale", "et");
+    else if (request != null && "admin".equals(request.getPathInfo().substring(1).split("/")[0])){
+      session.setAttribute("locale", "et");
+    }
     return (String) session.getAttribute("locale");
   }
 

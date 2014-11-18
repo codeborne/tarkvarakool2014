@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.admin.goals.Home;
 import framework.Redirect;
 import framework.Result;
 import framework.Role;
@@ -11,7 +12,14 @@ public class Language extends UserAwareController {
   @Override
   @Role("anonymous")
   public Result get() {
-    session.setAttribute("locale", locale);
-    return new Redirect(request.getHeader("Referer"));
+
+      if("changeLanguage".equals(locale)) {
+        session.setAttribute("locale", "et");
+        return redirect(Home.class);
+      }
+      else {
+        session.setAttribute("locale", locale);
+        return new Redirect(request.getHeader("Referer"));
+      }
   }
 }
