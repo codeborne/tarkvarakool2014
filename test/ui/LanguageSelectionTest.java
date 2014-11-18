@@ -62,7 +62,7 @@ public class LanguageSelectionTest extends UITest {
 
     $$(".goal").get(0).$("h4").shouldHave(text("Goal1"));
     $$(".goal").get(1).$("h4").shouldHave(text("Goal2"));
-    $$(".goal").get(0).$$(".metric").get(1).$(".name").shouldHave(text("metr1 ($)"));
+    $$(".goal").get(0).$$(".metric").get(1).$(".name").shouldHave(text("metr1"));
 
     $(".title").shouldHave(text("Metrics of MKM"));
 

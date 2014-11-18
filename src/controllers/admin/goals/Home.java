@@ -4,12 +4,14 @@ import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
 import model.Goal;
+import model.Metric;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hibernate.criterion.Order.asc;
 
 public class Home extends UserAwareController {
@@ -18,6 +20,7 @@ public class Home extends UserAwareController {
   public Integer sequenceNumber;
   public Set<String> errorsList = new HashSet<>();
   public String message;
+  public boolean[] isEverythingTranslated;
 
   @Override
   @Role("admin")
@@ -26,8 +29,11 @@ public class Home extends UserAwareController {
     session.removeAttribute("message");
 
     goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
+    isEverythingTranslated = checkTranslationStatus();
+
     return render();
   }
+
 
   @Override
   @Role("admin")
@@ -72,5 +78,25 @@ public class Home extends UserAwareController {
     return render();
   }
 
+  private boolean[] checkTranslationStatus() {
+    boolean[] isEverythingTranslated = new boolean[goals.size()];
+    int i = 0;
+    for(Goal goal:goals) {
+      isEverythingTranslated[i] = true;
+      if (isBlank(goal.getEngName()) || (!isBlank(goal.getComment()) && isBlank(goal.getEngComment()))) {
+        isEverythingTranslated[i] = false;
+      }
+      else  {
+        Set<Metric> metrics = goal.getPublicMetrics();
+        for (Metric metric : metrics) {
+          if ((!isBlank(metric.getUnit()) && isBlank(metric.getEngUnit())) || (!isBlank(metric.getPublicDescription()) && isBlank(metric.getEngPublicDescription())) || isBlank(metric.getEngName())) {
+            isEverythingTranslated[i] = false;
+          }
+        }
+      }
+      i++;
+    }
+    return isEverythingTranslated;
+  }
 }
 

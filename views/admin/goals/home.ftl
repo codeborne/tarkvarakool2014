@@ -74,7 +74,7 @@
                 <input type="hidden" value="${goal.id?c}" name="goalId">
                 <span class="value">
                 <button type="submit" title="<@m'translate'/>" class="translationButton btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-globe"></span>
+                  <span  <#if isEverythingTranslated[goal_index]==false>class="glyphicon glyphicon-globe redValue"<#else>class="glyphicon glyphicon-globe greenValue"</#if>></span>
                 </button>
                   </span>
               </form>

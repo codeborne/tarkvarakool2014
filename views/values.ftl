@@ -12,7 +12,7 @@
       <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
     </div>
     <div class="panel-body">
-      <table class="table">
+      <table class="table valueTable">
       <thead>
       <tr>
         <th class="valuesMetric"><@m'metric'/></th>

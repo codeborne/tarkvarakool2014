@@ -101,9 +101,24 @@ public class TranslationModifyingTest extends UITest {
     $$(".goal").get(0).$(".translationButton").click();
     $(".goalTable").$(By.name("engName")).shouldHave(value("added goal"));
     $(".goalTable").$(By.name("engComment")).shouldHave(value(""));
+  }
 
-
-
+  @Test
+  public void adminTranslatesEverythingAndGlobeTurnsGreen() throws Exception {
+    open("/admin/goals/home");
+    $$(".goal").get(0).$("span.glyphicon-globe").shouldHave(cssClass("redValue"));
+    $$(".goal").get(0).$(".translationButton").click();
+    $(".goalTable").$(By.name("engName")).setValue("inserted goal");
+    $(".goalTable").$(By.name("engComment")).setValue("This is a comment");
+    $(".metricTable").$(By.name("engMetricName")).setValue("a metric");
+    $(".metricTable").$(By.name("engUnit")).setValue("people");
+    $(".metricTable").$(By.name("engPublicDescription")).setValue("describe something");
+    $("#saveTranslationButton").click();
+    $$(".goal").get(0).$("span.glyphicon-globe").shouldHave(cssClass("greenValue"));
+    $$(".goal").get(0).$(".translationButton").click();
+    $(".goalTable").$(By.name("engComment")).setValue("");
+    $("#saveTranslationButton").click();
+    $$(".goal").get(0).$("span.glyphicon-globe").shouldHave(cssClass("redValue"));
   }
 }
 

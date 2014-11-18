@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -119,5 +120,16 @@ public class Goal {
 
   public void setMetrics(Set<Metric> metrics) {
     this.metrics = metrics;
+  }
+
+  public Set<Metric> getPublicMetrics(){
+    Set<Metric> metrics = this.getMetrics();
+    Set<Metric> publicMetrics = new HashSet<>();
+    for(Metric metric:metrics){
+      if(metric.getIsPublic()){
+        publicMetrics.add(metric);
+      }
+    }
+   return publicMetrics;
   }
 }
