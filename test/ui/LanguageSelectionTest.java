@@ -2,8 +2,10 @@ package ui;
 
 import model.Goal;
 import model.Metric;
+import model.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -13,7 +15,7 @@ public class LanguageSelectionTest extends UITest {
 
 
   @Before
-    public void setUp() {
+  public void setUp() {
     Goal goal1 = new Goal("Eesmark1", "", 145, 1);
     goal1.setEngName("Goal1");
     Goal goal2 = new Goal("Eesmark2", "", 120, 2);
@@ -31,11 +33,10 @@ public class LanguageSelectionTest extends UITest {
     open("/admin/login");
 
 
-
-
   }
+
   @Test
-  public void languageButtonEst(){
+  public void languageButtonEst() {
 
     open("/home");
 
@@ -54,7 +55,7 @@ public class LanguageSelectionTest extends UITest {
   }
 
   @Test
-  public void languageButtonEng(){
+  public void languageButtonEng() {
 
     open("/home");
 
@@ -67,5 +68,24 @@ public class LanguageSelectionTest extends UITest {
     $(".title").shouldHave(text("Metrics of MKM"));
 
 
+  }
+
+  @Test
+  public void adminSwitchLanguageInUserView() throws Exception {
+    hibernate.save(new User("johny", "p2s3w04d"));
+
+    $(By.name("username")).setValue("johny");
+    $(By.name("password")).setValue("p2s3w04d");
+
+    $("#submit").click();
+    $("#userViewButton").click();
+    $(".language-button-eng").click();
+
+    $(".title").shouldHave(text("Metrics of MKM"));
+
+    $("#adminViewButton").click();
+
+    $(".title").shouldHave(text("Infoühiskonna arendamise mõõdikud"));
+    $("#logout-button").click();
   }
 }

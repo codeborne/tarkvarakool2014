@@ -21,9 +21,9 @@
     <div class="navbar-collapse collapse navbar-right">
       <#if loggedInUsername??>
         <#if homeUrl?contains("admin")>
-        <button id="userViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'adminView'/>" onclick="location='/home'"></button>
+        <button id="userViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'userView'/>" onclick="location='/home'"></button>
         <#else>
-          <button id="adminViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'userView'/>" onclick="location='/language?locale=changeLanguage'"></button>
+          <button id="adminViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'adminView'/>" onclick="location='/language?locale=changeLanguage'"></button>
         </#if>
         </#if>
 

@@ -213,7 +213,7 @@ tr.metric .glyphicon-sort{
 }
 
 .measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover {
-  color: #ffcc00;
+  color: #ffcc00 !important;
 }
 
 .forecasted{
