@@ -1,6 +1,6 @@
 <@html>
-  <#if goals?has_content>
-    <#list goals as goal>
+  <#if goal?has_content>
+  <input type="hidden" value="${goal.id?c}" name="goalId">
     <div class="panel panel-default">
       <div class="goal">
         <div class="panel-heading">
@@ -11,19 +11,19 @@
       </div>
       <div class="panel-body"id="chart"></div>
     </div>
-    </#list>
+
   </#if>
 
 <script>
   google.load("visualization", "1", {packages:["corechart"]});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
-
     var jsonData = $.ajax({
       url: "/chart",
       type: "POST",
       dataType:"json",
-      async: false
+      async: false,
+      data: {goalId: $("input").val()}
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
   console.log(jsonData);
@@ -32,8 +32,7 @@
     var options = {
       title: 'Graafikud',
       curveType: 'function',
-      legend: { position: 'bottom'
-      }
+      legend: { position: 'bottom'}
     };
     var chart = new google.visualization.LineChart(document.getElementById('chart'));
     chart.draw(data, options);

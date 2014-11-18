@@ -4,20 +4,16 @@ import framework.Result;
 import framework.Role;
 import model.Goal;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.hibernate.criterion.Order.asc;
-
 public class Charts extends UserAwareController {
 
-  public List<Goal> goals = new ArrayList<>();
+  public Long goalId;
+  public Goal goal;
 
 
   @Override @Role("anonymous")
   public Result get(){
 
-    goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
+    goal = (Goal) hibernate.get(Goal.class, goalId);
 
     return render();
   }

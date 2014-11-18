@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static java.util.Arrays.asList;
-import static org.hibernate.criterion.Order.asc;
-
 public class Chart extends UserAwareController {
 
   public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
@@ -22,19 +19,26 @@ public class Chart extends UserAwareController {
   public String jsonResponse;
 
   public List<Goal> goals = new ArrayList<>();
+  public Long goalId;
+  public Goal goal;
 
 
 
 
   @Override @Role("anonymous")
   public Result post(){
-    goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
+    goal = (Goal) hibernate.get(Goal.class, goalId);
 
-    Goal goal = goals.get(0);
-    Set<Metric> metrics = goal.getMetrics();
+    Set<Metric> metrics = goal.getPublicMetrics();
 
 
-    List<String> header = asList("year","metric1","metric2");
+    List<String> header = new ArrayList<>();
+    header.add(messages.get("year"));
+    for (Metric metric:metrics){
+      header.add(metric.getName());
+    }
+
+//    asList("year","metric1","metric2");
 
     List<String> row = new ArrayList<>();
     row.add( new Gson().toJson(header));
