@@ -112,7 +112,7 @@
 
 </div>
   <div class="panel-body">
-    <table class="table">
+    <table class="table valueTable">
       <thead>
         <tr>
           <th><@m'metric'/></th>
