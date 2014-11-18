@@ -11,7 +11,7 @@ import java.util.*;
 import static java.util.Collections.unmodifiableMap;
 
 public class Messages  {
-  public static final String DEFAULT = "";
+  public static final String DEFAULT = "et";
   private final File confDir = new File("conf");
   public Map<String, ResourceBundle> bundles;
   boolean devMode;

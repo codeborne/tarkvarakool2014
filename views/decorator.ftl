@@ -21,15 +21,17 @@
     <div class="navbar-collapse collapse navbar-right">
       <#if loggedInUsername??>
         <#if homeUrl?contains("admin")>
-        <button id="userViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="Kasutaja vaade" onclick="location='/home'"></button>
+        <button id="userViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'adminView'/>" onclick="location='/home'"></button>
         <#else>
-          <button id="adminViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="Haldaja vaade" onclick="location='/admin/goals/home'"></button>
+          <button id="adminViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'userView'/>" onclick="location='/language?locale=changeLanguage'"></button>
         </#if>
         </#if>
 
 
       <div class="languageButtons btn-group button-menu-inner pull-left">
+      <#if !homeUrl?contains("admin")>
         <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
+        </#if>
         <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
       </div>
       <#if loggedInUsername??>
