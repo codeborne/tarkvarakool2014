@@ -11,7 +11,7 @@
         <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
       </div>
       <div class="panel-body">
-        <table class="table table-striped">
+        <table class="table userHomeTable">
           <thead>
           <tr>
             <th><@m'metric'/></th>
@@ -26,15 +26,35 @@
               <#if metric.isPublic == true>
               <tr class="metric">
                 <td class="name">
-                  <#if language == 'et'>${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if>
+                  <#if language == 'et'>${metric.name}
                   <#elseif language == 'en'>
                     <#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if>
-                    <#if metric.engUnit?has_content>(${metric.engUnit})<#else><i>(${metric.unit!""})</i></#if>
+
                     </#if>
                 </td>
                 <td class="userViewPublicDescription"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></td>
-                <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#if metric.commentOnStartLevel?has_content> (${metric.commentOnStartLevel})</#if><#else>N/A</#if></td>
-                <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#if metric.commentOnTargetLevel?has_content> (${metric.commentOnTargetLevel})</#if><#else>N/A</#if></td>
+                <td class="startLevel">
+                  <#if metric.startLevel??>${metric.startLevel?c}
+                    <#if language == 'et'>
+                      <#if metric.unit?has_content>${metric.unit}</#if>
+                    <#elseif language == 'en'>
+                        <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
+                    </#if><br>
+                    <#if metric.commentOnStartLevel?has_content> (${metric.commentOnStartLevel})</#if>
+                  <#elseif metric.commentOnStartLevel?has_content>${metric.commentOnStartLevel}
+                  <#else>N/A</#if>
+                </td>
+                <td class="targetLevel">
+                  <#if metric.targetLevel??>${metric.targetLevel?c}
+                    <#if language == 'et'>
+                      <#if metric.unit?has_content>${metric.unit}</#if>
+                    <#elseif language == 'en'>
+                        <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
+                        </#if><br>
+                    <#if metric.commentOnTargetLevel?has_content> (${metric.commentOnTargetLevel})</#if>
+                  <#elseif metric.commentOnTargetLevel?has_content> ${metric.commentOnTargetLevel}
+                  <#else>N/A</#if>
+                </td>
                 <td class="infoSource">
                   <#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
                    <a href="${metric.infoSource}" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>

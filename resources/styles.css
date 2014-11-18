@@ -92,6 +92,20 @@ body {
   width: auto !important;
 }
 
+.userHomeTable> thead > tr > th, .userHomeTable> tbody > tr > td{
+  text-align: left !important;
+}
+
+.userHomeTable td:first-child{
+  width:auto;
+}
+.userHomeTable td:nth-child(2){
+  width:250px;
+}
+
+.userHomeTable td:nth-child(3),.userHomeTable td:nth-child(4),.userHomeTable td:nth-child(5){
+  width:100px;
+}
 
 .table {
   margin-top: 20px;

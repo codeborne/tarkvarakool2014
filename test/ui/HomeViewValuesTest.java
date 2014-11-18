@@ -30,7 +30,7 @@ public class HomeViewValuesTest extends UITest {
     hibernate.save(goal2);
 
     hibernate.save(new Metric(goal1, "Mood1", "", "", "", 100.0, "", 150.0, "", "", "", 1.0, true));
-    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200.0, "", 220.0, "", "", "", 2.0, true));
+    hibernate.save(new Metric(goal1, "Mood2", "$", "", "", 200.0, "", 220.0, "2014", "", "", 2.0, true));
     hibernate.save(new Metric(goal2, "Mood3", "", "", "", 300.0, "", 340.0, "", "", "", 1.0, true));
     hibernate.save(new Metric(goal2, "Mood4", "", "", "", 400.0, "", 500.0, "", "", "", 2.0, true));
     hibernate.save(new Metric(goal2, "Mood5", "", "", "", 400.0, "", 500.0, "", "", "", 2.1, false));
@@ -44,11 +44,11 @@ public class HomeViewValuesTest extends UITest {
     goalBlock1.$("h4.name").shouldHave(text("Eesmark1"));
     ElementsCollection goal1Metrics = goalBlock1.$$(".metric");
     assertEquals("Mood1", goal1Metrics.get(0).$(".name").getText());
-    assertEquals("Mood2 ($)", goal1Metrics.get(1).$(".name").getText());
+    assertEquals("Mood2", goal1Metrics.get(1).$(".name").getText());
     goal1Metrics.get(0).$(".startLevel").shouldHave(text("100"));
     goal1Metrics.get(0).$(".targetLevel").shouldHave(text("150"));
-    goal1Metrics.get(1).$(".startLevel").shouldHave(text("200"));
-    goal1Metrics.get(1).$(".targetLevel").shouldHave(text("220"));
+    goal1Metrics.get(1).$(".startLevel").shouldHave(text("200 $"));
+    goal1Metrics.get(1).$(".targetLevel").shouldHave(text("220 $ (2014)"));
 
     SelenideElement goalBlock2 = goals.get(1);
     goalBlock2.$("h4.name").shouldHave(text("Eesmark2"));
