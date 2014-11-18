@@ -17,7 +17,6 @@ public class Charts extends UserAwareController {
   @Override @Role("anonymous")
   public Result get(){
 
-
     goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
 
     return render();

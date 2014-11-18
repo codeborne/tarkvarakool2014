@@ -27,7 +27,7 @@
           <#list goals as goal>
           <tr class="goal">
             <td class="sort">
-              <span class="glyphicon glyphicon-sort hand-pointer"></span>
+              <span class="glyphicon glyphicon-sort hand-pointer" title="<@m 'sortingInstruction'/>"></span>
               <form class="orderNumberForm">
                 <input type="hidden" value="${goal.id?c}" name="id">
                 <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
@@ -49,7 +49,7 @@
             <td>
               <form action="/admin/metrics/metrics">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
-                <button type="submit" class="metricsButton btn btn-default btn-sm">
+                <button type="submit" class="metricsButton btn btn-default btn-sm" title="<@m'viewMetrics'/>">
                   <span class="glyphicon glyphicon-list-alt"></span>
                 </button>
               </form>
@@ -57,7 +57,7 @@
             <td class="actions">
               <div class="action-button">
                 <input type="hidden" class="value" value="${goal.id?c}" name="id">
-                <input type="button " title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
+                <input type="button" title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
                        style="display: none" data-action="save">
                 <input type="button" title="<@m'cancel'/>" class="cancelGoalButton value btn btn-default btn-sm"
                        onclick="location='/admin/goals/home'; return false;" value="" style="display:none"
@@ -73,8 +73,11 @@
               <form action="/admin/goals/translation" class="action-button">
                 <input type="hidden" value="${goal.id?c}" name="goalId">
                 <span class="value">
-                <button type="submit" title="<@m'translate'/>" class="translationButton btn btn-default btn-sm">
-                  <span  <#if isEverythingTranslated[goal_index]==false>class="glyphicon glyphicon-globe redValue"<#else>class="glyphicon glyphicon-globe greenValue"</#if>></span>
+                <button type="submit" class="translationButton"
+                  <#if isEverythingTranslated[goal_index]==false>title="<@m'needsTranslation'/>"
+                  <#else> title="<@m'translated'/>"</#if>>
+                  <span <#if isEverythingTranslated[goal_index]==false> class="glyphicon glyphicon-globe redValue"
+                  <#else> class="glyphicon glyphicon-globe greenValue"></#if></span>
                 </button>
                   </span>
               </form>

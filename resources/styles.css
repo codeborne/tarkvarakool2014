@@ -203,7 +203,7 @@ tr.metric .glyphicon-sort{
 }
 
 
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .translationButton:hover, .glyphicon-sort:hover, .chart-button:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover {
   color: #ffcc00;
   background-color: transparent;
 }
