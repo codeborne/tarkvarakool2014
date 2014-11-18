@@ -35,17 +35,15 @@ public class Translation extends UserAwareController {
     if (errorsList.isEmpty()) {
 
       goal = (Goal) hibernate.get(Goal.class, goalId);
-      Set<Metric> metrics = goal.getMetrics();
+      Set<Metric> metrics = goal.getPublicMetrics();
       goal.setEngName(trimInput(engName));
       goal.setEngComment(trimInput(engComment));
       int i = 0;
       for (Metric metric : metrics) {
-        if (metric.getIsPublic()) {
           metric.setEngName(trimInput(engMetricName[i]));
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
           i++;
-        }
       }
       hibernate.update(goal);
       hibernate.flush();
