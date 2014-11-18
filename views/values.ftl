@@ -18,7 +18,7 @@
         <th class="valuesMetric"><@m'metric'/></th>
         <th><@m'startLevel'/></th>
         <#list minimumYear..maximumYear as year>
-          <th> ${year?c}</th>
+          <th>${year?c}</th>
         </#list>
         <th><@m'targetLevel'/></th>
       </tr>

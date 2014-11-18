@@ -133,9 +133,10 @@ body {
   text-align: center;
   padding: 200px;
 }
-.startLevel, .targetLevel{
+.startLevel, .targetLevel {
   text-align: right !important;
 }
+
 
 .saveGoalButton, .cancelGoalButton, .publicButton {
   height: 35px;

@@ -5,8 +5,10 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.Goal;
 import model.Metric;
+import model.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -80,6 +82,32 @@ public class HomeViewTest extends UITest {
     $$(".goal").get(3).$("h4").shouldHave(text("Eesmark4"));
     $$(".goal").get(4).$("h4").shouldHave(text("Eesmark5"));
 
+
+  }
+
+  @Test
+  public void adminCanSwitchBetweenUserAndAdminView() throws Exception {
+
+    hibernate.save(new User("johny", "p2s3w04d"));
+    open("/admin/login");
+
+    $(By.name("username")).setValue("johny");
+    $(By.name("password")).setValue("p2s3w04d");
+
+    $("#submit").click();
+
+    $("#userViewButton").click();
+    $("#adminViewButton").exists();
+
+    $(".actions").shouldNotBe(visible);
+
+
+    $("#adminViewButton").click();
+    $("#userViewButton").exists();
+
+    $(".actions").shouldBe(visible);
+
+    $("#logout-button").click();
 
   }
 }

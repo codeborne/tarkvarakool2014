@@ -117,6 +117,8 @@ public class HomeViewValuesTest extends UITest {
     $$(".goal").get(4).$("h4").shouldHave(text("Eesmark5"));
 
   }
+
+
 }
 
 
