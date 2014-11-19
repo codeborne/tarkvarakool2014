@@ -206,10 +206,10 @@ tr.metric .glyphicon-sort{
   float: right;
   font-size: 30px;
 }
-#chart{
-  width: 900px;
-  height: 400px;
-  margin:auto
+.chart{
+  margin:0 !important;
+  padding: 0 !important;
+  display: block
 }
 .hand-pointer {
   cursor: pointer;

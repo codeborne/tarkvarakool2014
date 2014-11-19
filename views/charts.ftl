@@ -1,6 +1,6 @@
 <@html>
-  <#if goals?has_content>
-    <#list goals as goal>
+  <#if goal?has_content>
+  <input type="hidden" value="${goal.id?c}" name="goalId">
     <div class="panel panel-default">
       <div class="goal">
         <div class="panel-heading">
@@ -9,33 +9,42 @@
           <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
         </div>
       </div>
-      <div class="panel-body"id="chart"></div>
+      <div class="panel-body">
+      <div class="chart" style= "height: 600px;"></div>
+</div>
     </div>
-    </#list>
+
   </#if>
 
 <script>
-  google.load("visualization", "1", {packages:["corechart"]});
+  google.load("visualization", "1", {packages:["corechart"],language:'et'});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
-
     var jsonData = $.ajax({
       url: "/chart",
       type: "POST",
       dataType:"json",
-      async: false
+      async: false,
+      data: {goalId: $("input").val()}
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
   console.log(jsonData);
   console.log(data1);
     var data = google.visualization.arrayToDataTable(data1);
     var options = {
-      title: 'Graafikud',
-      curveType: 'function',
-      legend: { position: 'bottom'
-      }
+//      curveType: 'none',
+//      pointSize: 5,
+//      hAxis: {gridlines: {count: 8}},
+      hAxis:{format:'####'},
+      vAxis:{format:'#%'},
+//      width: 1000,
+      legend: { position: 'right'}
     };
-    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    var chart =  new google.visualization.ColumnChart(document.getElementById('chart'));
+
+
+
+
     chart.draw(data, options);
   }
 </script>
