@@ -80,6 +80,7 @@ body {
   border-top: 0;
   text-align: left;
   padding: 10px;
+
 }
 
 .valueTable> thead > tr > th, .valueTable> tbody > tr > td{
@@ -94,6 +95,7 @@ body {
 
 .userHomeTable> thead > tr > th, .userHomeTable> tbody > tr > td{
   text-align: left !important;
+
 }
 
 .userHomeTable td:first-child{
@@ -106,9 +108,15 @@ body {
 .userHomeTable td:nth-child(3),.userHomeTable td:nth-child(4),.userHomeTable td:nth-child(5){
   width:100px;
 }
-
+.userHomeTable> tbody> tr:nth-child(odd), .valueStripes> tbody> tr:nth-child(odd) {
+  background: #E6E6E6;
+}
 .table {
   margin-top: 20px;
+}
+.table-hover> tbody> tr:hover td{
+  background-color: #E6E6E6;
+
 }
 
 .userViewPublicDescription {
@@ -130,6 +138,7 @@ body {
 #metrics-table tbody:hover {
   background: rgba(240, 240, 240, 1);
 }
+
 .form-control {
   max-width:815px;
   }
