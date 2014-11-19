@@ -154,7 +154,7 @@
         </tr>
       </#list>
       <tr class="yearlyBudget">
-        <td><@m'moneySpent'/></td>
+        <td><em><@m'moneySpent'/></em></td>
         <td></td>
         <#list minimumYear..maximumYear as year>
           <td class="values">
@@ -170,6 +170,7 @@
         </#list>
         <td></td>
         </tr>
+      <tr></tr>
         </tbody>
     </table>
     <br>
