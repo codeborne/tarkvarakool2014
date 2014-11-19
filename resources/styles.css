@@ -114,9 +114,8 @@ body {
 .table {
   margin-top: 20px;
 }
-.table-hover> tbody> tr:hover td{
+.table-hover> tbody> tr:not(:last-child):hover td{
   background-color: #E6E6E6;
-
 }
 
 .userViewPublicDescription {
