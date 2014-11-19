@@ -5,69 +5,57 @@ body {
   color: #333;
   font-weight: 300;
 }
-
 .navbar {
   border: 0;
   color: #fff;
-  background: url(/images/Top.png) repeat-x scroll 0px 100% transparent;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
+  background: url(/images/Top.png) repeat-x scroll 0 100% transparent;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
   height: 60px;
   margin-bottom: 60px;
 }
-
 .container {
   width: 1170px;
   padding: 0;
 }
-
 .container-top {
   margin-top: 6px;
 }
-
 .toprow {
   margin: 0 0 30px 0;
   width: 100%;
 }
-
 .toprow td:nth-child(3) {
   color: #fff;
   font-size: 30px;
 }
-
 .toprow td:first-child {
   width: 289px;
 }
-
 .toprow td:nth-child(2) {
   padding-right: 14px;
 }
-
 .toprow td:last-child {
   text-align: right;
   background-color: transparent;
 }
-
 .panel, .panel-login {
   border: 0;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   background-color: #f8f9fa;
   min-height: 600px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
   margin-top: 40px;
-
 }
-
 .panel-body {
-  padding: 0px 40px;
+  padding: 0 40px;
 }
-
 .table > thead > tr > th {
   border-bottom: 1px solid #DDD;
   color: #000;
@@ -75,84 +63,75 @@ body {
   text-align: left;
   padding: 20px 10px;
 }
-
 .table > tbody > tr > td {
   border-top: 0;
   text-align: left;
   padding: 10px;
 }
-
 .valueTable> thead > tr > th, .valueTable> tbody > tr > td{
   text-align: right !important;
   width: 75px;
 }
-
 .valueTable> thead > tr > th:first-child , .valueTable> tbody > tr > td:first-child{
   text-align: left !important;
   width: auto !important;
 }
-
 .userHomeTable> thead > tr > th, .userHomeTable> tbody > tr > td{
   text-align: left !important;
 }
-
 .userHomeTable td:first-child{
   width:auto;
 }
 .userHomeTable td:nth-child(2){
   width:250px;
 }
-
 .userHomeTable td:nth-child(3),.userHomeTable td:nth-child(4),.userHomeTable td:nth-child(5){
   width:100px;
 }
-
+.userHomeTable> tbody> tr:nth-child(odd), .valueStripes> tbody> tr:nth-child(odd) {
+  background: #E6E6E6;
+}
 .table {
   margin-top: 20px;
 }
-
+.table-hover> tbody> tr:not(:last-child):hover td{
+  background-color: #E6E6E6;
+}
 .userViewPublicDescription {
   font-size:12px;
 }
-
 #adminMetricTable tr.metric {
   border-bottom: solid 1px #DDD;
 }
-
 #metrics-table tbody {
   border: none;
 }
-
 #metrics-table tbody:nth-child(odd) {
   background: rgba(240, 240, 240, 0.5);
 }
-
 #metrics-table tbody:hover {
   background: rgba(240, 240, 240, 1);
 }
 .form-control {
   max-width:815px;
-  }
+}
 .smallInputFields {
   max-width:160px!important;
 }
 .panel-heading {
   padding: 25px 40px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   position: relative;
   background-color: #fff !important;
   z-index: 2;
 }
-
 .panel-heading > .name, .translationHeading {
   color: #006699;
   font-size: 30px;
 }
-
 .panel-heading .budget {
   color: #6f6d65;
 }
-
 .missingGoals {
   text-align: center;
   padding: 200px;
@@ -160,8 +139,6 @@ body {
 .startLevel, .targetLevel {
   text-align: right !important;
 }
-
-
 .saveGoalButton, .cancelGoalButton, .publicButton {
   height: 35px;
   width: 35px;
@@ -176,19 +153,15 @@ body {
   overflow: hidden;
   color: lightgray;
   margin-left: -15px;
-
 }
-
 .action-button .saveGoalButton:hover {
   color: green;
   background-color: transparent;
 }
-
 .cancelGoalButton:hover {
   color: red;
   background-color: transparent;
 }
-
 .modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button{
   background-color: Transparent;
   border: none;
@@ -197,59 +170,51 @@ body {
   color: lightgray;
   font-size: 16px;
 }
-
 tr.metric .glyphicon-sort{
   padding-top: 15px;
 }
-
-
 .modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover {
   color: #ffcc00;
   background-color: transparent;
 }
-
 .measured .glyphicon-pencil, .forecasted .glyphicon-pencil, .yearlyBudget .glyphicon-pencil {
   color: lightgrey !important;
 }
-
 .measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover {
-  color: #ffcc00;
+  color: #ffcc00 !important;
 }
-
 .forecasted{
   white-space: nowrap;
 }
-
 .footer {
-  background: url(/images/bottom.png) repeat scroll 0px 100% transparent;
-  height: 295px;
-  border-radius: 0px;
+  background: url(/images/bottom.png) repeat scroll 0 100% transparent;
+  border-radius: 0;
+  position: relative;
+  padding-top: 300px;
+  margin-top: -50px;
+  height: 100px;
+  z-index: -1;
+  !important;
 }
-
 .publicButton{
   margin: 0 !important;
   height: 23px !important;
   width: 28px !important;
   margin-bottom: 5px !important;
 }
-
 .chart-button{
   float: right;
   font-size: 30px;
 }
-
 .chart{
   margin:0 !important;
   padding: 0 !important;
   display: block
-
 }
-
 .hand-pointer {
   cursor: pointer;
   cursor: hand;
 }
-
 #saveTranslationButton, #goalSaveButton, .authentication-button, #submit, #metricSaveButton {
   margin-left: 20px;
   background: #084381;
@@ -263,7 +228,7 @@ tr.metric .glyphicon-sort{
   border: 0;
   width: 120px;
   height: 30px;
-  padding: 0px;
+  padding: 0;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 11px;
@@ -271,32 +236,26 @@ tr.metric .glyphicon-sort{
   font-family: "Roboto Condensed";
   border-radius: 2px;
 }
-
 #metricSaveButton{
   margin-left: 0 !important;
   margin-bottom: 20px;
 }
-
 #goalSaveButtonTd{
   vertical-align: bottom;
 }
-
 #saveTranslationButton{
   float:right;
   margin-right: 10px;
   margin-bottom: 30px;
 }
-
 #submit {
   margin-left: 2px;
-  padding: 0px;
+  padding: 0;
 }
-
 .glyphicon-arrow-right {
   color: #ffffff;
   padding-left: 10px;
 }
-
 .glyphicon-lock {
   font-size: 10px;
   padding-right: 5px;
@@ -307,9 +266,7 @@ tr.metric .glyphicon-sort{
   background-color: transparent;
   color: #ffcc00;
   border: none;
-
 }
-
 .forecasted > span.value, .forecast-indicator {
   color: #333
 }
@@ -319,13 +276,11 @@ tr.metric .glyphicon-sort{
 .values{
   text-align:right !important;
 }
-
 .symbol {
   height: 55px;
   width: 2px;
   background-color: #fff;
 }
-
 .switch-button {
   display: inline-block;
   padding: 6px 12px;
@@ -339,12 +294,10 @@ tr.metric .glyphicon-sort{
   background-color: transparent;
   color: rgba(255, 255, 255, 0.5);;
 }
-
-.switch-button.active {
+.switch-button.active, .languageButtons a.active  {
   color: #ffcc00;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .languageButtons {
   font-size: 11px;
   margin-bottom: 6px;
@@ -358,7 +311,6 @@ tr.metric .glyphicon-sort{
   position: relative;
   margin-right: 40px;
 }
-
 .languageButtons:before,
 .languageButtons:after {
   content: '';
@@ -369,12 +321,10 @@ tr.metric .glyphicon-sort{
   height: 15px;
   border-left: 1px solid #fff;
 }
-
 .languageButtons:after {
   left: auto;
   right: -10px;
 }
-
 .languageButtons a {
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
@@ -382,28 +332,18 @@ tr.metric .glyphicon-sort{
   display: inline-block;
   padding: 6px;
 }
-
-.languageButtons a.active {
-  color: #ffcc00;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 td.actions .action-button {
   display: inline-block;
 }
-
 td.actions {
   white-space: nowrap;
 }
-
 .ui-state-highlight {
   background-color: #E0E0E0;
 }
-
 input.modify-value {
   max-width: 60px;
 }
-
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -412,80 +352,54 @@ input.modify-value {
   clear: both;
   height: 0;
 }
-
 .clearfix {
   display: inline-block;
 }
-
 * html .clearfix {
   height: 1%;
 }
-
 .clearfix {
   display: block;
 }
-
 .login-center {
   padding: 140px 470px;
 }
-
 #login-h3 {
   color: #069;
   font-size: 30px;
-
 }
-
 .headingName {
   color: #006699;
   font-size: 30px;
 }
-
 .metricHeading{
   color: #006699;
 }
-
-
-.footer {
-  position: relative;
-  padding-top: 300px;
-  margin-top: -50px;
-  height: 100px;
-  z-index: -1;
-!important;
-}
-
 .alert-danger, .alert-success {
   width: 450px;
   text-align: center;
-  padding: 8px 0px;
+  padding: 8px 0;
   margin: auto;
   margin-bottom: 10px;
 }
-
 .greenValue {
   color: green;
 }
-
 .redValue {
   color: red;
 }
-
-
 tr.metric div, .addMetric div {
   display: inline-block;
 }
-
 .metricContent ul, .addMetric ul {
   list-style: none;
   margin: 0;
   padding: 0;
   padding-bottom: 20px;
 }
-
 .labelsStyle {
   font-weight: bold;
 }
-
 li span.value {
   padding-right: 10px;
 }

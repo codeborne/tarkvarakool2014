@@ -110,5 +110,7 @@ public class HomeViewTest extends UITest {
     $("#logout-button").click();
 
   }
+
+
 }
 

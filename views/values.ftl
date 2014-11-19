@@ -12,7 +12,7 @@
       <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
     </div>
     <div class="panel-body">
-      <table class="table valueTable">
+      <table class="table valueTable valueStripes">
       <thead>
       <tr>
         <th class="valuesMetric"><@m'metric'/></th>
@@ -48,13 +48,10 @@
         </tr>
           </#if>
         </#list>
-      <tr>
-        <td>
-          <br><br>
-          <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
-      </tr>
       </tbody>
       </table>
+      <br><br>
+      <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
     </div>
   </div>
   </div>

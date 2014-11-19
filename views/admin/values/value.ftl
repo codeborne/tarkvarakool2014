@@ -109,7 +109,7 @@
     <h4 class="name"> ${goal.name}</h4>
 </div>
   <div class="panel-body">
-    <table class="table valueTable">
+    <table class="table valueTable table-hover">
       <thead>
         <tr>
           <th><@m'metric'/></th>
@@ -171,14 +171,13 @@
             </form>
           </td>
         </#list>
+        <td></td>
         </tr>
-      <tr>
-        <td>
-          <br><br>
-          <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
-      </tr>
         </tbody>
     </table>
+    <br>
+    <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
+    <br><br>
 </div>
 </div>
   </div>

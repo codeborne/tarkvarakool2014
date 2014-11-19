@@ -2,6 +2,9 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
+    <button class="chart-button" type="button" class="btn btn-default btn-sm" title="<@m'charts'/>" onclick="location='/charts'">
+      <span class="glyphicon glyphicon-stats"></span>
+    </button>
     <#if message??>
       <div class="alert alert-success"><@m message/></div>
     </#if>
@@ -25,6 +28,7 @@
           <tr class="goal">
             <td class="sort">
               <span class="glyphicon glyphicon-sort hand-pointer" title="<@m 'sortingInstruction'/>"></span>
+
               <form class="orderNumberForm">
                 <input type="hidden" value="${goal.id?c}" name="id">
                 <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">

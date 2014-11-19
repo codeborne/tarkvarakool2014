@@ -49,102 +49,81 @@ public class ValuesModifyingTest extends UITest {
   public void successModifyingEmptyMeasuredValue () throws Exception {
     open("/admin/values/value");
 
-    $$(".glyphicon-pencil").get(0).click();
-    SelenideElement input = $$(".modify-value").get(0);
-    input.setValue("4564.656").pressEnter();
-    input.shouldNotBe(visible);
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(3);
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("4564.656").pressEnter();
 
-    $$(".value").get(0).shouldHave(text("4564.7"));
-    $$(".value").get(0).shouldNotHave(cssClass("glyphicon-pencil"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4564.7"));
   }
 
   @Test
   public void successModifyingExistingMeasuredValue() throws Exception {
     open("/admin/values/value");
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(5);
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("4345356498989898989898999118.65689898989555").pressEnter();
 
-    $$(".glyphicon-pencil").get(0).click();
-    SelenideElement input = $$(".modify-value").get(0);
-    input.setValue("4345356498989898989898999118.65689898989555").pressEnter();
-    input.shouldNotBe(visible);
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4345356498989898989898999118.7"));
 
-    $$(".value").get(0).shouldHave(text("4345356498989898989898999118.7"));
-
-    $$(".value").get(0).click();
-    input = $$(".modify-value").get(0);
-    input.shouldHave(value("4345356498989898989898999118.7"));
-
-    input.setValue("-4345356498989898989898999118.65").pressEnter();
-    input.shouldNotBe(visible);
-
-    $$(".value").get(0).shouldHave(text("-4345356498989898989898999118.7"));
-
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).shouldHave(value("4345356498989898989898999118.7"));
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("-4345356498989898989898999118.63").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4345356498989898989898999118.6"));
   }
 
   @Test
   public void modifyingEmptyForecastValue() throws Exception {
     open("/admin/values/value");
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(2);
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("56").pressEnter();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).shouldNotBe(visible);
 
-    $$(".glyphicon-pencil").get(1).click();
-    SelenideElement input = $$(".modify-value").get(1);
-    input.setValue("56").pressEnter();
-    input.shouldNotBe(visible);
-    $$(".value").get(1).shouldHave(text("56"));
-    $$(".value").get(1).shouldNotHave(text("56.0"));
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).shouldHave(text("56"));
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).shouldNotHave(text("56.0"));
   }
 
   @Test
   public void modifyingExistingForecastValue() throws Exception {
     open("/admin/values/value");
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(8);
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("53453").pressEnter();
 
-    $$(".glyphicon-pencil").get(1).click();
-    SelenideElement input = $$(".modify-value").get(1);
-    input.setValue("53453").pressEnter();
-    input.shouldNotBe(visible);
-    $$(".value").get(1).shouldHave(text("53453"));
-
-    $$(".value").get(1).click();
-    input = $$(".modify-value").get(1);
-    input.setValue("-4").pressEnter();
-    input.shouldNotBe(visible);
-    $$(".value").get(1).shouldHave(text("-4"));
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).shouldHave(text("53453"));
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("-4").pressEnter();
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).shouldHave(text("-4"));
   }
 
   @Test
   public void deleteExistingMeasuredValue() throws Exception {
     open("/admin/values/value");
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(8);
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("53453.87").pressEnter();
 
-    $$(".glyphicon-pencil").get(0).click();
-    SelenideElement input = $$(".modify-value").get(0);
-    input.setValue("-4564.656").pressEnter();
-    input.shouldNotBe(visible);
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("53453.9"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("").pressEnter();
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text(""));
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).shouldNotBe(visible);
 
-    $$(".value").get(0).shouldHave(text("-4564.7"));
-
-    $$(".value").get(0).click();
-    input = $$(".modify-value").get(0);
-    input.setValue("").pressEnter();
-    input.shouldNotBe(visible);
-
-    $$(".value").get(0).shouldHave(text(""));
   }
 
   @Test
   public void deleteExistingForecastValue() throws Exception {
     open("/admin/values/value");
+    SelenideElement tableCell = $$(".goal").get(0).$$(".metric").get(0).$$("td").get(8);
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("53453").pressEnter();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).shouldNotBe(visible);
 
-    $$(".glyphicon-pencil").get(3).click();
-    SelenideElement input = $$(".modify-value").get(3);
-    input.setValue("53453").pressEnter();
-    input.shouldNotBe(visible);
-    $$(".value").get(3).shouldHave(text("53453"));
-
-    $$(".value").get(3).click();
-    input = $$(".modify-value").get(3);
-    input.setValue("").pressEnter();
-    input.shouldNotBe(visible);
-    $$(".value").get(3).shouldHave(text(""));
-    $$(".value").get(3).shouldHave(cssClass("glyphicon-pencil"));
-
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).shouldHave(text("53453"));
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).click();
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).setValue("").pressEnter();
+    tableCell.$$("div.forecasted").get(0).$$("span.value").get(0).shouldHave(text(""));
+    tableCell.$$("div.forecasted").get(0).$$("input.modify-value").get(0).shouldNotBe(visible);
   }
 
   @Test
