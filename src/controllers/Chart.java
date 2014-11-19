@@ -6,8 +6,8 @@ import framework.Role;
 import model.Goal;
 import model.Metric;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -31,10 +31,18 @@ public class Chart extends UserAwareController {
 
     Set<Metric> metrics = goal.getPublicMetrics();
 
+    Set<Metric> metricsWithValidLevels= new HashSet<>();
+
+    for (Metric metric: metrics){
+      if(metric.getStartLevel() != null && metric.getTargetLevel() != null){
+        metricsWithValidLevels.add(metric);
+      }
+    }
+
 
     List<String> header = new ArrayList<>();
     header.add(messages.get("year"));
-    for (Metric metric:metrics){
+    for (Metric metric:metricsWithValidLevels){
       header.add(metric.getName());
     }
 
@@ -44,9 +52,13 @@ public class Chart extends UserAwareController {
     row.add( new Gson().toJson(header));
     for (int year = minimumYear; year<=maximumYear;year++){
 
-      String values = "["+year ;
-      for (Metric metric:metrics){
-        BigDecimal value = metric.getValues().get(year);
+      String values = "["+"\""+year+"\"" ;
+      for (Metric metric:metricsWithValidLevels){
+        Double value = null;
+        if(metric.getStartLevel() != metric.getTargetLevel() && metric.getValues().get(year) != null) {
+          value = (metric.getValues().get(year).doubleValue() - metric.getStartLevel()) / (metric.getTargetLevel() - metric.getStartLevel());
+        }
+//        BigDecimal value = metric.getValues().get(year);
         values = values +  "," +value;
       }
       values = values + "]";

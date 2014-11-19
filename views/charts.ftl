@@ -9,13 +9,15 @@
           <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
         </div>
       </div>
-      <div class="panel-body"id="chart"></div>
+      <div class="panel-body">
+      <div class="chart" style= "height: 600px;"></div>
+</div>
     </div>
 
   </#if>
 
 <script>
-  google.load("visualization", "1", {packages:["corechart"]});
+  google.load("visualization", "1", {packages:["corechart"],language:'et'});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
     var jsonData = $.ajax({
@@ -30,11 +32,19 @@
   console.log(data1);
     var data = google.visualization.arrayToDataTable(data1);
     var options = {
-      title: 'Graafikud',
-      curveType: 'function',
-      legend: { position: 'bottom'}
+//      curveType: 'none',
+//      pointSize: 5,
+//      hAxis: {gridlines: {count: 8}},
+      hAxis:{format:'####'},
+      vAxis:{format:'#%'},
+//      width: 1000,
+      legend: { position: 'right'}
     };
-    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    var chart =  new google.visualization.ColumnChart(document.getElementById('chart'));
+
+
+
+
     chart.draw(data, options);
   }
 </script>
