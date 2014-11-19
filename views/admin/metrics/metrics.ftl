@@ -46,46 +46,52 @@
         <li>
           <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
           <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
-          <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>" style="display: none;">${metric.name}</textarea>
+          <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>"
+                    style="display: none;">${metric.name}</textarea>
         </li>
 
         <li>
           <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
           <span class="value publicDescription">${metric.publicDescription}</span>
-          <textarea class="value form-control" name="publicDescription" maxlength="255" placeholder="<@m'publicDescription'/>" style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
+          <textarea class="value form-control" name="publicDescription" maxlength="255"
+                    placeholder="<@m'publicDescription'/>"
+                    style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
         </li>
 
         <li>
           <span class="labels labelsStyle"><@m'privateDescription'/>: </span>
           <span class="value privateDescription">${metric.privateDescription}</span>
-          <textarea class="value form-control" name="privateDescription" maxlength="255" placeholder="<@m'privateDescription'/>" style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
+          <textarea class="value form-control" name="privateDescription" maxlength="255"
+                    placeholder="<@m'privateDescription'/>"
+                    style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
         </li>
 
         <li>
           <div>
             <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'unit'/>: </span>
-            <input class="value form-control smallInputFields" name="unit" maxlength="255" placeholder="<@m'unit'/>" value="${metric.unit}" style="display: none;">
+            <input class="value form-control smallInputFields" name="unit" maxlength="255" placeholder="<@m'unit'/>"
+                   value="${metric.unit}" style="display: none;">
           </div>
           <br class="value">
+
           <div>
             <span class="labels labelsStyle"><@m'startLevel'/>: </span>
             <#if metric.startLevel??>
               <span class="value startLevel">${metric.startLevel?c}</span>
               <span class="value unit">${metric.unit}</span>
-              <span class="value commentOnStartLevel">
-                <#if metric.commentOnStartLevel?length!=0>(${metric.commentOnStartLevel})</#if>
-              </span>
+              <span class="value commentOnStartLevel">&nbsp;<#if metric.commentOnStartLevel?length!=0>(${metric.commentOnStartLevel})</#if></span>
             <#elseif metric.commentOnStartLevel?length!=0>
               <span class="value commentOnStartLevel">${metric.commentOnStartLevel}</span>
             <#else>
               <span class="value startLevel">N/A</span>
             </#if>
-            <input class="value form-control smallInputFields" name="startLevel"  placeholder="<@m'startLevel'/>"
+            <input class="value form-control smallInputFields" name="startLevel" placeholder="<@m'startLevel'/>"
                    <#if metric.startLevel??>value="${(metric.startLevel?c)}"</#if> style="display: none;">
           </div>
           <div>
             <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'startLevelComment'/>: </span>
-            <input class="value form-control smallInputFields" name="commentOnStartLevel" maxlength="255" placeholder="<@m'startLevelComment'/>"
+            <input class="value form-control smallInputFields" name="commentOnStartLevel" maxlength="255"
+                   placeholder="<@m'startLevelComment'/>"
                    value="${metric.commentOnStartLevel}"
                    style="display: none;">
           </div>
@@ -94,9 +100,7 @@
             <#if metric.targetLevel??>
               <span class="value targetLevel">${metric.targetLevel?c}</span>
               <span class="value unit">${metric.unit}</span>
-              <span class="value commentOnTargetLevel">
-                <#if metric.commentOnTargetLevel?length!=0>(${metric.commentOnTargetLevel})</#if>
-              </span>
+              <span class="value commentOnTargetLevel">&nbsp;<#if metric.commentOnTargetLevel?length!=0>(${metric.commentOnTargetLevel})</#if></span>
             <#elseif metric.commentOnTargetLevel?length!=0>
               <span class="value commentOnTargetLevel">${metric.commentOnTargetLevel}</span>
             <#else>
@@ -107,37 +111,35 @@
           </div>
           <div>
             <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'targetLevelComment'/>: </span>
-            <input class="value form-control smallInputFields" name="commentOnTargetLevel" maxlength="255" placeholder="<@m'targetLevelComment'/>"
+            <input class="value form-control smallInputFields" name="commentOnTargetLevel" maxlength="255"
+                   placeholder="<@m'targetLevelComment'/>"
                    value="${metric.commentOnTargetLevel}"
                    style="display: none;">
           </div>
-
         </li>
-
         <li>
           <div>
             <span class="labels labelsStyle"><@m'infoSource'/>: </span>
-                  <span class="value infoSource">
-                      <#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
-                        <a href="${metric.infoSource}" target="_blank">${metric.infoSource}</a>
-                        <#else> ${metric.infoSource!""}
-                      </#if>
-                  </span>
-            <input class="value form-control smallInputFields" name="infoSource" placeholder="<@m'infoSource'/>" maxlength="255" value="${metric.infoSource}"
+            <span
+              class="value infoSource"><#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
+            <a href="${metric.infoSource}" target="_blank">${metric.infoSource}</a><#else> ${metric.infoSource!""}</#if>
+            </span>
+            <input class="value form-control smallInputFields" name="infoSource" placeholder="<@m'infoSource'/>"
+                   maxlength="255" value="${metric.infoSource}"
                    style="display: none;">
           </div>
           <div>
             <span class="labels labelsStyle"> &nbsp; &nbsp;<@m'institutionReport'/>: </span>
             <span class="value institutionToReport">${metric.institutionToReport}</span>
-            <input class="value form-control smallInputFields" name="institutionToReport" maxlength="255" placeholder="<@m'institutionReport'/>"
+            <input class="value form-control smallInputFields" name="institutionToReport" maxlength="255"
+                   placeholder="<@m'institutionReport'/>"
                    value="${metric.institutionToReport}"
                    style="display: none;">
           </div>
         </li>
-
         <li>
-                <span
-                  class="value isPublic"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
+          <span
+            class="value isPublic"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
         </li>
       </ul>
     </td>
@@ -157,36 +159,31 @@
       </div>
 
       <div class="action-button">
-             <span class="value">
-              <button class="modifyButton" title="<@m'modify'/>" type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
-             </span>
+        <span class="value"><button class="modifyButton" title="<@m'modify'/>" type="button"
+                                    class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>
+        </button></span>
       </div>
 
       <div class="action-button">
         <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
           <input type="hidden" value="${goal.id?c}" name="goalId">
           <input type="hidden" name="id" value="${metric.id?c}"/>
-              <span class="value">
-              <button class="deleteButton " title="<@m'delete'/>" type="submit" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-trash"></span>
-              </button>
-              </span>
+          <span class="value"><button class="deleteButton " title="<@m'delete'/>" type="submit"
+                                      class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span>
+          </button></span>
         </form>
       </div>
 
       <div class="action-button">
-          <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
-          <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
-          <input class="isPublicValue" type="hidden" name="isStatusUpdateOnly" value="true"/>
-          <input class="isPublicValue" type="hidden" name="isPublic"
-          <#if metric.isPublic==false>value="true"<#else>value="false"</#if>/>
-          <span class="value">
-            <input type="button" title="<@m'public'/>/<@m'private'/>" class="isPublicValue btn btn-default btn-sm publicButton"
-              value="" data-action="save"
-              <#if metric.isPublic==true> style="color:green"<#else>style="color:red"</#if> />
-          </span>
+        <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
+        <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
+        <input class="isPublicValue" type="hidden" name="isStatusUpdateOnly" value="true"/>
+        <input class="isPublicValue" type="hidden" name="isPublic"
+               <#if metric.isPublic==false>value="true"<#else>value="false"</#if>/>
+        <span class="value"><input type="button" title="<@m'public'/>/<@m'private'/>"
+                                   class="isPublicValue btn btn-default btn-sm publicButton" value=""
+                                   data-action="save"<#if metric.isPublic==true> style="color:green"
+                                   <#else>style="color:red"</#if> /></span>
       </div>
     </td>
   </tr>
@@ -199,23 +196,27 @@
     <ul>
       <li>
         <span class="addLabel"><@m'metric'/>: </span>
-        <textarea name="name" class="value form-control" maxlength="255" placeholder="<@m'metric'/>">${name!""}</textarea>
+        <textarea name="name" class="value form-control" maxlength="255"
+                  placeholder="<@m'metric'/>">${name!""}</textarea>
       </li>
 
       <li>
         <span class="addLabel"><@m'publicDescription'/>: </span>
-        <textarea name="publicDescription" class="value form-control" maxlength="255" placeholder="<@m'publicDescription'/>">${publicDescription!""}</textarea>
+        <textarea name="publicDescription" class="value form-control" maxlength="255"
+                  placeholder="<@m'publicDescription'/>">${publicDescription!""}</textarea>
       </li>
 
       <li>
         <span class="addLabel"><@m'privateDescription'/>: </span>
-        <textarea name="privateDescription" class="value form-control" maxlength="255" placeholder="<@m'privateDescription'/>">${privateDescription!""}</textarea>
+        <textarea name="privateDescription" class="value form-control" maxlength="255"
+                  placeholder="<@m'privateDescription'/>">${privateDescription!""}</textarea>
       </li>
 
       <li>
         <div>
           <span class="addLabel"><@m'unit'/>: </span>
-          <input name="unit" class="value form-control smallInputFields" maxlength="255" placeholder="<@m'unit'/>" value="${unit!""}">
+          <input name="unit" class="value form-control smallInputFields" maxlength="255" placeholder="<@m'unit'/>"
+                 value="${unit!""}">
         </div>
         <div>
           <span class="addLabel"><@m'startLevel'/>: </span>
@@ -230,7 +231,7 @@
         </div>
         <div>
           <span class="addLabel"><@m'targetLevel'/>: </span>
-          <input name="targetLevel"  class="value form-control smallInputFields" placeholder="<@m'targetLevel'/>"
+          <input name="targetLevel" class="value form-control smallInputFields" placeholder="<@m'targetLevel'/>"
                  <#if targetLevel??>value="${(targetLevel?c)}"</#if>>
         </div>
         <div>
@@ -244,7 +245,8 @@
       <li>
         <div>
           <span class="addLabel"><@m'infoSource'/>: </span>
-          <input name="infoSource" class="value form-control smallInputFields" maxlength="255" placeholder="<@m'infoSource'/>"
+          <input name="infoSource" class="value form-control smallInputFields" maxlength="255"
+                 placeholder="<@m'infoSource'/>"
                  value="${infoSource!""}">
         </div>
         <div>
@@ -272,7 +274,6 @@
 <span id="errors"></span>
 </div>
 </div>
-
 
 
 <script>
