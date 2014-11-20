@@ -34,7 +34,7 @@ public class Chart extends UserAwareController {
     Set<Metric> metricsWithValidLevels= new HashSet<>();
 
     for (Metric metric: metrics){
-      if(metric.getStartLevel() != null && metric.getTargetLevel() != null){
+      if(metric.getStartLevel() != null && metric.getTargetLevel() != null && metricsWithValidLevels.size()<=10){
         metricsWithValidLevels.add(metric);
       }
     }
@@ -47,8 +47,6 @@ public class Chart extends UserAwareController {
     }
     header.add(messages.get("budget"));
 
-//    asList("year","metric1","metric2");
-
     List<String> row = new ArrayList<>();
     row.add( new Gson().toJson(header));
     for (int year = minimumYear; year<=maximumYear;year++){
@@ -60,7 +58,6 @@ public class Chart extends UserAwareController {
           value = (metric.getValues().get(year).doubleValue() - metric.getStartLevel()) / (metric.getTargetLevel() - metric.getStartLevel());
           value = Math.round( value * 1000.0 ) / 1000.0;
         }
-//        BigDecimal value = metric.getValues().get(year);
         values = values +  "," +value;
       }
       values = values + ","+ goal.getYearlyBudgets().get(year)+"]";
