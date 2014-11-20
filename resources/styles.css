@@ -405,5 +405,23 @@ tr.metric div, .addMetric div {
 li span.value {
   padding-right: 10px;
 }
+.legendRow{
+  height: 14px;
+  width: 14px;
+  display: inline-block;
 
+}
+.chartLegend {
+  background-color: white;
+  padding-bottom: 20px;
+}
 
+.legendMetricName {
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.legendTable{
+  margin-left: 40px;
+}
