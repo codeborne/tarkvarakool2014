@@ -9,8 +9,7 @@
           <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
         </div>
       </div>
-      <div class="panel-body">
-      <div class="chart" style= "height: 600px;"></div>
+      <div class="panel-body" id="chart">
 </div>
     </div>
 
@@ -31,19 +30,32 @@
   console.log(jsonData);
   console.log(data1);
     var data = google.visualization.arrayToDataTable(data1);
+    k = data.getNumberOfColumns()-2;
+    console.log(k);
     var options = {
-//      curveType: 'none',
-//      pointSize: 5,
-//      hAxis: {gridlines: {count: 8}},
-      hAxis:{format:'####'},
-      vAxis:{format:'#%'},
-//      width: 1000,
-      legend: { position: 'right'}
+      seriesType: "bars",
+      hAxis: {format: '####', title: 'Aasta'},
+      vAxes: {0:{format:'#%', minValue:0.0, viewWindow: {  min: 0  }, title: 'Eesmärgi täituvus'},
+        1: {format: "#", title: 'Eelarve (€)'} },
+      legend: { position: 'bottom'}
     };
-    var chart =  new google.visualization.ColumnChart(document.getElementById('chart'));
 
+    seriesOption = {};
+    seriesOption[ data.getNumberOfColumns()-2] = {targetAxisIndex:1, pointSize:5, type: "line"};
+    for(i=1; i<data.getNumberOfColumns()-2; i++) {
+      seriesOption[i] = {targetAxisIndex: 0};
+    }
+    options.series = seriesOption;
 
+    var formatter1 = new google.visualization.NumberFormat({pattern:'###%'});
+    for(i=1; i<data.getNumberOfColumns()-1; i++) {
+      formatter1.format(data, i);
+    }
 
+    var formatter2 = new google.visualization.NumberFormat({pattern:'###€'});
+    formatter2.format(data,data.getNumberOfColumns()-1);
+
+    var chart =  new google.visualization.ComboChart(document.getElementById('chart'));
 
     chart.draw(data, options);
   }
