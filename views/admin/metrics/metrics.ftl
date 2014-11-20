@@ -8,6 +8,7 @@
 </div>
 <div class="panel-body">
 <table class="table table-hover" id="adminMetricTable">
+
 <thead>
 <tr>
   <th><@m'sort'/></th>
@@ -41,6 +42,7 @@
       </form>
     </td>
 
+
     <td class="metricContent">
       <ul>
         <li>
@@ -48,7 +50,7 @@
           <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
           <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>"
                     style="display: none;">${metric.name}</textarea>
-        </li>
+               </li>
 
         <li>
           <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
@@ -81,7 +83,7 @@
               <span class="value unit">${metric.unit}</span>
               <span class="value commentOnStartLevel">&nbsp;<#if metric.commentOnStartLevel?length!=0>(${metric.commentOnStartLevel})</#if></span>
             <#elseif metric.commentOnStartLevel?length!=0>
-              <span class="value commentOnStartLevel">${metric.commentOnStartLevel}</span>
+              <span class="value commentOnStartLevel">(${metric.commentOnStartLevel})</span>
             <#else>
               <span class="value startLevel">N/A</span>
             </#if>
@@ -102,7 +104,7 @@
               <span class="value unit">${metric.unit}</span>
               <span class="value commentOnTargetLevel">&nbsp;<#if metric.commentOnTargetLevel?length!=0>(${metric.commentOnTargetLevel})</#if></span>
             <#elseif metric.commentOnTargetLevel?length!=0>
-              <span class="value commentOnTargetLevel">${metric.commentOnTargetLevel}</span>
+              <span class="value commentOnTargetLevel">(${metric.commentOnTargetLevel})</span>
             <#else>
               <span class="value targetLevel">N/A</span>
             </#if>
@@ -192,7 +194,6 @@
 <tr class="addMetric">
   <td></td>
   <td>
-
     <ul>
       <li>
         <span class="addLabel"><@m'metric'/>: </span>

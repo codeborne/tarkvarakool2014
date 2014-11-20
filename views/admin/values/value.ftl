@@ -98,11 +98,11 @@
 <div class="panel panel-default">
   <div class="goal">
 <div class="panel-heading">
-  <form action="/charts">
+  <form action="/admin/charts">
     <input type="hidden" value="${goal.id?c}" name="goalId">
-  <button class="chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'charts'/>">
-    <span class="glyphicon glyphicon-stats"></span>
-  </button>
+    <button class="chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'charts'/>">
+      <span class="glyphicon glyphicon-stats"></span>
+    </button>
   </form>
   <#if goal_index ==0>
    </#if>

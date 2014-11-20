@@ -210,7 +210,7 @@ tr.metric .glyphicon-sort{
   margin:0 !important;
   padding: 0 !important;
   display: block;
-height: 600px;
+  height: 600px;
 }
 .hand-pointer {
   cursor: pointer;
