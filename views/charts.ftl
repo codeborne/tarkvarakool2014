@@ -11,6 +11,27 @@
       </div>
       <div class="panel-body" id="chart">
 </div>
+      <div class="chartLegend" style="background-color: white; padding-left: 20px;">
+        <table class="legendTable">
+        <#list metricsWithValidLevels as metric>
+          <#list graphColors as color>
+        <#if metric_index == color_index>
+         <tr>
+          <td><div class="legendRow" style="background-color: ${color};"></div></td>
+          <td><span class="legendMetricName"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></span></td>
+          </tr>
+
+        </#if>
+            <#if (!metric_has_next && ((metric_index+1) == color_index))>
+              <tr>
+                <td><div class="legendRow" style="background-color: ${color};"></div></td>
+                <td><span class="legendMetricName"><@m'budget'/></span></td>
+              </tr>
+            </#if>
+        </#list>
+        </#list>
+          </table>
+      </div>
     </div>
 
   </#if>
@@ -30,14 +51,14 @@
   console.log(jsonData);
   console.log(data1);
     var data = google.visualization.arrayToDataTable(data1);
-    k = data.getNumberOfColumns()-2;
-    console.log(k);
+
     var options = {
       seriesType: "bars",
       hAxis: {format: '####', title: 'Aasta'},
       vAxes: {0:{format:'#%', minValue:0.0, viewWindow: {  min: 0  }, title: 'Eesmärgi täituvus'},
         1: {format: "#", title: 'Eelarve (€)'} },
-      legend: { position: 'bottom'}
+      legend: { position: 'none'},
+      colors: ['#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'],
     };
 
     seriesOption = {};
@@ -56,6 +77,8 @@
     formatter2.format(data,data.getNumberOfColumns()-1);
 
     var chart =  new google.visualization.ComboChart(document.getElementById('chart'));
+
+    console.log(options);
 
     chart.draw(data, options);
   }
