@@ -162,9 +162,7 @@
         <#list minimumYear..maximumYear as year>
           <td class="values">
 
-            <span <#if goal.yearlyBudgets.get(year)??>class="value hand-pointer"<#else>class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">
-              ${((goal.yearlyBudgets.get(year))?c)!""}
-            </span>
+            <span <#if goal.yearlyBudgets.get(year)??>class="value hand-pointer"<#else>class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">${((goal.yearlyBudgets.get(year))?c)!""}</span>
             <form class="metric-value-form" style="display: none;"
                   onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;">
               <input type="number" step="any" class="modify-value">
