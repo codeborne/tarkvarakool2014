@@ -25,7 +25,7 @@ public class Charts extends UserAwareController {
     Set<Metric> metrics = goal.getPublicMetrics();
 
     for (Metric metric: metrics){
-      if(metric.getStartLevel() != null && metric.getTargetLevel() != null){
+      if(metric.getStartLevel() != null && metric.getTargetLevel() != null && metricsWithValidLevels.size()<=10){
         metricsWithValidLevels.add(metric);
       }
     }
