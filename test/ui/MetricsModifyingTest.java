@@ -66,6 +66,8 @@ public class MetricsModifyingTest extends UITest {
 
     $$(".metricContent").get(0).$(By.name("name")).setValue("Metric");
     $$(".metricContent").get(0).$(By.name("unit")).setValue("EUR");
+    $$(".metricContent").get(0).$(By.name("startLevel")).setValue("23,5");
+    $$(".metricContent").get(0).$(By.name("targetLevel")).setValue("103,5");
     $$(".metricContent").get(0).$(By.name("infoSource")).setValue("source");
 
     $(".saveGoalButton").click();
@@ -74,6 +76,8 @@ public class MetricsModifyingTest extends UITest {
     assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
     assertEquals("source", $$("tr.metric").get(0).$(".infoSource").getText());
     assertEquals("Mitteavalik", $$("tr.metric").get(0).$(".isPublic").getText());
+    assertEquals("23.5", $$("tr.metric").get(0).$(".startLevel").getText());
+    assertEquals("103.5", $$("tr.metric").get(0).$(".targetLevel").getText());
 
     $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
   }

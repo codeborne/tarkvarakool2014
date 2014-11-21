@@ -281,6 +281,7 @@ public class SaveTest extends ControllerTest<Save> {
     verify(hibernate, never()).save(any(Metric.class));
   }
 
+
   @Test
   public void postIfStatusUpdateOnlyIsTrue() throws Exception {
     controller.metricId = 2L;
