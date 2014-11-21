@@ -162,7 +162,7 @@ body {
   color: red;
   background-color: transparent;
 }
-.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button{
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button, .small-chart-button{
   background-color: Transparent;
   border: none;
   cursor: pointer;
@@ -173,7 +173,7 @@ body {
 tr.metric .glyphicon-sort{
   padding-top: 15px;
 }
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover {
   color: #ffcc00;
   background-color: transparent;
 }

@@ -187,6 +187,15 @@
                                    data-action="save"<#if metric.isPublic==true> style="color:green"
                                    <#else>style="color:red"</#if> /></span>
       </div>
+
+      <div class="action-button">
+        <form action="/admin/metrics/charts">
+          <input type="hidden" value="${metric.id?c}" name="metricId">
+          <button class="small-chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'chart'/>">
+            <span class="glyphicon glyphicon-stats"></span>
+          </button>
+        </form>
+      </div>
     </td>
   </tr>
   </#list>
