@@ -34,6 +34,9 @@
           <th><@m'translateUnit'/></th>
           <th><@m'publicDescription'/></th>
           <th><@m'translatePublicDescription'/></th>
+          <th><@m'infoSource'/></th>
+          <th><@m'translateInfoSource'/></th>
+
         </tr>
         </thead>
       <tbody>
@@ -49,6 +52,10 @@
             <td class="publicDescription">${metric.publicDescription!""}</td>
             <td><textarea name="engPublicDescription" maxlength="255" rows="2"
                           placeholder="<@m'translatePublicDescription'/>">${metric.engPublicDescription!""}</textarea>
+            </td>
+            <td class="infoSource">${metric.infoSource!""}</td>
+            <td><textarea name="engInfoSource" maxlength="255" rows="2"
+                          placeholder="<@m'translateInfoSource'/>">${metric.engInfoSource!""}</textarea>
             </td>
           </tr>
           </#if>
