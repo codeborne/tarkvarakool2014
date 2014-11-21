@@ -44,6 +44,10 @@
 
 
     <td class="metricContent">
+
+
+      <span id="errors_${metric.id?c}"></span>
+
       <ul>
         <li>
           <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
@@ -199,7 +203,9 @@
 
 <tr class="addMetric">
   <td></td>
+
   <td>
+    <span id="adderrors"></span>
     <ul>
       <li>
         <span class="addLabel"><@m'metric'/>: </span>
@@ -276,7 +282,6 @@
 </tr>
 </tbody>
 </table>
-<span id="errors"></span>
 </div>
 </div>
 
@@ -294,7 +299,15 @@
     var saveClickHandler = function (event) {
       var button = $(event.target);
       var values = button.closest('tr').find('.value');
-      $.post(button.data("action"), values.serialize(), responseHandler);
+      $.post(button.data("action"), values.serialize(), function (response) {
+        if (response.trim() == "") {
+          window.location = window.location;
+        }
+        if (button.closest("td").children("input[name=metricId]").length == 0)
+          $("#adderrors").html(response);
+        else
+          $("#errors_" + button.closest("td").children("input[name=metricId]").first().val()).html(response);
+      });
     };
 
     var saveIsPublicClickHandler = function (event) {
