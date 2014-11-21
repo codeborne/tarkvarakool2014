@@ -29,6 +29,7 @@ public class Chart extends UserAwareController {
   @Override @Role("admin")
   public Result post(){
     goal = (Goal) hibernate.get(Goal.class, goalId);
+    Long availableBudget = goal.getBudget().longValue();
 
     Set<Metric> metrics = goal.getMetrics();
 
@@ -46,7 +47,7 @@ public class Chart extends UserAwareController {
     for (Metric metric:metricsWithValidLevels){
       header.add(metric.getName());
     }
-    header.add(messages.get("budget"));
+    header.add(messages.get("budgetLeft"));
 
     List<String> row = new ArrayList<>();
     row.add( new Gson().toJson(header));
@@ -61,7 +62,15 @@ public class Chart extends UserAwareController {
         }
         values = values +  "," +value;
       }
-      values = values + ","+ goal.getYearlyBudgets().get(year)+"]";
+      if(goal.getYearlyBudgets().get(year)!=null) {
+        availableBudget = availableBudget - goal.getYearlyBudgets().get(year);
+        values = values + "," + availableBudget + "]";
+      }
+      else {
+        values = values + "," + null + "]";
+      }
+
+
 
       row.add(values);
 
