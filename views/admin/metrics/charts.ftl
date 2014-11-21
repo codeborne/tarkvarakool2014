@@ -24,28 +24,14 @@
       async: false,
       data: {metricId: $("input").val()}
     }).responseText;
-    console.log(jsonData);
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
-
-    console.log(data1);
     var data = google.visualization.arrayToDataTable(data1);
-
     var options = {
       hAxis: {title: "<@m'year'/>"},
-      vAxis: {title: "<@m'vAxisTitle'/>"},
-      legend: { position: 'none'},
-//      colors: ['#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'],
+      vAxis: {title: "Mõõdiku väärtus (%)" , minValue: 0.0, viewWindow: {  min: 0.0  }},
+      legend: { position: 'none'}
     };
-
-//    var formatter1 = new google.visualization.NumberFormat({pattern:'###%'});
-//
-//      formatter1.format(data);
-
-
-
     var chart =  new google.visualization.ColumnChart(document.getElementById('chart'));
-
-
     chart.draw(data, options);
   }
 </script>

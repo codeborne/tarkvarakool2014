@@ -212,6 +212,31 @@ tr.metric .glyphicon-sort{
   display: block;
   height: 600px;
 }
+.legendRow{
+  height: 14px;
+  width: 14px;
+  display: inline-block;
+}
+.chartLegend {
+  background-color: white;
+  padding-bottom: 20px;
+}
+.legendMetricName {
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.legendTable{
+  margin-left: 40px;
+}
+.chartExplanation{
+  padding: 20px 0 0 10px;
+  font-size: 14px;
+}
+.glyphicon-info-sign{
+  padding-top: 25px;
+}
 .hand-pointer {
   cursor: pointer;
   cursor: hand;
@@ -404,33 +429,4 @@ tr.metric div, .addMetric div {
 }
 li span.value {
   padding-right: 10px;
-}
-.legendRow{
-  height: 14px;
-  width: 14px;
-  display: inline-block;
-
-}
-.chartLegend {
-  background-color: white;
-  padding-bottom: 20px;
-
-
-}
-
-.legendMetricName {
-  font-size: 16px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-}
-
-.legendTable{
-  margin-left: 40px;
-}
-.chartExplanation{
-padding: 20px 0 0 10px;
-font-size: 14px;
-}
-.glyphicon-info-sign{
-  padding-top: 25px;
 }

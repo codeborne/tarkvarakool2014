@@ -16,14 +16,10 @@ public class Chart extends UserAwareController {
 
   public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
   public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
-
   public String jsonResponse;
-
   public List<Goal> goals = new ArrayList<>();
   public Long goalId;
   public Goal goal;
-
-
 
 
   @Override @Role("admin")
@@ -40,7 +36,6 @@ public class Chart extends UserAwareController {
         metricsWithValidLevels.add(metric);
       }
     }
-
 
     List<String> header = new ArrayList<>();
     header.add(messages.get("year"));
@@ -69,15 +64,9 @@ public class Chart extends UserAwareController {
       else {
         values = values + "," + null + "]";
       }
-
-
-
       row.add(values);
-
     }
-
     jsonResponse =  row.toString();
-    System.out.println(jsonResponse);
     return render();
   }
 
