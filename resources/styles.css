@@ -118,6 +118,10 @@ body {
 .smallInputFields {
   max-width:160px!important;
 }
+
+.mediumInputFields {
+  max-width:650px!important;
+}
 .panel-heading {
   padding: 25px 40px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
@@ -425,3 +429,4 @@ li span.value {
 .legendTable{
   margin-left: 40px;
 }
+

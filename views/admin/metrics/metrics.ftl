@@ -126,17 +126,14 @@
               class="value infoSource"><#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
             <a href="${metric.infoSource}" target="_blank">${metric.infoSource}</a><#else> ${metric.infoSource!""}</#if>
             </span>
-            <input class="value form-control smallInputFields" name="infoSource" placeholder="<@m'infoSource'/>"
-                   maxlength="255" value="${metric.infoSource}"
-                   style="display: none;">
+            <textarea rows="1" cols="100" class="value form-control mediumInputFields" name="infoSource" placeholder="<@m'infoSource'/>"
+                   maxlength="255" style="display: none;">${metric.infoSource}</textarea>
           </div>
           <div>
             <span class="labels labelsStyle"> &nbsp; &nbsp;<@m'institutionReport'/>: </span>
             <span class="value institutionToReport">${metric.institutionToReport}</span>
-            <input class="value form-control smallInputFields" name="institutionToReport" maxlength="255"
-                   placeholder="<@m'institutionReport'/>"
-                   value="${metric.institutionToReport}"
-                   style="display: none;">
+            <textarea rows="1" cols="100"class="value form-control smallInputFields" name="institutionToReport" maxlength="255"
+                   placeholder="<@m'institutionReport'/>"style="display: none;">${metric.institutionToReport}</textarea>
           </div>
         </li>
         <li>
@@ -246,15 +243,13 @@
       <li>
         <div>
           <span class="addLabel"><@m'infoSource'/>: </span>
-          <input name="infoSource" class="value form-control smallInputFields" maxlength="255"
-                 placeholder="<@m'infoSource'/>"
-                 value="${infoSource!""}">
+          <textarea rows="1" cols="100" name="infoSource" class="value form-control mediumInputFields" maxlength="255"
+                 placeholder="<@m'infoSource'/>">${infoSource!""}</textarea>
         </div>
         <div>
           <span class="addLabel"><@m'institutionReport'/>: </span>
-          <input name="institutionToReport" class="value form-control smallInputFields" maxlength="255"
-                 placeholder="<@m'institutionReport'/>"
-                 value="${institutionToReport!""}">
+          <textarea rows="1" name="institutionToReport" class="value form-control smallInputFields" maxlength="255"
+                 placeholder="<@m'institutionReport'/>">${institutionToReport!""}</textarea>
         </div>
       </li>
 
