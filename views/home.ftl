@@ -60,7 +60,7 @@
                 </td>
                 <td class="infoSource">
                   <#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
-                   <a href="${metric.infoSource}" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
+                   <a href="${metric.infoSource}" target="_blank"><span class="glyphicon glyphicon-link"></span></a>
                   <#else> ${metric.infoSource!""}
                   </#if>
                 </td>

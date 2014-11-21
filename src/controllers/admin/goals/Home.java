@@ -25,8 +25,6 @@ public class Home extends UserAwareController {
   @Override
   @Role("admin")
   public Result get() {
-//    session.removeAttribute("locale");
-//    session.setAttribute("locale", "et");
     message = (String) session.getAttribute("message");
     session.removeAttribute("message");
 

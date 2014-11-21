@@ -25,13 +25,20 @@
             <#if (!metric_has_next && ((metric_index+1) == color_index))>
               <tr>
                 <td><div class="legendRow" style="background-color: ${color};"></div></td>
-                <td><span class="legendMetricName"><@m'budget'/></span></td>
+                <td><span class="legendMetricName"><@m'budgetLegend'/></span></td>
+
               </tr>
             </#if>
           </#list>
         </#list>
+
+        <tr>
+          <td > <span class="glyphicon glyphicon-info-sign"></span></td>
+          <td class="chartExplanation"> <@m'vAxisTitle'/>: <@m'chartExplanation'/></td>
+        </tr>
       </table>
     </div>
+
   </div>
 
   </#if>
@@ -41,7 +48,7 @@
   google.setOnLoadCallback(drawChart);
   function drawChart() {
     var jsonData = $.ajax({
-      url: "/chart",
+      url: "/admin/chart",
       type: "POST",
       dataType:"json",
       async: false,
@@ -55,12 +62,14 @@
     var options = {
       seriesType: "bars",
       hAxis: {format: '####', title: "<@m'year'/>"},
-      vAxes: {0:{format:'#%', minValue:0.0, viewWindow: {  min: 0  }, title: "<@m'vAxisTitle'/>"},
-        1: {format: "#", title: "<@m'chartBudget'/>"} },
+      vAxes: {0:{format:'#%',  title: "<@m'vAxisTitle'/>", minValue: 0.0, viewWindow: {  min: 0.0  }, gridlines:{count:11}},
+        1: {format: "#", title: "<@m'chartBudget'/>" , minValue:0.0, viewWindow: {  min: 0.0  },gridlines:{count:11}}},
       legend: { position: 'none'},
       colors: ['#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'],
-    };
+      interpolateNulls:true
 
+    };
+//    minValue:0.0, viewWindow: {  min: 0  },
     seriesOption = {};
     seriesOption[ data.getNumberOfColumns()-2] = {targetAxisIndex:1, pointSize:5, type: "line"};
     for(i=1; i<data.getNumberOfColumns()-2; i++) {

@@ -421,7 +421,7 @@ li span.value {
 }
 
 .legendMetricName {
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 10px;
   padding-left: 10px;
 }
@@ -429,4 +429,10 @@ li span.value {
 .legendTable{
   margin-left: 40px;
 }
-
+.chartExplanation{
+padding: 20px 0 0 10px;
+font-size: 14px;
+}
+.glyphicon-info-sign{
+  padding-top: 25px;
+}

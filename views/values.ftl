@@ -54,7 +54,6 @@
       </tbody>
       </table>
       <br><br>
-      <span class="forecast-indicator"><@m'estimatedValue'/></span></td>
     </div>
   </div>
   </div>
