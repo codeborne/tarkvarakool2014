@@ -51,35 +51,35 @@ public class TranslationModifyingTest extends UITest {
     open("/admin/goals/home");
 
     $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(".name").shouldHave(text("Sisestatud eesmark"));
-    $(".goalTable").$(By.name("engName")).shouldBe(empty);
-    $(".goalTable").$(".comment").shouldHave(text("Siin on kommentaar"));
-    $(".goalTable").$(By.name("engComment")).shouldBe(empty);
+    $("#translationTable").$(".name").shouldHave(text("Sisestatud eesmark"));
+    $("#translationTable").$(By.name("engName")).shouldBe(empty);
+    $("#translationTable").$(".comment").shouldHave(text("Siin on kommentaar"));
+    $("#translationTable").$(By.name("engComment")).shouldBe(empty);
 
-    $(".metricTable").$(".name").shouldHave(text("üks mõõdik"));
-    $(".metricTable").$(".unit").shouldHave(text("inimest"));
-    $(".metricTable").$(".publicDescription").shouldHave(text("Loeb kokku mitu inimest on"));
-    $(".metricTable").$(By.name("engMetricName")).shouldBe(empty);
-    $(".metricTable").$(By.name("engUnit")).shouldBe(empty);
-    $(".metricTable").$(By.name("engPublicDescription")).shouldBe(empty);
+    $("#translationTable").$(".metric-name").shouldHave(text("üks mõõdik"));
+    $("#translationTable").$(".unit").shouldHave(text("inimest"));
+    $("#translationTable").$(".publicDescription").shouldHave(text("Loeb kokku mitu inimest on"));
+    $("#translationTable").$(By.name("engMetricName")).shouldBe(empty);
+    $("#translationTable").$(By.name("engUnit")).shouldBe(empty);
+    $("#translationTable").$(By.name("engPublicDescription")).shouldBe(empty);
   }
 
   @Test
   public void adminTranslates() throws Exception {
     open("/admin/goals/home");
     $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(By.name("engName")).setValue("inserted goal");
-    $(".goalTable").$(By.name("engComment")).setValue("This is a comment");
-    $(".metricTable").$(By.name("engMetricName")).setValue("a metric");
-    $(".metricTable").$(By.name("engUnit")).setValue("people");
+    $("#translationTable").$(By.name("engName")).setValue("inserted goal");
+    $("#translationTable").$(By.name("engComment")).setValue("This is a comment");
+    $("#translationTable").$(By.name("engMetricName")).setValue("a metric");
+    $("#translationTable").$(By.name("engUnit")).setValue("people");
     $("#saveTranslationButton").click();
     $(".alert-success").shouldHave(text("Salvestamine õnnestus"));
       $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(By.name("engName")).shouldHave(value("inserted goal"));
-    $(".goalTable").$(By.name("engComment")).shouldHave(value("This is a comment"));
-    $(".metricTable").$(By.name("engMetricName")).shouldHave(value("a metric"));
-    $(".metricTable").$(By.name("engUnit")).shouldHave(value("people"));
-    $(".metricTable").$(By.name("engPublicDescription")).shouldBe(empty);
+    $("#translationTable").$(By.name("engName")).shouldHave(value("inserted goal"));
+    $("#translationTable").$(By.name("engComment")).shouldHave(value("This is a comment"));
+    $("#translationTable").$(By.name("engMetricName")).shouldHave(value("a metric"));
+    $("#translationTable").$(By.name("engUnit")).shouldHave(value("people"));
+    $("#translationTable").$(By.name("engPublicDescription")).shouldBe(empty);
 
   }
 
@@ -92,15 +92,15 @@ public class TranslationModifyingTest extends UITest {
 
     open("/admin/goals/home");
     $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(By.name("engName")).shouldHave(value("inserted goal"));
-    $(".goalTable").$(By.name("engComment")).shouldHave(value("comment"));
-    $(".goalTable").$(By.name("engName")).setValue("added goal");
-    $(".goalTable").$(By.name("engComment")).setValue("");
+    $("#translationTable").$(By.name("engName")).shouldHave(value("inserted goal"));
+    $("#translationTable").$(By.name("engComment")).shouldHave(value("comment"));
+    $("#translationTable").$(By.name("engName")).setValue("added goal");
+    $("#translationTable").$(By.name("engComment")).setValue("");
     $("#saveTranslationButton").click();
     $(".alert-success").shouldHave(text("Salvestamine õnnestus"));
     $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(By.name("engName")).shouldHave(value("added goal"));
-    $(".goalTable").$(By.name("engComment")).shouldHave(value(""));
+    $("#translationTable").$(By.name("engName")).shouldHave(value("added goal"));
+    $("#translationTable").$(By.name("engComment")).shouldHave(value(""));
   }
 
   @Test
@@ -108,15 +108,15 @@ public class TranslationModifyingTest extends UITest {
     open("/admin/goals/home");
     $$(".goal").get(0).$("span.glyphicon-globe").shouldHave(cssClass("redValue"));
     $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(By.name("engName")).setValue("inserted goal");
-    $(".goalTable").$(By.name("engComment")).setValue("This is a comment");
-    $(".metricTable").$(By.name("engMetricName")).setValue("a metric");
-    $(".metricTable").$(By.name("engUnit")).setValue("people");
-    $(".metricTable").$(By.name("engPublicDescription")).setValue("describe something");
+    $("#translationTable").$(By.name("engName")).setValue("inserted goal");
+    $("#translationTable").$(By.name("engComment")).setValue("This is a comment");
+    $("#translationTable").$(By.name("engMetricName")).setValue("a metric");
+    $("#translationTable").$(By.name("engUnit")).setValue("people");
+    $("#translationTable").$(By.name("engPublicDescription")).setValue("describe something");
     $("#saveTranslationButton").click();
     $$(".goal").get(0).$("span.glyphicon-globe").shouldHave(cssClass("greenValue"));
     $$(".goal").get(0).$(".translationButton").click();
-    $(".goalTable").$(By.name("engComment")).setValue("");
+    $("#translationTable").$(By.name("engComment")).setValue("");
     $("#saveTranslationButton").click();
     $$(".goal").get(0).$("span.glyphicon-globe").shouldHave(cssClass("redValue"));
   }

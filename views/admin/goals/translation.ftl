@@ -5,64 +5,53 @@
   </div>
   <div class="panel-body">
   <form method="post">
-    <table class="table table-hover goalTable">
+    <table class="table" id="translationTable">
       <thead>
       <tr>
-        <th><@m'goal'/></th>
-        <th><@m'translateGoal'/></th>
-        <th><@m'comment'/></th>
-        <th><@m'translateComment'/></th>
+        <th></th>
+        <th><@m'estonian'/></th>
+        <th><@m'english'/></th>
       </tr>
       </thead>
       <tbody>
       <tr>
+        <td><@m'goal'/></td>
         <td class="name">${goal.name!""}</td>
-        <td><textarea name="engName" rows="3" maxlength="255" placeholder="<@m'translateGoal'/>">${goal.engName!""}</textarea></td>
+        <td><textarea name="engName" rows="2" maxlength="255" placeholder="<@m'translateGoal'/>">${goal.engName!""}</textarea></td>
+      </tr>
+      <tr>
+        <td><@m'comment'/></td>
         <td class="comment">${goal.comment!""}</td>
-        <td><textarea name="engComment" rows="3" maxlength="255" placeholder="<@m'translateComment'/>">${goal.engComment!""}</textarea>
-        </td>
+        <td><textarea name="engComment" rows="2" maxlength="255" placeholder="<@m'translateComment'/>">${goal.engComment!""}</textarea></td>
       </tr>
       </tbody>
-    </table>
-    <#if goal.metrics?has_content>
-    <table class="table table-hover metricTable">
-        <thead>
+      <#list goal.metrics as metric>
+        <#if metric.isPublic == true>
+        <tbody>
         <tr>
-          <th><@m'metric'/></th>
-          <th><@m'translateMetric'/></th>
-          <th><@m'unit'/></th>
-          <th><@m'translateUnit'/></th>
-          <th><@m'publicDescription'/></th>
-          <th><@m'translatePublicDescription'/></th>
-          <#--<th><@m'infoSource'/></th>-->
-          <#--<th><@m'translateInfoSource'/></th>-->
-
+          <td><@m'metric'/></td>
+          <td class="metric-name">${metric.name}</td>
+          <td> <textarea name="engMetricName" maxlength="255" rows="2" placeholder="<@m'translateMetric'/>">${metric.engName!""}</textarea></td>
         </tr>
-        </thead>
-      <tbody>
-        <#list goal.metrics as metric>
-          <#if metric.isPublic == true>
-          <tr class="metric">
-            <td class="name">${metric.name} <input type="hidden" value="${metric.id}"></td>
-            <td><textarea name="engMetricName" maxlength="255" rows="2"
-                          placeholder="<@m'translateMetric'/>">${metric.engName!""}</textarea></td>
-            <td class="unit">${metric.unit!""}</td>
-            <td><textarea name="engUnit" maxlength="255" rows="2" placeholder="<@m'translateUnit'/>">${metric.engUnit!""}</textarea>
-            </td>
-            <td class="publicDescription">${metric.publicDescription!""}</td>
-            <td><textarea name="engPublicDescription" maxlength="255" rows="2"
-                          placeholder="<@m'translatePublicDescription'/>">${metric.engPublicDescription!""}</textarea>
-            </td>
-            <#--<td class="infoSource">${metric.infoSource!""}</td>-->
-            <#--<td><textarea name="engInfoSource" maxlength="255" rows="2"-->
-                          <#--placeholder="<@m'translateInfoSource'/>">${metric.engInfoSource!""}</textarea>-->
-            <#--</td>-->
-          </tr>
-          </#if>
-        </#list>
-      </tbody>
-    </table>
-    </#if>
+        <tr>
+          <td><@m'unit'/></td>
+          <td class="unit">${metric.unit!""}</td>
+          <td><textarea name="engUnit" maxlength="255" rows="2" placeholder="<@m'translateUnit'/>">${metric.engUnit!""}</textarea></td>
+        </tr>
+        <tr>
+          <td><@m'publicDescription'/></td>
+          <td class="publicDescription">${metric.publicDescription!""}</td>
+          <td><textarea name="engPublicDescription" maxlength="255" rows="2" placeholder="<@m'translatePublicDescription'/>">${metric.engPublicDescription!""}</textarea></td>
+        </tr>
+        <tr>
+          <td><@m'infoSource'/></td>
+          <td class="infoSource">${metric.infoSource!""}</td>
+          <td><textarea name="engInfoSource" maxlength="255" rows="2" placeholder="<@m'translateInfoSource'/>">${metric.engInfoSource!""}</textarea></td>
+        </tr>
+        </tbody>
+        </#if>
+      </#list>
+  </table>
     <input type="submit" value="<@m'save'/>" class="saveGoalButton btn btn-default btn-sm" id="saveTranslationButton" onclick="/">
   </form>
   <span id="errors"></span>

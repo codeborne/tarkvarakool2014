@@ -144,4 +144,10 @@
     </addColumn>
   </changeSet>
 
+  <changeSet id="10" author="Tarkvarakool">
+    <addColumn tableName="metric">
+      <column name="engInfoSource" type="VARCHAR(255)"></column>
+    </addColumn>
+  </changeSet>
+
 </databaseChangeLog>

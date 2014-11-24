@@ -30,6 +30,8 @@ public class Translation extends UserAwareController {
     String[] engUnit = request.getParameterValues("engUnit");
     String[] engMetricName = request.getParameterValues("engMetricName");
     String[] engPublicDescription = request.getParameterValues("engPublicDescription");
+    String[] engInfoSource = request.getParameterValues("engInfoSource");
+
 
     checkErrors();
     if (errorsList.isEmpty()) {
@@ -43,6 +45,7 @@ public class Translation extends UserAwareController {
           metric.setEngName(trimInput(engMetricName[i]));
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
+          metric.setEngInfoSource(trimInput(engInfoSource[i]));
           i++;
       }
       hibernate.update(goal);
@@ -71,7 +74,14 @@ public class Translation extends UserAwareController {
     checkEngMetricName();
     checkEngPublicDescription();
     checkEngUnit();
+    checkEngInfoSource();
 
+  }
+
+  private void checkEngInfoSource() {
+    if(errors.containsKey("engInfoSource")){
+      errorsList.add(messages.get("error"));
+    }
   }
 
   public void checkGoalId() {
