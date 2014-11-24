@@ -19,7 +19,8 @@
 
 <tbody id="sortable">
   <#list goal.metrics as metric>
-
+  <#list infoSourceContentList as infosource>
+  <#if metric_index == infosource_index>
   <tr class="metric">
     <td class="sort">
       <span class="glyphicon glyphicon-sort hand-pointer"></span>
@@ -122,9 +123,12 @@
         <li>
           <div>
             <span class="labels labelsStyle"><@m'infoSource'/>: </span>
-            <span
-              class="value infoSource"><#if metric.infoSource?has_content && (metric.infoSource?contains("http://") || metric.infoSource?contains("https://")) >
-            <a href="${metric.infoSource}" target="_blank">${metric.infoSource}</a><#else> ${metric.infoSource!""}</#if>
+
+            <span class="value infoSource">
+              <#list infosource as infoItem>
+                <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
+                  <a href="${infoItem}" target="_blank">${infoItem}</a><#else> ${infoItem}</#if>
+              </#list>
             </span>
             <textarea rows="1" cols="100" class="value form-control mediumInputFields" name="infoSource" placeholder="<@m'infoSource'/>"
                    maxlength="255" style="display: none;">${metric.infoSource}</textarea>
@@ -186,6 +190,8 @@
       </div>
     </td>
   </tr>
+  </#if>
+  </#list>
   </#list>
 
 <tr class="addMetric">
@@ -245,6 +251,7 @@
           <span class="addLabel"><@m'infoSource'/>: </span>
           <textarea rows="1" cols="100" name="infoSource" class="value form-control mediumInputFields" maxlength="255"
                  placeholder="<@m'infoSource'/>">${infoSource!""}</textarea>
+
         </div>
         <div>
           <span class="addLabel"><@m'institutionReport'/>: </span>
@@ -263,6 +270,7 @@
     <input type="button" id="metricSaveButton" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>"
            data-action="save">
     <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+
   </td>
 </tr>
 </tbody>
