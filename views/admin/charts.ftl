@@ -26,12 +26,10 @@
               <tr>
                 <td><div class="legendRow" style="background-color: ${color};"></div></td>
                 <td><span class="legendMetricName"><@m'budgetLegend'/></span></td>
-
               </tr>
             </#if>
           </#list>
         </#list>
-
         <tr>
           <td > <span class="glyphicon glyphicon-info-sign"></span></td>
           <td class="chartExplanation"> <@m'vAxisTitle'/>: <@m'chartExplanation'/></td>
@@ -55,10 +53,8 @@
       data: {goalId: $("input").val()}
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
-    console.log(jsonData);
-    console.log(data1);
     var data = google.visualization.arrayToDataTable(data1);
-
+console.log(data1);
     var options = {
       seriesType: "bars",
       hAxis: {format: '####', title: "<@m'year'/>"},
@@ -67,9 +63,7 @@
       legend: { position: 'none'},
       colors: ['#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'],
       interpolateNulls:true
-
     };
-//    minValue:0.0, viewWindow: {  min: 0  },
     seriesOption = {};
     seriesOption[ data.getNumberOfColumns()-2] = {targetAxisIndex:1, pointSize:5, type: "line"};
     for(i=1; i<data.getNumberOfColumns()-2; i++) {
@@ -86,9 +80,6 @@
     formatter2.format(data,data.getNumberOfColumns()-1);
 
     var chart =  new google.visualization.ComboChart(document.getElementById('chart'));
-
-    console.log(options);
-
     chart.draw(data, options);
   }
 </script>

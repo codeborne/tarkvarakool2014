@@ -166,7 +166,7 @@ body {
   color: red;
   background-color: transparent;
 }
-.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button{
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button, .small-chart-button{
   background-color: Transparent;
   border: none;
   cursor: pointer;
@@ -177,7 +177,7 @@ body {
 tr.metric .glyphicon-sort{
   padding-top: 15px;
 }
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover {
   color: #ffcc00;
   background-color: transparent;
 }
@@ -215,6 +215,31 @@ tr.metric .glyphicon-sort{
   padding: 0 !important;
   display: block;
   height: 600px;
+}
+.legendRow{
+  height: 14px;
+  width: 14px;
+  display: inline-block;
+}
+.chartLegend {
+  background-color: white;
+  padding-bottom: 20px;
+}
+.legendMetricName {
+  font-size: 16px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.legendTable{
+  margin-left: 40px;
+}
+.chartExplanation{
+  padding: 20px 0 0 10px;
+  font-size: 14px;
+}
+.glyphicon-info-sign{
+  padding-top: 25px;
 }
 .hand-pointer {
   cursor: pointer;
@@ -382,7 +407,7 @@ input.modify-value {
   color: #006699;
 }
 .alert-danger, .alert-success {
-  width: 450px;
+  width: 815px;
   text-align: center;
   padding: 8px 0;
   margin: auto;
@@ -396,6 +421,7 @@ input.modify-value {
 }
 tr.metric div, .addMetric div {
   display: inline-block;
+  white-space: nowrap;
 }
 .metricContent ul, .addMetric ul {
   list-style: none;
@@ -406,33 +432,4 @@ tr.metric div, .addMetric div {
 .labelsStyle {
   font-weight: bold;
 }
-li span.value {
-  padding-right: 10px;
-}
-.legendRow{
-  height: 14px;
-  width: 14px;
-  display: inline-block;
 
-}
-.chartLegend {
-  background-color: white;
-  padding-bottom: 20px;
-}
-
-.legendMetricName {
-  font-size: 16px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-}
-
-.legendTable{
-  margin-left: 40px;
-}
-.chartExplanation{
-padding: 20px 0 0 10px;
-font-size: 14px;
-}
-.glyphicon-info-sign{
-  padding-top: 25px;
-}

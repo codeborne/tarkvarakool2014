@@ -31,7 +31,7 @@ public class MetricsModifyingTest extends UITest {
 
     hibernate.save(goal);
     hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "http://", "pqr", -5.5, false));
-    hibernate.save(new Metric(goal, "Some metric1", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true));
+    hibernate.save(new Metric(goal, "another metric", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true));
 
     open("/admin/goals/home");
 
@@ -64,7 +64,7 @@ public class MetricsModifyingTest extends UITest {
     $$(".metricContent").get(0).$(By.name("infoSource")).shouldHave(value("http://"));
     $$(".metricContent").get(0).$(By.name("institutionToReport")).shouldHave(value("pqr"));
 
-    $$(".metricContent").get(0).$(By.name("name")).setValue("Metric");
+    $$(".metricContent").get(0).$(By.name("name")).setValue("Metric changed");
     $$(".metricContent").get(0).$(By.name("unit")).setValue("EUR");
     $$(".metricContent").get(0).$(By.name("startLevel")).setValue("23,5");
     $$(".metricContent").get(0).$(By.name("targetLevel")).setValue("103,5");
@@ -72,14 +72,16 @@ public class MetricsModifyingTest extends UITest {
 
     $(".saveGoalButton").click();
 
-    assertEquals("Metric", $$("tr.metric").get(0).$(".name").getText());
+    assertEquals("Metric changed", $$("tr.metric").get(0).$(".name").getText());
     assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
     assertEquals("source", $$("tr.metric").get(0).$(".infoSource").getText());
-    assertEquals("Mitteavalik", $$("tr.metric").get(0).$(".isPublic").getText());
     assertEquals("23.5", $$("tr.metric").get(0).$(".startLevel").getText());
     assertEquals("103.5", $$("tr.metric").get(0).$(".targetLevel").getText());
 
     $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
+
+    $("#userViewButton").click();
+    $$("tr.metric").get(0).$(".name").shouldNotHave(text("Metric changed"));
   }
 
   @Test
@@ -87,10 +89,15 @@ public class MetricsModifyingTest extends UITest {
     $$(".publicButton").get(0).click();
 
     $$("tr.metric").get(0).$(".name").shouldHave(text("Some metric"));
-    $$("tr.metric").get(0).$(".isPublic").shouldHave(text("Avalik"));
+    $("#userViewButton").click();
+    $$("tr.metric").get(0).$(".name").shouldHave(text("Some metric"));
 
+    $("#adminViewButton").click();
+    $$(".metricsButton").get(0).click();
     $$(".publicButton").get(0).click();
-    $$("tr.metric").get(0).$(".isPublic").shouldHave(text("Mitteavalik"));
+    $("#userViewButton").click();
+    $$("tr.metric").get(0).$(".name").shouldNotHave(text("Some metric"));
+
   }
 }
 
