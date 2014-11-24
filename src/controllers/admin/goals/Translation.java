@@ -45,7 +45,7 @@ public class Translation extends UserAwareController {
           metric.setEngName(trimInput(engMetricName[i]));
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
-        metric.setEngInfoSource(trimInput(engInfoSource[i]));
+          metric.setEngInfoSource(trimInput(engInfoSource[i]));
           i++;
       }
       hibernate.update(goal);

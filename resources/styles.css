@@ -100,6 +100,13 @@ body {
 .userViewPublicDescription {
   font-size:12px;
 }
+#translationTable textarea{
+  width: 470px;
+
+}
+#translationTable td:nth-child(2){
+  width: 500px;
+}
 #adminMetricTable tr.metric {
   border-bottom: solid 1px #DDD;
 }
