@@ -32,6 +32,7 @@ public class Metric {
   private String engName;
   private String engUnit;
   private String engPublicDescription;
+  private String engInfoSource;
 
   @ElementCollection
   @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
@@ -221,5 +222,12 @@ public class Metric {
 
   public void setEngPublicDescription(String engPublicDescription) {
     this.engPublicDescription = engPublicDescription;
+  }
+  public String getEngInfoSource() {
+    return engInfoSource;
+  }
+
+  public void setEngInfoSource(String engInfoSource) {
+    this.engInfoSource = engInfoSource;
   }
 }
