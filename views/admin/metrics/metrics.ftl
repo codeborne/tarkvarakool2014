@@ -140,10 +140,6 @@
                    placeholder="<@m'institutionReport'/>"style="display: none;">${metric.institutionToReport}</textarea>
           </div>
         </li>
-        <li>
-          <span
-            class="value isPublic"> <#if metric.isPublic?? && metric.isPublic == true><@m 'public'/><#else><@m'private'/></#if></span>
-        </li>
       </ul>
     </td>
 

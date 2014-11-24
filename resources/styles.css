@@ -421,6 +421,7 @@ input.modify-value {
 }
 tr.metric div, .addMetric div {
   display: inline-block;
+  white-space: nowrap;
 }
 .metricContent ul, .addMetric ul {
   list-style: none;
@@ -431,6 +432,4 @@ tr.metric div, .addMetric div {
 .labelsStyle {
   font-weight: bold;
 }
-li span.value {
-  padding-right: 10px;
-}
+

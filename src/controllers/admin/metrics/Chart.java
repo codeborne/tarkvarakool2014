@@ -6,6 +6,7 @@ import framework.Result;
 import framework.Role;
 import model.Metric;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,12 @@ public class Chart extends UserAwareController {
     List<String> row = new ArrayList<>();
     row.add( new Gson().toJson(header));
     for (int year = minimumYear; year<=maximumYear;year++) {
+      BigDecimal value = metric.getValues().get(year);
+      if (year == 2014 && metric.getValues().get(year)==null){
+        value = new BigDecimal(0);
+      }
 
-      String values = "[" + "\"" + year + "\"," +metric.getValues().get(year)+"]";
+      String values = "[" + "\"" + year + "\"," + value +"]";
       row.add(values);
     }
 

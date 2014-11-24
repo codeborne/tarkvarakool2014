@@ -58,10 +58,16 @@ public class Chart extends UserAwareController {
           value = (metric.getValues().get(year).doubleValue() - metric.getStartLevel()) / (metric.getTargetLevel() - metric.getStartLevel());
           value = Math.round( value * 1000.0 ) / 1000.0;
         }
+        else if (year == 2014 && metric.getValues().get(year)==null){
+          value = 0.0;
+        }
         values = values +  "," +value;
       }
       if(goal.getYearlyBudgets().get(year)!=null) {
         availableBudget = availableBudget - goal.getYearlyBudgets().get(year);
+        values = values + "," + availableBudget + "]";
+      }
+      else if (year == 2014 && goal.getYearlyBudgets().get(year) == null) {
         values = values + "," + availableBudget + "]";
       }
       else {

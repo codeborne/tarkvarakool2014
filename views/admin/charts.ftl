@@ -54,7 +54,7 @@
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
     var data = google.visualization.arrayToDataTable(data1);
-
+console.log(data1);
     var options = {
       seriesType: "bars",
       hAxis: {format: '####', title: "<@m'year'/>"},
