@@ -5,7 +5,7 @@
   </div>
   <div class="panel-body">
   <form method="post">
-    <table class="table table-hover" id="translationTable">
+    <table class="table" id="translationTable">
       <thead>
       <tr>
         <th></th>
@@ -30,7 +30,7 @@
         <tbody>
         <tr>
           <td><@m'metric'/></td>
-          <td class="name">${metric.name}</td>
+          <td class="metric-name">${metric.name}</td>
           <td> <textarea name="engMetricName" maxlength="255" rows="2" placeholder="<@m'translateMetric'/>">${metric.engName!""}</textarea></td>
         </tr>
         <tr>

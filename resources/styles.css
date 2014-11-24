@@ -107,6 +107,13 @@ body {
 #translationTable td:nth-child(2){
   width: 500px;
 }
+#translationTable td:first-child, #translationTable th:first-child{
+  color: black;
+  border-right: solid 1px lightgray;
+}
+#translationTable> tbody> tr:hover td{
+  background-color: #E6E6E6;
+}
 #adminMetricTable tr.metric {
   border-bottom: solid 1px #DDD;
 }
