@@ -29,6 +29,7 @@ public class Save extends UserAwareController {
   public String institutionToReport;
   public Double orderNumber;
   public Set<String> errorsList = new HashSet<>();
+
   public Long metricId;
   public Goal goal;
   public Boolean isPublic;
@@ -45,8 +46,9 @@ public class Save extends UserAwareController {
     }
     goal = (Goal) hibernate.get(Goal.class, goalId);
     if(!isStatusUpdateOnly) {
-    checkErrors();
-    convertLevelsToNumbers();
+      checkErrors();
+
+      convertLevelsToNumbers();
     }
     if (errorsList.isEmpty()) {
       try {
@@ -82,6 +84,8 @@ public class Save extends UserAwareController {
     if (institutionToReport != null)
       institutionToReport = institutionToReport.trim();
   }
+
+
 
   private void save() {
     if (metricId != null) {
