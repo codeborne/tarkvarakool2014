@@ -135,7 +135,7 @@
               </#list>
             </span>
             <textarea rows="1" cols="100" class="value form-control mediumInputFields" name="infoSource" placeholder="<@m'infoSource'/>"
-                   maxlength="255" style="display: none;">${metric.infoSource}</textarea>
+                   maxlength="1000" style="display: none;">${metric.infoSource}</textarea>
           </div>
           <div>
             <span class="labels labelsStyle"> &nbsp; &nbsp;<@m'institutionReport'/>: </span>

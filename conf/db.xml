@@ -149,5 +149,10 @@
       <column name="engInfoSource" type="VARCHAR(255)"></column>
     </addColumn>
   </changeSet>
-
+  
+<changeSet id="11" author="Tarkvarakool">
+  <modifyDataType tableName="metric" columnName="infoSource" newDataType="VARCHAR(1000)"/>
+</changeSet>
+  
+  
 </databaseChangeLog>

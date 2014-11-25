@@ -35,7 +35,7 @@ public class HomeViewTest extends UITest {
     hibernate.save(goal1);
     hibernate.save(goal2);
 
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", null, "", 23.0, "2014", "http://", "", 2.0, true));
+    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", null, "", 23.0, "2014", "http:// statistikaamet http://www.neti.ee", "", 2.0, true));
     hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0.0, "", null, "", "", "", 10.0, false));
     hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 15.0, "", null, "", "amet", "", 5.8, true));
 
@@ -50,6 +50,7 @@ public class HomeViewTest extends UITest {
     goalBlock1.$$(".metric").get(0).$(".startLevel").shouldHave(text("N/A"));
     goalBlock1.$$(".metric").get(0).$(".targetLevel").shouldHave(text("23 (2014)"));
     goalBlock1.$$(".metric").get(0).$(".infoSource").$(".glyphicon-link").shouldBe(visible);
+    goalBlock1.$$(".metric").get(0).$(".infoSource").shouldHave(text("statistikaamet"));
     assertEquals("Moodik1", goalBlock1.$$(".metric").get(0).$(".name").getText());
     goalBlock1.$(".name").shouldNotHave(text("Moodik2 (EUR)"));
 
