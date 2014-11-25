@@ -17,6 +17,7 @@ public class Translation extends UserAwareController {
   public Set<String> errorsList = new HashSet<>();
   public Goal goal;
 
+
   @Override
   @Role("admin")
   public Result get() {

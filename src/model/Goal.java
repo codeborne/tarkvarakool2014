@@ -124,6 +124,7 @@ public class Goal {
 
   public Set<Metric> getPublicMetrics(){
     Set<Metric> metrics = this.getMetrics();
+
     Set<Metric> publicMetrics = new HashSet<>();
     for(Metric metric:metrics){
       if(metric.getIsPublic()){
