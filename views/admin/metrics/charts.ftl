@@ -3,8 +3,8 @@
   <input type="hidden" value="${metric.id?c}" name="metricId">
   <div class="panel panel-default">
     <div class="goal">
-      <div class="panel-heading">
-        <h4 class="name"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
+      <div class="panel-heading panel-heading-chart">
+        <h4 class="name printMetricName"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
       </div>
     </div>
     <div class="panel-body" id="chart">
