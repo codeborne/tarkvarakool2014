@@ -35,10 +35,18 @@ public class Metrics extends UserAwareController {
     List<String> infoSourceList = new ArrayList<>();
 
     String infoSource = metric.getInfoSource();
+    infoSource = infoSource.replace("\n","*** ");
     StringTokenizer stringTokenizer = new StringTokenizer(infoSource);
     while (stringTokenizer.hasMoreElements()) {
       infoSourceList.add(stringTokenizer.nextElement().toString());
 
+    }
+    for(String info : infoSourceList){
+      if(info.contains("***")){
+        String updatedInfo= info.replace("***","\n");
+        int indexOfInfo = infoSourceList.indexOf(info);
+        infoSourceList.set(indexOfInfo,updatedInfo);
+      }
     }
     return infoSourceList;
   }

@@ -69,17 +69,9 @@
                     </td>
                     <td class="infoSource">
                       <#list infosource as infoItem>
-                        <#--<#if language == 'et'>-->
-                          <#--<#if metric.unit?has_content>${metric.unit}</#if>-->
-                        <#--<#elseif language == 'en'>-->
-                            <#--<#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>-->
-                        <#--</#if>-->
-
                         <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                          <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-link"></span><br></a>
-                          <#else><#if language == 'et'> ${infoItem!""} <#elseif language == 'en'><#if engInfoItem?has_content>${engInfoSource!""}<#else>${infoItem!""}</#if>
-
-                        </#if>
+                          <span style="white-space: pre-wrap;"> <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-link"></span></a></span>
+                          <#else><span style="white-space: pre-wrap;">${infoItem}</span>
                         </#if>
                       </#list>
                     </td>

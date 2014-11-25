@@ -140,15 +140,13 @@
               <div>
                 <span class="labels labelsStyle"><@m'infoSource'/>: </span>
 
-            <span class="value infoSource" style="white-space: pre-wrap;">
+            <span class="value infoSource" >
               <#list infosource as infoItem>
                 <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                  <a href="${infoItem}" target="_blank">${infoItem}</a><#else> ${infoItem}</#if>
+                  <span ><a href="${infoItem}" target="_blank" >${infoItem}</a></span><#else> <span style="white-space: pre-wrap;">${infoItem}</span></#if>
               </#list>
             </span>
-                <textarea rows="2" cols="200" class="value form-control" name="infoSource"
-                          placeholder="<@m'infoSource'/>"
-                          maxlength="1000" style="display: none;">${metric.infoSource}</textarea>
+                <textarea rows="2" cols="200" class="value form-control" name="infoSource" placeholder="<@m'infoSource'/>" maxlength="1000" style="display: none;">${metric.infoSource}</textarea>
               </div>
             </li>
           </ul>
