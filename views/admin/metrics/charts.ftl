@@ -28,9 +28,11 @@
     var data = google.visualization.arrayToDataTable(data1);
     var options = {
       hAxis: {title: "<@m'year'/>"},
-      vAxis: {title: "Mõõdiku väärtus (%)" , minValue: 0.0, viewWindow: {  min: 0.0  }},
-      legend: { position: 'none'}
+      vAxis: {title: data.getColumnLabel(0) , minValue: 0.0, viewWindow: {  min: 0.0  }},
+      legend: { position: 'none'},
+      is3D: true
     };
+    data.setColumnProperty(2, "role", 'tooltip');
     var chart =  new google.visualization.ColumnChart(document.getElementById('chart'));
     chart.draw(data, options);
   }

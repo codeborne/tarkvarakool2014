@@ -6,7 +6,6 @@ import framework.Result;
 import framework.Role;
 import model.Metric;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,28 +20,25 @@ public class Chart extends UserAwareController {
 
 
   @Override @Role("admin")
-  public Result post() {
-    metric = (Metric) hibernate.get(Metric.class, metricId);
+public Result post() {
+  metric = (Metric) hibernate.get(Metric.class, metricId);
 
-    List<String> header = new ArrayList<>();
-    header.add(messages.get("year"));
-    header.add(metric.getName());
+  List<String> header = new ArrayList<>();
+    header.add("Mõõdiku väärtus ("+metric.getUnit()+")");
+  header.add(metric.getName());
+  header.add("null");
 
-    List<String> row = new ArrayList<>();
-    row.add( new Gson().toJson(header));
-    for (int year = minimumYear; year<=maximumYear;year++) {
-      BigDecimal value = metric.getValues().get(year);
-      if (year == 2014 && metric.getValues().get(year)==null){
-        value = new BigDecimal(0);
-      }
+  List<String> row = new ArrayList<>();
+  row.add( new Gson().toJson(header));
+  for (int year = minimumYear; year<=maximumYear;year++) {
+    String tooltip = year+" "+metric.getValues().get(year).toString()+metric.getUnit();
 
-      String values = "[" + "\"" + year + "\"," + value +"]";
-      row.add(values);
-    }
-
-    jsonResponse =  row.toString();
-    return render();
+    String values = "[" + "\"" + year + "\"," +metric.getValues().get(year)+",\""+tooltip+"\"]";
+    row.add(values);
   }
 
+  jsonResponse =  row.toString();
+  return render();
+}
 
 }
