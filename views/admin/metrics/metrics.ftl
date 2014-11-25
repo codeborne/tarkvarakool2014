@@ -8,7 +8,6 @@
 </div>
 <div class="panel-body">
 <table class="table table-hover" id="adminMetricTable">
-
 <thead>
 <tr>
   <th><@m'sort'/></th>
@@ -16,7 +15,6 @@
   <th><@m'actions'/></th>
 </tr>
 </thead>
-
 <tbody id="sortable">
   <#list goal.metrics as metric>
     <#list infoSourceContentList as infosource>
@@ -24,7 +22,6 @@
       <tr class="metric">
         <td class="sort">
           <span class="glyphicon glyphicon-sort hand-pointer"></span>
-
           <form class="orderNumberForm" goalId="post" action="/admin/metrics/modify">
             <input type="hidden" name="goalId" value="${goal.id?c}">
             <input type="hidden" name="metricId" value="${metric.id?c}">
@@ -42,13 +39,8 @@
             <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
           </form>
         </td>
-
-
         <td class="metricContent">
-
-
           <span id="errors_${metric.id?c}"></span>
-
           <ul>
             <li>
               <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
@@ -56,7 +48,6 @@
               <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>"
                         style="display: none;">${metric.name}</textarea>
             </li>
-
             <li>
               <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
               <span class="value publicDescription">${metric.publicDescription}</span>
@@ -64,7 +55,6 @@
                         placeholder="<@m'publicDescription'/>"
                         style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
             </li>
-
             <li>
               <span class="labels labelsStyle"><@m'privateDescription'/>: </span>
               <span class="value privateDescription">${metric.privateDescription}</span>
@@ -72,7 +62,6 @@
                         placeholder="<@m'privateDescription'/>"
                         style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
             </li>
-
             <li>
               <div>
                 <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'unit'/>: </span>
@@ -80,7 +69,6 @@
                        value="${metric.unit}" style="display: none;">
               </div>
               <br class="value">
-
               <div>
                 <span class="labels labelsStyle"><@m'startLevel'/>: </span>
                 <#if metric.startLevel??>
@@ -139,8 +127,7 @@
             <li>
               <div>
                 <span class="labels labelsStyle"><@m'infoSource'/>: </span>
-
-            <span class="value infoSource" >
+            <span class="value infoSource">
               <#list infosource as infoItem>
                 <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
                   <span ><a href="${infoItem}" target="_blank" >${infoItem}</a></span><#else> <span style="white-space: pre-wrap;">${infoItem}</span></#if>
@@ -155,7 +142,6 @@
           <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
           <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
           <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
-
           <div class="action-button">
             <input type="hidden" class="value" value="${metric.id?c}" name="id">
             <input type="button" title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
@@ -164,13 +150,11 @@
                    onclick="location='metrics?goalId=${goal.id?c}'; return false;" value="" style="display:none"
                    data-action="save">
           </div>
-
           <div class="action-button">
         <span class="value"><button class="modifyButton" title="<@m'modify'/>" type="button"
                                     class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>
         </button></span>
           </div>
-
           <div class="action-button">
             <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
               <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -180,7 +164,6 @@
           </button></span>
             </form>
           </div>
-
           <div class="action-button">
             <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
             <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
@@ -192,7 +175,6 @@
                                    data-action="save"<#if metric.isPublic==true> style="color:green"
                                    <#else>style="color:red"</#if> /></span>
           </div>
-
           <div class="action-button">
             <form action="/admin/metrics/charts">
               <input type="hidden" value="${metric.id?c}" name="metricId">
@@ -206,10 +188,8 @@
       </#if>
     </#list>
   </#list>
-
 <tr class="addMetric">
   <td></td>
-
   <td>
     <span id="adderrors"></span>
     <ul>
@@ -218,19 +198,16 @@
         <textarea name="name" class="value form-control" maxlength="255"
                   placeholder="<@m'metric'/>">${name!""}</textarea>
       </li>
-
       <li>
         <span class="addLabel"><@m'publicDescription'/>: </span>
         <textarea name="publicDescription" class="value form-control" maxlength="255"
                   placeholder="<@m'publicDescription'/>">${publicDescription!""}</textarea>
       </li>
-
       <li>
         <span class="addLabel"><@m'privateDescription'/>: </span>
         <textarea name="privateDescription" class="value form-control" maxlength="255"
                   placeholder="<@m'privateDescription'/>">${privateDescription!""}</textarea>
       </li>
-
       <li>
         <div>
           <span class="addLabel"><@m'unit'/>: </span>
@@ -260,7 +237,6 @@
                  value="${commentOnTargetLevel!""}">
         </div>
       </li>
-
       <li>
         <div>
           <span class="addLabel"><@m'institutionReport'/>: </span>
@@ -286,15 +262,12 @@
     <input type="button" id="metricSaveButton" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>"
            data-action="save">
     <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
-
   </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-
-
 <script>
   $(function () {
 
