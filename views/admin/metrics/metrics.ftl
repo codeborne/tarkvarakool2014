@@ -128,10 +128,10 @@
           <div>
             <span class="labels labelsStyle"><@m'infoSource'/>: </span>
 
-            <span class="value infoSource">
+            <span class="value infoSource" style="white-space: pre-wrap;">
               <#list infosource as infoItem>
                 <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                  <a href="${infoItem}" target="_blank">${infoItem}</a><br><#else> ${infoItem}</#if>
+                  <a href="${infoItem}" target="_blank">${infoItem}</a><#else> ${infoItem}</#if>
               </#list>
             </span>
             <textarea rows="1" cols="100" class="value form-control mediumInputFields" name="infoSource" placeholder="<@m'infoSource'/>"
