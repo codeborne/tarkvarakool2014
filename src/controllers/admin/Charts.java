@@ -6,16 +6,13 @@ import framework.Role;
 import model.Goal;
 import model.Metric;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Charts extends UserAwareController {
 
   public Long goalId;
   public Goal goal;
-  public Set<Metric> metricsWithValidLevels = new HashSet<>();
+  public List<Metric> metricsWithValidLevels = new ArrayList<>();
   public List<String> graphColors;
 
 

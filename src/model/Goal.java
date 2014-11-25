@@ -1,10 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Goal {
@@ -122,9 +119,9 @@ public class Goal {
     this.metrics = metrics;
   }
 
-  public Set<Metric> getPublicMetrics(){
+  public List<Metric> getPublicMetrics(){
     Set<Metric> metrics = this.getMetrics();
-    Set<Metric> publicMetrics = new HashSet<>();
+    List<Metric> publicMetrics = new ArrayList<>();
     for(Metric metric:metrics){
       if(metric.getIsPublic()){
         publicMetrics.add(metric);

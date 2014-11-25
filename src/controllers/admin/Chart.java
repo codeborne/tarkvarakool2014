@@ -8,7 +8,6 @@ import model.Goal;
 import model.Metric;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,13 +28,15 @@ public class Chart extends UserAwareController {
 
     Set<Metric> metrics = goal.getMetrics();
 
-    Set<Metric> metricsWithValidLevels= new HashSet<>();
+    List<Metric> metricsWithValidLevels= new ArrayList<>();
 
     for (Metric metric: metrics){
       if(metric.getStartLevel() != null && metric.getTargetLevel() != null && metricsWithValidLevels.size()<=10){
         metricsWithValidLevels.add(metric);
       }
     }
+
+
 
     List<String> header = new ArrayList<>();
     header.add(messages.get("year"));

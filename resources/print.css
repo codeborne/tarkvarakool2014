@@ -1,0 +1,20 @@
+.toprow, .navbar, .footer{
+  display: none;
+}
+
+.panel-default{
+  margin: 0;
+}
+
+.panel-heading{
+  z-index: 1;
+  margin-bottom: -110px;
+  margin-top: -30px;
+}
+
+h4.name{
+  font-size: 20px !important;
+}
+
+/*'#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'*/
+/*.legendRow:first-child*/

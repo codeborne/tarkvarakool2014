@@ -7,9 +7,7 @@ import model.Goal;
 import model.Metric;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Chart extends UserAwareController {
 
@@ -30,9 +28,9 @@ public class Chart extends UserAwareController {
     goal = (Goal) hibernate.get(Goal.class, goalId);
     Long availableBudget = goal.getBudget().longValue();
 
-    Set<Metric> metrics = goal.getPublicMetrics();
+    List<Metric> metrics = goal.getPublicMetrics();
 
-    Set<Metric> metricsWithValidLevels= new HashSet<>();
+    List<Metric> metricsWithValidLevels= new ArrayList<>();
 
     for (Metric metric: metrics){
       if(metric.getStartLevel() != null && metric.getTargetLevel() != null && metricsWithValidLevels.size()<=10){
