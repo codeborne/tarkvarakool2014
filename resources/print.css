@@ -1,0 +1,56 @@
+.toprow, .navbar, .footer{
+  display: none;
+}
+
+.panel-default{
+  margin: 0;
+}
+
+.panel-heading-chart{
+  z-index: 1;
+  margin-bottom: -110px;
+  margin-top: -30px;
+}
+
+h4.name{
+  font-size: 20px !important;
+}
+
+h4.printMetricName{
+  margin: 60px 0 140px 20px !important;
+  font-size: 30px !important;
+}
+
+#legendBox_0 {
+  border: #1abc9c solid 8px;
+}
+#legendBox_1 {
+  border: #3498db solid 8px;
+}
+#legendBox_2 {
+  border: #9b59b6 solid 8px;
+}
+#legendBox_3 {
+  border: #34495e solid 8px;
+}
+#legendBox_4 {
+  border: #f1c40f solid 8px;
+}
+#legendBox_5 {
+  border: #e67e22 solid 8px;
+}
+#legendBox_6 {
+  border: #e74c3c solid 8px;
+}
+#legendBox_7 {
+  border: #95a5a6 solid 8px;
+}
+#legendBox_8 {
+  border: #d35400 solid 8px;
+}
+#legendBox_9 {
+  border: #2980b9 solid 8px;
+}
+#legendBox_10 {
+  border: #16a085 solid 8px;
+}

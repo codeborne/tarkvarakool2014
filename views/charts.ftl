@@ -3,7 +3,7 @@
   <input type="hidden" value="${goal.id?c}" name="goalId">
     <div class="panel panel-default">
       <div class="goal">
-        <div class="panel-heading">
+        <div class="panel-heading panel-heading-chart">
           <h4 class="name"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>
           <div style="white-space: pre;"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
           <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
@@ -17,14 +17,14 @@
           <#list graphColors as color>
         <#if metric_index == color_index>
          <tr>
-          <td><div class="legendRow" style="background-color: ${color};"></div></td>
+          <td><div class="legendRow" id="legendBox_${color_index}" style="background-color: ${color};"></div></td>
           <td><span class="legendMetricName"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></span></td>
           </tr>
 
         </#if>
             <#if (!metric_has_next && ((metric_index+1) == color_index))>
               <tr>
-                <td><div class="legendRow" style="background-color: ${color};"></div></td>
+                <td><div class="legendRow" id="legendBox_${color_index}" style="background-color: ${color};"></div></td>
                 <td><span class="legendMetricName"><@m'budgetLegend'/></span></td>
               </tr>
             </#if>

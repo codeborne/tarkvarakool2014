@@ -6,10 +6,7 @@ import framework.Role;
 import model.Goal;
 import model.Metric;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hibernate.criterion.Order.asc;
@@ -87,7 +84,7 @@ public class Home extends UserAwareController {
         isEverythingTranslated[i] = false;
       }
       else  {
-        Set<Metric> metrics = goal.getPublicMetrics();
+        List<Metric> metrics = goal.getPublicMetrics();
         for (Metric metric : metrics) {
           if ((!isBlank(metric.getUnit()) && isBlank(metric.getEngUnit())) || (!isBlank(metric.getPublicDescription()) && isBlank(metric.getEngPublicDescription())) || isBlank(metric.getEngName())) {
             isEverythingTranslated[i] = false;

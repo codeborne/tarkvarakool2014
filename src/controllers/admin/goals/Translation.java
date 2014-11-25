@@ -7,6 +7,7 @@ import model.Goal;
 import model.Metric;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Translation extends UserAwareController {
@@ -34,11 +35,12 @@ public class Translation extends UserAwareController {
     String[] engInfoSource = request.getParameterValues("engInfoSource");
 
 
+
     checkErrors();
     if (errorsList.isEmpty()) {
 
       goal = (Goal) hibernate.get(Goal.class, goalId);
-      Set<Metric> metrics = goal.getPublicMetrics();
+      List<Metric> metrics = goal.getPublicMetrics();
       goal.setEngName(trimInput(engName));
       goal.setEngComment(trimInput(engComment));
       int i = 0;

@@ -22,7 +22,7 @@ public class Charts extends UserAwareController {
   public Result get(){
     graphColors = Arrays.asList("#1abc9c", "#3498db", "#9b59b6", "#34495e", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#d35400", "#2980b9", "#16a085");
     goal = (Goal) hibernate.get(Goal.class, goalId);
-    Set<Metric> metrics = goal.getPublicMetrics();
+    List<Metric> metrics = goal.getPublicMetrics();
 
     for (Metric metric: metrics){
       if(metric.getStartLevel() != null && metric.getTargetLevel() != null && metricsWithValidLevels.size()<=10){

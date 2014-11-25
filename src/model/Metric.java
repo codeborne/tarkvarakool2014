@@ -18,6 +18,7 @@ public class Metric {
   @ManyToOne
   private Goal goal;
 
+  private String unit;
   private String publicDescription;
   private String privateDescription;
   private Double startLevel;
@@ -27,6 +28,8 @@ public class Metric {
   private String infoSource;
   private String institutionToReport;
   private Boolean isPublic = false;
+  @Column(nullable = false)
+  private Double orderNumber;
 
 
   private String engName;
@@ -45,10 +48,9 @@ public class Metric {
   @MapKeyColumn(name = "year")
   @Column(name = "comparableValue", precision = 38, scale = 1)
   private Map<Integer, BigDecimal> forecasts = new HashMap<>();
-  private String unit;
 
-  @Column(nullable = false)
-  private Double orderNumber;
+
+
 
   private Metric() {
   }
