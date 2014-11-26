@@ -1,3 +1,6 @@
+<#setting locale="et">
+<#setting number_format=",##0">
+
 <#macro html values_active=false>
 
 
