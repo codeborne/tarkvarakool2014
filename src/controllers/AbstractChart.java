@@ -13,16 +13,18 @@ public abstract class AbstractChart extends UserAwareController {
 
   public static final List<String> CHART_COLORS = Arrays.asList("#1abc9c", "#3498db", "#9b59b6", "#34495e", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#d35400", "#2980b9", "#16a085");
 
+  public List<String> graphColors = CHART_COLORS;
+
   public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
   public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
   public String jsonResponse;
   public List<Goal> goals = new ArrayList<>();
   public Long goalId;
-  public Goal goal;
+
+  private Goal goal;
 
   public void prepareJsonResponse() {
-    goal = (Goal) hibernate.get(Goal.class, goalId);
-    Long availableBudget = goal.getBudget().longValue();
+    Long availableBudget = getGoal().getBudget().longValue();
 
     List<Metric> metricsWithValidLevels = getMetricsWithValidLevels();
 
@@ -35,10 +37,10 @@ public abstract class AbstractChart extends UserAwareController {
       String values = "[" + "\"" + year + "\"";
       values += createJsonForValuesOfYear(metricsWithValidLevels, year);
 
-      if (goal.getYearlyBudgets().get(year) != null) {
-        availableBudget = availableBudget - goal.getYearlyBudgets().get(year);
+      if (getGoal().getYearlyBudgets().get(year) != null) {
+        availableBudget = availableBudget - getGoal().getYearlyBudgets().get(year);
         values = values + "," + availableBudget + "]";
-      } else if (year == 2014 && goal.getYearlyBudgets().get(year) == null) {
+      } else if (year == 2014 && getGoal().getYearlyBudgets().get(year) == null) {
         values = values + "," + availableBudget + "]";
       } else {
         values = values + "," + null + "]";
@@ -74,9 +76,9 @@ public abstract class AbstractChart extends UserAwareController {
     return header;
   }
 
-  private List<Metric> getMetricsWithValidLevels() {
+  public List<Metric> getMetricsWithValidLevels() {
     List<Metric> metricsWithValidLevels = new ArrayList<>();
-    for (Metric metric : getMetrics(goal)) {
+    for (Metric metric : getMetrics(getGoal())) {
       if (metric.levelsAreValid()) {
         metricsWithValidLevels.add(metric);
       }
@@ -85,6 +87,13 @@ public abstract class AbstractChart extends UserAwareController {
       }
     }
     return metricsWithValidLevels;
+  }
+
+  public Goal getGoal() {
+    if (goal == null) {
+      goal = (Goal) hibernate.get(Goal.class, goalId);
+    }
+    return goal;
   }
 
   protected abstract Collection<Metric> getMetrics(Goal goal);
