@@ -18,8 +18,6 @@ public class Home extends UserAwareController {
   public List<Goal> goals = new ArrayList<>();
   public List<List<List<String>>> infoSourceContentList = new ArrayList<>();
 
-
-
   @Override
   @Role("anonymous")
   public Result get() {
@@ -58,6 +56,9 @@ public class Home extends UserAwareController {
     }
     return infoSourceList;
   }
+
+
+
 }
 
 

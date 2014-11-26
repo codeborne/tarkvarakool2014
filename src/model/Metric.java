@@ -49,10 +49,7 @@ public class Metric {
   @Column(name = "comparableValue", precision = 38, scale = 1)
   private Map<Integer, BigDecimal> forecasts = new HashMap<>();
 
-
-
-
-  private Metric() {
+  Metric() {
   }
 
   public Metric(Goal goal, String name, String unit, String publicDescription, String privateDescription, Double startLevel,
@@ -231,5 +228,15 @@ public class Metric {
 
   public void setEngInfoSource(String engInfoSource) {
     this.engInfoSource = engInfoSource;
+  }
+
+  public boolean hasValueForYear(int year){
+    return getValues().get(year) != null;
+  }
+
+  public boolean levelsAreValid() {
+    if (startLevel == null || targetLevel == null) return false;
+    if (startLevel.equals(targetLevel)) return false;
+    return true;
   }
 }
