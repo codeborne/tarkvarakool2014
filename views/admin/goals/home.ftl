@@ -41,7 +41,7 @@
               <textarea class="value form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
             </td>
             <td class="budgetInTable">
-              <span class="value">${goal.budget?c}</span>
+              <span class="value">${goal.budget}</span>
               <input type="number" class="value form-control" name="budget" placeholder="<@m'budget'/>" value="${goal.budget?c}"
                      style="display: none;">
             </td>

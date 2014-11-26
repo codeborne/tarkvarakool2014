@@ -75,8 +75,8 @@ public class MetricsModifyingTest extends UITest {
     assertEquals("Metric changed", $$("tr.metric").get(0).$(".name").getText());
     assertEquals("EUR", $$("tr.metric").get(0).$(".unit").getText());
     assertEquals("source", $$("tr.metric").get(0).$(".infoSource").getText());
-    assertEquals("23.5", $$("tr.metric").get(0).$(".startLevel").getText());
-    assertEquals("103.5", $$("tr.metric").get(0).$(".targetLevel").getText());
+    assertEquals("23,5", $$("tr.metric").get(0).$(".startLevel").getText());
+    assertEquals("103,5", $$("tr.metric").get(0).$(".targetLevel").getText());
 
     $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
 

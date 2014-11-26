@@ -67,8 +67,8 @@ public class MetricsAddingTest extends UITest {
     $(".saveGoalButton").click();
 
     assertEquals("Koer", $$("tr.metric").get(0).$(".name").getText());
-    assertEquals("1.5", $$("tr.metric").get(0).$(".startLevel").getText());
-    assertEquals("8.5", $$("tr.metric").get(0).$(".targetLevel").getText());
+    assertEquals("1,5", $$("tr.metric").get(0).$(".startLevel").getText());
+    assertEquals("8,5", $$("tr.metric").get(0).$(".targetLevel").getText());
   }
 
   @Test

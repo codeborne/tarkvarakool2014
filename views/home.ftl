@@ -17,7 +17,7 @@
 
         <div><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else>
         <i>${goal.comment!""}</i></#if></#if></div>
-        <h4 class="budget"><@m'budget'/> ${goal.budget?c} €</h4>
+        <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
       </div>
       <div class="panel-body">
         <table class="table userHomeTable">
@@ -46,7 +46,7 @@
                       class="userViewPublicDescription"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else>
                     <i>${metric.publicDescription!""}</i></#if></#if></td>
                     <td class="startLevel">
-                      <#if metric.startLevel??>${metric.startLevel?c}
+                      <#if metric.startLevel??>${metric.startLevel}
                         <#if language == 'et'>
                           <#if metric.unit?has_content>${metric.unit}</#if>
                         <#elseif language == 'en'>
@@ -57,7 +57,7 @@
                       <#else>N/A</#if>
                     </td>
                     <td class="targetLevel">
-                      <#if metric.targetLevel??>${metric.targetLevel?c}
+                      <#if metric.targetLevel??>${metric.targetLevel}
                         <#if language == 'et'>
                           <#if metric.unit?has_content>${metric.unit}</#if>
                         <#elseif language == 'en'>
