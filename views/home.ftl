@@ -3,7 +3,7 @@
     <#list goals as goal>
       <#list infoSourceContentList as metricInfosource>
         <#if goal_index == metricInfosource_index>
-    <div class="panel panel-default goal">
+    <div class="panel panel-default goal panel-user">
       <div class="panel-heading">
         <form action="/charts">
           <input type="hidden" value="${goal.id?c}" name="goalId">
@@ -26,7 +26,7 @@
             <th><@m'metric'/></th>
             <th><@m'publicDescription'/></th>
             <th><@m'startLevel'/></th>
-            <th><@m'targetLevel'/></th>
+            <th><@m'targetLevel'/><br>(2020)</th>
             <th><@m'infoSource'/></th>
           </tr>
           </thead>
