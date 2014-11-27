@@ -1,4 +1,4 @@
-<@html>
+  <@html>
   <#if goals?has_content>
     <#list goals as goal>
       <#list infoSourceContentList as metricInfosource>

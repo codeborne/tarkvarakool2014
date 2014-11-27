@@ -5,13 +5,11 @@ import framework.Result;
 import framework.Role;
 import model.Goal;
 
-import java.util.ArrayList;
-
 import static org.hibernate.criterion.Order.asc;
 
 public class Value extends UserAwareController{
 
-  public java.util.List<Goal> goals = new ArrayList<>();
+  public java.util.List<Goal> goals;
   public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
   public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
 
