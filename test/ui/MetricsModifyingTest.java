@@ -23,7 +23,6 @@ public class MetricsModifyingTest extends UITest {
 
 
     open("/admin/login");
-    $(".language-button-est").click();
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 

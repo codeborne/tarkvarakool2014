@@ -2,6 +2,7 @@ package ui;
 
 import framework.Messages;
 import model.User;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -11,13 +12,19 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class LoginTest extends UITest {
 
+  @Before
+  public void setUp() throws Exception {
+    open("/admin/login");
+
+
+  }
+
   @Test
   public void loginFailsWithIncorrectPassword() throws Exception {
     messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("johny", "foo"));
 
-    open("/admin/login");
-    $(".language-button-est").click();
+
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 
@@ -30,10 +37,6 @@ public class LoginTest extends UITest {
   public void userCanSuccessfullyLogIn() throws Exception {
     messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("johny", "p2s3w04d"));
-
-
-    open("/admin/login");
-    $(".language-button-est").click();
 
 
     $(By.name("username")).setValue("johny");
@@ -51,10 +54,6 @@ public class LoginTest extends UITest {
     hibernate.save(new User("mari", "pass"));
 
 
-    open("/admin/login");
-    $(".language-button-est").click();
-
-
     $(By.name("username")).setValue("meelis");
     $(By.name("password")).setValue("pass");
 
@@ -69,11 +68,6 @@ public class LoginTest extends UITest {
     messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("tarmo", "tass"));
 
-
-    open("/admin/login");
-    $(".language-button-est").click();
-
-
     $(By.name("username")).setValue(null);
     $(By.name("password")).setValue("tass");
 
@@ -87,11 +81,6 @@ public class LoginTest extends UITest {
   public void logoutSuccess() throws Exception {
     messages = new Messages(false).getResolverFor("et");
     hibernate.save(new User("johny", "p2s3w04d"));
-
-
-    open("/admin/login");
-    $(".language-button-est").click();
-
 
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");

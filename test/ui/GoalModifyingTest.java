@@ -22,14 +22,13 @@ public class GoalModifyingTest extends UITest {
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
-
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 
     $("#submit").click();
 
     hibernate.save(new Goal("Sisestatud eesmark","", 100, 1));
-
+    open("/admin/goals/home");
   }
 
   @After
@@ -40,9 +39,6 @@ public class GoalModifyingTest extends UITest {
   @Test
   public void adminClicksOnModifyButton () {
 
-    open("/admin/goals/home");
-    $(".language-button-est").click();
-
     $(".modifyButton").click();
 
     $(By.name("name")).shouldHave(value("Sisestatud eesmark"));
@@ -51,9 +47,6 @@ public class GoalModifyingTest extends UITest {
 
   @Test
   public void adminModifiesGoal() throws Exception {
-
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $(".modifyButton").click();
 
@@ -71,9 +64,6 @@ public class GoalModifyingTest extends UITest {
 
   @Test
   public void adminFailsModifyingGoal() throws Exception {
-
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $(".modifyButton").click();
 

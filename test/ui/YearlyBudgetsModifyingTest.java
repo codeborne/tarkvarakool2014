@@ -27,7 +27,6 @@ public class YearlyBudgetsModifyingTest extends UITest {
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
-    $(".language-button-est").click();
 
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");

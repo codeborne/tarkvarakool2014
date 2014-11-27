@@ -28,6 +28,8 @@ public class GoalAddingTest extends UITest {
 
     $("#submit").click();
 
+    open("/admin/goals/home");
+
   }
 
   @After
@@ -39,8 +41,6 @@ public class GoalAddingTest extends UITest {
   @Test
   public void adminCanSuccessfullyInsertGoal() throws Exception {
 
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $(By.name("name")).setValue("Sisestatud eesmark");
     $(By.name("budget")).setValue("100");
@@ -56,8 +56,6 @@ public class GoalAddingTest extends UITest {
   @Test
   public void adminInsertsInvalidGoal() throws Exception {
 
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $(By.name("name")).setValue("");
     $(By.name("budget")).setValue("10");

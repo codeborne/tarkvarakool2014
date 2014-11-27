@@ -22,13 +22,14 @@ public class GoalDeletingTest extends UITest {
     hibernate.save(new User("johny", "p2s3w04d"));
 
     open("/admin/login");
-
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("p2s3w04d");
 
     $("#submit").click();
 
     hibernate.save(new Goal("Sisestatud eesmark", "", 100, 1));
+    open("/admin/goals/home");
+
 
   }
 
@@ -39,9 +40,6 @@ public class GoalDeletingTest extends UITest {
 
   @Test
   public void adminClicksOnDeleteButton() {
-
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $(".deleteButton").click();
 
@@ -55,8 +53,6 @@ public class GoalDeletingTest extends UITest {
   public void adminDeletesOneGoalFromMultipleGoals() throws Exception {
 
     hibernate.save(new Goal("eesmark", "", 10, 2));
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $$(".deleteButton").get(0).click();
 
@@ -71,8 +67,6 @@ public class GoalDeletingTest extends UITest {
 
   @Test
   public void adminCancelsDelete() throws Exception {
-    open("/admin/goals/home");
-    $(".language-button-est").click();
 
     $(".deleteButton").click();
 

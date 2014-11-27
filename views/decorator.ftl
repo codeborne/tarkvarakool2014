@@ -31,13 +31,15 @@
         </#if>
         </#if>
 
-
-      <div class="languageButtons btn-group button-menu-inner pull-left">
       <#if !homeUrl?contains("admin")>
+      <div class="languageButtons btn-group button-menu-inner pull-left">
+
         <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
-        </#if>
+
         <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
+
       </div>
+      </#if>
       <#if loggedInUsername??>
         <form class="navbar-form pull-left" action="/admin/logout">
           <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
