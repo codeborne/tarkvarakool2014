@@ -10,6 +10,7 @@ public class Logout extends UserAwareController{
   @Override @Role("admin")
   public Result get(){
     session.removeAttribute("username");
+    session.invalidate();
     return redirect(Home.class);
   }
 }
