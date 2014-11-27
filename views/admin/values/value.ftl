@@ -124,7 +124,7 @@
       <#list goal.metrics as metric>
         <tr class="metric">
           <td class="metricName">${metric.name} <#if metric.unit?has_content>(${metric.unit})</#if></td>
-          <td class="startLevel"><#if metric.startLevel??>${metric.startLevel?c}<#else>N/A</#if></td>
+          <td class="startLevel"><#if metric.startLevel??>${metric.startLevel}<#else>N/A</#if></td>
           <#list (minimumYear)..maximumYear as year>
             <td class="values">
               <div class="measured">
@@ -153,7 +153,7 @@
               </div>
             </td>
           </#list>
-          <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel?c}<#else>N/A</#if></td>
+          <td class="targetLevel"><#if metric.targetLevel??>${metric.targetLevel}<#else>N/A</#if></td>
         </tr>
       </#list>
       <tr class="yearlyBudget">
@@ -165,7 +165,7 @@
             <span <#if goal.yearlyBudgets.get(year)??>class="value hand-pointer"<#else>class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">${((goal.yearlyBudgets.get(year))?c)!""}</span>
             <form class="metric-value-form" style="display: none;"
                   onsubmit="sendBudgetData(${goal.id}, ${year?c}, $(this)); return false;">
-              <input type="number" step="any" class="modify-value">
+              <input type="text" step="any" class="modify-value">
             </form>
           </td>
         </#list>

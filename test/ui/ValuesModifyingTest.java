@@ -144,8 +144,8 @@ public class ValuesModifyingTest extends UITest {
     open("/admin/values/value");
 
     $$(".goal").get(0).$$(".metric").get(1).$$(".startLevel").get(0).shouldHave(text("0"));
-    $$(".goal").get(0).$$(".metric").get(0).$$(".targetLevel").get(0).shouldHave(text("100000"));
-    $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34363"));
+    $$(".goal").get(0).$$(".metric").get(0).$$(".targetLevel").get(0).shouldHave(text("100 000"));
+    $$(".goal").get(0).$$(".metric").get(0).$$(".startLevel").get(0).shouldHave(text("34 363"));
     $$(".goal").get(0).$$(".metric").get(1).$$(".targetLevel").get(0).shouldHave(text("20"));
   }
 

@@ -72,7 +72,7 @@
               <div>
                 <span class="labels labelsStyle"><@m'startLevel'/>: </span>
                 <#if metric.startLevel??>
-                  <span class="value startLevel">${metric.startLevel?c}</span>
+                  <span class="value startLevel">${metric.startLevel}</span>
                   <span class="value unit">${metric.unit}</span>
                   <span class="value commentOnStartLevel">&nbsp;<#if metric.commentOnStartLevel?length!=0>
                     (${metric.commentOnStartLevel})</#if></span>
@@ -94,7 +94,7 @@
               <div>
                 <span class="labels labelsStyle"> &nbsp; &nbsp;<@m'targetLevel'/>: </span>
                 <#if metric.targetLevel??>
-                  <span class="value targetLevel">${metric.targetLevel?c}</span>
+                  <span class="value targetLevel">${metric.targetLevel}</span>
                   <span class="value unit">${metric.unit}</span>
                   <span class="value commentOnTargetLevel">&nbsp;<#if metric.commentOnTargetLevel?length!=0>
                     (${metric.commentOnTargetLevel})</#if></span>

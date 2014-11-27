@@ -54,10 +54,10 @@ body {
   margin-top: 40px;
 }
 .panel-user {
-  min-height: 300px;
+  min-height: 400px;
 }
 .panel-body {
-  padding: 0 40px;
+  padding: 0 40px 40px 40px;
 }
 .table > thead > tr > th {
   border-bottom: 1px solid #DDD;
