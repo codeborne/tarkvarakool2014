@@ -32,6 +32,8 @@
           <root url="file://$USER_HOME$/Downloads" />
           <root url="jar://$USER_HOME$/Downloads/selenide-2.14-sources.jar!/" />
           <root url="jar://$USER_HOME$/Downloads/selenium-api-2.43.1-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.ideaLibSources/jetty-server-9.2.3.v20140905-sources.jar!/" />
+          <root url="file://$USER_HOME$/jetty-server-src" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" type="SOURCES" />
