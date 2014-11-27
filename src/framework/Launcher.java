@@ -43,7 +43,7 @@ public class Launcher {
     resourceHandler.setResourceBase("resources");
 
     HandlerList handlers = new HandlerList();
-    handlers.addHandler(new SessionHandler());
+    handlers.addHandler(new SessionHandler(new SessionManager()));
     Handler handler = new Handler();
     handler.initialize();
     handlers.addHandler(handler);
