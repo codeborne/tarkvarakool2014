@@ -24,8 +24,10 @@
       async: false,
       data: {metricId: $("input").val()}
     }).responseText;
+    console.log(jsonData);
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
     var data = google.visualization.arrayToDataTable(data1);
+
     var options = {
       hAxis: {title: "<@m'year'/>"},
       vAxis: {title: data.getColumnLabel(0) , minValue: 0.0, viewWindow: {  min: 0.0  }},

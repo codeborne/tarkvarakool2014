@@ -6,6 +6,7 @@ import framework.Result;
 import framework.Role;
 import model.Metric;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +32,16 @@ public Result post() {
   List<String> row = new ArrayList<>();
   row.add( new Gson().toJson(header));
   for (int year = minimumYear; year<=maximumYear;year++) {
-    String tooltip = year+" "+metric.getValues().get(year).toString()+metric.getUnit();
+    String tooltip = year+" "+metric.getValues().get(year)+metric.getUnit();
+    BigDecimal value;
+    if(year == minimumYear && metric.getValues().get(minimumYear) == null){
+      value = new BigDecimal(0);
+    }
+    else {
+      value = metric.getValues().get(year);
+    }
 
-    String values = "[" + "\"" + year + "\"," +metric.getValues().get(year)+",\""+tooltip+"\"]";
+    String values = "[" + "\"" + year + "\"," +value+",\""+tooltip+"\"]";
     row.add(values);
   }
 
