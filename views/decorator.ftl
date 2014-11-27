@@ -24,15 +24,17 @@
   <div class="container container-top">
     <div class="navbar-collapse collapse navbar-right">
       <#if loggedInUsername??>
-        <#if homeUrl?contains("admin")>
-        <button id="userViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'userView'/>" onclick="location='/home'"></button>
-        <#else>
-          <button id="adminViewButton" type="submit" class="glyphicon glyphicon-user pull-left" title="<@m'adminView'/>" onclick="location='/language?locale=changeLanguage'"></button>
-        </#if>
+
+      <div class="languageButtons btn-group button-menu-inner pull-left">
+        <button id="userViewButton" type="submit" class="switch-button pull-left <#if !homeUrl?contains("admin")>active</#if>"  onclick="location='/home'"><@m'userView'/></button>
+
+
+          <button id="adminViewButton" type="submit" class="switch-button pull-left <#if homeUrl?contains("admin")>active</#if>" onclick="location='/language?locale=changeLanguage'"><@m'adminView'/></button>
+      </div>
         </#if>
 
       <#if !homeUrl?contains("admin")>
-      <div class="languageButtons btn-group button-menu-inner pull-left">
+      <div class="languageButtons btn-group button-menu-inner pull-left" >
 
         <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
 

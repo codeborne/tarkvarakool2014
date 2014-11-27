@@ -15,6 +15,9 @@ body {
   height: 60px;
   margin-bottom: 60px;
 }
+.navbar-form{
+  padding-left: 0;
+}
 .container {
   width: 1170px;
   padding: 0;
@@ -103,7 +106,7 @@ body {
 .table-hover> tbody> tr:not(:last-child):hover td{
   background-color: #E6E6E6;
 }
-.userViewPublicDescription {
+.viewPublicDescription {
   font-size:12px;
 }
 #translationTable textarea{
@@ -227,6 +230,10 @@ tr.metric .glyphicon-sort{
 }
 .chart-button{
   float: right;
+  font-size: 20px;
+  font-family: Roboto;
+}
+.glyphicon-stats{
   font-size: 30px;
 }
 #chart{
@@ -276,7 +283,7 @@ tr.metric .glyphicon-sort{
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1) box-shadow : 0 0 0 px 2 px rgba(0, 0, 0, 0.2);
   border: 0;
   width: 120px;
-  height: 30px;
+  height: 28px;
   padding: 0;
   text-transform: uppercase;
   font-weight: bold;
@@ -284,6 +291,9 @@ tr.metric .glyphicon-sort{
   color: white;
   font-family: "Roboto Condensed";
   border-radius: 2px;
+}
+#login-button{
+  margin-left: 0 !important;
 }
 #metricSaveButton{
   margin-left: 0 !important;
@@ -309,13 +319,7 @@ tr.metric .glyphicon-sort{
   font-size: 10px;
   padding-right: 5px;
 }
-.glyphicon-user{
-  margin-top: 14px;
-  margin-right: 20px;
-  background-color: transparent;
-  color: #ffcc00;
-  border: none;
-}
+
 .forecasted > span.value, .forecast-indicator {
   color: #333
 }
@@ -344,9 +348,20 @@ tr.metric .glyphicon-sort{
   background-color: transparent;
   color: rgba(255, 255, 255, 0.5);;
 }
-.switch-button.active, .languageButtons a.active  {
+.switch-button.active, .languageButtons a.active {
   color: #ffcc00;
   background-color: rgba(0, 0, 0, 0.5);
+}
+#userViewButton,#adminViewButton{
+  font-size: 11px;
+  border-radius: 0;
+  margin-right: 10px;
+  padding: 5px 10px;
+
+}
+
+.language-button-est, #adminViewButton{
+  margin-right: 20px !important;
 }
 .languageButtons {
   font-size: 11px;
@@ -354,27 +369,14 @@ tr.metric .glyphicon-sort{
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
-  border: 1px solid transparent;
-  border-radius: 2px;
   background-color: transparent;
   margin-top: 8px;
   position: relative;
-  margin-right: 40px;
+  margin-right: 20px;
+  border-right: 1px solid #fff;
 }
-.languageButtons:before,
-.languageButtons:after {
-  content: '';
-  position: absolute;
-  display: block;
-  left: -10px;
-  top: 6px;
-  height: 15px;
-  border-left: 1px solid #fff;
-}
-.languageButtons:after {
-  left: auto;
-  right: -10px;
-}
+
+
 .languageButtons a {
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;

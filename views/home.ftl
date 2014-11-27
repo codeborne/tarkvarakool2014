@@ -7,8 +7,8 @@
       <div class="panel-heading">
         <form action="/charts">
           <input type="hidden" value="${goal.id?c}" name="goalId">
-          <button class="chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'charts'/>">
-            <span class="glyphicon glyphicon-stats"></span>
+          <button class="chart-button" type="submit" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-stats"></span><span><br>Graafik</span>
           </button>
         </form>
         <h4
