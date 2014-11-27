@@ -39,7 +39,7 @@ public class Handler extends AbstractHandler {
 
   public void initialize() throws IOException {
     Render.freemarker = initializeFreemarker(devMode);
-    hibernateSessionFactory = createSessionFactory();
+    hibernateSessionFactory = createSessionFactory(devMode);
   }
 
   @Override

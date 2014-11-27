@@ -31,26 +31,26 @@ public class HibernateHelper {
     configuration.setProperty(DIALECT, "org.hibernate.dialect.H2Dialect");
   }
 
-  public static SessionFactory createSessionFactory() throws IOException {
-    return sessionFactory != null ? sessionFactory : buildSessionFactory();
+  public static SessionFactory createSessionFactory(boolean devMode) throws IOException {
+    return sessionFactory != null ? sessionFactory : buildSessionFactory(devMode);
   }
 
   public static SessionFactory createTestSessionFactory() throws IOException {
     migrateDatabaseNeeded = false;
     configuration.setProperty(AUTOCOMMIT, "true");
     configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
-    sessionFactory = buildSessionFactory();
+    sessionFactory = buildSessionFactory(true);
     return sessionFactory;
   }
 
-  public static void migrateDatabase() {
+  public static void migrateDatabase(boolean devMode) {
     if (!migrateDatabaseNeeded) return;
 
     try {
       ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor();
       Database database = DatabaseFactory.getInstance().openDatabase(configuration.getProperty(URL), configuration.getProperty(USER), configuration.getProperty(PASS), null, resourceAccessor);
       Liquibase liquibase = new Liquibase("db.xml", resourceAccessor, database);
-      liquibase.update("");
+      liquibase.update(devMode ? "dev" : "");
     }
     catch (Exception e) {
       throw new RuntimeException(e);
@@ -61,10 +61,10 @@ public class HibernateHelper {
     new SchemaExport(configuration).create(true, true);
   }
 
-  private static SessionFactory buildSessionFactory() throws IOException {
+  private static SessionFactory buildSessionFactory(boolean devMode) throws IOException {
     prepareDatabase();
     addMappedClasses(configuration);
-    migrateDatabase();
+    migrateDatabase(devMode);
     //noinspection deprecation
     return configuration.buildSessionFactory();
   }
