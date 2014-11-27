@@ -19,38 +19,39 @@ import java.sql.SQLException;
 import static org.hibernate.cfg.AvailableSettings.*;
 
 public class HibernateHelper {
-  private static Configuration configuration = new Configuration();
+  private static Configuration configuration = new Configuration(     );
   private static SessionFactory sessionFactory;
-  private static boolean migrateDatabaseNeeded = true;
+  private static boolean dbMigrationNeeded = true;
 
   static {
-    configuration.setProperty(URL, "jdbc:h2:./moodikud;DB_CLOSE_DELAY=-1");
-    configuration.setProperty(USER, "sa");
-    configuration.setProperty(PASS, "sa");
-    configuration.setProperty(DRIVER, "org.h2.Driver");
-    configuration.setProperty(DIALECT, "org.hibernate.dialect.H2Dialect");
+    try {
+      configuration.getProperties().load(HibernateHelper.class.getResourceAsStream("/db.properties"));
+    }
+    catch (IOException e) {
+      throw new RuntimeException("Cannot load db.properties", e);
+    }
   }
 
-  public static SessionFactory createSessionFactory() throws IOException {
-    return sessionFactory != null ? sessionFactory : buildSessionFactory();
+  public static SessionFactory createSessionFactory(boolean devMode) throws IOException {
+    return sessionFactory != null ? sessionFactory : buildSessionFactory(devMode);
   }
 
   public static SessionFactory createTestSessionFactory() throws IOException {
-    migrateDatabaseNeeded = false;
+    dbMigrationNeeded = false;
     configuration.setProperty(AUTOCOMMIT, "true");
     configuration.setProperty(URL, "jdbc:h2:mem:tarkvarakool_test;DB_CLOSE_DELAY=-1");
-    sessionFactory = buildSessionFactory();
-    return sessionFactory;
+    return sessionFactory = buildSessionFactory(true);
   }
 
-  public static void migrateDatabase() {
-    if (!migrateDatabaseNeeded) return;
+  public static void migrateDatabase(boolean devMode) {
+    if (!dbMigrationNeeded) return;
 
     try {
       ClassLoaderResourceAccessor resourceAccessor = new ClassLoaderResourceAccessor();
-      Database database = DatabaseFactory.getInstance().openDatabase(configuration.getProperty(URL), configuration.getProperty(USER), configuration.getProperty(PASS), null, resourceAccessor);
+      Database database = DatabaseFactory.getInstance().openDatabase(configuration.getProperty(URL),
+        configuration.getProperty(USER), configuration.getProperty(PASS), configuration.getProperty(DRIVER), null, null, null, resourceAccessor);
       Liquibase liquibase = new Liquibase("db.xml", resourceAccessor, database);
-      liquibase.update("");
+      liquibase.update(devMode ? "dev" : "");
     }
     catch (Exception e) {
       throw new RuntimeException(e);
@@ -61,10 +62,10 @@ public class HibernateHelper {
     new SchemaExport(configuration).create(true, true);
   }
 
-  private static SessionFactory buildSessionFactory() throws IOException {
+  private static SessionFactory buildSessionFactory(boolean devMode) throws IOException {
     prepareDatabase();
     addMappedClasses(configuration);
-    migrateDatabase();
+    migrateDatabase(devMode);
     //noinspection deprecation
     return configuration.buildSessionFactory();
   }
