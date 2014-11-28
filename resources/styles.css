@@ -271,6 +271,11 @@ tr.metric .glyphicon-sort{
   cursor: pointer;
   cursor: hand;
 }
+.glyphicon-user, .glyphicon-user:hover{
+  font-size: 18px;
+  color: #ffcc00;
+  text-decoration: none;
+}
 #saveTranslationButton, #goalSaveButton, .authentication-button, #submit, #metricSaveButton {
   margin-left: 20px;
   background: #084381;
