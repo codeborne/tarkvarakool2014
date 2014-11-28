@@ -194,7 +194,7 @@ body {
   cursor: pointer;
   overflow: hidden;
   color: lightgray;
-  font-size: 16px;
+  font-size: 16px !important;
 }
 tr.metric .glyphicon-sort{
   padding-top: 15px;
@@ -233,7 +233,7 @@ tr.metric .glyphicon-sort{
   font-size: 20px;
   font-family: Roboto;
 }
-.glyphicon-stats{
+.chart-button .glyphicon-stats{
   font-size: 30px;
 }
 #chart{

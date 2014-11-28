@@ -175,6 +175,7 @@
                                    data-action="save"<#if metric.isPublic==true> style="color:green"
                                    <#else>style="color:red"</#if> /></span>
           </div>
+          <#if metric.startLevel?? && metric.targetLevel??>
           <div class="action-button">
             <form action="/admin/metrics/charts">
               <input type="hidden" value="${metric.id?c}" name="metricId">
@@ -183,6 +184,7 @@
               </button>
             </form>
           </div>
+          </#if>
         </td>
       </tr>
       </#if>
