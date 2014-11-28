@@ -20,11 +20,13 @@ public class Launcher {
     int port = 8080;
     if (args.length == 1) port = Integer.parseInt(args[0]);
 
+    boolean isDevMode = Boolean.getBoolean("dev");
+
     String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
     Files.write(Paths.get("server.pid"), pid.getBytes());
 
     prepareLogging();
-    Server server = createServer(port);
+    Server server = createServer(port, isDevMode);
     try {
       server.start();
       server.join();
@@ -35,7 +37,7 @@ public class Launcher {
     }
   }
 
-  public static Server createServer(int port) throws Exception {
+  public static Server createServer(int port, boolean isDevMode) throws Exception {
     LOG.info("starting");
 
     ResourceHandler resourceHandler = new ResourceHandler();
@@ -43,8 +45,8 @@ public class Launcher {
     resourceHandler.setResourceBase("resources");
 
     HandlerList handlers = new HandlerList();
-    handlers.addHandler(new SessionHandler(new SessionManager()));
-    Handler handler = new Handler();
+    handlers.addHandler(new SessionHandler(new SessionManager(isDevMode)));
+    Handler handler = new Handler(isDevMode);
     handler.initialize();
     handlers.addHandler(handler);
     handlers.addHandler(resourceHandler);

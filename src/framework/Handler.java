@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.management.ManagementFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -29,17 +28,23 @@ public class Handler extends AbstractHandler {
     System.setProperty("file.encoding", THE_ENCODING);
   }
 
-  private boolean devMode = isRunningInDebugMode();
-
   private SessionFactory hibernateSessionFactory;
 
-  private Messages messages = new Messages(devMode);
+  private Messages messages;
 
   private Binder binder = new Binder("dd.MM.yyyy");
 
+  private boolean isDevMode;
+
+  public Handler(boolean isDevMode) {
+    super();
+    this.isDevMode = isDevMode;
+    messages = new Messages(isDevMode);
+  }
+
   public void initialize() throws IOException {
-    Render.freemarker = initializeFreemarker(devMode);
-    hibernateSessionFactory = createSessionFactory(devMode);
+    Render.freemarker = initializeFreemarker(isDevMode);
+    hibernateSessionFactory = createSessionFactory(isDevMode);
   }
 
   @Override
@@ -70,7 +75,7 @@ public class Handler extends AbstractHandler {
     }
     catch (Exception e) {
       LOG.warn("Request handling failed", e);
-      response.sendError(SC_INTERNAL_SERVER_ERROR, devMode ? e.toString() : null);
+      response.sendError(SC_INTERNAL_SERVER_ERROR, isDevMode ? e.toString() : null);
       baseRequest.setHandled(true);
     }
     finally {
@@ -144,10 +149,6 @@ public class Handler extends AbstractHandler {
     String packagePrefix = (i == -1) ? "" : path.substring(0, i).replace('/', '.') + ".";
     path = path.substring(i + 1);
     return "controllers." + packagePrefix + capitalize(path, '-').replace("-", "");
-  }
-
-  private boolean isRunningInDebugMode() {
-    return ManagementFactory.getRuntimeMXBean().getInputArguments().toString().contains("jdwp");
   }
 }
 

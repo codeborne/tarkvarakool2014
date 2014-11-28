@@ -29,7 +29,7 @@ public class HandlerTest {
   @Before
   public void setUp() throws Exception {
     when(request.getSession()).thenReturn(session);
-    handler = spy(new Handler());
+    handler = spy(new Handler(true));
   }
 
   @Test

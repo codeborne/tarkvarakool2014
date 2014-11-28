@@ -27,7 +27,7 @@ public class UITest {
       Launcher.prepareLogging();
       sessionFactory = createTestSessionFactory();
       Launcher
-        .createServer(PORT)
+        .createServer(PORT, true)
         .start();
     } catch (Exception e) {
       throw new RuntimeException(e);
