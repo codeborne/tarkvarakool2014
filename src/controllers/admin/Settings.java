@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import controllers.UserAwareController;
+import controllers.admin.goals.Home;
 import framework.Result;
 import framework.Role;
 import model.User;
@@ -23,6 +24,7 @@ public class Settings extends UserAwareController {
   public String newPasswordFirst;
   public String newPasswordSecond;
   public Set<String> errorsList = new HashSet<>();
+  private static final int PASSWORD_MIN_LENGTH = 8;
 
   @Override @Role("admin")
   public Result get(){
@@ -33,8 +35,19 @@ public class Settings extends UserAwareController {
     username = (String) session.getAttribute("username");
     User user = (User) hibernate.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
     checkErrors();
-    validatePasswords(user.getPassword());
-    if (errorsList.isEmpty()){
+    if (errorsList.isEmpty() && validatePasswords(user.getPassword())){
+      tryUpdate(user);
+    }
+    if(errorsList.isEmpty()){
+      session.setAttribute("message",(messages.get("passwordChangeSuccess")));
+      return redirect(Home.class);
+    }
+    else {
+      return render();
+    }
+  }
+
+  private void tryUpdate(User user) throws InvalidKeySpecException, NoSuchAlgorithmException {
     try {
       user.setPassword(newPasswordFirst);
       hibernate.update(user);
@@ -42,39 +55,40 @@ public class Settings extends UserAwareController {
       hibernate.getTransaction().rollback();
       errorsList.add(messages.get("errorFailedToChangePassword"));
     }
-    }
-    return render();
   }
 
-  private void validatePasswords(String password) throws NoSuchAlgorithmException, DecoderException, InvalidKeySpecException {
+  private boolean validatePasswords(String password) throws NoSuchAlgorithmException, DecoderException, InvalidKeySpecException {
     if(!validatePassword(oldPassword, password)){
       errorsList.add(messages.get("errorWrongOldPassword"));
     }
     else if (!newPasswordFirst.equals(newPasswordSecond)){
       errorsList.add(messages.get("errorNewPasswordsDiffer"));
     }
+    else if (oldPassword.equals(newPasswordFirst)){
+      errorsList.add(messages.get("errorNewAndOldPasswordEqual"));
+    }
+    else if(newPasswordFirst.length()< PASSWORD_MIN_LENGTH){
+      errorsList.add(messages.get("passwordTooShort"));
+    }
+    return errorsList.isEmpty();
   }
 
   private void checkErrors() {
-    checkOldPassword();
-    checkNewPasswordFirst();
-    checkNewPasswordSecond();
+    checkErrorsMap();
+    checkAllFieldsAreFilled();
   }
 
-  private void checkOldPassword() {
-    if(errors.containsKey("oldPassword") || isBlank(oldPassword)){
-      errorsList.add(messages.get("errorEnteringOldPassword"));
-    }
-  }
-  private void checkNewPasswordFirst(){
-    if(errors.containsKey("newPasswordFirst") || isBlank(newPasswordFirst)){
-      errorsList.add(messages.get("errorEnteringNewPasswordFirst"));
+  private void checkErrorsMap(){
+    if(errors.containsKey("oldPassword") || errors.containsKey("newPasswordFirst") || errors.containsKey("newPasswordSecond")){
+      errorsList.add(messages.get("error"));
     }
   }
 
-  private void checkNewPasswordSecond() {
-    if (errors.containsKey("newPasswordSecond") || isBlank(newPasswordSecond)) {
-      errorsList.add(messages.get("errorEnteringNewPasswordSecond"));
+  private void checkAllFieldsAreFilled(){
+    if(isBlank(oldPassword) || isBlank(newPasswordFirst)|| isBlank(newPasswordSecond)){
+      errorsList.add(messages.get("errorAllFieldsMustBeFilledIn"));
     }
   }
+
+
 }

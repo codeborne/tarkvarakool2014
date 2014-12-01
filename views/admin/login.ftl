@@ -3,8 +3,9 @@
   <p><@m'loggedIn'/> ${loggedInUsername}</p>
   <button class="btn btn-default btn-sm" onclick="location='/admin/logout'"><@m'exit'/> </button>
   <#else>
+  <div class="panel-login">
   <form method="post" class="form-horizontal">
-    <div class="panel-login">
+
       <div class="login-center">
       <h3 id="login-h3"><@m'login'/></h3>
       <label>
