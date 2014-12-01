@@ -12,6 +12,7 @@ public abstract class UserAwareController extends Controller {
   private static final ImmutableSet<String> ANONYMOUS_ROLES = ImmutableSet.of("anonymous");
   public static final Integer MINIMUM_YEAR = 2014;
   public static final Integer MAXIMUM_YEAR = 2020;
+  public static final int PASSWORD_MIN_LENGTH = 8;
   public String homeUrl;
   public String valuesUrl;
 

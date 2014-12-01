@@ -43,7 +43,7 @@
       </div>
       </#if>
       <#if loggedInUsername??>
-      <a href="/admin/settings" class="navbar-form pull-left glyphicon glyphicon-user" title="<@m'settings'/>"></a>
+      <a <#if loggedInUsername == "Delia"> href="/admin/settings" <#else> href="/admin/changepassword"</#if> class="navbar-form pull-left glyphicon glyphicon-user" title="<@m'settings'/>"></a>
         <form class="navbar-form pull-left" action="/admin/logout">
           <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
           <button id="logout-button" type="submit" class="authentication-button">

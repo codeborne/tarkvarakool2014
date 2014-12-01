@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
-public class SettingsTest extends ControllerTest<Settings>{
+public class ChangepasswordTest extends ControllerTest<Changepassword>{
 
   @Before
   public void setUp() throws Exception {

@@ -276,7 +276,7 @@ tr.metric .glyphicon-sort{
   color: #ffcc00;
   text-decoration: none;
 }
-#saveTranslationButton, #goalSaveButton, .authentication-button, #submit, #metricSaveButton {
+#saveTranslationButton, #goalSaveButton, .authentication-button, #submit, #metricSaveButton, #saveNewPassword {
   margin-left: 20px;
   background: #084381;
   background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
@@ -312,7 +312,7 @@ tr.metric .glyphicon-sort{
   margin-right: 10px;
   margin-bottom: 30px;
 }
-#submit {
+#submit, #saveNewPassword {
   margin-left: 2px;
   padding: 0;
 }
