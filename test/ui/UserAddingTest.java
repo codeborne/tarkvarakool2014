@@ -15,7 +15,9 @@ public class UserAddingTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
-    hibernate.save(new User("Delia", "password"));
+    User user = new User("Delia", "password");
+    user.setAdmin(true);
+    hibernate.save(user);
     open("/admin/login");
     messages = new Messages(false).getResolverFor("et");
     $(By.name("username")).setValue("Delia");

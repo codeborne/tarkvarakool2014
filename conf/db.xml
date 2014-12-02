@@ -150,9 +150,23 @@
     </addColumn>
   </changeSet>
   
-<changeSet id="11" author="Tarkvarakool">
-  <modifyDataType tableName="metric" columnName="infoSource" newDataType="VARCHAR(1000)"/>
-</changeSet>
-  
+  <changeSet id="11" author="Tarkvarakool">
+    <modifyDataType tableName="metric" columnName="infoSource" newDataType="VARCHAR(1000)"/>
+  </changeSet>
+
+  <changeSet id="12" author="Tarkvarakool">
+    <addColumn tableName="USER">
+      <column name="isAdmin" type="boolean" defaultValueBoolean="false">
+        <constraints nullable="false"/>
+      </column>
+    </addColumn>
+  </changeSet>
+
+  <changeSet id="13" author="Tarkvarakool" context="dev">
+    <update tableName="USER">
+      <column name="isAdmin" value="true"/>
+      <where>username = 'Delia'</where>
+    </update>
+  </changeSet>
   
 </databaseChangeLog>

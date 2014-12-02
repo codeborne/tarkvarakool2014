@@ -3,6 +3,8 @@ package controllers;
 import com.google.common.collect.ImmutableSet;
 import framework.Controller;
 import framework.Render;
+import model.User;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.Set;
 
@@ -16,6 +18,15 @@ public abstract class UserAwareController extends Controller {
   public String homeUrl;
   public String valuesUrl;
 
+
+  public String getAdmin(){
+    User user = (User) hibernate.createCriteria(User.class).add(Restrictions.eq("isAdmin", true)).uniqueResult();
+    if(user!=null) {
+      return user.getUsername();
+    }
+    else
+      return null;
+  }
   public String getLoggedInUsername() {
     return (String) session.getAttribute("username");
   }

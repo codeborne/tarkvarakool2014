@@ -14,7 +14,9 @@ public class UserDeletingTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
-    hibernate.save(new User("Delia", "password"));
+    User user = new User("Delia", "password");
+    user.setAdmin(true);
+    hibernate.save(user);
     hibernate.save(new User("Johny", "password"));
     open("/admin/login");
     messages = new Messages(false).getResolverFor("et");
