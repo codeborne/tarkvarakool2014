@@ -26,10 +26,10 @@
       <#if loggedInUsername??>
 
       <div class="languageButtons btn-group button-menu-inner pull-left">
-        <button id="userViewButton" type="submit" class="switch-button pull-left <#if !homeUrl?contains("admin")>active</#if>"  onclick="location='/home'"><@m'userView'/></button>
+        <button id="userViewButton" type="submit" class="switch-view-button pull-left <#if !homeUrl?contains("admin")>active</#if>"  onclick="location='/home'"><@m'userView'/></button>
 
 
-          <button id="adminViewButton" type="submit" class="switch-button pull-left <#if homeUrl?contains("admin")>active</#if>" onclick="location='/language?locale=changeLanguage'"><@m'adminView'/></button>
+          <button id="adminViewButton" type="submit" class="switch-view-button pull-left <#if homeUrl?contains("admin")>active</#if>" onclick="location='/language?locale=changeLanguage'"><@m'adminView'/></button>
       </div>
         </#if>
 
