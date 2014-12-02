@@ -1,9 +1,10 @@
 body {
-  background: #F2F0E7 url(/images/bg1.png) no-repeat center 60px;
+  /*background: #F2F0E7 url(/images/bg1.png) no-repeat center 60px;*/
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 16px;
   color: #333;
   font-weight: 300;
+  background-color: #fbfaf8;
 }
 .navbar {
   border: 0;
@@ -12,7 +13,7 @@ body {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
-  height: 60px;
+  height: 30px;
   margin-bottom: 60px;
 }
 .navbar-form{
@@ -25,13 +26,17 @@ body {
 .container-top {
   margin-top: 6px;
 }
+.logo{
+  width:289px;
+}
 .toprow {
   margin: 0 0 30px 0;
   width: 100%;
 }
 .toprow td:nth-child(3) {
-  color: #fff;
+  color: #222;
   font-size: 30px;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 .toprow td:first-child {
   width: 289px;
@@ -120,7 +125,7 @@ body {
   color: black;
   border-right: solid 1px lightgray;
 }
-#translationTable> tbody> tr:hover td{
+#translationTable> tbody> tr:hover td, .user-table> tbody> tr:hover td{
   background-color: #E6E6E6;
 }
 #adminMetricTable tr.metric {
@@ -276,7 +281,7 @@ tr.metric .glyphicon-sort{
   color: #ffcc00;
   text-decoration: none;
 }
-#saveTranslationButton, #goalSaveButton, .authentication-button, #submit, #metricSaveButton, #saveNewPassword {
+#saveTranslationButton, #goalSaveButton, .authentication-button, #submit, #metricSaveButton, #saveNewPassword,#saveNewUser {
   margin-left: 20px;
   background: #084381;
   background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
@@ -312,7 +317,7 @@ tr.metric .glyphicon-sort{
   margin-right: 10px;
   margin-bottom: 30px;
 }
-#submit, #saveNewPassword {
+#submit, #saveNewPassword, #saveNewUser {
   margin-left: 2px;
   padding: 0;
 }
@@ -338,7 +343,8 @@ tr.metric .glyphicon-sort{
 .symbol {
   height: 55px;
   width: 2px;
-  background-color: #fff;
+  background-color: #222;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 .switch-button {
   display: inline-block;
@@ -421,6 +427,9 @@ input.modify-value {
 .login-center {
   padding: 140px 470px;
 }
+.user-center{
+  padding: 140px 370px;
+}
 #login-h3 {
   color: #069;
   font-size: 30px;
@@ -457,5 +466,14 @@ tr.metric div, .addMetric div {
 }
 .labelsStyle {
   font-weight: bold;
+}
+.adminSettings, .adminSettings:hover {
+  text-decoration: none;
+  font-size: 30px;
+
+}
+#settingsChangePassword, #settingsAddUser, #settingsDeleteUser{
+  padding-top: 30px;
+  text-align: center;
 }
 

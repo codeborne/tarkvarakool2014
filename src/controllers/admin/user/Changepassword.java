@@ -1,4 +1,4 @@
-package controllers.admin;
+package controllers.admin.user;
 
 import controllers.UserAwareController;
 import controllers.admin.goals.Home;

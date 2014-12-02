@@ -2,7 +2,7 @@
 
     <div class="panel-login">
       <div class="login-center">
-        <form method="post" class="form-horizontal">
+        <form method="post" class="form-horizontal" autocomplete="off">
         <h3 ><@m'changePassword'/></h3>
         <label><@m'oldPassword'/><input type="password" name="oldPassword" class="form-control"></label><br>
         <label><@m'newPasswordFirst'/><input type="password" class="form-control" name="newPasswordFirst"></label><br>

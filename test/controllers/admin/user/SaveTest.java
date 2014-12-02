@@ -1,4 +1,4 @@
-package controllers.admin;
+package controllers.admin.user;
 
 import controllers.ControllerTest;
 import model.User;
@@ -6,14 +6,13 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
 
+import static helpers.Password.validatePassword;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-public class AdduserTest extends ControllerTest<Adduser>{
+public class SaveTest extends ControllerTest<Save>{
   @Before
   public void setUp() throws Exception {
     when(request.getPathInfo()).thenReturn("admin/");
@@ -122,7 +121,7 @@ public class AdduserTest extends ControllerTest<Adduser>{
   }
 
   @Test
-  public void postIfUpdateFailsWithConstraintViolation() throws Exception {
+  public void postIfSaveFailsWithConstraintViolation() throws Exception {
     controller.username = "user";
     controller.passwordFirst = "password";
     controller.passwordSecond = "password";
@@ -133,5 +132,19 @@ public class AdduserTest extends ControllerTest<Adduser>{
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("errorUserExists")));
     verify(transaction).rollback();
+  }
+
+  @Test
+  public void postIfSaveSucceeds() throws Exception {
+    controller.username = "user";
+    controller.passwordFirst = "password";
+    controller.passwordSecond = "password";
+
+    assertRedirect(Delete.class, controller.post());
+
+    User savedUser = getSavedEntity();
+
+    assertEquals("user", savedUser.getUsername());
+    assertTrue(validatePassword("password", savedUser.getPassword()));
   }
 }

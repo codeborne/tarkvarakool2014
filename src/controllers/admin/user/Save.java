@@ -1,7 +1,6 @@
-package controllers.admin;
+package controllers.admin.user;
 
 import controllers.UserAwareController;
-import controllers.admin.goals.Home;
 import framework.Result;
 import framework.Role;
 import model.User;
@@ -17,7 +16,7 @@ import java.util.Set;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
-public class Adduser extends UserAwareController {
+public class Save extends UserAwareController {
   public List userNames = new ArrayList<>();
   public String username;
   public String passwordFirst;
@@ -38,7 +37,7 @@ public class Adduser extends UserAwareController {
       trySave();
     }
     if(errorsList.isEmpty()){
-      return redirect(Home.class);
+      return redirect(Delete.class);
     }
     else {
       return render();

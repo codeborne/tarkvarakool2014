@@ -31,6 +31,7 @@ public class DeleteTest extends ControllerTest<Delete> {
     when(hibernate.get(Goal.class, 5L)).thenReturn(null);
 
     assertRedirect(Home.class, controller.post());
+    verify(hibernate, never()).delete(any(Goal.class));
   }
 
   @Test

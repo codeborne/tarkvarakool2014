@@ -1,4 +1,4 @@
-package controllers.admin;
+package controllers.admin.user;
 
 import controllers.ControllerTest;
 import controllers.admin.goals.Home;
@@ -7,7 +7,6 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
-
 import static helpers.Password.validatePassword;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
