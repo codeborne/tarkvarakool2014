@@ -126,6 +126,7 @@ public class HandlerTest {
   public void invokeControllerFailsWithoutRole() throws Exception {
     Controller controller = new MockController();
     when(baseRequest.getMethod()).thenReturn("POST");
+    when(baseRequest.getSession()).thenReturn(mock(HttpSession.class));
     handler.invokeController(controller, baseRequest);
   }
 

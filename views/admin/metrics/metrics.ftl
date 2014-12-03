@@ -37,6 +37,7 @@
             <input type="hidden" name="infoSource" value="${metric.infoSource}">
             <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
             <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
+            <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
           </form>
         </td>
         <td class="metricContent">
@@ -142,6 +143,7 @@
           <input type="hidden" class="value" value="${metric.orderNumber?c}" name="orderNumber">
           <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
           <input type="hidden" class="value" name="metricId" value="${metric.id?c}"/>
+          <input type="hidden" class="value" name="csrfToken" value="${session.getAttribute("csrfToken")}">
           <div class="action-button">
             <input type="hidden" class="value" value="${metric.id?c}" name="id">
             <input type="button" title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
@@ -159,6 +161,7 @@
             <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')">
               <input type="hidden" value="${goal.id?c}" name="goalId">
               <input type="hidden" name="id" value="${metric.id?c}"/>
+              <input type="hidden" class="value" name="csrfToken" value="${session.getAttribute("csrfToken")}">
           <span class="value"><button class="deleteButton " title="<@m'delete'/>" type="submit"
                                       class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span>
           </button></span>
@@ -168,6 +171,7 @@
             <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
             <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
             <input class="isPublicValue" type="hidden" name="isStatusUpdateOnly" value="true"/>
+            <input type="hidden" class="isPublicValue" name="csrfToken" value="${session.getAttribute("csrfToken")}">
             <input class="isPublicValue" type="hidden" name="isPublic"
                    <#if metric.isPublic==false>value="true"<#else>value="false"</#if>/>
         <span class="value"><input type="button" title="<@m'public'/>/<@m'private'/>"
@@ -264,6 +268,7 @@
     <input type="button" id="metricSaveButton" class="saveGoalButton value btn btn-default btn-sm" value="<@m'add'/>"
            data-action="save">
     <input type="hidden" class="value" value="${goal.id?c}" name="goalId">
+    <input type="hidden" class="value" name="csrfToken" value="${session.getAttribute("csrfToken")}">
   </td>
 </tr>
 </tbody>

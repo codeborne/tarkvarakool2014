@@ -17,6 +17,7 @@
             <#if admin?? && username!=admin>
             <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                   class="action-button">
+              <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
               <input type="hidden" name="username" value="${username}"/>
               <button class="deleteButton" title="<@m'delete'/>" type="submit" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-trash"></span>
