@@ -59,7 +59,7 @@
   </div>
   </#list>
   <#else>
-  <div class="panel-login">
+  <div class="panel">
     <div class="missingGoals">
       <h3 id="login-h3"><@m'noValues'/></h3>
     </div>

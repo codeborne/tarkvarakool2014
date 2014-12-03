@@ -5,12 +5,15 @@ body {
   color: #333;
   font-weight: 300;
 }
+
 button:focus {
-    outline: none;
+  outline: none;
 }
-.wrapper{
-  background:#efede3 url(images/sectionContent.png) repeat-x;
+
+.wrapper {
+  background: #efede3 url(images/sectionContent.png) repeat-x;
 }
+
 .navbar {
   border: 0;
   color: #fff;
@@ -33,23 +36,25 @@ button:focus {
   font-size: 11px;
   border-radius: 0;
   margin-right: 10px;
-  padding: 5px 10px;
+  padding: 6px 10px;
 }
-.switch-view-button:before{
-    content: "";
-    position: absolute;
-    right: 0px;
-    top: 7px;
-    width: 1px;
-    height: 14px;
-    background-color: #fff;
-  }
+
+.switch-view-button:before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 7px;
+  width: 1px;
+  height: 14px;
+  background-color: #fff;
+}
+
 .switch-view-button.active {
   color: #00CCFF;
 }
 
 .languageButtons {
-  font-size: 11px;
+  font-size: 12px;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -60,19 +65,20 @@ button:focus {
   color: #ffffff;
 }
 
-.languageButtons:before{
-    content: "";
-    position: absolute;
-    right: 0px;
-    top: 7px;
-    width: 1px;
-    height: 14px;
-    background-color: #fff;
-  }
+.languageButtons:before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 7px;
+  width: 1px;
+  height: 14px;
+  background-color: #fff;
+}
 
 .language-button-est {
   margin-right: 20px !important;
 }
+
 .languageButtons a {
   color: white;
   text-decoration: none;
@@ -80,16 +86,16 @@ button:focus {
   display: inline-block;
   padding: 6px;
 }
+
 .languageButtons a.active {
   color: #00CCFF;
 }
 
-
-.glyphicon-user, .glyphicon-user:hover{
+.glyphicon-user, .glyphicon-user:hover {
   font-size: 14px;
   color: #ffcc00;
   text-decoration: none;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 
 .authentication-button {
@@ -103,9 +109,9 @@ button:focus {
   background: linear-gradient(to right, #084381 0%, #0081b2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1) box-shadow : 0 0 0 px 2 px rgba(0, 0, 0, 0.2);
   border: 0;
-  margin-top:3px;
+  margin-top: 3px;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 11px;
   color: white;
   border-radius: 2px;
@@ -117,6 +123,7 @@ button:focus {
   width: 1170px;
   padding: 0;
 }
+
 .container-top {
   margin-top: -6px;
 }
@@ -125,39 +132,51 @@ button:focus {
   margin: 0 0 20px 0;
   width: 100%;
 }
-.logo{
-  width:289px;
+
+.logo {
+  width: 289px;
 }
+
 .toprow td:nth-child(3) {
   color: #222;
   font-size: 30px;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
+
 .toprow td:first-child {
   width: 289px;
 }
+
 .toprow td:nth-child(2) {
   padding-right: 14px;
 }
+
 .toprow td:last-child {
   text-align: right;
   background-color: transparent;
 }
-.panel, .panel-login {
+
+.panel {
   border: 0;
   border-radius: 0;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   background-color: #f8f9fa;
-  margin-bottom: 0px;
-  margin-top: 20px;
+  margin-bottom: 40px;
   min-height: 600px;
 }
+
+.panel-user {
+  min-height: 400px;
+}
+
+.panel:last-child, .panel-home, .panel-metrics {
+  margin-bottom: -30px;
+}
+
 .panel-body {
   padding: 0 40px 40px 40px;
 }
-.panel-user{
-  min-height: 400px;
-}
+
 .panel-heading {
   padding: 25px 40px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
@@ -165,13 +184,16 @@ button:focus {
   background-color: #fff !important;
   z-index: 2;
 }
+
 .panel-heading > .name, .translationHeading {
   color: #006699;
   font-size: 30px;
 }
+
 .panel-heading .budget {
   color: #6f6d65;
 }
+
 .table > thead > tr > th {
   border-bottom: 1px solid #DDD;
   color: #000;
@@ -179,90 +201,114 @@ button:focus {
   text-align: left;
   padding: 20px 10px;
 }
+
 .table > tbody > tr > td {
   border-top: 0;
   text-align: left;
   padding: 10px;
 }
-.valueTable> thead > tr > th, .valueTable> tbody > tr > td{
+
+.valueTable > thead > tr > th, .valueTable > tbody > tr > td {
   text-align: right !important;
   width: 75px;
 }
-.valueTable> thead > tr > th:first-child , .valueTable> tbody > tr > td:first-child{
+
+.valueTable > thead > tr > th:first-child, .valueTable > tbody > tr > td:first-child {
   text-align: left !important;
   width: auto !important;
 }
-.userHomeTable> thead > tr > th, .userHomeTable> tbody > tr > td{
+
+.userHomeTable > thead > tr > th, .userHomeTable > tbody > tr > td {
   text-align: left !important;
 }
-.userHomeTable td:first-child{
-  width:auto;
+
+.userHomeTable td:first-child {
+  width: auto;
 }
-.userHomeTable td:nth-child(2){
-  width:250px;
+
+.userHomeTable td:nth-child(2) {
+  width: 250px;
 }
-.userHomeTable td:nth-child(3),.userHomeTable td:nth-child(4){
-  width:100px;
+
+.userHomeTable td:nth-child(3), .userHomeTable td:nth-child(4) {
+  width: 100px;
 }
-.userHomeTable td:nth-child(5){
-  width:150px;
+
+.userHomeTable td:nth-child(5) {
+  width: 150px;
 }
-.userHomeTable> tbody> tr:nth-child(odd), .valueStripes> tbody> tr:nth-child(odd) {
+
+.userHomeTable > tbody > tr:nth-child(odd), .valueStripes > tbody > tr:nth-child(odd) {
   background: #E6E6E6;
 }
+
 .table {
   margin-top: 20px;
 }
-.table-hover> tbody> tr:not(:last-child):hover td{
+
+.table-hover > tbody > tr:not(:last-child):hover td {
   background-color: #E6E6E6;
 }
+
 .viewPublicDescription {
-  font-size:12px;
+  font-size: 12px;
 }
-#translationTable textarea{
+
+#translationTable textarea {
   width: 470px;
 
 }
-#translationTable td:nth-child(2){
+
+#translationTable td:nth-child(2) {
   width: 500px;
 }
-#translationTable td:first-child, #translationTable th:first-child{
+
+#translationTable td:first-child, #translationTable th:first-child {
   color: black;
   border-right: solid 1px lightgray;
 }
-#translationTable> tbody> tr:hover td, .user-table> tbody> tr:hover td{
+
+#translationTable > tbody > tr:hover td, .user-table > tbody > tr:hover td {
   background-color: #E6E6E6;
 }
+
 #adminMetricTable tr.metric {
   border-bottom: solid 1px #DDD;
 }
+
 #metrics-table tbody {
   border: none;
 }
+
 #metrics-table tbody:nth-child(odd) {
   background: rgba(240, 240, 240, 0.5);
 }
+
 #metrics-table tbody:hover {
   background: rgba(240, 240, 240, 1);
 }
+
 .form-control {
-  max-width:815px;
+  max-width: 815px;
 }
+
 .smallInputFields {
-  max-width:160px!important;
+  max-width: 160px !important;
 }
 
 .mediumInputFields {
-  max-width:322px!important;
+  max-width: 322px !important;
 }
 
 .missingGoals {
   text-align: center;
   padding: 200px;
 }
+
 .startLevel, .targetLevel {
   text-align: right !important;
 }
+
 .saveGoalButton, .cancelGoalButton, .publicButton {
   height: 35px;
   width: 35px;
@@ -277,15 +323,18 @@ button:focus {
   color: lightgray;
   margin-left: -15px;
 }
+
 .action-button .saveGoalButton:hover {
   color: green;
   background-color: transparent;
 }
+
 .cancelGoalButton:hover {
   color: red;
   background-color: transparent;
 }
-.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button, .small-chart-button{
+
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button, .small-chart-button {
   background-color: Transparent;
   border: none;
   cursor: pointer;
@@ -293,74 +342,88 @@ button:focus {
   color: lightgray;
   font-size: 16px !important;
 }
-tr.metric .glyphicon-sort{
+
+tr.metric .glyphicon-sort {
   padding-top: 15px;
 }
+
 .modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover {
   color: #ffcc00;
   background-color: transparent;
 }
+
 .measured .glyphicon-pencil, .forecasted .glyphicon-pencil, .yearlyBudget .glyphicon-pencil {
   color: lightgrey !important;
 }
+
 .measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover {
   color: #ffcc00 !important;
 }
-.forecasted{
+
+.forecasted {
   white-space: nowrap;
 }
 
-.publicButton{
+.publicButton {
   margin: 0 !important;
   height: 23px !important;
   width: 28px !important;
   margin-bottom: 5px !important;
 }
-.chart-button{
+
+.chart-button {
   float: right;
   font-size: 20px;
-  font-family: Roboto;
+
 }
-.chart-button .glyphicon-stats{
+
+.chart-button .glyphicon-stats {
   font-size: 30px;
 }
-#chart{
-  margin:0 !important;
+
+#chart {
+  margin: 0 !important;
   padding: 0 !important;
   display: block;
   height: 600px;
 }
-.legendRow{
+
+.legendRow {
   height: 14px;
   width: 14px;
   display: inline-block;
 }
+
 .chartLegend {
   background-color: white;
   padding-bottom: 20px;
 }
+
 .legendMetricName {
   font-size: 16px;
   margin-bottom: 10px;
   padding-left: 10px;
 }
 
-.legendTable{
+.legendTable {
   margin-left: 40px;
 }
-.chartExplanation{
+
+.chartExplanation {
   padding: 20px 0 0 10px;
   font-size: 14px;
 }
-.glyphicon-info-sign{
+
+.glyphicon-info-sign {
   padding-top: 25px;
 }
+
 .hand-pointer {
   cursor: pointer;
   cursor: hand;
 }
 
-#saveTranslationButton, #goalSaveButton, #submit, #metricSaveButton, #saveNewPassword,#saveNewUser {
+#saveTranslationButton, #goalSaveButton, #submit, #metricSaveButton, #saveNewPassword, #saveNewUser {
   margin-left: 20px;
   background: #084381;
   background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
@@ -375,36 +438,42 @@ tr.metric .glyphicon-sort{
   height: 28px;
   padding: 0;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 11px;
   color: white;
   font-family: "Roboto Condensed";
   border-radius: 2px;
 }
 
-#login-button{
+#login-button {
   margin-left: 0 !important;
 }
-#metricSaveButton{
+
+#metricSaveButton {
   margin-left: 0 !important;
   margin-bottom: 20px;
 }
-#goalSaveButtonTd{
+
+#goalSaveButtonTd {
   vertical-align: bottom;
 }
-#saveTranslationButton{
-  float:right;
+
+#saveTranslationButton {
+  float: right;
   margin-right: 10px;
   margin-bottom: 30px;
 }
+
 #submit, #saveNewPassword, #saveNewUser {
   margin-left: 2px;
   padding: 0;
 }
+
 .glyphicon-arrow-right {
   color: #ffffff;
   padding-left: 10px;
 }
+
 .glyphicon-lock {
   font-size: 10px;
   padding-right: 5px;
@@ -413,13 +482,15 @@ tr.metric .glyphicon-sort{
 .forecasted > span.value, .forecast-indicator {
   color: #333
 }
-.forecast-indicator{
+
+.forecast-indicator {
   font-size: 12px;
 }
 
-.values{
-  text-align:right !important;
+.values {
+  text-align: right !important;
 }
+
 .symbol {
   height: 55px;
   width: 2px;
@@ -427,8 +498,7 @@ tr.metric .glyphicon-sort{
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 
-
-.switch-button{
+.switch-button {
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -437,25 +507,41 @@ tr.metric .glyphicon-sort{
   border: transparent;
   background-color: transparent;
   color: black;
-  font-weight: bold;
-  margin-top: 140px;
+  font-weight: normal;
+  font-size: 14px;
 }
+
 .switch-button.active {
-  color: #006699;
+  color: #ffffff;
+  background: #084381;
+  background: -moz-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #084381), color-stop(100%, #0081b2));
+  background: -webkit-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -o-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: -ms-linear-gradient(left, #084381 0%, #0081b2 100%);
+  background: linear-gradient(to right, #084381 0%, #0081b2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1) box-shadow : 0 0 0 px 2 px rgba(0, 0, 0, 0.2);
+  padding: 5px 20px;
+  border-radius: 2px;
+  font-weight: normal;
 }
 
 td.actions .action-button {
   display: inline-block;
 }
+
 td.actions {
   white-space: nowrap;
 }
+
 .ui-state-highlight {
   background-color: #E0E0E0;
 }
+
 input.modify-value {
   max-width: 60px;
 }
+
 .clearfix:after {
   visibility: hidden;
   display: block;
@@ -464,32 +550,41 @@ input.modify-value {
   clear: both;
   height: 0;
 }
+
 .clearfix {
   display: inline-block;
 }
+
 * html .clearfix {
   height: 1%;
 }
+
 .clearfix {
   display: block;
 }
+
 .login-center {
   padding: 140px 470px;
 }
-.user-center{
+
+.user-center {
   padding: 140px 370px;
 }
+
 #login-h3, h3 {
   color: #069;
   font-size: 30px;
 }
+
 .headingName {
   color: #006699;
   font-size: 30px;
 }
-.metricHeading{
+
+.metricHeading {
   color: #006699;
 }
+
 .alert-danger, .alert-success {
   width: 815px;
   text-align: center;
@@ -497,25 +592,31 @@ input.modify-value {
   margin: auto;
   margin-bottom: 10px;
 }
+
 .greenValue {
   color: green;
 }
+
 .redValue {
   color: red;
 }
+
 tr.metric div, .addMetric div {
   display: inline-block;
   white-space: nowrap;
 }
+
 .metricContent ul, .addMetric ul {
   list-style: none;
   margin: 0;
   padding: 0;
   padding-bottom: 20px;
 }
+
 .labelsStyle {
   font-weight: bold;
 }
+
 .adminSettings, .adminSettings:hover {
   text-decoration: none;
   font-size: 30px;
@@ -523,8 +624,15 @@ tr.metric div, .addMetric div {
   font-weight: 500;
 
 }
-#settingsChangePassword, #settingsAddUser, #settingsDeleteUser{
+
+#settingsChangePassword, #settingsAddUser, #settingsDeleteUser {
   text-align: center;
   line-height: 2;
+}
+
+.footer {
+
+  padding-top: 70px;
+  padding-bottom: 100px;
 }
 

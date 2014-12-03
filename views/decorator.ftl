@@ -53,7 +53,7 @@
                                                title="<@m'settings'/>"></a>
 
           <form class="navbar-form pull-left" action="/admin/logout">
-            <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
+            <span class="greetings"><@m'hello'/>&nbsp; ${loggedInUsername}</span>
             <button id="logout-button" type="submit" class="authentication-button">
               <span class="glyphicon glyphicon-lock"></span> <@m'exit'/>
             </button>
@@ -82,16 +82,20 @@
                     onclick="location='${homeUrl}'">
               <@m'goals'/>
             </button>
+
             <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
                     onclick="location='${valuesUrl}'"><@m'values'/>
             </button>
           </div>
+
         </td>
       </tr>
     </table>
     <#nested>
   </div>
-  <div class="footer"></div>
+</div>
+<div class="footer">
+ <div class="container"></div>
 </div>
 </body>
 </html>

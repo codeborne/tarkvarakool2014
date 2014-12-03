@@ -1,6 +1,6 @@
 <@html>
 
-<div class="panel-login">
+<div class="panel">
   <div class="user-center">
     <div id="settingsChangePassword">
       <a href="/admin/user/changepassword" class="adminSettings"><@m'changePassword'/></a>
