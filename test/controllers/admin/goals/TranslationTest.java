@@ -83,6 +83,18 @@ public class TranslationTest extends ControllerTest<Translation>{
   }
 
   @Test
+  public void postIfEngInfoSourceHasErrors() throws Exception {
+    controller.goalId = 1L;
+    controller.errors.put("engInfoSource",new RuntimeException());
+
+    assertRedirect(Home.class, controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("error")));
+    verify(hibernate, never()).update(any(Goal.class));
+  }
+
+  @Test
   public void postIfEngMetricNameHasErrors() throws Exception {
     controller.goalId = 1L;
     controller.errors.put("engMetricName",new RuntimeException());
