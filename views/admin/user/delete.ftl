@@ -14,6 +14,7 @@
         <tr>
           <td>${username}</td>
           <td>
+            <#if admin?? && username!=admin>
             <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                   class="action-button">
               <input type="hidden" name="username" value="${username}"/>
@@ -21,6 +22,7 @@
                 <span class="glyphicon glyphicon-trash"></span>
               </button>
             </form>
+            </#if>
           </td>
         </tr>
         </#list>

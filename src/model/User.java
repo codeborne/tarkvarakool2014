@@ -22,6 +22,9 @@ public class User {
   @Column(nullable = false)
   private String password;
 
+  @Column(nullable = false)
+  private boolean isAdmin;
+
   public User() {
   }
 
@@ -42,12 +45,20 @@ public class User {
     return password;
   }
 
+  public boolean isAdmin() {
+    return isAdmin;
+  }
+
   public void setUsername(String username) {
     this.username = username;
   }
 
   public void setPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
     this.password = generateStrongPasswordHash(password);
+  }
+
+  public void setAdmin(boolean isAdmin) {
+    this.isAdmin = isAdmin;
   }
 
 }
