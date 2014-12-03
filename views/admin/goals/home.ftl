@@ -1,8 +1,7 @@
 <@html>
 
-<div class="panel panel-default">
+<div class="panel panel-default panel-home">
   <div class="panel-heading">
-
     <#if message??>
       <div class="alert alert-success"><@m message/></div>
     </#if>

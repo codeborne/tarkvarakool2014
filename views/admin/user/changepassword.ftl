@@ -1,6 +1,6 @@
 <@html>
 
-    <div class="panel-login">
+    <div class="panel">
       <div class="login-center">
         <form method="post" class="form-horizontal" autocomplete="off">
         <h3 ><@m'changePassword'/></h3>

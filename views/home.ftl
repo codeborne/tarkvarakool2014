@@ -88,7 +88,7 @@
       </#list>
     </#list>
   <#else>
-  <div class="panel-login">
+  <div class="panel">
     <div class="missingGoals">
       <h3 id="login-h3"><@m'noGoals'/></h3>
     </div>

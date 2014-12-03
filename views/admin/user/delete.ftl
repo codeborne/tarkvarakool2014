@@ -1,6 +1,6 @@
 <@html>
 
-<div class="panel-login">
+<div class="panel">
   <div class="login-center">
     <table class="table user-table">
       <thead>
