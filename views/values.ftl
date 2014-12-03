@@ -1,7 +1,7 @@
 <@html values_active=true>
   <#if goals?has_content>
   <#list goals as goal>
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-user">
   <div class="goal">
     <div class="panel-heading">
       <form action="/charts">
