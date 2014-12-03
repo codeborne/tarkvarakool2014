@@ -44,7 +44,7 @@ public class Password {
     return skf.generateSecret(spec).getEncoded();
   }
 
-  private static byte[] generateSalt() throws NoSuchAlgorithmException {
+  public static byte[] generateSalt() throws NoSuchAlgorithmException {
     SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
     byte[] salt = new byte[16];
     sr.nextBytes(salt);
