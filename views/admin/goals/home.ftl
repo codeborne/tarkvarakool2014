@@ -164,7 +164,7 @@
       items: "tr:not(:last-child)",
       update: function (event, ui) {
         var id = ui.item.find("[name=id]").val();
-        var id = ui.item.find("[name=csrfToken]").val();
+        var csrfToken = ui.item.find("[name=csrfToken]").val();
         var sequenceNumberBeforeInput = ui.item.prev().find("[name=sequenceNumber]");
 
         if (sequenceNumberBeforeInput.length == 0)
