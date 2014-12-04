@@ -7,6 +7,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
+
 import static helpers.Password.validatePassword;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -174,6 +175,8 @@ public class ChangepasswordTest extends ControllerTest<Changepassword>{
     assertRedirect(Home.class, controller.post());
 
     User updatedUser = getUpdatedEntity();
+    verify(controller.session).setAttribute("message", (messages.get("passwordChangeSuccess")));
+
     assertTrue(validatePassword("newPassword", updatedUser.getPassword()));
     assertEquals("Username", updatedUser.getUsername());
   }

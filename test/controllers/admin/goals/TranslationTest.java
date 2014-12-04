@@ -151,6 +151,8 @@ public class TranslationTest extends ControllerTest<Translation>{
     assertEquals(null, updatedMetric2.getEngPublicDescription());
     assertEquals(null, updatedMetric2.getEngInfoSource());
 
+    verify(controller.session).setAttribute("message", (messages.get("translationSuccess")));
+
   }
 
   @Test (expected = HibernateException.class)
