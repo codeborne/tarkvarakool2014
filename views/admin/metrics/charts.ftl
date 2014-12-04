@@ -1,6 +1,7 @@
 <@html>
   <#if metric?has_content>
   <input type="hidden" value="${metric.id?c}" name="metricId">
+  <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
   <div class="panel panel-default">
     <div class="goal">
       <div class="panel-heading panel-heading-chart">
@@ -16,13 +17,14 @@
 <script>
   google.load("visualization", "1", {packages:["corechart"],language:'et'});
   google.setOnLoadCallback(drawChart);
+  var csrfToken = $("[name=csrfToken]").val();
   function drawChart() {
     var jsonData = $.ajax({
       url: "/admin/metrics/chart",
       type: "POST",
       dataType:"json",
       async: false,
-      data: {metricId: $("input").val()}
+      data: {metricId: $("input").val(), csrfToken: csrfToken}
     }).responseText;
     console.log(jsonData);
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));

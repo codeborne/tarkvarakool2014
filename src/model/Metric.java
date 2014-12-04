@@ -2,8 +2,9 @@ package model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @Entity
 public class Metric {
@@ -238,5 +239,30 @@ public class Metric {
     if (startLevel == null || targetLevel == null) return false;
     if (startLevel.equals(targetLevel)) return false;
     return true;
+  }
+
+  public List<String> getInfoSourceAsListOfWordsAndLinks(String language){
+      List<String> infoSourceList = new ArrayList<>();
+      String infoSource = getInfoSourceDependingOnLanguage(language);
+
+      infoSource = infoSource.replace("\n","*thisIsALineBreak*");
+      StringTokenizer stringTokenizer = new StringTokenizer(infoSource);
+      while (stringTokenizer.hasMoreElements()) {
+        String nextString = stringTokenizer.nextElement().toString();
+        if(nextString.contains("*thisIsALineBreak*")){
+          nextString = nextString.replace("*thisIsALineBreak*","\n");
+        }
+        infoSourceList.add(nextString);
+      }
+      return infoSourceList;
+  }
+
+  protected String getInfoSourceDependingOnLanguage(String language){
+  if("en".equals(language)&&!isBlank(this.getEngInfoSource())) {
+    return this.getEngInfoSource();
+  }
+  else{
+    return this.getInfoSource();
+  }
   }
 }
