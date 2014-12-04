@@ -2,7 +2,7 @@
   <#if goal?has_content>
   <input type="hidden" value="${goal.id?c}" name="goalId">
   <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-chart">
     <div class="goal">
       <div class="panel-heading panel-heading-chart">
         <h4 class="name"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>

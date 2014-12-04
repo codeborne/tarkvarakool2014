@@ -169,7 +169,7 @@ button:focus {
   min-height: 400px;
 }
 
-.panel:last-child, .panel-home, .panel-metrics {
+.panel:last-child, .panel-home, .panel-metrics,.panel-chart {
   margin-bottom: -30px;
 }
 

@@ -2,7 +2,7 @@
   <#if metric?has_content>
   <input type="hidden" value="${metric.id?c}" name="metricId">
   <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-chart">
     <div class="goal">
       <div class="panel-heading panel-heading-chart">
         <h4 class="name printMetricName"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
