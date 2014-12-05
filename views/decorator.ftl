@@ -57,7 +57,8 @@
       </div>
     </div>
   </div>
-  <div class="main-header" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+  <div class="header-wrapper">
+  <div class="main-header" data-spy="affix" data-offset-top="30">
     <div class="container">
     <table class="toprow">
           <tr>
@@ -77,6 +78,7 @@
           </tr>
         </table>
     </div>
+  </div>
   </div>
   <div class="container main-content" role="main">
     <#nested>

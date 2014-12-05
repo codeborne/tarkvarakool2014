@@ -136,8 +136,6 @@ button:focus {
 
 .logo {
   width: 289px;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
 }
 .title{
   color: #222;
@@ -155,6 +153,9 @@ button:focus {
   width: 2px;
 }
 
+.header-wrapper{
+  height: 140px;
+}
 .main-header.affix{
   width:100%;
   z-index:100;
@@ -167,8 +168,6 @@ button:focus {
 .main-header.affix .logo{
   width:189px;
   top:20px;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s
 }
 
 .main-header.affix .title{
@@ -570,6 +569,7 @@ td.actions .action-button {
 
 td.actions {
   white-space: nowrap;
+  text-align: center;
 }
 
 .ui-state-highlight {
