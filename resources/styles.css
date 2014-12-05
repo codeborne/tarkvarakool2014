@@ -92,8 +92,8 @@ button:focus {
   color: #00CCFF;
 }
 
-.glyphicon-user, .glyphicon-user:hover {
-  font-size: 14px;
+.glyphicon-wrench, .glyphicon-wrench:hover {
+  font-size: 17px;
   color: #ffcc00;
   text-decoration: none;
   margin-top: 16px;
@@ -208,6 +208,10 @@ button:focus {
 
 .panel:last-child, .panel-home, .panel-metrics,.panel-chart {
   margin-bottom: -30px;
+}
+
+.panel-password, .panel-save-users, .panel-delete-users, .panel-login{
+  min-height: 600px;
 }
 
 .panel-body {

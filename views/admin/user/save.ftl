@@ -1,6 +1,6 @@
 <@html>
 
-<div class="panel">
+<div class="panel panel-save-users">
   <div class="panel-body">
   <div class="save-center">
     <form method="post" class="form-horizontal" autocomplete="off">

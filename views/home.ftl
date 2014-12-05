@@ -86,8 +86,8 @@
                     <td class="infoSource">
                       <#list infosource as infoItem>
                         <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                          <span style="white-space: pre-wrap;"> <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-new-window""></span></a></span>
-                          <#else><span style="white-space: pre-wrap;">${infoItem}</span>
+                          <span style="white-space: pre-wrap;"> <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-new-window" title="Link allikale"></span></a>&nbsp;</span>
+                          <#else><span style="white-space: pre-wrap;">${infoItem}&nbsp;</span>
                         </#if>
                       </#list>
                     </td>
