@@ -118,7 +118,30 @@ public class HomeViewValuesTest extends UITest {
 
   }
 
+  @Test
+  public void userShouldSeeYearlyBudgets() throws Exception {
+    Goal goal = new Goal("Eesmark", "", 10, 1);
+    goal.getYearlyBudgets().put(2014, 100000L);
+    goal.getYearlyBudgets().put(2015, 200000L);
+    goal.getYearlyBudgets().put(2016, 300000L);
+    goal.getYearlyBudgets().put(2017, 400000L);
+    goal.getYearlyBudgets().put(2018, 500000L);
+    goal.getYearlyBudgets().put(2019, 600000L);
+    goal.getYearlyBudgets().put(2020, 700000L);
+    hibernate.save(goal);
+    hibernate.flush();
+    open("/home");
+    $("#MetricsValue").click();
 
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(2).shouldHave(text("100 000"));
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(3).shouldHave(text("200 000"));
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(4).shouldHave(text("300 000"));
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(5).shouldHave(text("400 000"));
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(6).shouldHave(text("500 000"));
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(7).shouldHave(text("600 000"));
+    $$(".goal").get(0).$(".moneySpentRow").$$("td").get(8).shouldHave(text("700 000"));
+
+  }
 }
 
 

@@ -196,10 +196,10 @@ button:focus {
 
 .table > thead > tr > th {
   border-bottom: 1px solid #DDD;
-  color: #000;
-  font-weight: 300;
   text-align: left;
   padding: 20px 10px;
+  color: #6f6d65;
+  font-weight: bold;
 }
 
 .table > tbody > tr > td {
@@ -249,6 +249,10 @@ button:focus {
 .table-hover > tbody > tr:not(:last-child):hover td {
   background-color: #E6E6E6;
 }
+
+/*.moneySpentRow{*/
+/*border-top: solid 1px gray;*/
+/*}*/
 
 .viewPublicDescription {
   font-size: 12px;
