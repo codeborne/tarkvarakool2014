@@ -201,15 +201,11 @@ button:focus {
   min-height: 300px;
 }
 
-.panel-user {
-  min-height: 300px;
-}
-
 .panel:last-child, .panel-home, .panel-metrics,.panel-chart {
   margin-bottom: -30px;
 }
 
-.panel-password, .panel-save-users, .panel-delete-users, .panel-login{
+.panel-password, .panel-save-users, .panel-delete-users, .panel-login, .panel-user{
   min-height: 600px;
 }
 
