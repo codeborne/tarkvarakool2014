@@ -17,11 +17,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 <div class="wrapper">
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container container-top">
       <div class="navbar-collapse collapse navbar-right">
         <#if loggedInUsername??>
@@ -68,32 +69,34 @@
       </div>
     </div>
   </div>
-  <div class="container main-content" role="main">
+  <div class="main-header" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+    <div class="container">
     <table class="toprow">
-      <tr>
-        <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
-        <td>
-          <div class="symbol"></div>
-        </td>
-        <td class="title"><@m'title'/></td>
-        <td>
-          <div class="btn-group button-menu-inner">
-            <button type="button" class="switch-button<#if !values_active> active</#if>"
-                    onclick="location='${homeUrl}'">
-              <@m'goals'/>
-            </button>
-            <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
-                    onclick="location='${valuesUrl}'"><@m'results'/>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </table>
+          <tr>
+            <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
+            <td class="title"><@m'title'/></td>
+            <td>
+              <div class="btn-group button-menu-inner">
+                <button type="button" class="switch-button<#if !values_active> active</#if>"
+                        onclick="location='${homeUrl}'">
+                  <@m'goals'/>
+                </button>
+                <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
+                        onclick="location='${valuesUrl}'"><@m'results'/>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
+  <div class="container main-content" role="main">
     <#nested>
   </div>
 </div>
 <div class="footer">
- <div class="container"></div>
+ <div class="container">
+ </div>
 </div>
 </body>
 </html>
