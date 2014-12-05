@@ -44,21 +44,21 @@
           <span id="errors_${metric.id?c}"></span>
           <ul>
             <li>
-              <h4 class="metricHeading"><span class="value name">${metric.name}</span></h4>
+              <h4 class="metricHeading"><span class="value name line-break">${metric.name}</span></h4>
               <span class="labelOnlyShownWhenModifying" style="display: none;"><@m'metric'/>: </span>
               <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'metric'/>"
                         style="display: none;">${metric.name}</textarea>
             </li>
             <li>
               <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
-              <span class="value publicDescription">${metric.publicDescription}</span>
+              <span class="value publicDescription line-break">${metric.publicDescription}</span>
               <textarea class="value form-control" name="publicDescription" maxlength="255"
                         placeholder="<@m'publicDescription'/>"
                         style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
             </li>
             <li>
               <span class="labels labelsStyle"><@m'privateDescription'/>: </span>
-              <span class="value privateDescription">${metric.privateDescription}</span>
+              <span class="value privateDescription line-break">${metric.privateDescription}</span>
               <textarea class="value form-control" name="privateDescription" maxlength="255"
                         placeholder="<@m'privateDescription'/>"
                         style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
@@ -119,7 +119,7 @@
             <li>
               <div>
                 <span class="labels labelsStyle"><@m'institutionReport'/>: </span>
-                <span class="value institutionToReport">${metric.institutionToReport}</span>
+                <span class="value institutionToReport line-break">${metric.institutionToReport}</span>
                 <textarea rows="1" cols="80" class="value form-control mediumInputFields" name="institutionToReport"
                           maxlength="255"
                           placeholder="<@m'institutionReport'/>"
@@ -132,7 +132,7 @@
             <span class="value infoSource">
               <#list infosource as infoItem>
                 <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                  <span style="white-space: pre-wrap;"><a href="${infoItem}" target="_blank" ><span class="glyphicon glyphicon-new-window" title="Link"></span></a></span><#else> <span style="white-space: pre-wrap;">${infoItem}</span></#if>
+                  <span class="line-break"><a href="${infoItem}" target="_blank" ><span class="glyphicon glyphicon-new-window" title="Link"></span></a>&nbsp;</span><#else> <span class="line-break">${infoItem}&nbsp;</span></#if>
               </#list>
             </span>
                 <textarea rows="2" cols="200" class="value form-control" name="infoSource" placeholder="<@m'infoSource'/>" maxlength="1000" style="display: none;">${metric.infoSource}</textarea>
@@ -174,7 +174,7 @@
             <input class="isPublicValue" type="hidden" name="isStatusUpdateOnly" value="true"/>
             <input type="hidden" class="isPublicValue" name="csrfToken" value="${session.getAttribute("csrfToken")}">
             <input class="isPublicValue" type="hidden" name="isPublic"
-                   <#if metric.isPublic==false>value="true"<#else>value="false"</#if>/>
+                   <#if metric.isPublic==false>value="true" <#else>value="false"</#if>/>
         <span class="value"><input type="button" title="<@m'public'/>/<@m'private'/>"
                                    class="isPublicValue btn btn-default btn-sm publicButton" value=""
                                    data-action="save"<#if metric.isPublic==true> style="color:green"

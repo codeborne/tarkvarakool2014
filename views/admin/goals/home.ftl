@@ -33,11 +33,11 @@
               </form>
             </td>
             <td class="nameInTable">
-              <span class="value">${goal.name}</span>
+              <span class="value line-break">${goal.name}</span>
               <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'goal'/>" style="display: none">${goal.name}</textarea>
             </td>
             <td class="commentInTable">
-              <span class="value" style="white-space: pre-wrap;">${goal.comment!""}</span>
+              <span class="value line-break">${goal.comment!""}</span>
               <textarea class="value form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
             </td>
             <td class="budgetInTable">

@@ -633,8 +633,10 @@ tr.metric div, .addMetric div {
 }
 
 .footer {
-
   padding-top: 100px;
   padding-bottom: 100px;
 }
 
+.line-break{
+  white-space: pre-wrap;
+}
