@@ -23,7 +23,7 @@ public class UserAddingTest extends UITest {
     $(By.name("username")).setValue("Delia");
     $(By.name("password")).setValue("password");
     $("#submit").click();
-    $(".glyphicon-user").click();
+    $(".glyphicon-wrench").click();
     $("#settingsAddUser").$("a").click();
   }
 

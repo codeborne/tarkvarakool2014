@@ -23,7 +23,7 @@ public class UserDeletingTest extends UITest {
     $(By.name("username")).setValue("Delia");
     $(By.name("password")).setValue("password");
     $("#submit").click();
-    $(".glyphicon-user").click();
+    $(".glyphicon-wrench").click();
     $("#settingsDeleteUser").$("a").click();
   }
 

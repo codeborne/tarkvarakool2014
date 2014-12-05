@@ -20,7 +20,7 @@ public class PasswordChangeTest extends UITest {
     $(By.name("username")).setValue("johny");
     $(By.name("password")).setValue("password");
     $("#submit").click();
-    $(".glyphicon-user").click();
+    $(".glyphicon-wrench").click();
   }
 
   @After
