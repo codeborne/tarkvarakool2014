@@ -21,6 +21,7 @@ button:focus {
   border-radius: 0;
   font-size: 14px;
   min-height: 0px;
+
 }
 
 .switch-view-button {
@@ -162,11 +163,11 @@ button:focus {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   background-color: #f8f9fa;
   margin-bottom: 40px;
-  min-height: 600px;
+  min-height: 300px;
 }
 
 .panel-user {
-  min-height: 400px;
+  min-height: 300px;
 }
 
 .panel:last-child, .panel-home, .panel-metrics {
@@ -228,6 +229,7 @@ button:focus {
 
 .userHomeTable td:nth-child(2) {
   width: 250px;
+  font-size: 12px;
 }
 
 .userHomeTable td:nth-child(3), .userHomeTable td:nth-child(4) {
@@ -630,9 +632,15 @@ tr.metric div, .addMetric div {
   line-height: 2;
 }
 
+.settings-delete-users{
+  font-weight: 500 !important;
+  padding:0 0 2px 8px !important;
+}
+
 .footer {
 
-  padding-top: 70px;
+  padding-top: 100px;
   padding-bottom: 100px;
 }
+
 

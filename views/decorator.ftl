@@ -82,12 +82,10 @@
                     onclick="location='${homeUrl}'">
               <@m'goals'/>
             </button>
-
             <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
-                    onclick="location='${valuesUrl}'"><@m'values'/>
+                    onclick="location='${valuesUrl}'"><@m'results'/>
             </button>
           </div>
-
         </td>
       </tr>
     </table>

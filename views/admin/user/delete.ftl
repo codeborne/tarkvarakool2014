@@ -5,8 +5,8 @@
     <table class="table user-table">
       <thead>
       <tr>
-        <th><@m'user'/></th>
-        <th><@m'delete'/></th>
+        <th class="settings-delete-users"><@m'user'/></th>
+        <th  class="settings-delete-users"><@m'delete'/></th>
       </tr>
       </thead>
       <tbody>
