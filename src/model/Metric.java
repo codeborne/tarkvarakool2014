@@ -32,11 +32,12 @@ public class Metric {
   @Column(nullable = false)
   private Double orderNumber;
 
-
   private String engName;
   private String engUnit;
   private String engPublicDescription;
   private String engInfoSource;
+  private String engStartLevelComment;
+  private String engTargetLevelComment;
 
   @ElementCollection
   @JoinTable(name = "MetricValue", joinColumns = @JoinColumn(name = "metric_id"))
@@ -119,12 +120,45 @@ public class Metric {
     return isPublic;
   }
 
+  public String getUnit() {
+    return unit;
+  }
+
   public Map<Integer, BigDecimal> getValues() {
     return values;
   }
 
   public Map<Integer, BigDecimal> getForecasts() {
     return forecasts;
+  }
+
+  public Double getOrderNumber() {
+    return orderNumber;
+  }
+
+  public String getEngName() {
+    return engName;
+  }
+
+  public String getEngPublicDescription() {
+    return engPublicDescription;
+  }
+
+
+  public String getEngUnit() {
+    return engUnit;
+  }
+
+  public String getEngInfoSource() {
+    return engInfoSource;
+  }
+
+  public String getEngStartLevelComment() {
+    return engStartLevelComment;
+  }
+
+  public String getEngTargetLevelComment() {
+    return engTargetLevelComment;
   }
 
   public void setId(Long id) {
@@ -183,52 +217,36 @@ public class Metric {
     this.isPublic = isPublic;
   }
 
-  public String getUnit() {
-    return unit;
-  }
-
   public void setUnit(String unit) {
     this.unit = unit;
-  }
-
-  public Double getOrderNumber() {
-    return orderNumber;
   }
 
   public void setOrderNumber(Double orderNumber) {
     this.orderNumber = orderNumber;
   }
 
+  public void setEngUnit(String engUnit) {
+    this.engUnit = engUnit;
+  }
 
-  public String getEngName() {
-    return engName;
+  public void setEngPublicDescription(String engPublicDescription) {
+    this.engPublicDescription = engPublicDescription;
+  }
+
+  public void setEngInfoSource(String engInfoSource) {
+    this.engInfoSource = engInfoSource;
   }
 
   public void setEngName(String engName) {
     this.engName = engName;
   }
 
-  public String getEngUnit() {
-    return engUnit;
+  public void setEngStartLevelComment(String engStartLevelComment) {
+    this.engStartLevelComment = engStartLevelComment;
   }
 
-  public void setEngUnit(String engUnit) {
-    this.engUnit = engUnit;
-  }
-
-  public String getEngPublicDescription() {
-    return engPublicDescription;
-  }
-
-  public void setEngPublicDescription(String engPublicDescription) {
-    this.engPublicDescription = engPublicDescription;
-  }
-  public String getEngInfoSource() {
-    return engInfoSource;
-  }
-
-  public void setEngInfoSource(String engInfoSource) {
-    this.engInfoSource = engInfoSource;
+  public void setEngTargetLevelComment(String engTargetLevelComment) {
+    this.engTargetLevelComment = engTargetLevelComment;
   }
 
   public boolean hasValueForYear(int year){
