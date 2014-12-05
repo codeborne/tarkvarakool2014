@@ -113,11 +113,9 @@ public class MetricsAddingTest extends UITest {
     row.$(".commentOnStartLevel").shouldHave(text("blahblah"));
     row.$(".targetLevel").shouldHave(text("1"));
     row.$(".commentOnTargetLevel").shouldHave(text("iejoja"));
-    row.$(".infoSource").shouldHave(text("http://"));
+    row.$(".infoSource").$(".glyphicon-new-window").shouldBe(visible);
     row.$(".infoSource").$("a").shouldBe(visible);
     row.$(".institutionToReport").shouldHave(text("koht"));
-
-
   }
 
   @Test
