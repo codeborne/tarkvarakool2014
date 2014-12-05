@@ -36,6 +36,7 @@ public class Login extends UserAwareController {
     } else {
       session.setAttribute("username", username);
       session.setAttribute("csrfToken", generateCSRFToken());
+      session.setAttribute("locale", "et");
       return redirect(Home.class);
     }
   }

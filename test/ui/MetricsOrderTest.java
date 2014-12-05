@@ -43,10 +43,30 @@ public class MetricsOrderTest extends UITest {
     $("#logout-button").click();
   }
 
-  @Test @Ignore
+  @Test
   public void testOrderInAdminMetrics() {
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
+
+    $$(".name").get(0).shouldHave(text("Some metric1"));
+    $$(".name").get(1).shouldHave(text("Some metric2"));
+    $$(".name").get(2).shouldHave(text("Some metric3"));
+    $$(".name").get(3).shouldHave(text("Some metric4"));
+  }
+
+  @Test
+  public void testOrderInAdminValues() {
+    open("/admin/values/value");
+
+    $$("td.metricName").get(0).shouldHave(text("Some metric1"));
+    $$("td.metricName").get(1).shouldHave(text("Some metric2"));
+    $$("td.metricName").get(2).shouldHave(text("Some metric3"));
+    $$("td.metricName").get(3).shouldHave(text("Some metric4"));
+  }
+
+  @Test
+  public void testOrderInAnonymousHome() {
+    open("/home");
 
     $$("td.name").get(0).shouldHave(text("Some metric1"));
     $$("td.name").get(1).shouldHave(text("Some metric2"));
@@ -54,27 +74,7 @@ public class MetricsOrderTest extends UITest {
     $$("td.name").get(3).shouldHave(text("Some metric4"));
   }
 
-  @Test @Ignore
-  public void testOrderInAdminValues() {
-    open("/admin/values/value");
-
-    $$("td.name").get(0).shouldHave(text("Some metric1 (%)"));
-    $$("td.name").get(1).shouldHave(text("Some metric2 (%)"));
-    $$("td.name").get(2).shouldHave(text("Some metric3"));
-    $$("td.name").get(3).shouldHave(text("Some metric4"));
-  }
-
-  @Test @Ignore
-  public void testOrderInAnonymousHome() {
-    open("/home");
-
-    $$("td.name").get(0).shouldHave(text("Some metric1 (%)"));
-    $$("td.name").get(1).shouldHave(text("Some metric2 (%)"));
-    $$("td.name").get(2).shouldHave(text("Some metric3"));
-    $$("td.name").get(3).shouldHave(text("Some metric4"));
-  }
-
-  @Test @Ignore
+  @Test
   public void testOrderInAnonymousValues() {
     open("/values");
 
@@ -99,19 +99,19 @@ public class MetricsOrderTest extends UITest {
     originalMetricObject.setOrderNumber(2.5);
     assertEquals(originalMetricObject,updatedMetricObject);
 
-    $$("td.name").shouldHave(texts(
-      "Some metric2 (%)",
+    $$(".name").shouldHave(texts(
+      "Some metric2",
       "Some metric3",
-      "Some metric1 (%)",
+      "Some metric1",
       "Some metric4"));
 
     open("/admin/goals/home");
     $(".metricsButton").click();
 
-    $$("td.name").shouldHave(texts(
-      "Some metric2 (%)",
+    $$(".name").shouldHave(texts(
+      "Some metric2",
       "Some metric3",
-      "Some metric1 (%)",
+      "Some metric1",
       "Some metric4"));
   }
 
@@ -129,18 +129,18 @@ public class MetricsOrderTest extends UITest {
     originalMetricObject.setOrderNumber(-7.0);
     assertEquals(originalMetricObject,updatedMetricObject);
 
-    $$("td.name").get(0).shouldHave(text("Some metric2 (%)"));
-    $$("td.name").get(1).shouldHave(text("Some metric1 (%)"));
-    $$("td.name").get(2).shouldHave(text("Some metric3"));
-    $$("td.name").get(3).shouldHave(text("Some metric4"));
+    $$(".name").get(0).shouldHave(text("Some metric2 (%)"));
+    $$(".name").get(1).shouldHave(text("Some metric1 (%)"));
+    $$(".name").get(2).shouldHave(text("Some metric3"));
+    $$(".name").get(3).shouldHave(text("Some metric4"));
 
     open("/admin/goals/home");
     $$(".metricsButton").get(0).click();
 
-    $$("td.name").get(0).shouldHave(text("Some metric2 (%)"));
-    $$("td.name").get(1).shouldHave(text("Some metric1 (%)"));
-    $$("td.name").get(2).shouldHave(text("Some metric3"));
-    $$("td.name").get(3).shouldHave(text("Some metric4"));
+    $$(".name").get(0).shouldHave(text("Some metric2 (%)"));
+    $$(".name").get(1).shouldHave(text("Some metric1 (%)"));
+    $$(".name").get(2).shouldHave(text("Some metric3"));
+    $$(".name").get(3).shouldHave(text("Some metric4"));
   }
 
 }

@@ -29,6 +29,7 @@
               <form class="orderNumberForm">
                 <input type="hidden" value="${goal.id?c}" name="id">
                 <input type="hidden" value="${goal.sequenceNumber}" name="sequenceNumber">
+                <input type="hidden"  name="csrfToken" value="${session.getAttribute("csrfToken")}">
               </form>
             </td>
             <td class="nameInTable">
@@ -55,6 +56,7 @@
             <td class="actions">
               <div class="action-button">
                 <input type="hidden" class="value" value="${goal.id?c}" name="id">
+                <input type="hidden" class="value" name="csrfToken" value="${session.getAttribute("csrfToken")}">
                 <input type="button" title="<@m'save'/>" class="saveGoalButton value btn btn-default btn-sm" value=""
                        style="display: none" data-action="save">
                 <input type="button" title="<@m'cancel'/>" class="cancelGoalButton value btn btn-default btn-sm"
@@ -83,6 +85,7 @@
                 <form action="delete" method="post" onsubmit="return confirm('<@m'errorDeletingConfirmation'/>')"
                       class="action-button">
                   <input type="hidden" name="id" value="${goal.id?c}"/>
+                  <input type="hidden" class="value" name="csrfToken" value="${session.getAttribute("csrfToken")}">
                   <span class="value">
                   <button class="deleteButton" title="<@m'delete'/>" type="submit" class="btn btn-default btn-sm">
                     <span class="glyphicon glyphicon-trash"></span>
@@ -95,7 +98,7 @@
           </#list>
         </#if>
       <tr>
-        <td></td>
+        <td><input type="hidden" class="value" name="csrfToken" value="${session.getAttribute("csrfToken")}"></td>
         <td>
           <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'goal'/>"><#if name??> ${name}</#if></textarea>
           </td>
@@ -112,6 +115,7 @@
       </tbody>
     </table>
     <span id="errors"></span>
+
   </div>
 </div>
 
@@ -160,6 +164,7 @@
       items: "tr:not(:last-child)",
       update: function (event, ui) {
         var id = ui.item.find("[name=id]").val();
+        var csrfToken = ui.item.find("[name=csrfToken]").val();
         var sequenceNumberBeforeInput = ui.item.prev().find("[name=sequenceNumber]");
 
         if (sequenceNumberBeforeInput.length == 0)
@@ -171,7 +176,7 @@
         $.ajax({
           type: "POST",
           url: "/admin/goals/home",
-          data: { sequenceNumber: order, id: id },
+          data: { sequenceNumber: order, id: id, csrfToken: csrfToken },
           error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("<@m'error'/>");
           }

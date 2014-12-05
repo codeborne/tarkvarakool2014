@@ -8,6 +8,7 @@
         <label><@m'newPasswordFirst'/><input type="password" class="form-control" name="newPasswordFirst"></label><br>
         <label><@m'newPasswordSecond'/><input type="password" class="form-control" name="newPasswordSecond"></label><br>
         <button type="submit" class="btn btn-default btn-sm" id="saveNewPassword"><span class="enter"><@m'save'/></span></button>
+         <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
         </form>
       </div>
       <#if errorsList?has_content>

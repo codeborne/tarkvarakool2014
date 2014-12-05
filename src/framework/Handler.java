@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 
 import static framework.FreemarkerHelper.initializeFreemarker;
 import static framework.HibernateHelper.createSessionFactory;
+import static javax.servlet.http.HttpServletResponse.SC_FORBIDDEN;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
@@ -70,7 +71,12 @@ public class Handler extends AbstractHandler {
     catch (NotAuthorizedException e) {
       LOG.error(e.getMessage());
       //response.sendError(SC_FORBIDDEN, devMode ? e.getMessage() : null);
-      response.sendRedirect("/");
+      if(isAjax(baseRequest)) {
+        response.sendError(SC_FORBIDDEN, "Not authorized");
+      }
+      else {
+        response.sendRedirect("/");
+      }
       baseRequest.setHandled(true);
     }
     catch (Exception e) {
@@ -85,6 +91,10 @@ public class Handler extends AbstractHandler {
     }
   }
 
+  private boolean isAjax(Request request) {
+    return "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+  }
+
   private Session openHibernateSession(RequestState state) {
     return state.hibernate = hibernateSessionFactory.openSession();
   }
@@ -96,7 +106,11 @@ public class Handler extends AbstractHandler {
 
   Result invokeController(Controller controller, Request baseRequest) throws Exception {
     try {
-      Method method = controller.getClass().getMethod(baseRequest.getMethod().toLowerCase());
+      String httpMethod = baseRequest.getMethod().toLowerCase();
+      if ("post".equals(httpMethod) && !checkCSRFToken(baseRequest)) {
+        throw new NotAuthorizedException("Most likely CSRF attempt");
+      }
+      Method method = controller.getClass().getMethod(httpMethod);
       Role roleAnnotation = method.getAnnotation(Role.class);
       if (roleAnnotation == null) throw new RoleMissingException(method);
       if (!controller.getRoles().contains(roleAnnotation.value())) throw new NotAuthorizedException(method + " requires role '" + roleAnnotation.value() + "'");
@@ -106,6 +120,12 @@ public class Handler extends AbstractHandler {
     catch (InvocationTargetException e) {
       throw (Exception) e.getCause(); // todo fix for throwable
     }
+  }
+
+  private boolean checkCSRFToken(Request baseRequest) {
+    String csrfToken = baseRequest.getParameter("csrfToken");
+    String sessionToken = (String) baseRequest.getSession().getAttribute("csrfToken");
+    return sessionToken == null || sessionToken.equals(csrfToken);
   }
 
   Controller createController(String target) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
