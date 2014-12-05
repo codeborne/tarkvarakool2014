@@ -20,6 +20,20 @@ public class HomeViewTest extends UITest {
 
   @Before
   public void setUp() throws Exception {
+    Goal goal1 = new Goal("Eesmark1","", 10 ,1);
+    Goal goal2 = new Goal("Eesmark2","", 12, 2);
+
+    hibernate.save(goal1);
+    hibernate.save(goal2);
+
+    Metric metric = new Metric(goal1, "Moodik1", "", "", "", null, "", 23.0, "2014", "http:// statistikaamet http://www.neti.ee", "", 2.0, true);
+    metric.setEngUnit("%");
+    metric.setEngStartLevelComment("start comment");
+    metric.setEngTargetLevelComment("target comment");
+    hibernate.save(metric);
+    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0.0, "", null, "", "", "", 10.0, false));
+    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 15.0, "", null, "", "amet", "", 5.8, true));
+
     open("/home");
 
     $(".language-button-est").click();
@@ -28,18 +42,8 @@ public class HomeViewTest extends UITest {
 
   @Test
   public void GoalAndBudgetWithCorrectMetrics() {
-
-    Goal goal1 = new Goal("Eesmark1","", 10 ,1);
-    Goal goal2 = new Goal("Eesmark2","", 12, 2);
-
-    hibernate.save(goal1);
-    hibernate.save(goal2);
-
-    hibernate.save(new Metric(goal1, "Moodik1", "", "", "", null, "", 23.0, "2014", "http:// statistikaamet http://www.neti.ee", "", 2.0, true));
-    hibernate.save(new Metric(goal1, "Moodik2", "EUR", "", "", 0.0, "", null, "", "", "", 10.0, false));
-    hibernate.save(new Metric(goal2, "Moodik3", "", "", "", 15.0, "", null, "", "amet", "", 5.8, true));
-
     open("/home");
+
 
     ElementsCollection goals = $$(".goal");
     goals.shouldHaveSize(2);
@@ -70,11 +74,11 @@ public class HomeViewTest extends UITest {
 
   @Test
   public void goalsAreDisplayedInCorrectOrder() throws Exception {
-    hibernate.save(new Goal("Eesmark1", "", 101, 1));
+
     hibernate.save(new Goal("Eesmark5", "", 102, 5));
     hibernate.save(new Goal("Eesmark3", "", 103, 3));
     hibernate.save(new Goal("Eesmark4", "", 104, 4));
-    hibernate.save(new Goal("Eesmark2", "", 105, 2));
+
     open("/home");
 
     $$(".goal").get(0).$("h4").shouldHave(text("Eesmark1"));
@@ -112,6 +116,11 @@ public class HomeViewTest extends UITest {
 
   }
 
-
+  @Test
+  public void userViewsThePageInEnglish() throws Exception {
+    $(".language-button-eng").click();
+    $$(".goal").get(0).$$(".metric").get(0).$(".startLevel").shouldHave(text("start comment"));
+    $$(".goal").get(0).$$(".metric").get(0).$(".targetLevel").shouldHave(text("23 %\n (target comment)"));
+  }
 }
 

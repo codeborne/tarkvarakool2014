@@ -23,7 +23,16 @@ public class TranslationTest extends ControllerTest<Translation>{
     when(request.getParameterValues("engMetricName")).thenReturn(new String[]{"metric1","metric2"});
     when(request.getParameterValues("engPublicDescription")).thenReturn(new String[]{"descr1",""});
     when(request.getParameterValues("engInfoSource")).thenReturn(new String[]{"info1",""});
+    when(request.getParameterValues("engStartLevelComment")).thenReturn(new String[]{"startComment1","startComment2"});
+    when(request.getParameterValues("engTargetLevelComment")).thenReturn(new String[]{"targetComment1","targetComment2"});
     when(request.getPathInfo()).thenReturn("admin/");
+  }
+
+  @Test
+  public void get() throws Exception {
+    controller.goalId = 5L;
+    when(hibernate.get(Goal.class, 5L)).thenReturn(new Goal("goal",null, 1,1));
+    assertRender(controller.get());
   }
 
   @Test
@@ -120,13 +129,37 @@ public class TranslationTest extends ControllerTest<Translation>{
   }
 
   @Test
+  public void postIfEngStartLevelCommentHasErrors() throws Exception {
+    controller.goalId = 1L;
+    controller.errors.put("engStartLevelComment",new RuntimeException());
+
+    assertRedirect(Home.class, controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("error")));
+    verify(hibernate, never()).update(any(Goal.class));
+  }
+
+  @Test
+  public void postIfEngTargetLevelCommentHasErrors() throws Exception {
+    controller.goalId = 1L;
+    controller.errors.put("engTargetLevelComment",new RuntimeException());
+
+    assertRedirect(Home.class, controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("error")));
+    verify(hibernate, never()).update(any(Goal.class));
+  }
+
+  @Test
   public void postUpdateSuccess() throws Exception {
     controller.goalId = 3L;
     controller.engName = "goal";
     controller.engComment = "comment";
     Goal goal = new Goal("Eesmark", "kommentaar", 100, 1);
-    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0.0, null, 0.0, null, null, null, 1.0, true);
-    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0.0, null, 0.0, null, null, null, 1.0, true);
+    Metric metric1 = new Metric(goal, "moodik1","inimesed" ,"kirjeldus1", null, 0.0, "kommentaar1", 0.0, "kommentaar2", null, null, 1.0, true);
+    Metric metric2 = new Metric(goal, "moodik2","%", "kirjeldus2", null, 0.0, "kommentaar3", 0.0, "kommentaar4", null, null, 1.0, true);
     Set<Metric> metrics = new HashSet<>();
     metrics.add(metric1);
     metrics.add(metric2);
@@ -146,10 +179,14 @@ public class TranslationTest extends ControllerTest<Translation>{
     assertEquals("metric1", updatedMetric1.getEngName());
     assertEquals("descr1", updatedMetric1.getEngPublicDescription());
     assertEquals("info1", updatedMetric1.getEngInfoSource());
+    assertEquals("startComment1", updatedMetric1.getEngStartLevelComment());
+    assertEquals("targetComment1", updatedMetric1.getEngTargetLevelComment());
     assertEquals("%", updatedMetric2.getEngUnit());
     assertEquals("metric2", updatedMetric2.getEngName());
     assertEquals(null, updatedMetric2.getEngPublicDescription());
     assertEquals(null, updatedMetric2.getEngInfoSource());
+    assertEquals("startComment2", updatedMetric2.getEngStartLevelComment());
+    assertEquals("targetComment2", updatedMetric2.getEngTargetLevelComment());
 
     verify(controller.session).setAttribute("message", (messages.get("translationSuccess")));
 

@@ -49,22 +49,38 @@
                       <#if metric.startLevel??>${metric.startLevel}
                         <#if language == 'et'>
                           <#if metric.unit?has_content>${metric.unit}</#if>
+                          <br>
+                          <#if metric.commentOnStartLevel?has_content> (${metric.commentOnStartLevel})</#if>
                         <#elseif language == 'en'>
-                            <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
-                        </#if><br>
-                        <#if metric.commentOnStartLevel?has_content> (${metric.commentOnStartLevel})</#if>
-                      <#elseif metric.commentOnStartLevel?has_content>${metric.commentOnStartLevel}
+                           <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
+                          <br>
+                          <#if metric.engStartLevelComment?has_content> (${metric.engStartLevelComment})
+                          <#elseif metric.commentOnStartLevel?has_content><i>(${metric.commentOnStartLevel})</i></#if>
+                        </#if>
+                      <#elseif language == 'et' && metric.commentOnStartLevel?has_content>${metric.commentOnStartLevel}
+                      <#elseif language == 'en'>
+                        <#if metric.engStartLevelComment?has_content>${metric.engStartLevelComment}
+                        <#else><i>(${metric.commentOnStartLevel})</i>
+                        </#if>
                       <#else>N/A</#if>
                     </td>
                     <td class="targetLevel">
                       <#if metric.targetLevel??>${metric.targetLevel}
                         <#if language == 'et'>
                           <#if metric.unit?has_content>${metric.unit}</#if>
+                          <br>
+                          <#if metric.commentOnTargetLevel?has_content> (${metric.commentOnTargetLevel})</#if>
                         <#elseif language == 'en'>
                             <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
-                        </#if><br>
-                        <#if metric.commentOnTargetLevel?has_content> (${metric.commentOnTargetLevel})</#if>
-                      <#elseif metric.commentOnTargetLevel?has_content> ${metric.commentOnTargetLevel}
+                          <br>
+                          <#if metric.engTargetLevelComment?has_content> (${metric.engTargetLevelComment})
+                          <#elseif metric.commentOnTargetLevel?has_content><i>(${metric.commentOnTargetLevel})</i></#if>
+                        </#if>
+                      <#elseif language == 'et' && metric.commentOnTargetLevel?has_content>${metric.commentOnTargetLevel}
+                      <#elseif language == 'en'>
+                        <#if metric.engTargetLevelComment?has_content>${metric.engTargetLevelComment}
+                        <#else><i>(${metric.commentOnTargetLevel})</i>
+                        </#if>
                       <#else>N/A</#if>
                     </td>
                     <td class="infoSource">
