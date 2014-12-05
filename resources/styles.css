@@ -199,7 +199,7 @@ button:focus {
   text-align: left;
   padding: 20px 10px;
   color: #6f6d65;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .table > tbody > tr > td {
@@ -560,8 +560,8 @@ input.modify-value {
   display: block;
 }
 
-.login-center {
-  padding: 140px 470px;
+.login-center, .save-center, .change-password-center {
+  padding: 100px 450px;
 }
 
 .user-center {
@@ -589,6 +589,7 @@ input.modify-value {
   margin: auto;
   margin-bottom: 10px;
 }
+
 
 .greenValue {
   color: green;

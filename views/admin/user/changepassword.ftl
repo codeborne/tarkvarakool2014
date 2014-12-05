@@ -1,7 +1,8 @@
 <@html>
 
     <div class="panel">
-      <div class="login-center">
+      <div class="panel-body">
+      <div class="change-password-center">
         <form method="post" class="form-horizontal" autocomplete="off">
         <h3 ><@m'changePassword'/></h3>
         <label><@m'oldPassword'/><input type="password" name="oldPassword" class="form-control"></label><br>
@@ -17,6 +18,7 @@
         </#list>
       </#if>
       </div>
+    </div>
 
 
 

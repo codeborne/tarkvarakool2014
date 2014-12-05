@@ -4,6 +4,7 @@
   <button class="btn btn-default btn-sm" onclick="location='/admin/logout'"><@m'exit'/> </button>
   <#else>
   <div class="panel">
+  <div class="panel-body">
   <form method="post" class="form-horizontal">
 
       <div class="login-center">
@@ -20,5 +21,6 @@
     <div class="alert alert-danger">${error}</div>
     </#if>
   </#if>
+</div>
 </div>
 </@html>

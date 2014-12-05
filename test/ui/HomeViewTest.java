@@ -49,7 +49,7 @@ public class HomeViewTest extends UITest {
     goalBlock1.$(".budget").shouldHave(text("10"));
     goalBlock1.$$(".metric").get(0).$(".startLevel").shouldHave(text("N/A"));
     goalBlock1.$$(".metric").get(0).$(".targetLevel").shouldHave(text("23 (2014)"));
-    goalBlock1.$$(".metric").get(0).$(".infoSource").$(".glyphicon-link").shouldBe(visible);
+    goalBlock1.$$(".metric").get(0).$(".infoSource").$(".glyphicon-new-window").shouldBe(visible);
     goalBlock1.$$(".metric").get(0).$(".infoSource").shouldHave(text("statistikaamet"));
     assertEquals("Moodik1", goalBlock1.$$(".metric").get(0).$(".name").getText());
     goalBlock1.$(".name").shouldNotHave(text("Moodik2 (EUR)"));
