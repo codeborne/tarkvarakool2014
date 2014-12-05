@@ -33,6 +33,8 @@ public class Translation extends UserAwareController {
     String[] engMetricName = request.getParameterValues("engMetricName");
     String[] engPublicDescription = request.getParameterValues("engPublicDescription");
     String[] engInfoSource = request.getParameterValues("engInfoSource");
+    String[] engStartLevelComment = request.getParameterValues("engStartLevelComment");
+    String[] engTargetLevelComment = request.getParameterValues("engTargetLevelComment");
 
 
 
@@ -49,6 +51,8 @@ public class Translation extends UserAwareController {
           metric.setEngUnit(trimInput(engUnit[i]));
           metric.setEngPublicDescription(trimInput(engPublicDescription[i]));
           metric.setEngInfoSource(trimInput(engInfoSource[i]));
+          metric.setEngStartLevelComment(trimInput(engStartLevelComment[i]));
+          metric.setEngTargetLevelComment(trimInput(engTargetLevelComment[i]));
           i++;
       }
       hibernate.update(goal);
@@ -78,7 +82,8 @@ public class Translation extends UserAwareController {
     checkEngPublicDescription();
     checkEngUnit();
     checkEngInfoSource();
-
+    checkEngStartLevelSource();
+    checkEngTargetLevelSource();
   }
 
   private void checkEngInfoSource() {
@@ -117,5 +122,13 @@ public class Translation extends UserAwareController {
       errorsList.add(messages.get("error"));
   }
 
+  private void checkEngTargetLevelSource() {
+    if (errors.containsKey("engTargetLevelComment"))
+      errorsList.add(messages.get("error"));
+  }
 
+  private void checkEngStartLevelSource() {
+    if (errors.containsKey("engStartLevelComment"))
+      errorsList.add(messages.get("error"));
+  }
 }

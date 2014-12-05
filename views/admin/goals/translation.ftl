@@ -48,6 +48,16 @@
           <td class="infoSource">${metric.infoSource!""}</td>
           <td><textarea name="engInfoSource" maxlength="255" rows="2" placeholder="<@m'translateInfoSource'/>">${metric.engInfoSource!""}</textarea></td>
         </tr>
+        <tr>
+          <td><@m'startLevelComment'/></td>
+          <td class="commentOnStartLevel">${metric.commentOnStartLevel!""}</td>
+          <td><textarea name="engStartLevelComment" maxlength="255" rows="2" placeholder="<@m'translateStartLevelComment'/>">${metric.engStartLevelComment!""}</textarea></td>
+        </tr>
+        <tr>
+          <td><@m'targetLevelComment'/></td>
+          <td class="commentOnTargetLevel">${metric.commentOnTargetLevel!""}</td>
+          <td><textarea name="engTargetLevelComment" maxlength="255" rows="2" placeholder="<@m'translateTargetLevelComment'/>">${metric.engTargetLevelComment!""}</textarea></td>
+        </tr>
         </tbody>
         </#if>
       </#list>

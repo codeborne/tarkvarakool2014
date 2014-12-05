@@ -168,5 +168,11 @@
       <where>username = 'Delia'</where>
     </update>
   </changeSet>
-  
+
+  <changeSet id="14" author="Tarkvarakool">
+    <addColumn tableName="metric">
+      <column name="engStartLevelComment" type="VARCHAR(255)"></column>
+      <column name="engTargetLevelComment" type="VARCHAR(255)"></column>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>
