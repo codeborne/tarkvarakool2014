@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -74,6 +75,14 @@ public class HomeViewValuesTest extends UITest {
     metric.getValues().put(2018, new BigDecimal(16));
     metric.getValues().put(2019, new BigDecimal(17));
     metric.getValues().put(2020, new BigDecimal(18));
+    metric.getForecasts().put(2014, new BigDecimal(10));
+    metric.getForecasts().put(2015, new BigDecimal(15));
+    metric.getForecasts().put(2016, new BigDecimal(14));
+    metric.getForecasts().put(2017, new BigDecimal(11));
+    metric.getForecasts().put(2018, new BigDecimal(18));
+
+    metric.getForecasts().put(2020, new BigDecimal(15));
+
     hibernate.save(metric);
     hibernate.flush();
 
@@ -98,7 +107,14 @@ public class HomeViewValuesTest extends UITest {
     assertEquals("17", metricValues.get(5).text());
     assertEquals("18", metricValues.get(6).text());
 
-
+    metricValues.get(0).shouldHave(cssClass("greenValue"));
+    metricValues.get(1).shouldHave(cssClass("redValue"));
+    metricValues.get(2).shouldHave(cssClass("greenValue"));
+    metricValues.get(3).shouldHave(cssClass("greenValue"));
+    metricValues.get(4).shouldHave(cssClass("redValue"));
+    metricValues.get(5).shouldNotHave(cssClass("redValue"));
+    metricValues.get(5).shouldNotHave(cssClass("greenValue"));
+    metricValues.get(6).shouldHave(cssClass("greenValue"));
   }
 
   @Test

@@ -1,6 +1,6 @@
 <@html>
 
-<div class="panel">
+<div class="panel panel-delete-users">
   <div class="login-center">
     <table class="table user-table">
       <thead>

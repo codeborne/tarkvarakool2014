@@ -1,7 +1,8 @@
 <@html>
 
-<div class="panel">
-  <div class="login-center">
+<div class="panel panel-save-users">
+  <div class="panel-body">
+  <div class="save-center">
     <form method="post" class="form-horizontal" autocomplete="off">
       <h3 ><@m'addUser'/></h3>
       <input style="display:none" type="text" name="fakeusernameremembered"/>
@@ -15,9 +16,9 @@
   </div>
   <#if errorsList?has_content>
     <#list errorsList as error>
-      <div class="alert alert-danger">${error} </div>
+      <div class="alert alert-danger alert-danger-save-users">${error} </div>
     </#list>
   </#if>
+  </div>
 </div>
-
 </@html>

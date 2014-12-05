@@ -1,9 +1,6 @@
 <#setting locale="et">
 <#setting number_format=",##0.##">
-
 <#macro html values_active=false>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,41 +14,33 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="wrapper">
-  <div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container container-top">
       <div class="navbar-collapse collapse navbar-right">
         <#if loggedInUsername??>
-
           <div class="languageButtons btn-group button-menu-inner pull-left">
             <button id="userViewButton" type="submit"
                     class="switch-view-button pull-left <#if !homeUrl?contains("admin")>active</#if>"
                     onclick="location='/home'"><@m'userView'/></button>
-
-
             <button id="adminViewButton" type="submit"
                     class="switch-view-button pull-left <#if homeUrl?contains("admin")>active</#if>"
                     onclick="location='/language?locale=changeLanguage'"><@m'adminView'/></button>
           </div>
         </#if>
-
         <#if !homeUrl?contains("admin")>
           <div class="languageButtons btn-group button-menu-inner pull-left">
-
             <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
-
             <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
-
           </div>
         </#if>
         <#if loggedInUsername??>
           <a <#if loggedInUsername == "Delia"> href="/admin/settings" <#else> href="/admin/user/changepassword"</#if>
-                                               class="navbar-form pull-left glyphicon glyphicon-user"
+                                               class="navbar-form pull-left glyphicon glyphicon-wrench"
                                                title="<@m'settings'/>"></a>
-
           <form class="navbar-form pull-left" action="/admin/logout">
             <span class="greetings"><@m'hello'/>&nbsp; ${loggedInUsername}</span>
             <button id="logout-button" type="submit" class="authentication-button">
@@ -68,32 +57,34 @@
       </div>
     </div>
   </div>
-  <div class="container main-content" role="main">
+  <div class="main-header" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+    <div class="container">
     <table class="toprow">
-      <tr>
-        <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
-        <td>
-          <div class="symbol"></div>
-        </td>
-        <td class="title"><@m'title'/></td>
-        <td>
-          <div class="btn-group button-menu-inner">
-            <button type="button" class="switch-button<#if !values_active> active</#if>"
-                    onclick="location='${homeUrl}'">
-              <@m'goals'/>
-            </button>
-            <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
-                    onclick="location='${valuesUrl}'"><@m'results'/>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </table>
+          <tr>
+            <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
+            <td class="title"><@m'title'/></td>
+            <td>
+              <div class="btn-group button-menu-inner">
+                <button type="button" class="switch-button<#if !values_active> active</#if>"
+                        onclick="location='${homeUrl}'">
+                  <@m'goals'/>
+                </button>
+                <button type="button" id="MetricsValue" class="switch-button<#if values_active> active</#if>"
+                        onclick="location='${valuesUrl}'"><@m'results'/>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </div>
+  <div class="container main-content" role="main">
     <#nested>
   </div>
 </div>
 <div class="footer">
- <div class="container"></div>
+ <div class="container">
+ </div>
 </div>
 </body>
 </html>

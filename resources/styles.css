@@ -12,6 +12,7 @@ button:focus {
 
 .wrapper {
   background: #efede3 url(images/sectionContent.png) repeat-x;
+  padding-top: 60px;
 }
 
 .navbar {
@@ -91,8 +92,8 @@ button:focus {
   color: #00CCFF;
 }
 
-.glyphicon-user, .glyphicon-user:hover {
-  font-size: 14px;
+.glyphicon-wrench, .glyphicon-wrench:hover {
+  font-size: 17px;
   color: #ffcc00;
   text-decoration: none;
   margin-top: 16px;
@@ -129,31 +130,67 @@ button:focus {
 }
 
 .toprow {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;
   width: 100%;
 }
 
 .logo {
   width: 289px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
 }
-
-.toprow td:nth-child(3) {
+.title{
   color: #222;
   font-size: 30px;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+
+}
+.title:before{
+  content: "";
+  position: absolute;
+  background-color: black;
+  height: 50px;
+  left: 690px;
+  top:90px;
+  width: 2px;
 }
 
-.toprow td:first-child {
-  width: 289px;
+.main-header.affix{
+  width:100%;
+  z-index:100;
+  background-color:#fff;
+  top:30px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding-top: 20px;
 }
 
-.toprow td:nth-child(2) {
-  padding-right: 14px;
+.main-header.affix .logo{
+  width:189px;
+  top:20px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s
+}
+
+.main-header.affix .title{
+  font-size: 20px;
+  position: relative;
+  width:100%;
+  padding-left: 40px;
+}
+.main-header.affix .title:before{
+  content: "";
+  position: fixed;
+  background-color: black;
+  height: 35px;
+  left: 568px;
+  top:40px;
+  width: 1px;
 }
 
 .toprow td:last-child {
   text-align: right;
   background-color: transparent;
+  min-width: 200px;
 }
 
 .panel {
@@ -171,6 +208,10 @@ button:focus {
 
 .panel:last-child, .panel-home, .panel-metrics,.panel-chart {
   margin-bottom: -30px;
+}
+
+.panel-password, .panel-save-users, .panel-delete-users, .panel-login{
+  min-height: 600px;
 }
 
 .panel-body {
@@ -199,7 +240,7 @@ button:focus {
   text-align: left;
   padding: 20px 10px;
   color: #6f6d65;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .table > tbody > tr > td {
@@ -560,8 +601,8 @@ input.modify-value {
   display: block;
 }
 
-.login-center {
-  padding: 140px 470px;
+.login-center, .save-center, .change-password-center {
+  padding: 100px 450px;
 }
 
 .user-center {
@@ -589,6 +630,7 @@ input.modify-value {
   margin: auto;
   margin-bottom: 10px;
 }
+
 
 .greenValue {
   color: green;

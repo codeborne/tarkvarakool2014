@@ -1,4 +1,4 @@
-<@html>
+  <@html>
   <#if goals?has_content>
     <#list goals as goal>
       <#list infoSourceContentList as metricInfosource>
@@ -77,8 +77,8 @@
                         <td class="infoSource">
                           <#list infosource as infoItem>
                             <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                              <span class="line-break"> <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a></span>
-                            <#else><span class="line-break">${infoItem}</span>
+                              <span class="line-break"> <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>&nbsp;</span>
+                            <#else><span class="line-break">${infoItem}&nbsp;</span>
                             </#if>
                           </#list>
                         </td>
