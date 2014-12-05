@@ -136,11 +136,14 @@ button:focus {
 
 .logo {
   width: 289px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
 }
 .title{
   color: #222;
   font-size: 30px;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+
 }
 .title:before{
   content: "";
@@ -164,17 +167,22 @@ button:focus {
 .main-header.affix .logo{
   width:189px;
   top:20px;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s
 }
 
 .main-header.affix .title{
   font-size: 20px;
+  position: relative;
+  width:100%;
+  padding-left: 40px;
 }
 .main-header.affix .title:before{
   content: "";
-  position: absolute;
+  position: fixed;
   background-color: black;
   height: 35px;
-  left: 630px;
+  left: 568px;
   top:40px;
   width: 1px;
 }
@@ -182,6 +190,7 @@ button:focus {
 .toprow td:last-child {
   text-align: right;
   background-color: transparent;
+  min-width: 200px;
 }
 
 .panel {

@@ -45,10 +45,15 @@
                   <td class="startLevel"><#if metric.startLevel??>${metric.startLevel}<#else>N/A</#if></td>
                   <#list minimumYear..maximumYear as year>
                     <td class="values">
-              <span class="value">
+              <span <#if (metric.forecasts.get(year)?has_content && metric.values.get(year)?has_content)>
+                                      <#if  (metric.values.get(year)>=metric.forecasts.get(year))>
+                                  class="value greenValue"
+                              <#elseif (metric.values.get(year)<metric.forecasts.get(year))>
+                                  class="value redValue"</#if> <#else> class="value"</#if>>
                 <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year)))}
                 <#elseif (currentYear>year)>N/A
                 <#else></#if>
+
               </span>
                     </td>
                   </#list>

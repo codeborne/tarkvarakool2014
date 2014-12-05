@@ -1,9 +1,6 @@
 <#setting locale="et">
 <#setting number_format=",##0.##">
-
 <#macro html values_active=false>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +15,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 <div class="wrapper">
@@ -26,33 +22,25 @@
     <div class="container container-top">
       <div class="navbar-collapse collapse navbar-right">
         <#if loggedInUsername??>
-
           <div class="languageButtons btn-group button-menu-inner pull-left">
             <button id="userViewButton" type="submit"
                     class="switch-view-button pull-left <#if !homeUrl?contains("admin")>active</#if>"
                     onclick="location='/home'"><@m'userView'/></button>
-
-
             <button id="adminViewButton" type="submit"
                     class="switch-view-button pull-left <#if homeUrl?contains("admin")>active</#if>"
                     onclick="location='/language?locale=changeLanguage'"><@m'adminView'/></button>
           </div>
         </#if>
-
         <#if !homeUrl?contains("admin")>
           <div class="languageButtons btn-group button-menu-inner pull-left">
-
             <a href="/language?locale=en" class="language-button-eng<#if language == 'en'> active</#if>">ENG</a>
-
             <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
-
           </div>
         </#if>
         <#if loggedInUsername??>
           <a <#if loggedInUsername == "Delia"> href="/admin/settings" <#else> href="/admin/user/changepassword"</#if>
                                                class="navbar-form pull-left glyphicon glyphicon-user"
                                                title="<@m'settings'/>"></a>
-
           <form class="navbar-form pull-left" action="/admin/logout">
             <span class="greetings"><@m'hello'/>&nbsp; ${loggedInUsername}</span>
             <button id="logout-button" type="submit" class="authentication-button">
