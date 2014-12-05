@@ -1,6 +1,9 @@
 <@html>
   <#if goal?has_content>
   <input type="hidden" value="${goal.id?c}" name="goalId">
+  <#if loggedInUsername??>
+  <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
+  </#if>
     <div class="panel panel-default panel-chart">
       <div class="goal">
         <div class="panel-heading panel-heading-chart">
@@ -43,13 +46,14 @@
 <script>
   google.load("visualization", "1", {packages:["corechart"],language:'et'});
   google.setOnLoadCallback(drawChart);
+  var csrfToken = $("[name=csrfToken]").val();
   function drawChart() {
     var jsonData = $.ajax({
       url: "/chart",
       type: "POST",
       dataType:"json",
       async: false,
-      data: {goalId: $("input").val()}
+      data: {goalId: $("input").val(), csrfToken: csrfToken}
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
     var data = google.visualization.arrayToDataTable(data1);
