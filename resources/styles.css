@@ -541,7 +541,7 @@ td.actions {
 }
 
 input.modify-value {
-  max-width: 60px;
+  max-width: 150px;
 }
 
 .clearfix:after {

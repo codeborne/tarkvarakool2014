@@ -71,7 +71,7 @@
   <div class="container main-content" role="main">
     <table class="toprow">
       <tr>
-        <td><img src="/images/logo.png" class="logo"></td>
+        <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
         <td>
           <div class="symbol"></div>
         </td>
