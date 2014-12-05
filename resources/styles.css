@@ -252,10 +252,6 @@ button:focus {
   background-color: #E6E6E6;
 }
 
-.viewPublicDescription {
-  font-size: 12px;
-}
-
 #translationTable textarea {
   width: 470px;
 
