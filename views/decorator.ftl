@@ -60,7 +60,7 @@
     </div>
   </div>
   <div class="header-wrapper">
-  <div class="main-header" data-spy="affix" data-offset-top="30">
+  <div class="main-header" data-spy="affix" data-offset-top="40">
     <div class="container">
     <table class="toprow">
           <tr>

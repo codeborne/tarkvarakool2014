@@ -107,7 +107,7 @@ button:focus {
   color: #ffcc00;
   text-decoration: none;
   margin-top: 5px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .authentication-button {
@@ -121,7 +121,7 @@ button:focus {
   background: linear-gradient(to right, #084381 0%, #0081b2 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#084381', endColorstr='#0081b2', GradientType=1) box-shadow : 0 0 0 px 2 px rgba(0, 0, 0, 0.2);
   border: 0;
-  margin-top: 3px;
+  margin-top: 2px;
   text-transform: uppercase;
   font-weight: normal;
   font-size: 11px;
@@ -147,12 +147,12 @@ button:focus {
   position:relative;
 
 }
-.title:before{
+.logo:before{
   content: "";
   position: absolute;
   background-color: black;
-  height: 50px;
-  right: 30px;
+  height: 1000px;
+  right: 300px;
   width: 2px;
 }
 
