@@ -29,7 +29,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 1L;
     controller.metricId = 1L;
     controller.year = 2015;
-    controller.value = new BigDecimal(777);
+    controller.value = "777";
     controller.isForecast = false;
 
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
@@ -40,7 +40,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
-    assertEquals(controller.value, savedMetric.getValues().get(controller.year));
+    assertEquals(new BigDecimal(777), savedMetric.getValues().get(controller.year));
     assertTrue(savedMetric.getForecasts().isEmpty());
 
     verify(hibernate).update(savedMetric);
@@ -51,7 +51,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 1L;
     controller.metricId = 1L;
     controller.year = 2015;
-    controller.value = new BigDecimal(777);
+    controller.value = "777";
     controller.isForecast = true;
 
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
@@ -62,7 +62,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
 
-    assertEquals(controller.value, savedMetric.getForecasts().get(controller.year));
+    assertEquals(new BigDecimal(777), savedMetric.getForecasts().get(controller.year));
     assertTrue(savedMetric.getValues().isEmpty());
 
     verify(hibernate).update(savedMetric);
@@ -116,7 +116,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void failWhenMetricIdIsNull() throws Exception {
     controller.goalId = 2L;
     controller.year = 2014;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
     assertRender(controller.post());
 
@@ -129,7 +129,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfErrorsContainsMetricId() {
     controller.goalId = 2L;
     controller.year = 2014;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
 
     controller.errors.put("metricId", new Exception());
@@ -144,7 +144,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void failWhenGoalIdIsNull() throws Exception {
     controller.metricId = 2L;
     controller.year = 2014;
-    controller.value = new BigDecimal(744.55);
+    controller.value = "744.55";
 
     assertRender(controller.post());
 
@@ -156,7 +156,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfErrorsContainsGoalId() {
     controller.metricId = 2L;
     controller.year = 2014;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
 
     controller.errors.put("goalId", new Exception());
@@ -171,7 +171,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void failWhenYearNull() throws Exception {
     controller.goalId = 12L;
     controller.metricId = 21L;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
     assertRender(controller.post());
 
@@ -183,7 +183,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfErrorsContainsYear() {
     controller.goalId = 12L;
     controller.metricId = 21L;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
     controller.errors.put("year", new Exception());
 
@@ -198,7 +198,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = UserAwareController.MAXIMUM_YEAR + 1;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
     assertRender(controller.post());
 
@@ -211,7 +211,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = UserAwareController.MINIMUM_YEAR - 1;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
 
     assertRender(controller.post());
 
@@ -230,7 +230,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertRender(controller.post());
 
     assertEquals(1, controller.errorsList.size());
-    assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
+    assertTrue(controller.errorsList.contains(messages.get("error")));
   }
 
   @Test
@@ -238,7 +238,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.goalId = 12L;
     controller.metricId = 21L;
     controller.year = 2016;
-    controller.value = new BigDecimal(744);
+    controller.value = "744";
     controller.isForecast = true;
 
     when(session.getAttribute("username")).thenReturn("Some username");

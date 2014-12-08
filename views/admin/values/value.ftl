@@ -137,7 +137,7 @@
                     <#else>class="value hand-pointer" </#if>
                       <#else>
                       class="value glyphicon glyphicon-pencil hand-pointer"
-                      </#if>>${((metric.values.get(year))?c)!""}</span>
+                      </#if>>${((metric.values.get(year)))!""}</span>
                 <form class="metric-value-form" style="display: none;"
                       onsubmit="sendData(${goal.id?c}, ${metric.id?c}, ${year?c}, false, $(this), '${session.getAttribute("csrfToken")}'); return false;">
                   <input type="text" step="any" class="modify-value" title="Vajuta enter">
@@ -145,7 +145,7 @@
               </div>
               <br>
               <div class="forecasted">
-                <span <#if metric.forecasts.get(year)??>class="value hand-pointer"<#else> class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">${((metric.forecasts.get(year))?c)!""}</span><sup class="forecast-indicator"><@m'valueSymbol'/></sup>
+                <span <#if metric.forecasts.get(year)??>class="value hand-pointer"<#else> class="value glyphicon glyphicon-pencil hand-pointer"</#if> title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));">${((metric.forecasts.get(year)))!""}</span><sup class="forecast-indicator"><@m'valueSymbol'/></sup>
                 <form class="metric-value-form" style="display: none;"
                       onsubmit="sendData(${goal.id?c}, ${metric.id?c}, ${year?c}, true, $(this), '${session.getAttribute("csrfToken")}'); return false;">
                   <input type="text" step="any" class="modify-value" title="Vajuta enter">

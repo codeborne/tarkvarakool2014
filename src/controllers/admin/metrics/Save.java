@@ -134,26 +134,20 @@ public class Save extends UserAwareController {
   private void convertLevelsToNumbers(){
 
     if (!"".equals(startLevel) && startLevel != null) {
+      startLevel=startLevel.replace(',','.');
       try {
-        if (startLevel.contains(",")){
-        startLevel=startLevel.replace(',','.');
-        }
         startLevelAsNumber = Double.parseDouble(startLevel);
       } catch (NumberFormatException e) {
         errorsList.add(messages.get("errorStartLevel"));
       }
-
     }
     if (!"".equals(targetLevel) && targetLevel != null) {
+      targetLevel=targetLevel.replace(',','.');
       try {
-        if (targetLevel.contains(",")){
-          targetLevel=targetLevel.replace(',','.');
-        }
         targetLevelAsNumber = Double.parseDouble(targetLevel);
       } catch (NumberFormatException e) {
         errorsList.add(messages.get("errorTargetLevel"));
       }
-
     }
   }
 

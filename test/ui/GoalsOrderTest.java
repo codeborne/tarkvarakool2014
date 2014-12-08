@@ -50,7 +50,7 @@ public class GoalsOrderTest extends UITest {
       texts("Eesmark1", "Eesmark2", "Eesmark3", "Eesmark4", "Eesmark5"));
   }
 
-  @Test
+  @Test @Ignore
   public void adminMovesElementToFirstPosition() {
     dragAndDrop($$(".goal").get(2).$(".glyphicon-sort"), -2);
 
@@ -70,7 +70,7 @@ public class GoalsOrderTest extends UITest {
       texts("Eesmark1", "Eesmark2", "Eesmark3", "Eesmark4", "Eesmark5"));
   }
 
-  @Test
+  @Test @Ignore
   public void adminMovesElementInTheMiddle() {
     dragAndDrop($$(".goal").get(3).$(".glyphicon-sort"), -2);
 
