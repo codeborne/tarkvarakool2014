@@ -38,11 +38,13 @@
           </div>
         </#if>
         <#if loggedInUsername??>
-          <a <#if loggedInUsername == "Delia"> href="/admin/settings" <#else> href="/admin/user/changepassword"</#if>
-                                               class="pull-left glyphicon glyphicon-wrench"
-                                               title="<@m'settings'/>"></a>
-          <form class="pull-left" action="/admin/logout">
-            <span class="greetings"><@m'hello'/>&nbsp; ${loggedInUsername}</span>
+          <a <#if admin?? && loggedInUsername == admin> href="/admin/settings" <#else>
+                                                        href="/admin/user/changepassword"</#if>
+                                                        class="navbar-form pull-left glyphicon glyphicon-wrench"
+                                                        title="<@m'settings'/>"></a>
+
+          <form class="navbar-form pull-left" action="/admin/logout">
+            <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
             <button id="logout-button" type="submit" class="authentication-button">
               <span class="glyphicon glyphicon-lock"></span> <@m'exit'/>
             </button>
