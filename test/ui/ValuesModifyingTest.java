@@ -53,7 +53,7 @@ public class ValuesModifyingTest extends UITest {
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("4564.656").pressEnter();
 
-    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4564.7"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4564,7"));
   }
 
   @Test
@@ -63,12 +63,12 @@ public class ValuesModifyingTest extends UITest {
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("4345356498989898989898999118.65689898989555").pressEnter();
 
-    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4345356498989898989898999118.7"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4345356498989898989898999118,7"));
 
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
-    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).shouldHave(value("4345356498989898989898999118.7"));
+    tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).shouldHave(value("4345356498989898989898999118,7"));
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("-4345356498989898989898999118.63").pressEnter();
-    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4345356498989898989898999118.6"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("4345356498989898989898999118,6"));
   }
 
   @Test
@@ -103,7 +103,7 @@ public class ValuesModifyingTest extends UITest {
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("53453.87").pressEnter();
 
-    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("53453.9"));
+    tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text("53453,9"));
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).click();
     tableCell.$$("div.measured").get(0).$$("input.modify-value").get(0).setValue("").pressEnter();
     tableCell.$$("div.measured").get(0).$$("span.value").get(0).shouldHave(text(""));

@@ -13,16 +13,19 @@ import java.util.List;
 import java.util.Set;
 
 import static java.math.RoundingMode.HALF_UP;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class Modify extends UserAwareController {
   public Long goalId;
   public Long metricId;
   public Integer year;
-  public BigDecimal value;
+  public String value;
   public Boolean isForecast;
   public String jsonResponse;
   public BigDecimal comparableValue;
   public Set<String> errorsList = new HashSet<>();
+
+  protected BigDecimal valueAsNumber;
 
   private class JsonResponse {
     public Set<String> errorsList;
@@ -39,7 +42,9 @@ public class Modify extends UserAwareController {
   @Override
   @Role("admin")
   public Result post() {
+
     checkErrors();
+    convertValueToBigDecimal();
     if (errorsList.isEmpty()) {
       List metricList = hibernate.createCriteria(Metric.class).add(Restrictions.eq("id", metricId))
                              .createCriteria("goal").add(Restrictions.eq("id", goalId))
@@ -49,11 +54,11 @@ public class Modify extends UserAwareController {
 
 
         if(isForecast) {
-          metric.getForecasts().put(year, value);
+          metric.getForecasts().put(year, valueAsNumber);
           comparableValue = metric.getValues().get(year);
         }
         else {
-          metric.getValues().put(year, value);
+          metric.getValues().put(year, valueAsNumber);
           comparableValue = metric.getForecasts().get(year);
         }
         hibernate.update(metric);
@@ -64,9 +69,32 @@ public class Modify extends UserAwareController {
 
     }
 
-    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, value == null ? "" : value.toString(),
+    String returnValue = valueAsNumber == null ? "" : valueAsNumber.toString().replace(".", ",");
+
+    jsonResponse = new Gson().toJson(new JsonResponse(errorsList, returnValue,
       comparableValue == null ? "" : comparableValue.toString()));
     return render();
+  }
+
+  private void convertValueToBigDecimal() {
+
+    if (!isBlank(value)) {
+      value = value.replace(",", ".");
+      try{
+        valueAsNumber = new BigDecimal(value);
+        if(valueAsNumber.remainder(new BigDecimal(1)).equals(new BigDecimal(0))){
+          valueAsNumber = valueAsNumber.setScale(0, HALF_UP);
+        }
+        else {
+          valueAsNumber = valueAsNumber.setScale(1, HALF_UP);
+        }
+      }catch (NumberFormatException e){
+        errorsList.add(messages.get("errorInsertValue"));
+      }
+      if(valueAsNumber.toString().length()>38) {
+        errorsList.add(messages.get("errorValue"));
+      }
+    }
   }
 
   public void checkErrors() {
@@ -93,16 +121,7 @@ public class Modify extends UserAwareController {
 
   public void checkValue() {
     if (errors.containsKey("value")) {
-      errorsList.add(messages.get("errorInsertValue"));
-    } else if (value != null) {
-      if(value.remainder(new BigDecimal(1)).equals(new BigDecimal(0))){
-        value = value.setScale(0, HALF_UP);
-      }
-      else {
-        value = value.setScale(1, HALF_UP);
-      }
-      if(value.toString().length()>38)
-        errorsList.add(messages.get("errorValue"));
+      errorsList.add(messages.get("error"));
     }
   }
 }

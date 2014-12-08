@@ -35,9 +35,6 @@ public class GoalAddingTest extends UITest {
   @After
   public void after() {
     SelenideElement logoutButton = $("#logout-button");
-    System.out.println("exists: " + logoutButton.exists());
-    System.out.println("display: " + logoutButton.isDisplayed());
-    System.out.println("toString: " + logoutButton);
     logoutButton.click();
   }
 
