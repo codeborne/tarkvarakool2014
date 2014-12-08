@@ -22,7 +22,7 @@ button:focus {
   background: url(images/navbar2.PNG) repeat-x scroll 0 100% transparent;
   border-radius: 0;
   font-size: 14px;
-  min-height: 0;
+  min-height: 0px;
 }
 
 .navbar-right{
