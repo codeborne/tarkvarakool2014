@@ -16,9 +16,11 @@
             <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
           </div>
           <div class="panel-body">
+
             <table class="table userHomeTable">
               <thead>
               <tr>
+                <th><@m'viewValues'/></th>
                 <th><@m'metric'/></th>
                 <th><@m'publicDescription'/></th>
                 <th><@m'startLevel'/></th>
@@ -26,12 +28,13 @@
                 <th><@m'infoSource'/></th>
               </tr>
               </thead>
-              <tbody>
+              <tbody class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <#list goal.metrics as metric>
                   <#list metricInfosource as infosource>
                     <#if metric_index == infosource_index>
                       <#if metric.isPublic == true>
-                      <tr class="metric">
+                      <tr class="metric" role="tab" id="heading_${goal_index}_${metric_index}">
+                        <td><#if !isMetricPerformancePositive(metric)??><#elseif isMetricPerformancePositive(metric)><span class="glyphicon glyphicon-thumbs-up greenValue"></span><#else><span class="glyphicon glyphicon-thumbs-down redValue"></span> </#if> <a  data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapse_${goal_index}_${metric_index}" aria-expanded="false" aria-controls="collapse_${goal_index}_${metric_index}">link</a></td>
                         <td class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></td>
                         <td class="userViewPublicDescription line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></td>
                         <td class="startLevel">
@@ -81,6 +84,39 @@
                             <#else><span class="line-break">${infoItem}&nbsp;</span>
                             </#if>
                           </#list>
+                        </td>
+                      </tr>
+
+                      <tr id="collapse_${goal_index}_${metric_index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_${goal_index}_${metric_index}">
+                        <td colspan="6">
+                          <table class="">
+                            <tablehead>
+                            <#list minimumYear..maximumYear as year>
+                              <th>${year?c}</th>
+                            </#list>
+                            </tablehead>
+                            <tbody>
+                            <tr>
+                            <#list minimumYear..maximumYear as year>
+
+                              <td class="values">
+              <span <#if (metric.forecasts.get(year)?has_content && metric.values.get(year)?has_content)>
+                <#if  (metric.values.get(year)>=metric.forecasts.get(year))>
+                  class="value greenValue"
+                <#elseif (metric.values.get(year)<metric.forecasts.get(year))>
+                  class="value redValue"</#if> <#else> class="value"</#if>>
+                <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year)))}
+                <#elseif (currentYear>year)>N/A
+                <#else></#if>
+
+              </span>
+                              </td>
+                            </#list>
+                            </tr>
+                            </tbody>
+
+                          </table>
+
                         </td>
                       </tr>
                       </#if>
