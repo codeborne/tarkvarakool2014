@@ -40,7 +40,7 @@
         <#if loggedInUsername??>
           <a <#if admin?? && loggedInUsername == admin> href="/admin/settings" <#else>
                                                         href="/admin/user/changepassword"</#if>
-                                                        class="navbar-form pull-left glyphicon glyphicon-wrench"
+                                                        class="pull-left glyphicon glyphicon-wrench"
                                                         title="<@m'settings'/>"></a>
 
           <form class="pull-left" action="/admin/logout">
