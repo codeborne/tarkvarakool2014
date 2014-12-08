@@ -20,7 +20,7 @@
 <div class="wrapper">
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container container-top">
-      <div class="navbar-collapse collapse navbar-right">
+      <div class="navbar-right">
         <#if loggedInUsername??>
           <div class="languageButtons btn-group button-menu-inner pull-left">
             <button id="userViewButton" type="submit"
@@ -39,16 +39,16 @@
         </#if>
         <#if loggedInUsername??>
           <a <#if loggedInUsername == "Delia"> href="/admin/settings" <#else> href="/admin/user/changepassword"</#if>
-                                               class="navbar-form pull-left glyphicon glyphicon-wrench"
+                                               class="pull-left glyphicon glyphicon-wrench"
                                                title="<@m'settings'/>"></a>
-          <form class="navbar-form pull-left" action="/admin/logout">
+          <form class="pull-left" action="/admin/logout">
             <span class="greetings"><@m'hello'/>&nbsp; ${loggedInUsername}</span>
             <button id="logout-button" type="submit" class="authentication-button">
               <span class="glyphicon glyphicon-lock"></span> <@m'exit'/>
             </button>
           </form>
         <#else>
-          <form class="navbar-form pull-left" action="/admin/login">
+          <form class="pull-left" action="/admin/login">
             <button id="login-button" type="submit" class="authentication-button">
               <span class="glyphicon glyphicon-lock"></span><@m'login'/>
             </button>
