@@ -38,7 +38,11 @@
           </div>
         </#if>
         <#if loggedInUsername??>
-          <a <#if admin?? && loggedInUsername == admin> href="/admin/settings" <#else> href="/admin/user/changepassword"</#if> class="navbar-form pull-left glyphicon glyphicon-wrench" title="<@m'settings'/>"></a>
+          <a <#if admin?? && loggedInUsername == admin> href="/admin/settings" <#else>
+                                                        href="/admin/user/changepassword"</#if>
+                                                        class="navbar-form pull-left glyphicon glyphicon-wrench"
+                                                        title="<@m'settings'/>"></a>
+
           <form class="navbar-form pull-left" action="/admin/logout">
             <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>
             <button id="logout-button" type="submit" class="authentication-button">
@@ -56,9 +60,9 @@
     </div>
   </div>
   <div class="header-wrapper">
-  <div class="main-header" data-spy="affix" data-offset-top="30">
-    <div class="container">
-    <table class="toprow">
+    <div class="main-header" data-spy="affix" data-offset-top="30">
+      <div class="container">
+        <table class="toprow">
           <tr>
             <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
             <td class="title"><@m'title'/></td>
@@ -75,16 +79,16 @@
             </td>
           </tr>
         </table>
+      </div>
     </div>
-  </div>
   </div>
   <div class="container main-content" role="main">
     <#nested>
   </div>
 </div>
 <div class="footer">
- <div class="container">
- </div>
+  <div class="container">
+  </div>
 </div>
 </body>
 </html>

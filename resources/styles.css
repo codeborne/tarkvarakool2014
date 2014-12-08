@@ -13,6 +13,7 @@ button:focus {
 .wrapper {
   background: #efede3 url(images/sectionContent.png) repeat-x;
   padding-top: 60px;
+  width: 100%;
 }
 
 .navbar {
@@ -22,6 +23,7 @@ button:focus {
   border-radius: 0;
   font-size: 14px;
   min-height: 0px;
+  width: 100%;
 }
 
 .switch-view-button {
