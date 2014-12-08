@@ -205,7 +205,7 @@ button:focus {
   margin-bottom: -30px;
 }
 
-.panel-password, .panel-save-users, .panel-delete-users, .panel-login, .panel-user{
+.panel-password, .panel-save-users, .panel-delete-users, .panel-login{
   min-height: 600px;
 }
 
