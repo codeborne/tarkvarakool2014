@@ -50,4 +50,19 @@ public class AbstractMetricChartTest extends ControllerTest<AbstractMetricChartT
 
   public static class TestAbstractMetricChart extends AbstractMetricChart {
   }
+
+  @Test
+  public void prepareJson() throws Exception {
+    metric.getValues().put(2014, new BigDecimal(25));
+    metric.getValues().put(2015, new BigDecimal(30));
+    metric.getValues().put(2016, new BigDecimal(35));
+    controller.metricId = 2L;
+    when(hibernate.get(Metric.class, 2L)).thenReturn(metric);
+    controller.prepareJsonResponse();
+    assertEquals("[[\"Mõõdiku väärtus (%)\",\"mõõdik\",\"null\"], [\"2014\",25,\"2014 25%\"], [\"2015\",30,\"2015 30%\"], " +
+      "[\"2016\",35,\"2016 35%\"], [\"2017\",null,\"\"], [\"2018\",null,\"\"], [\"2019\",null,\"\"], " +
+      "[\"2020\",null,\"\"]]",controller.jsonResponse);
+  }
+
+
 }

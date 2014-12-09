@@ -36,7 +36,7 @@ public abstract class AbstractMetricChart extends UserAwareController {
     else {
       value = metric.getValues().get(year);
       if (value != null){
-        tooltip = year+" "+metric.getValues().get(year)+metric.getUnit();
+        tooltip = year+" "+metric.getValues().get(year)+metric.getUnitDependingOnLanguage(getLanguage());
       }
     }
     return "[" + "\"" + year + "\"," +value+",\""+tooltip+"\"]";
