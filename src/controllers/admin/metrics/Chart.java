@@ -7,7 +7,7 @@ import framework.Role;
 public class Chart extends AbstractMetricChart {
 
 
-  @Override @Role("admin")
+@Override @Role("admin")
 public Result post() {
     prepareJsonResponse();
     return json();

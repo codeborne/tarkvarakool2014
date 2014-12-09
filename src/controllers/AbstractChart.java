@@ -14,9 +14,6 @@ public abstract class AbstractChart extends UserAwareController {
   public static final List<String> CHART_COLORS = Arrays.asList("#1abc9c", "#3498db", "#9b59b6", "#34495e", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#d35400", "#2980b9", "#16a085");
 
   public List<String> graphColors = CHART_COLORS;
-
-  public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
-  public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
   public String jsonResponse;
   public List<Goal> goals = new ArrayList<>();
   public Long goalId;
@@ -32,7 +29,7 @@ public abstract class AbstractChart extends UserAwareController {
 
     List<String> row = new ArrayList<>();
     row.add(new Gson().toJson(header));
-    for (int year = minimumYear; year <= maximumYear; year++) {
+    for (int year = MINIMUM_YEAR; year <= MAXIMUM_YEAR; year++) {
 
       String values = "[" + "\"" + year + "\"";
       values += createJsonForValuesOfYear(metricsWithValidLevels, year);
