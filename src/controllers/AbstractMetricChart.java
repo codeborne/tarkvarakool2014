@@ -27,22 +27,25 @@ public abstract class AbstractMetricChart extends UserAwareController {
     jsonResponse =  row.toString();
   }
 
-  private String createValuesRowByYear(int year) {
-    String tooltip = year+" "+metric.getValues().get(year)+metric.getUnit();
+  String createValuesRowByYear(int year) {
+    String tooltip = "";
     BigDecimal value;
     if(year == minimumYear && metric.getValues().get(minimumYear) == null){
       value = new BigDecimal(0);
     }
     else {
       value = metric.getValues().get(year);
+      if (value != null){
+        tooltip = year+" "+metric.getValues().get(year)+metric.getUnit();
+      }
     }
     return "[" + "\"" + year + "\"," +value+",\""+tooltip+"\"]";
   }
 
-  private List<String> createHeader() {
+  List<String> createHeader() {
     List<String> header = new ArrayList<>();
-    header.add("Mõõdiku väärtus ("+metric.getUnit()+")");
-    header.add(metric.getName());
+    header.add(messages.get("vertAxisValue") +" ("+metric.getUnitDependingOnLanguage(getLanguage())+")");
+    header.add(metric.getMetricNameDependingOnLanguage(getLanguage()));
     header.add("null");
     return header;
   }

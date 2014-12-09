@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="panel-body" id="chart">
-</div>
+      </div>
       <div class="chartLegend" style="background-color: white; padding-left: 20px;">
         <table class="legendTable">
         <#list metricsWithValidLevels as metric>

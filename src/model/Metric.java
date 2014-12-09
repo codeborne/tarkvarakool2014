@@ -283,4 +283,22 @@ public class Metric {
     return this.getInfoSource();
   }
   }
+
+  public String getMetricNameDependingOnLanguage(String language){
+    if("en".equals(language)&&!isBlank(this.getEngName())) {
+      return this.getEngName();
+    }
+    else{
+      return this.getName();
+    }
+  }
+
+  public String getUnitDependingOnLanguage(String language){
+    if("en".equals(language)&&!isBlank(this.getEngUnit())) {
+      return this.getEngUnit();
+    }
+    else{
+      return this.getUnit();
+    }
+  }
 }
