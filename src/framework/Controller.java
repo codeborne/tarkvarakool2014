@@ -35,6 +35,10 @@ public abstract class Controller extends RequestState {
     return new Render(this);
   }
 
+  protected Render json() {
+    return new Json(this);
+  }
+
   protected Render render(String template) {
     return new Render(this, template);
   }

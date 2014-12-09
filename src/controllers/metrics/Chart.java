@@ -9,7 +9,7 @@ public class Chart extends AbstractMetricChart {
   @Override @Role("anonymous")
   public Result post() {
     prepareJsonResponse();
-    return render();
+    return json();
   }
 }
 

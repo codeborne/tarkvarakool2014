@@ -38,7 +38,7 @@ public class Modify extends UserAwareController {
     }
 
     jsonResponse = new Gson().toJson(errorsList);
-    return render();
+    return json();
   }
 
   public void checkErrors() {

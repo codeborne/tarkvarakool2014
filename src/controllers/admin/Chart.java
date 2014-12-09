@@ -8,6 +8,6 @@ public class Chart extends AdminChart {
   @Override @Role("admin")
   public Result post(){
     prepareJsonResponse();
-    return render();
+    return json();
   }
 }

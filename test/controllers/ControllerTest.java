@@ -62,6 +62,10 @@ public abstract class ControllerTest<T extends Controller> {
     assertEquals(Render.class, result.getClass());
   }
 
+  protected void assertJson(Result result) {
+    assertEquals(Json.class, result.getClass());
+  }
+
   public <E> E getDeletedEntity() {
     return getSingleItem(getDeletedEntities());
   }

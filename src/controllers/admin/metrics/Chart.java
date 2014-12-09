@@ -10,7 +10,7 @@ public class Chart extends AbstractMetricChart {
   @Override @Role("admin")
 public Result post() {
     prepareJsonResponse();
-    return render("");
+    return json();
   }
 
 }

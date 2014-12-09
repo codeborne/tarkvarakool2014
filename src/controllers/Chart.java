@@ -8,6 +8,6 @@ public class Chart extends AnonymousChart {
   @Override @Role("anonymous")
   public Result post(){
     prepareJsonResponse();
-    return render();
+    return json();
   }
 }

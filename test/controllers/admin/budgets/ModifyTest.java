@@ -26,7 +26,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.yearlyBudget = 123L;
     controller.errors.put("goalId", new RuntimeException());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -37,7 +37,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.yearlyBudget = 145L;
     controller.year = 2019;
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -48,7 +48,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.yearlyBudget = 123L;
     controller.errors.put("year", new RuntimeException());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -58,7 +58,7 @@ public class ModifyTest extends ControllerTest<Modify> {
   public void postIfYearIsNull() throws Exception {
     controller.yearlyBudget = 145L;
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -71,7 +71,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2060;
     controller.yearlyBudget = 150L;
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -84,7 +84,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2010;
     controller.yearlyBudget = 150L;
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -97,7 +97,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2017;
     controller.errors.put("yearlyBudget", new RuntimeException());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
@@ -110,7 +110,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2017;
     controller.yearlyBudget = -14L;
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
@@ -123,7 +123,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.yearlyBudget = 555L;
     when(hibernate.createCriteria(Goal.class).add(any(SimpleExpression.class)).list()).thenReturn(asList(new Goal("some goal", 1000)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     Goal updatedGoal = getUpdatedEntity();
     assertTrue(controller.errorsList.isEmpty());
@@ -139,7 +139,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2017;
     when(hibernate.createCriteria(Goal.class).add(any(SimpleExpression.class)).list()).thenReturn(asList(new Goal("some goal", 1000)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     Goal updatedGoal = getUpdatedEntity();
     assertTrue(controller.errorsList.isEmpty());
@@ -157,7 +157,7 @@ public class ModifyTest extends ControllerTest<Modify> {
       new Goal("some goal", 1000),
       new Goal("second goal", 2000)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1,controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
