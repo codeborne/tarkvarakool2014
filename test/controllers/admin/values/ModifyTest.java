@@ -42,8 +42,28 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertEquals(new BigDecimal(777), savedMetric.getValues().get(controller.year));
     assertTrue(savedMetric.getForecasts().isEmpty());
+    assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"\"}", controller.jsonResponse);
 
     verify(hibernate).update(savedMetric);
+  }
+
+  @Test
+  public void jsonResponseOnSuccess() throws Exception {
+    controller.goalId = 1L;
+    controller.metricId = 1L;
+    controller.year = 2015;
+    controller.value = "777";
+    controller.isForecast = false;
+    controller = spy (controller);
+    Metric metric = new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true);
+    when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
+      metric));
+
+    when(controller.getComparableValue(metric)).thenReturn(new BigDecimal(12));
+    assertRender(controller.post());
+
+    assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"12\"}", controller.jsonResponse);
+
   }
 
   @Test
@@ -234,6 +254,32 @@ public class ModifyTest extends ControllerTest<Modify> {
   }
 
   @Test
+  public void postIfValueIsTooLong() {
+    controller.goalId = 12L;
+    controller.metricId = 2L;
+    controller.year = 2014;
+    controller.value = "123456789012345678901234567890123456789.0";
+
+    assertRender(controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("errorValue")));
+  }
+
+  @Test
+  public void postIfValueIsNotANumber() throws Exception {
+    controller.goalId = 12L;
+    controller.metricId = 2L;
+    controller.year = 2014;
+    controller.value = "j3j33";
+
+    assertRender(controller.post());
+
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
+  }
+
+  @Test
   public void postIfIncorrectMetricOrGoalId() {
     controller.goalId = 12L;
     controller.metricId = 21L;
@@ -251,4 +297,29 @@ public class ModifyTest extends ControllerTest<Modify> {
     assertTrue(controller.errorsList.contains(messages.get("error")));
   }
 
+  @Test
+  public void convertValueToBigDecimal() throws Exception {
+    controller.value = "34,343  ";
+    controller.convertValueToBigDecimal();
+
+    assertEquals("34.3", controller.valueAsNumber.toString());
+  }
+
+  @Test
+  public void tryConvertValueToBigDecimalWithEmptyValue() throws Exception {
+    controller.value = "";
+    controller.convertValueToBigDecimal();
+
+    assertEquals(null, controller.valueAsNumber);
+  }
+
+  @Test
+  public void tryConvertValueToBigDecimalWithNonNumber() throws Exception {
+    controller.value = "abc";
+    controller.convertValueToBigDecimal();
+
+    assertEquals(null, controller.valueAsNumber);
+    assertEquals(1, controller.errorsList.size());
+    assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
+  }
 }

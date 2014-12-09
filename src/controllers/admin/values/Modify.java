@@ -51,22 +51,12 @@ public class Modify extends UserAwareController {
                              .list();
       if (metricList.size()==1) {
         Metric metric = (Metric) metricList.get(0);
-
-
-        if(isForecast) {
-          metric.getForecasts().put(year, valueAsNumber);
-          comparableValue = metric.getValues().get(year);
-        }
-        else {
-          metric.getValues().put(year, valueAsNumber);
-          comparableValue = metric.getForecasts().get(year);
-        }
+        comparableValue = getComparableValue(metric);
         hibernate.update(metric);
         hibernate.flush();
       } else {
         errorsList.add(messages.get("error"));
       }
-
     }
 
     String returnValue = valueAsNumber == null ? "" : valueAsNumber.toString().replace(".", ",");
@@ -76,10 +66,20 @@ public class Modify extends UserAwareController {
     return render();
   }
 
-  private void convertValueToBigDecimal() {
+  BigDecimal getComparableValue(Metric metric) {
+    if(isForecast) {
+      metric.getForecasts().put(year, valueAsNumber);
+      return metric.getValues().get(year);
+    }
+    else {
+      metric.getValues().put(year, valueAsNumber);
+      return metric.getForecasts().get(year);
+    }
+  }
 
+  void convertValueToBigDecimal() {
     if (!isBlank(value)) {
-      value = value.replace(",", ".");
+      value = value.trim().replace(",", ".");
       try{
         valueAsNumber = new BigDecimal(value);
         if(valueAsNumber.remainder(new BigDecimal(1)).equals(new BigDecimal(0))){
@@ -88,11 +88,11 @@ public class Modify extends UserAwareController {
         else {
           valueAsNumber = valueAsNumber.setScale(1, HALF_UP);
         }
+        if(valueAsNumber.toString().length()>38) {
+          errorsList.add(messages.get("errorValue"));
+        }
       }catch (NumberFormatException e){
         errorsList.add(messages.get("errorInsertValue"));
-      }
-      if(valueAsNumber.toString().length()>38) {
-        errorsList.add(messages.get("errorValue"));
       }
     }
   }
