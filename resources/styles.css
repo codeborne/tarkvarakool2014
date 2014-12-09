@@ -261,20 +261,20 @@ button:focus {
   text-align: left !important;
 }
 
-.userHomeTable td:nth-child(2) {
+.userHomeTable td:first-child {
   width: auto;
 }
 
-.userHomeTable td:nth-child(3) {
+.userHomeTable td:nth-child(2) {
   width: 250px;
   font-size: 12px;
 }
 
-.userHomeTable td:nth-child(4), .userHomeTable td:nth-child(5) {
+.userHomeTable td:nth-child(3), .userHomeTable td:nth-child(4),.userHomeTable td:nth-child(6) {
   width: 100px;
 }
 
-.userHomeTable td:nth-child(6) {
+.userHomeTable td:nth-child(5) {
   width: 150px;
 }
 

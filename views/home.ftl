@@ -1,4 +1,4 @@
-  <@html>
+<@html>
   <#if goals?has_content>
     <#list goals as goal>
       <#list infoSourceContentList as metricInfosource>
@@ -11,8 +11,13 @@
                 <span class="glyphicon glyphicon-stats"></span><span><br>Graafik</span>
               </button>
             </form>
-            <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>
-            <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
+            <h4
+              class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else>
+              <i>${goal.name}</i></#if></#if></h4>
+
+            <div
+              class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else>
+              <i>${goal.comment!""}</i></#if></#if></div>
             <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
           </div>
           <div class="panel-body">
@@ -20,12 +25,12 @@
             <table class="table userHomeTable">
               <thead>
               <tr>
-                <th><@m'viewValues'/></th>
                 <th><@m'metric'/></th>
                 <th><@m'publicDescription'/></th>
                 <th><@m'startLevel'/></th>
                 <th><@m'targetLevel'/>&nbsp;(2020)</th>
                 <th><@m'infoSource'/></th>
+                <th><@m'results'/></th>
               </tr>
               </thead>
               <tbody class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -34,9 +39,12 @@
                     <#if metric_index == infosource_index>
                       <#if metric.isPublic == true>
                       <tr class="metric" role="tab" id="heading_${goal_index}_${metric_index}">
-                        <td><#if !isMetricPerformancePositive(metric)??><#elseif isMetricPerformancePositive(metric)><span class="glyphicon glyphicon-thumbs-up greenValue"></span><#else><span class="glyphicon glyphicon-thumbs-down redValue"></span> </#if> <a  data-toggle="collapse" class="collapsed" data-parent="#accordion" href="#collapse_${goal_index}_${metric_index}" aria-expanded="false" aria-controls="collapse_${goal_index}_${metric_index}">link</a></td>
-                        <td class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></td>
-                        <td class="userViewPublicDescription line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></td>
+                        <td
+                          class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else>
+                          <i>${metric.name}</i></#if></#if></td>
+                        <td
+                          class="userViewPublicDescription line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else>
+                          <i>${metric.publicDescription!""}</i></#if></#if></td>
                         <td class="startLevel">
                           <#if metric.startLevel??>${metric.startLevel}
                             <#if language == 'et'>
@@ -80,41 +88,56 @@
                         <td class="infoSource">
                           <#list infosource as infoItem>
                             <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
-                              <span class="line-break"> <a href="${infoItem}" target="_blank"><span class="glyphicon glyphicon-new-window"></span></a>&nbsp;</span>
+                              <span class="line-break"> <a href="${infoItem}" target="_blank"><span
+                                class="glyphicon glyphicon-new-window"></span></a>&nbsp;</span>
                             <#else><span class="line-break">${infoItem}&nbsp;</span>
                             </#if>
                           </#list>
                         </td>
+                        <td>
+                          <#if !isMetricPerformancePositive(metric)??>
+                        <#elseif isMetricPerformancePositive(metric)><span
+                          class="glyphicon glyphicon-thumbs-up greenValue"></span>
+                        <#else><span class="glyphicon glyphicon-thumbs-down redValue"></span>
+                        </#if>
+                          <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
+                             href="#collapse_${goal_index}_${metric_index}" aria-expanded="false"
+                             aria-controls="collapse_${goal_index}_${metric_index}">link</a>
+
+                          <div class="action-button">
+                            <form action="/metrics/charts">
+                              <input type="hidden" value="${metric.id?c}" name="metricId">
+                              <button class="small-chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'chart'/>">
+                                <span class="glyphicon glyphicon-stats"></span>
+                              </button>
+                            </form>
+                          </div>
+
+                        </td>
                       </tr>
 
-                      <tr id="collapse_${goal_index}_${metric_index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_${goal_index}_${metric_index}">
+                      <tr id="collapse_${goal_index}_${metric_index}" class="panel-collapse collapse" role="tabpanel"
+                          aria-labelledby="heading_${goal_index}_${metric_index}">
                         <td colspan="6">
                           <table class="">
                             <tablehead>
-                            <#list minimumYear..maximumYear as year>
-                              <th>${year?c}</th>
-                            </#list>
+                              <#list minimumYear..maximumYear as year>
+                                <th>${year?c}</th>
+                              </#list>
                             </tablehead>
                             <tbody>
                             <tr>
-                            <#list minimumYear..maximumYear as year>
-
-                              <td class="values">
-              <span <#if (metric.forecasts.get(year)?has_content && metric.values.get(year)?has_content)>
-                <#if  (metric.values.get(year)>=metric.forecasts.get(year))>
-                  class="value greenValue"
-                <#elseif (metric.values.get(year)<metric.forecasts.get(year))>
-                  class="value redValue"</#if> <#else> class="value"</#if>>
-                <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year)))}
-                <#elseif (currentYear>year)>N/A
-                <#else></#if>
-
-              </span>
-                              </td>
-                            </#list>
+                              <#list minimumYear..maximumYear as year>
+                                <td class="values">
+                                  <span>
+                                    <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year)))}
+                                    <#elseif (currentYear>year)>N/A
+                                    <#else></#if>
+                                  </span>
+                                </td>
+                              </#list>
                             </tr>
                             </tbody>
-
                           </table>
 
                         </td>
