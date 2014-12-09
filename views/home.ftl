@@ -98,7 +98,7 @@
 
                           <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
                              href="#collapse_${goal_index}_${metric_index}" aria-expanded="false"
-                             aria-controls="collapse_${goal_index}_${metric_index}"><#if !isMetricPerformancePositive(metric)??>
+                             aria-controls="collapse_${goal_index}_${metric_index}" title="<@m'viewValues'/>"><#if !isMetricPerformancePositive(metric)??>
 
                           <#elseif isMetricPerformancePositive(metric)><span
                             class="glyphicon glyphicon-thumbs-up greenValue"></span>
@@ -120,7 +120,7 @@
                       <tr id="collapse_${goal_index}_${metric_index}" class="panel-collapse collapse" role="tabpanel"
                           aria-labelledby="heading_${goal_index}_${metric_index}">
                         <td colspan="6">
-                          <table class="">
+                          <table class="table-collapse">
                             <tablehead>
                               <#list minimumYear..maximumYear as year>
                                 <th>${year?c}</th>
@@ -140,7 +140,6 @@
                             </tr>
                             </tbody>
                           </table>
-
                         </td>
                       </tr>
                       </#if>
