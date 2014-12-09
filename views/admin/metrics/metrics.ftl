@@ -168,6 +168,16 @@
           </button></span>
             </form>
           </div>
+          <#if metric.startLevel?? && metric.targetLevel??>
+                  <div class="action-button">
+                    <form action="/admin/metrics/charts">
+                      <input type="hidden" value="${metric.id?c}" name="metricId">
+                      <button class="small-chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'viewChart'/>">
+                        <span class="glyphicon glyphicon-stats value"></span>
+                      </button>
+                    </form>
+                  </div>
+                  </#if>
           <div class="action-button">
             <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
             <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
@@ -180,16 +190,6 @@
                                    data-action="save"<#if metric.isPublic==true> style="color:green"
                                    <#else>style="color:red"</#if> /></span>
           </div>
-          <#if metric.startLevel?? && metric.targetLevel??>
-          <div class="action-button">
-            <form action="/admin/metrics/charts">
-              <input type="hidden" value="${metric.id?c}" name="metricId">
-              <button class="small-chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'chart'/>">
-                <span class="glyphicon glyphicon-stats"></span>
-              </button>
-            </form>
-          </div>
-          </#if>
         </td>
       </tr>
       </#if>

@@ -102,7 +102,10 @@ button:focus {
   color: #00CCFF;
 }
 
-.glyphicon-wrench, .glyphicon-wrench:hover {
+a:hover, a:focus{
+  text-decoration: none !important;
+}
+.glyphicon-wrench, .glyphicon-wrench:hover{
   font-size: 17px;
   color: #ffcc00;
   text-decoration: none;
@@ -231,6 +234,7 @@ button:focus {
   color: #6f6d65;
 }
 
+
 .table > thead > tr > th {
   border-bottom: 1px solid #DDD;
   text-align: left;
@@ -245,9 +249,33 @@ button:focus {
   padding: 10px;
 }
 
+.table-collapse{
+  color: #6f6d65 !important;
+  width: 80%;
+  margin: auto;
+
+
+}
+.table-collapse td {
+  width: auto !important;
+  text-align: center;
+  font-weight: 300;
+
+}
+.table-collapse th{
+  text-align: center;
+  font-weight: 500;
+  border-bottom: solid 1px lightgray;
+
+}
+
 .valueTable > thead > tr > th, .valueTable > tbody > tr > td {
   text-align: right !important;
   width: 75px;
+}
+.valueStripes > tbody > tr > td {
+  background-color: #E6E6E6;
+  border-top: 2px solid white;
 }
 
 .valueTable > thead > tr > th:first-child, .valueTable > tbody > tr > td:first-child {
@@ -257,6 +285,7 @@ button:focus {
 
 .userHomeTable > thead > tr > th, .userHomeTable > tbody > tr > td {
   text-align: left !important;
+  border-top: 2px solid white;
 }
 
 .userHomeTable td:first-child {
@@ -265,7 +294,6 @@ button:focus {
 
 .userHomeTable td:nth-child(2) {
   width: 250px;
-  font-size: 12px;
 }
 
 .userHomeTable td:nth-child(3), .userHomeTable td:nth-child(4),.userHomeTable td:nth-child(6) {
@@ -276,7 +304,7 @@ button:focus {
   width: 150px;
 }
 
-.userHomeTable > tbody > tr:nth-child(odd), .valueStripes > tbody > tr:nth-child(odd) {
+.userHomeTable > tbody > tr:nth-child(odd){
   background: #E6E6E6;
 }
 
@@ -339,6 +367,10 @@ button:focus {
   padding: 200px;
 }
 
+.userViewPublicDescription{
+  font-size: 12px;
+}
+
 .startLevel, .targetLevel {
   text-align: right !important;
 }
@@ -354,7 +386,7 @@ button:focus {
   border: none;
   cursor: pointer;
   overflow: hidden;
-  color: lightgray;
+  color: gray;
   margin-left: -15px;
 }
 
@@ -373,7 +405,7 @@ button:focus {
   border: none;
   cursor: pointer;
   overflow: hidden;
-  color: lightgray;
+  color: gray;
   font-size: 16px !important;
 }
 
@@ -381,17 +413,22 @@ tr.metric .glyphicon-sort {
   padding-top: 15px;
 }
 
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover{
   color: #ffcc00;
   background-color: transparent;
 }
 
 .measured .glyphicon-pencil, .forecasted .glyphicon-pencil, .yearlyBudget .glyphicon-pencil {
-  color: lightgrey !important;
+  color: lightgray !important;
 }
 
-.measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover {
+.glyphicon-new-window, .glyphicon-th-list{
+  color: gray;
+}
+
+.measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover, .glyphicon-new-window:hover, .glyphicon-th-list:hover {
   color: #ffcc00 !important;
+
 }
 
 .forecasted {
@@ -410,7 +447,6 @@ tr.metric .glyphicon-sort {
   font-size: 20px;
 
 }
-
 .chart-button .glyphicon-stats {
   font-size: 30px;
 }
@@ -521,16 +557,6 @@ tr.metric .glyphicon-sort {
   font-size: 12px;
 }
 
-.values {
-  text-align: right !important;
-}
-
-.symbol {
-  height: 55px;
-  width: 2px;
-  background-color: #222;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
-}
 
 .switch-button {
   display: inline-block;
