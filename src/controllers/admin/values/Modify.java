@@ -63,7 +63,7 @@ public class Modify extends UserAwareController {
 
     jsonResponse = new Gson().toJson(new JsonResponse(errorsList, returnValue,
       comparableValue == null ? "" : comparableValue.toString()));
-    return render();
+    return json();
   }
 
   BigDecimal getComparableValue(Metric metric) {

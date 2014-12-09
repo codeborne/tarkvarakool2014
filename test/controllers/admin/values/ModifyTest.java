@@ -35,7 +35,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
       new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
@@ -60,7 +60,7 @@ public class ModifyTest extends ControllerTest<Modify> {
       metric));
 
     when(controller.getComparableValue(metric)).thenReturn(new BigDecimal(12));
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"12\"}", controller.jsonResponse);
 
@@ -77,7 +77,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
       new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
@@ -99,7 +99,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
       new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
@@ -121,7 +121,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
       new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     Metric savedMetric = getUpdatedEntity();
     Assert.assertTrue(controller.errorsList.isEmpty());
@@ -138,7 +138,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2014;
     controller.value = "744";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -154,7 +154,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     controller.errors.put("metricId", new Exception());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -166,7 +166,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2014;
     controller.value = "744.55";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -181,7 +181,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     controller.errors.put("goalId", new Exception());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -193,7 +193,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.metricId = 21L;
     controller.value = "744";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -207,7 +207,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     controller.errors.put("year", new Exception());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -220,7 +220,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = UserAwareController.MAXIMUM_YEAR + 1;
     controller.value = "744";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -233,7 +233,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = UserAwareController.MINIMUM_YEAR - 1;
     controller.value = "744";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -247,7 +247,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     controller.errors.put("value", new Exception());
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));
@@ -260,7 +260,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2014;
     controller.value = "123456789012345678901234567890123456789.0";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("errorValue")));
@@ -273,7 +273,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.year = 2014;
     controller.value = "j3j33";
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("errorInsertValue")));
@@ -291,7 +291,7 @@ public class ModifyTest extends ControllerTest<Modify> {
     when(hibernate.createCriteria(Goal.class).add(any(Criterion.class)).list()).thenReturn(new ArrayList<Metric>());
 
 
-    assertRender(controller.post());
+    assertJson(controller.post());
 
     assertEquals(1, controller.errorsList.size());
     assertTrue(controller.errorsList.contains(messages.get("error")));

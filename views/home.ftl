@@ -98,8 +98,9 @@
 
                           <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
                              href="#collapse_${goal_index}_${metric_index}" aria-expanded="false"
-                             aria-controls="collapse_${goal_index}_${metric_index}" title="<@m'viewValues'/>"><#if !isMetricPerformancePositive(metric)??>
-
+                             aria-controls="collapse_${goal_index}_${metric_index}" title="<@m'viewValues'/>">
+                            
+                            <#if !isMetricPerformancePositive(metric)??>
                           <#elseif isMetricPerformancePositive(metric)><span
                             class="glyphicon glyphicon-thumbs-up greenValue"></span>
                           <#else><span class="glyphicon glyphicon-thumbs-down redValue"></span>

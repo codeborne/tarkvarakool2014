@@ -12,7 +12,6 @@ public class Charts extends UserAwareController {
   @Override @Role("admin")
   public Result get(){
     metric=(Metric) hibernate.get(Metric.class,metricId);
-
     return render();
   }
 }
