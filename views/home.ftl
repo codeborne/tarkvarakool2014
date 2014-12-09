@@ -8,7 +8,7 @@
             <form action="/charts">
               <input type="hidden" value="${goal.id?c}" name="goalId">
               <button class="chart-button" type="submit" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-stats"></span><span><br>Graafik</span>
+                <span class="glyphicon glyphicon-stats" title="<@m'viewChart'/>"></span><span><br><@m'chart'/></span>
               </button>
             </form>
             <h4
@@ -89,7 +89,7 @@
                           <#list infosource as infoItem>
                             <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
                               <span class="line-break"> <a href="${infoItem}" target="_blank"><span
-                                class="glyphicon glyphicon-new-window"></span></a>&nbsp;</span>
+                                class="glyphicon glyphicon-new-window" title="Link"></span></a>&nbsp;</span>
                             <#else><span class="line-break">${infoItem}&nbsp;</span>
                             </#if>
                           </#list>
@@ -99,22 +99,23 @@
                           <a data-toggle="collapse" class="collapsed" data-parent="#accordion"
                              href="#collapse_${goal_index}_${metric_index}" aria-expanded="false"
                              aria-controls="collapse_${goal_index}_${metric_index}" title="<@m'viewValues'/>">
-                            
-                            <#if !isMetricPerformancePositive(metric)??>
-                          <#elseif isMetricPerformancePositive(metric)><span
-                            class="glyphicon glyphicon-thumbs-up greenValue"></span>
-                          <#else><span class="glyphicon glyphicon-thumbs-down redValue"></span>
-                          </#if></a>
+                            <span class="glyphicon glyphicon-th-list" </span>
+                          </a>
 
                           <div class="action-button">
                             <form action="/metrics/charts">
                               <input type="hidden" value="${metric.id?c}" name="metricId">
-                              <button class="small-chart-button" type="submit" class="btn btn-default btn-sm" title="<@m'chart'/>">
+                              <button class="small-chart-button" type="submit" class="btn btn-default btn-sm"
+                                      title="<@m'viewChart'/>">
                                 <span class="glyphicon glyphicon-stats"></span>
                               </button>
                             </form>
                           </div>
-
+                          <#if !isMetricPerformancePositive(metric)??>
+                          <#elseif isMetricPerformancePositive(metric)><span
+                            class="glyphicon glyphicon-thumbs-up greenValue"></span>
+                          <#else><span class="glyphicon glyphicon-thumbs-down redValue"></span>
+                          </#if>
                         </td>
                       </tr>
 
@@ -131,7 +132,12 @@
                             <tr>
                               <#list minimumYear..maximumYear as year>
                                 <td class="values">
-                                  <span>
+                                  <span
+                                    <#if (metric.forecasts.get(year)?has_content && metric.values.get(year)?has_content)>
+                                      <#if  (metric.values.get(year)>=metric.forecasts.get(year))>
+                                        class="value greenValue"
+                                      <#elseif (metric.values.get(year)<metric.forecasts.get(year))>
+                                        class="value redValue"</#if> <#else> class="value"</#if>>
                                     <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year)))}
                                     <#elseif (currentYear>year)>N/A
                                     <#else></#if>

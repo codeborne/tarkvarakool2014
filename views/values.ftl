@@ -7,7 +7,7 @@
           <form action="/charts">
             <input type="hidden" value="${goal.id?c}" name="goalId">
             <button class="chart-button" type="submit" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-stats"></span><span><br>Graafik</span>
+              <span class="glyphicon glyphicon-stats" title="<@m'viewChart'/>"></span><span><br><@m'chart'/></span>
             </button>
           </form>
           <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>

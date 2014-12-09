@@ -386,7 +386,7 @@ a:hover, a:focus{
   border: none;
   cursor: pointer;
   overflow: hidden;
-  color: lightgray;
+  color: gray;
   margin-left: -15px;
 }
 
@@ -405,7 +405,7 @@ a:hover, a:focus{
   border: none;
   cursor: pointer;
   overflow: hidden;
-  color: lightgray;
+  color: gray;
   font-size: 16px !important;
 }
 
@@ -413,16 +413,20 @@ tr.metric .glyphicon-sort {
   padding-top: 15px;
 }
 
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover {
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover{
   color: #ffcc00;
   background-color: transparent;
 }
 
 .measured .glyphicon-pencil, .forecasted .glyphicon-pencil, .yearlyBudget .glyphicon-pencil {
-  color: lightgrey !important;
+  color: lightgray !important;
 }
 
-.measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover, .glyphicon-thumbs-down:hover, .glyphicon-thumbs-up:hover {
+.glyphicon-new-window, .glyphicon-th-list{
+  color: gray;
+}
+
+.measured .glyphicon-pencil:hover, .forecasted .glyphicon-pencil:hover, .yearlyBudget .glyphicon-pencil:hover, .glyphicon-new-window:hover, .glyphicon-th-list:hover {
   color: #ffcc00 !important;
 
 }
