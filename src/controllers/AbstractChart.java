@@ -21,7 +21,7 @@ public abstract class AbstractChart extends UserAwareController {
   private Goal goal;
 
   public void prepareJsonResponse() {
-    Long availableBudget = getGoal().getBudget().longValue();
+    Double availableBudget = getGoal().getBudget().doubleValue();
 
     List<Metric> metricsWithValidLevels = getMetricsWithValidLevels();
 
@@ -29,16 +29,17 @@ public abstract class AbstractChart extends UserAwareController {
 
     List<String> row = new ArrayList<>();
     row.add(new Gson().toJson(header));
-    for (int year = MINIMUM_YEAR; year <= MAXIMUM_YEAR; year++) {
 
-      String values = "[" + "\"" + year + "\"";
+    for (int year = MINIMUM_YEAR-1; year <= MAXIMUM_YEAR+1; year++) {
+
+      String values = "["  + year;
       values += createJsonForValuesOfYear(metricsWithValidLevels, year);
 
       if (getGoal().getYearlyBudgets().get(year) != null) {
         availableBudget = availableBudget - getGoal().getYearlyBudgets().get(year);
-        values = values + "," + availableBudget +","+ 1+ "]";
-      } else if (year == 2014 && getGoal().getYearlyBudgets().get(year) == null) {
-        values = values + "," + availableBudget + ","+1+ "]";
+        values = values + "," + availableBudget/getGoal().getBudget().doubleValue() +","+ 1+ "]";
+      } else if (year == MINIMUM_YEAR-1) {
+        values = values + "," + availableBudget/getGoal().getBudget().doubleValue() + ","+1+ "]";
       } else {
         values = values + "," + null +","+ 1 + "]";
       }

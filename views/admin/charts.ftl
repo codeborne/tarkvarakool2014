@@ -14,8 +14,8 @@
     </div>
     <div class="chartLegend" style="background-color: white; padding-left: 20px;">
       <table class="legendTable">
+        <#list graphColors as color>
         <#list metricsWithValidLevels as metric>
-          <#list graphColors as color>
             <#if metric_index == color_index>
               <tr>
                 <td><div class="legendRow" id="legendBox_${color_index}" style="background-color: ${color};"></div></td>
@@ -23,13 +23,20 @@
               </tr>
 
             </#if>
-            <#if (!metric_has_next && ((metric_index+1) == color_index))>
+            <#if !metric_has_next && ((metric_index+1) == color_index)>
               <tr>
                 <td><div class="legendRow" id="legendBox_${color_index}" style="background-color: ${color};"></div></td>
                 <td><span class="legendMetricName"><@m'budgetLegend'/></span></td>
               </tr>
             </#if>
           </#list>
+
+        <#if  metricsWithValidLevels?size == 0 && color_index ==0>
+        <tr>
+          <td><div class="legendRow" id="legendBox_${color_index}" style="background-color: ${color};"></div></td>
+          <td><span class="legendMetricName"><@m'budgetLegend'/></span></td>
+        </tr>
+        </#if>
         </#list>
         <tr>
           <td > <span class="glyphicon glyphicon-info-sign"></span></td>
@@ -37,9 +44,7 @@
         </tr>
       </table>
     </div>
-
   </div>
-
   </#if>
 
 <script>
@@ -56,33 +61,31 @@
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
     var data = google.visualization.arrayToDataTable(data1);
-    console.log(data1);
+
+    vAxisMinValue = 0;
+    vAxisMaxValue = 1.2;
+    hAxisMinViewValues = data.getValue(0,0)+0.5;
+    hAxisMaxViewValues = data.getValue(data.getNumberOfRows()-1,0)-0.5;
+    gridLinesCount = data.getNumberOfRows()-2;
+
     var options = {
       seriesType: "bars",
-      hAxis: {format: '####', title: "<@m'year'/>"},
-      vAxes: {0:{format:'#%',  title: "<@m'vAxisTitle'/>", minValue: 0.0, viewWindow: {  min: 0.0  }, gridlines:{count:11}},
-        1: {format: "#", title: "<@m'chartBudget'/>" , minValue:0.0, viewWindow: {  min: 0.0  },gridlines:{count:11}}},
+      hAxis: {format: '####', viewWindow: {  min: hAxisMinViewValues, max: hAxisMaxViewValues  }, title: "<@m'year'/>", gridlines:{count:gridLinesCount, color:"#ffffff"}},
+      vAxis: {format:'#%',  title: ""<@m'vAxisTitle'/> / <@m'chartBudget'/>"", minValue: vAxisMinValue, maxValue:vAxisMaxValue, viewWindow: {  min:vAxisMinValue , max:vAxisMaxValue }, gridlines:{count:7}},
       legend: { position: 'none'},
       colors: ['#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'],
       interpolateNulls:true
     };
     seriesOption = {};
 
-    seriesOption[ data.getNumberOfColumns()-3] = {targetAxisIndex:1, pointSize:5, type: "line"};
-    seriesOption[ data.getNumberOfColumns()-2] = {targetAxisIndex:0, type: "line", color: "black", lineWidth:"1",  enableInteractivity: false};
-    for(i=1; i<data.getNumberOfColumns()-3; i++) {
-      seriesOption[i] = {targetAxisIndex: 0};
-    }
+    seriesOption[ data.getNumberOfColumns()-3] = {pointSize:5, type: "line"};
+    seriesOption[ data.getNumberOfColumns()-2] = {type: "line", color: "black", lineWidth:"1",  enableInteractivity: false};
     options.series = seriesOption;
 
     var formatter1 = new google.visualization.NumberFormat({pattern:'###%'});
-    for(i=1; i<data.getNumberOfColumns()-1; i++) {
+    for(i=1; i<data.getNumberOfColumns(); i++) {
       formatter1.format(data, i);
     }
-    formatter1.format(data, data.getNumberOfColumns()-1);
-
-    var formatter2 = new google.visualization.NumberFormat({pattern:'###€'});
-    formatter2.format(data,data.getNumberOfColumns()-2);
 
     var chart =  new google.visualization.ComboChart(document.getElementById('chart'));
     chart.draw(data, options);
