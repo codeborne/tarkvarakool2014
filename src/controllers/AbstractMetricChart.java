@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 public abstract class AbstractMetricChart extends UserAwareController {
   public String jsonResponse;
   public Long metricId;
@@ -41,7 +43,12 @@ public abstract class AbstractMetricChart extends UserAwareController {
 
   List<String> createHeader() {
     List<String> header = new ArrayList<>();
-    header.add(messages.get("vertAxisValue") +" ("+metric.getUnitDependingOnLanguage(getLanguage())+")");
+    if(isBlank(metric.getUnit()) && isBlank(metric.getEngUnit())){
+      header.add(messages.get("vertAxisValue"));
+    }
+    else {
+      header.add(messages.get("vertAxisValue") + " (" + metric.getUnitDependingOnLanguage(getLanguage()) + ")");
+    }
     header.add(metric.getMetricNameDependingOnLanguage(getLanguage()));
     header.add("null");
     return header;

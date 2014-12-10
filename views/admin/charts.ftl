@@ -71,7 +71,7 @@
     var options = {
       seriesType: "bars",
       hAxis: {format: '####', viewWindow: {  min: hAxisMinViewValues, max: hAxisMaxViewValues  }, title: "<@m'year'/>", gridlines:{count:gridLinesCount, color:"#ffffff"}},
-      vAxis: {format:'#%',  title: ""<@m'vAxisTitle'/> / <@m'chartBudget'/>"", minValue: vAxisMinValue, maxValue:vAxisMaxValue, viewWindow: {  min:vAxisMinValue , max:vAxisMaxValue }, gridlines:{count:7}},
+      vAxis: {format:'#%',  title: "<@m'vAxisTitle'/> / <@m'chartBudget'/>", minValue: vAxisMinValue, maxValue:vAxisMaxValue, viewWindow: {  min:vAxisMinValue , max:vAxisMaxValue }, gridlines:{count:7}},
       legend: { position: 'none'},
       colors: ['#1abc9c', '#3498db', '#9b59b6','#34495e', '#f1c40f','#e67e22', '#e74c3c','#95a5a6', '#d35400', '#2980b9', '#16a085'],
       interpolateNulls:true

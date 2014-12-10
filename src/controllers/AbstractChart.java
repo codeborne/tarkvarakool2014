@@ -69,10 +69,10 @@ public abstract class AbstractChart extends UserAwareController {
     List<String> header = new ArrayList<>();
     header.add(messages.get("year"));
     for (Metric metric : metrics) {
-      header.add(metric.getName());
+      header.add(metric.getMetricNameDependingOnLanguage(getLanguage()));
     }
     header.add(messages.get("budgetLeft"));
-    header.add("referenceLine");
+    header.add("referenceLineForHundredPercent");
     return header;
   }
 
