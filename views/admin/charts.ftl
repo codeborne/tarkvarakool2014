@@ -56,6 +56,7 @@
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
     var data = google.visualization.arrayToDataTable(data1);
+    console.log(data1);
     var options = {
       seriesType: "bars",
       hAxis: {format: '####', title: "<@m'year'/>"},
@@ -66,8 +67,10 @@
       interpolateNulls:true
     };
     seriesOption = {};
-    seriesOption[ data.getNumberOfColumns()-2] = {targetAxisIndex:1, pointSize:5, type: "line"};
-    for(i=1; i<data.getNumberOfColumns()-2; i++) {
+
+    seriesOption[ data.getNumberOfColumns()-3] = {targetAxisIndex:1, pointSize:5, type: "line"};
+    seriesOption[ data.getNumberOfColumns()-2] = {targetAxisIndex:0, type: "line", color: "black", lineWidth:"1",  enableInteractivity: false};
+    for(i=1; i<data.getNumberOfColumns()-3; i++) {
       seriesOption[i] = {targetAxisIndex: 0};
     }
     options.series = seriesOption;
@@ -76,9 +79,10 @@
     for(i=1; i<data.getNumberOfColumns()-1; i++) {
       formatter1.format(data, i);
     }
+    formatter1.format(data, data.getNumberOfColumns()-1);
 
     var formatter2 = new google.visualization.NumberFormat({pattern:'###€'});
-    formatter2.format(data,data.getNumberOfColumns()-1);
+    formatter2.format(data,data.getNumberOfColumns()-2);
 
     var chart =  new google.visualization.ComboChart(document.getElementById('chart'));
     chart.draw(data, options);

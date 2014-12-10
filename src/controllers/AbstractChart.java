@@ -36,16 +36,17 @@ public abstract class AbstractChart extends UserAwareController {
 
       if (getGoal().getYearlyBudgets().get(year) != null) {
         availableBudget = availableBudget - getGoal().getYearlyBudgets().get(year);
-        values = values + "," + availableBudget + "]";
+        values = values + "," + availableBudget +","+ 1+ "]";
       } else if (year == 2014 && getGoal().getYearlyBudgets().get(year) == null) {
-        values = values + "," + availableBudget + "]";
+        values = values + "," + availableBudget + ","+1+ "]";
       } else {
-        values = values + "," + null + "]";
+        values = values + "," + null +","+ 1 + "]";
       }
 
       row.add(values);
     }
     jsonResponse = row.toString();
+    System.out.println(jsonResponse);
   }
 
   private String createJsonForValuesOfYear(List<Metric> metrics, int year) {
@@ -70,6 +71,7 @@ public abstract class AbstractChart extends UserAwareController {
       header.add(metric.getName());
     }
     header.add(messages.get("budgetLeft"));
+    header.add("referenceLine");
     return header;
   }
 
