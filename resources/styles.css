@@ -318,11 +318,13 @@ a:hover, a:focus{
 
 #translationTable textarea {
   width: 470px;
-
 }
 
 #translationTable td:nth-child(2) {
   width: 500px;
+}
+#translationTable .infoSource {
+  word-break: break-all;
 }
 
 #translationTable td:first-child, #translationTable th:first-child {
