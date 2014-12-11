@@ -5,7 +5,7 @@
     <div class="panel panel-default panel-chart">
       <div class="goal">
         <div class="panel-heading panel-heading-chart">
-          <h4 class="name printMetricName"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
+          <h4 class="name printMetricName line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
         </div>
       </div>
       <div class="panel-body" id="chart"></div>
