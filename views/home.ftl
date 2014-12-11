@@ -12,7 +12,6 @@
               </button>
             </form>
             <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>
-
             <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
             <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
           </div>
@@ -36,11 +35,9 @@
                       <#if metric.isPublic == true>
                       <tr class="metric" role="tab" id="heading_${goal_index}_${metric_index}">
                         <td
-                          class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else>
-                          <i>${metric.name}</i></#if></#if></td>
+                          class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></td>
                         <td
-                          class="userViewPublicDescription line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else>
-                          <i>${metric.publicDescription!""}</i></#if></#if></td>
+                          class="userViewPublicDescription line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></td>
                         <td class="startLevel">
                           <#if metric.startLevel??>${metric.startLevel}
                             <#if language == 'et'>
@@ -51,13 +48,13 @@
                               <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
                               <br>
                               <#if metric.engStartLevelComment?has_content> (${metric.engStartLevelComment})
-                              <#elseif metric.commentOnStartLevel?has_content><i>(${metric.commentOnStartLevel}
-                                )</i></#if>
+                              <#elseif metric.commentOnStartLevel?has_content><i>(${metric.commentOnStartLevel})</i></#if>
                             </#if>
                           <#elseif language == 'et' && metric.commentOnStartLevel?has_content>${metric.commentOnStartLevel}
                           <#elseif language == 'en'>
                             <#if metric.engStartLevelComment?has_content>${metric.engStartLevelComment}
-                            <#else><i>(${metric.commentOnStartLevel})</i>
+                            <#elseif metric.commentOnStartLevel?has_content><i>(${metric.commentOnStartLevel})</i>
+                            <#else>N/A
                             </#if>
                           <#else>N/A</#if>
                         </td>
@@ -71,13 +68,13 @@
                               <#if metric.engUnit?has_content>${metric.engUnit}<#else><i>${metric.unit!""}</i></#if>
                               <br>
                               <#if metric.engTargetLevelComment?has_content> (${metric.engTargetLevelComment})
-                              <#elseif metric.commentOnTargetLevel?has_content><i>(${metric.commentOnTargetLevel}
-                                )</i></#if>
+                              <#elseif metric.commentOnTargetLevel?has_content><i>(${metric.commentOnTargetLevel})</i></#if>
                             </#if>
                           <#elseif language == 'et' && metric.commentOnTargetLevel?has_content>${metric.commentOnTargetLevel}
                           <#elseif language == 'en'>
                             <#if metric.engTargetLevelComment?has_content>${metric.engTargetLevelComment}
-                            <#else><i>(${metric.commentOnTargetLevel})</i>
+                            <#elseif metric.commentOnTargetLevel?has_content><i>(${metric.commentOnTargetLevel})</i>
+                            <#else>N/A
                             </#if>
                           <#else>N/A</#if>
                         </td>
