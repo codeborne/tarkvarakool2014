@@ -168,7 +168,6 @@
           </button></span>
             </form>
           </div>
-          <#if metric.startLevel?? && metric.targetLevel??>
                   <div class="action-button">
                     <form action="/admin/metrics/charts">
                       <input type="hidden" value="${metric.id?c}" name="metricId">
@@ -177,7 +176,6 @@
                       </button>
                     </form>
                   </div>
-                  </#if>
           <div class="action-button">
             <input class="isPublicValue" type="hidden" value="${goal.id?c}" name="goalId"/>
             <input class="isPublicValue" type="hidden" name="metricId" value="${metric.id?c}"/>
