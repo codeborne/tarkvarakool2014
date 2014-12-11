@@ -71,7 +71,7 @@ public class Home extends UserAwareController {
       hibernate.update(goalToBeChanged);
       hibernate.flush();
     }
-
+    isEverythingTranslated = checkTranslationStatus();
     return render();
   }
 
