@@ -35,11 +35,14 @@ public abstract class AbstractChart extends UserAwareController {
       String values = "["  + year;
       values += createJsonForValuesOfYear(metricsWithValidLevels, year);
 
-      if (getGoal().getYearlyBudgets().get(year) != null) {
+      double availableBudgetPercentage;
+      if (getGoal().getYearlyBudgets().get(year) != null && !getGoal().getBudget().equals(0)) {
         availableBudget = availableBudget - getGoal().getYearlyBudgets().get(year);
-        values = values + "," + availableBudget/getGoal().getBudget().doubleValue() +","+ 1+ "]";
-      } else if (year == MINIMUM_YEAR-1) {
-        values = values + "," + availableBudget/getGoal().getBudget().doubleValue() + ","+1+ "]";
+        availableBudgetPercentage = availableBudget / getGoal().getBudget().doubleValue();
+        values = values + "," + availableBudgetPercentage +","+ 1+ "]";
+      }
+      else if (year == MINIMUM_YEAR-1) {
+        values = values + "," + 1 +","+ 1+ "]";
       } else {
         values = values + "," + null +","+ 1 + "]";
       }
