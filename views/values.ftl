@@ -2,14 +2,20 @@
   <#if goals?has_content>
     <#list goals as goal>
     <div class="panel panel-default">
+      <a id="${goal.id}" class="anchor"></a>
       <div class="goal">
         <div class="panel-heading">
           <form action="/charts">
             <input type="hidden" value="${goal.id?c}" name="goalId">
-            <button class="chart-button" type="submit" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-stats" title="<@m'viewChart'/>"></span><span><br><@m'chart'/></span>
+            <button type="submit" class="chart-button btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-stats" title="<@m'viewChart'/>">
             </button>
           </form>
+          <a href="/home#${goal.id}">
+            <button class="values-view-button btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-home" title="<@m'goToGoal'/>"></span>
+            </button>
+          </a>
           <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>
           <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
           <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>

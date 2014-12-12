@@ -407,7 +407,7 @@ a:hover, a:focus{
   background-color: transparent;
 }
 
-.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button, .small-chart-button {
+.modifyButton, .metricsButton, .deleteButton, .translationButton, .glyphicon-sort, .chart-button, .small-chart-button,.values-view-button {
   background-color: Transparent;
   border: none;
   cursor: pointer;
@@ -420,7 +420,7 @@ tr.metric .glyphicon-sort {
   padding-top: 15px;
 }
 
-.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover{
+.modifyButton:hover, .metricsButton:hover, .deleteButton:hover, .glyphicon-sort:hover, .chart-button:hover, .small-chart-button:hover, .values-view-button:hover{
   color: #ffcc00;
   background-color: transparent;
 }
@@ -452,9 +452,14 @@ tr.metric .glyphicon-sort {
 .chart-button {
   float: right;
   font-size: 20px;
-
 }
-.chart-button .glyphicon-stats {
+
+.values-view-button{
+  float: right;
+  margin-left: 30px;
+  margin-bottom: 30px;
+}
+.chart-button .glyphicon-stats, .values-view-button .glyphicon-th-list, .values-view-button .glyphicon-home{
   font-size: 30px;
 }
 
@@ -721,4 +726,11 @@ tr.metric div, .addMetric div {
 
 .rotateRedArrow {
   transform: rotate(-45deg);
+}
+
+.anchor{
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
 }
