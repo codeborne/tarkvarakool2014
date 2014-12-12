@@ -105,9 +105,9 @@
                             </form>
                           </div>
                           <#if !isMetricPerformancePositive(metric)??>
-                          <#elseif isMetricPerformancePositive(metric)><span
-                            class="glyphicon glyphicon-thumbs-up greenValue"></span>
-                          <#else><span class="glyphicon glyphicon-thumbs-down redValue"></span>
+                          <#elseif isMetricPerformancePositive(metric)><div class="rotateGreenArrow" title="<@m'resultPositive'/>"><span
+                            class="glyphicon glyphicon-arrow-up greenValue"></span></div>
+                          <#else><div class="rotateRedArrow" title="<@m'resultNegative'/>"> <span class="glyphicon glyphicon-arrow-down redValue"></span></div>
                           </#if>
                         </td>
                       </tr>
