@@ -23,7 +23,7 @@
                 <th><@m'metric'/></th>
                 <th><@m'publicDescription'/></th>
                 <th><@m'startLevel'/></th>
-                <th><@m'targetLevel'/>&nbsp;(2020)</th>
+                <th><@m'targetLevel'/></th>
                 <th><@m'infoSource'/></th>
                 <th><@m'results'/></th>
               </tr>
