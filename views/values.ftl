@@ -56,7 +56,7 @@
           <table class="table valueTable valueStripes">
             <thead>
             <tr>
-              <th>Eelarve</th>
+              <th><@m'budgetSum'/> ${goal.budget} €</th>
               <th></th>
               <#list minimumYear..maximumYear as year>
                 <th>${year?c}</th>
