@@ -44,10 +44,10 @@ public abstract class AbstractMetricChart extends UserAwareController {
   List<String> createHeader() {
     List<String> header = new ArrayList<>();
     if(isBlank(metric.getUnit()) && isBlank(metric.getEngUnit())){
-      header.add(messages.get("vertAxisValue"));
+      header.add("");
     }
     else {
-      header.add(messages.get("vertAxisValue") + " (" + metric.getUnitDependingOnLanguage(getLanguage()) + ")");
+      header.add(metric.getUnitDependingOnLanguage(getLanguage()));
     }
     header.add(metric.getMetricNameDependingOnLanguage(getLanguage()));
     header.add("null");
