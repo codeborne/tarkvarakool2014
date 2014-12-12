@@ -8,7 +8,7 @@
     <h4 class="name"><@m'goals'/></h4>
   </div>
   <div class="panel-body">
-    <table class="table table-hover">
+    <table class="table table-hover goalsHomeTable">
       <thead>
       <tr>
         <th class="sort"><@m'sort'/></th>

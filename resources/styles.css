@@ -352,6 +352,11 @@ a:hover, a:focus{
   background: rgba(240, 240, 240, 1);
 }
 
+.goalsHomeTable .budgetInTable{
+  width: 130px;
+  text-align: right !important;
+}
+
 .form-control {
   max-width: 815px;
 }
@@ -389,7 +394,6 @@ a:hover, a:focus{
   cursor: pointer;
   overflow: hidden;
   color: gray;
-  margin-left: -15px;
 }
 
 .action-button .saveGoalButton:hover {
