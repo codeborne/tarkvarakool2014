@@ -61,7 +61,7 @@ public class Handler extends AbstractHandler {
       transaction = hibernate.beginTransaction();
       Controller controller = createController(target);
       binder.bindRequestParameters(controller, request.getParameterMap());
-      Result result = invokeController(controller, baseRequest);
+      Result result = invokeController(controller, baseRequest, response);
       if (transaction.isActive()) transaction.commit();
       result.handle(request, response);
     }
@@ -77,18 +77,23 @@ public class Handler extends AbstractHandler {
       else {
         response.sendRedirect("/");
       }
-      baseRequest.setHandled(true);
+      setHandled(baseRequest, response);
     }
     catch (Exception e) {
       LOG.warn("Request handling failed", e);
       response.sendError(SC_INTERNAL_SERVER_ERROR, isDevMode ? e.toString() : null);
-      baseRequest.setHandled(true);
+      setHandled(baseRequest, response);
     }
     finally {
       closeHibernateSession(hibernate, transaction);
       t += System.currentTimeMillis();
       if (baseRequest.isHandled()) LOG.info(request.getMethod() + " " + target + " " + t + " ms");
     }
+  }
+
+  private void setHandled(Request baseRequest, HttpServletResponse response) {
+    response.addHeader("Cache-Control","max-age=1, must-revalidate, no-store");
+    baseRequest.setHandled(true);
   }
 
   private boolean isAjax(Request request) {
@@ -104,7 +109,7 @@ public class Handler extends AbstractHandler {
     if (hibernate != null) hibernate.close();
   }
 
-  Result invokeController(Controller controller, Request baseRequest) throws Exception {
+  Result invokeController(Controller controller, Request baseRequest, HttpServletResponse response) throws Exception {
     try {
       String httpMethod = baseRequest.getMethod().toLowerCase();
       if ("post".equals(httpMethod) && !checkCSRFToken(baseRequest)) {
@@ -114,7 +119,7 @@ public class Handler extends AbstractHandler {
       Role roleAnnotation = method.getAnnotation(Role.class);
       if (roleAnnotation == null) throw new RoleMissingException(method);
       if (!controller.getRoles().contains(roleAnnotation.value())) throw new NotAuthorizedException(method + " requires role '" + roleAnnotation.value() + "'");
-      baseRequest.setHandled(true);
+      setHandled(baseRequest, response);
       return (Result) method.invoke(controller);
     }
     catch (InvocationTargetException e) {
@@ -148,7 +153,7 @@ public class Handler extends AbstractHandler {
     try {
       Class.forName(getClassName(withHomeSuffix));
       response.sendRedirect(withHomeSuffix);
-      baseRequest.setHandled(true);
+      setHandled(baseRequest, response);
       return true;
     }
     catch (ClassNotFoundException e) {

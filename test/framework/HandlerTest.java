@@ -110,7 +110,7 @@ public class HandlerTest {
     TestController controller = new TestController();
     controller.roles = ImmutableSet.of("test");
     when(baseRequest.getMethod()).thenReturn("GET");
-    handler.invokeController(controller, baseRequest);
+    handler.invokeController(controller, baseRequest,response);
     assertEquals(true, controller.getCalled);
   }
 
@@ -119,7 +119,7 @@ public class HandlerTest {
     TestController controller = new TestController();
     controller.roles = ImmutableSet.of("foo", "bar");
     when(baseRequest.getMethod()).thenReturn("GET");
-    handler.invokeController(controller, baseRequest);
+    handler.invokeController(controller, baseRequest,response);
   }
 
   @Test(expected = RoleMissingException.class)
@@ -127,7 +127,7 @@ public class HandlerTest {
     Controller controller = new MockController();
     when(baseRequest.getMethod()).thenReturn("POST");
     when(baseRequest.getSession()).thenReturn(mock(HttpSession.class));
-    handler.invokeController(controller, baseRequest);
+    handler.invokeController(controller, baseRequest, response);
   }
 
   @Test
