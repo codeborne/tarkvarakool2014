@@ -27,7 +27,7 @@ public class AbstractMetricChartTest extends ControllerTest<AbstractMetricChartT
   @Test
   public void createHeader() throws Exception {
     controller.metric = metric;
-    assertEquals(asList("Mõõdiku väärtus (%)","mõõdik", "null"), controller.createHeader());
+    assertEquals(asList("%","mõõdik", "null"), controller.createHeader());
   }
 
   @Test
@@ -59,7 +59,7 @@ public class AbstractMetricChartTest extends ControllerTest<AbstractMetricChartT
     controller.metricId = 2L;
     when(hibernate.get(Metric.class, 2L)).thenReturn(metric);
     controller.prepareJsonResponse();
-    assertEquals("[[\"Mõõdiku väärtus (%)\",\"mõõdik\",\"null\"], [\"2014\",25,\"2014 25%\"], [\"2015\",30,\"2015 30%\"], " +
+    assertEquals("[[\"%\",\"mõõdik\",\"null\"], [\"2014\",25,\"2014 25%\"], [\"2015\",30,\"2015 30%\"], " +
       "[\"2016\",35,\"2016 35%\"], [\"2017\",null,\"\"], [\"2018\",null,\"\"], [\"2019\",null,\"\"], " +
       "[\"2020\",null,\"\"]]",controller.jsonResponse);
   }

@@ -38,7 +38,7 @@
             </td>
             <td class="commentInTable">
               <span class="value line-break">${goal.comment!""}</span>
-              <textarea class="value form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
+              <textarea class="value form-control" name="comment" maxlength="1000" placeholder="<@m'comment'/>" style="display: none"><#if goal.comment??>${goal.comment}</#if></textarea>
             </td>
             <td class="budgetInTable">
               <span class="value">${goal.budget}</span>
@@ -103,7 +103,7 @@
           <textarea class="value form-control" name="name" maxlength="255" placeholder="<@m'goal'/>"><#if name??> ${name}</#if></textarea>
           </td>
         <td>
-          <textarea class="value form-control" name="comment" maxlength="255" placeholder="<@m'comment'/>"><#if comment??> ${comment}</#if></textarea>
+          <textarea class="value form-control" name="comment" maxlength="1000" placeholder="<@m'comment'/>"><#if comment??> ${comment}</#if></textarea>
           </td>
         <td><input type="number" class="value form-control" placeholder="<@m'budget'/>" name="budget"
                    <#if budget?? && (budget>=0)>value=${budget?c}</#if>></td>

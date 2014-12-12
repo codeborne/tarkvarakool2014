@@ -52,14 +52,14 @@
             <li>
               <span class="labels labelsStyle"><@m'publicDescription'/>: </span>
               <span class="value publicDescription line-break">${metric.publicDescription}</span>
-              <textarea class="value form-control" name="publicDescription" maxlength="255"
+              <textarea class="value form-control" name="publicDescription" maxlength="1000"
                         placeholder="<@m'publicDescription'/>"
                         style="display: none;"><#if metric.publicDescription??>${metric.publicDescription}</#if></textarea>
             </li>
             <li>
               <span class="labels labelsStyle"><@m'privateDescription'/>: </span>
               <span class="value privateDescription line-break">${metric.privateDescription}</span>
-              <textarea class="value form-control" name="privateDescription" maxlength="255"
+              <textarea class="value form-control" name="privateDescription" maxlength="1000"
                         placeholder="<@m'privateDescription'/>"
                         style="display: none;"><#if metric.privateDescription??>${metric.privateDescription}</#if></textarea>
             </li>
@@ -205,12 +205,12 @@
       </li>
       <li>
         <span class="addLabel"><@m'publicDescription'/>: </span>
-        <textarea name="publicDescription" class="value form-control" maxlength="255"
+        <textarea name="publicDescription" class="value form-control" maxlength="1000"
                   placeholder="<@m'publicDescription'/>">${publicDescription!""}</textarea>
       </li>
       <li>
         <span class="addLabel"><@m'privateDescription'/>: </span>
-        <textarea name="privateDescription" class="value form-control" maxlength="255"
+        <textarea name="privateDescription" class="value form-control" maxlength="1000"
                   placeholder="<@m'privateDescription'/>">${privateDescription!""}</textarea>
       </li>
       <li>

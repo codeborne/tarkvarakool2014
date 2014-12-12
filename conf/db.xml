@@ -175,4 +175,13 @@
       <column name="engTargetLevelComment" type="VARCHAR(255)"></column>
     </addColumn>
   </changeSet>
+  
+  <changeSet id="15" author="Tarkvarakool">
+    <modifyDataType tableName="goal" columnName="comment" newDataType="VARCHAR(1000)"/>
+    <modifyDataType tableName="goal" columnName="engComment" newDataType="VARCHAR(1000)"/>
+    <modifyDataType tableName="metric" columnName="engInfoSource" newDataType="VARCHAR(1000)"/>
+    <modifyDataType tableName="metric" columnName="publicDescription" newDataType="VARCHAR(1000)"/>
+    <modifyDataType tableName="metric" columnName="privateDescription" newDataType="VARCHAR(1000)"/>
+    <modifyDataType tableName="metric" columnName="engPublicDescription" newDataType="VARCHAR(1000)"/>
+  </changeSet>
 </databaseChangeLog>

@@ -22,7 +22,7 @@
       <tr>
         <td><@m'comment'/></td>
         <td class="comment">${goal.comment!""}</td>
-        <td><textarea name="engComment" rows="2" maxlength="255" placeholder="<@m'translateComment'/>">${goal.engComment!""}</textarea></td>
+        <td><textarea name="engComment" rows="2" maxlength="1000" placeholder="<@m'translateComment'/>">${goal.engComment!""}</textarea></td>
       </tr>
       </tbody>
       <#list goal.metrics as metric>
@@ -41,12 +41,12 @@
         <tr>
           <td><@m'publicDescription'/></td>
           <td class="publicDescription">${metric.publicDescription!""}</td>
-          <td><textarea name="engPublicDescription" maxlength="255" rows="2" placeholder="<@m'translatePublicDescription'/>">${metric.engPublicDescription!""}</textarea></td>
+          <td><textarea name="engPublicDescription" maxlength="1000" rows="2" placeholder="<@m'translatePublicDescription'/>">${metric.engPublicDescription!""}</textarea></td>
         </tr>
         <tr>
           <td><@m'infoSource'/></td>
           <td class="infoSource">${metric.infoSource!""}</td>
-          <td><textarea name="engInfoSource" maxlength="255" rows="2" placeholder="<@m'translateInfoSource'/>">${metric.engInfoSource!""}</textarea></td>
+          <td><textarea name="engInfoSource" maxlength="1000" rows="2" placeholder="<@m'translateInfoSource'/>">${metric.engInfoSource!""}</textarea></td>
         </tr>
         <tr>
           <td><@m'startLevelComment'/></td>

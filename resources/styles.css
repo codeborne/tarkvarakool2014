@@ -318,6 +318,7 @@ a:hover, a:focus{
 
 #translationTable textarea {
   width: 470px;
+  max-width: 470px;
 }
 
 #translationTable td:nth-child(2) {
