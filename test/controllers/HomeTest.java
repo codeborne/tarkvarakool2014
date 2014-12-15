@@ -43,6 +43,13 @@ public class HomeTest extends ControllerTest<Home>{
   }
 
   @Test
+  public void isMetricPerformancePositiveWhenValueIsGreaterThanForecastAndMetricIsDecreasing() throws Exception {
+    metric.getValues().put(2015, new BigDecimal(15));
+    metric.setIsDecreasing(true);
+    assertFalse(controller.isMetricPerformancePositive(metric));
+  }
+
+  @Test
   public void isMetricPerformancePositiveWhenValueIsLessThanForecast() throws Exception {
     metric.getValues().put(2015, new BigDecimal(11));
     assertFalse(controller.isMetricPerformancePositive(metric));
