@@ -34,6 +34,7 @@ public class Save extends UserAwareController {
   public Goal goal;
   public Boolean isPublic;
   public Boolean isStatusUpdateOnly;
+  public Boolean isDecreasing;
 
   public Double startLevelAsNumber;
   public Double targetLevelAsNumber;
@@ -66,6 +67,9 @@ public class Save extends UserAwareController {
   private void trimAndPrepareAllInput() {
     if (isPublic == null) {
       isPublic = false;
+    }
+    if(isDecreasing==null){
+      isDecreasing = false;
     }
     if (name != null)
     name = name.trim();
@@ -113,6 +117,7 @@ public class Save extends UserAwareController {
     metric.setInfoSource(infoSource);
     metric.setInstitutionToReport(institutionToReport);
     metric.setOrderNumber(orderNumber);
+    metric.setIsDecreasing(isDecreasing);
     }
     else {
       metric.setIsPublic(isPublic);
@@ -126,8 +131,10 @@ public class Save extends UserAwareController {
     orderNumber = (Double) hibernate.createCriteria(Metric.class)
       .add(Restrictions.eq("goal", goal)).setProjection(Projections.max("orderNumber")).uniqueResult();
     orderNumber = Math.ceil(orderNumber == null ? 0 : orderNumber) + 1;
-    hibernate.save(new Metric(goal, name, unit, publicDescription, privateDescription, startLevelAsNumber, commentOnStartLevel,
-      targetLevelAsNumber, commentOnTargetLevel, infoSource, institutionToReport, orderNumber, isPublic));
+    Metric metric = new Metric(goal, name, unit, publicDescription, privateDescription, startLevelAsNumber, commentOnStartLevel,
+      targetLevelAsNumber, commentOnTargetLevel, infoSource, institutionToReport, orderNumber, isPublic);
+    metric.setIsDecreasing(isDecreasing);
+    hibernate.save(metric);
     hibernate.flush();
   }
 
@@ -162,6 +169,8 @@ public class Save extends UserAwareController {
     checkInfoSource();
     checkInstitutionToReport();
     checkOrderNumber();
+    checkIsPublic();
+    checkIsDecreasing();
   }
 
   private void checkName() {
@@ -177,7 +186,6 @@ public class Save extends UserAwareController {
   private void checkPrivateDescription() {
     if (errors.containsKey("privateDescription"))
       errorsList.add(messages.get("error"));
-
   }
 
   private void checkStartLevel() {
@@ -215,6 +223,15 @@ public class Save extends UserAwareController {
   private void checkOrderNumber() {
     if (errors.containsKey("orderNumber"))
       errorsList.add(messages.get("error"));
+  }
 
+  private void checkIsPublic() {
+    if (errors.containsKey("isPublic"))
+      errorsList.add(messages.get("error"));
+  }
+
+  private void checkIsDecreasing() {
+    if (errors.containsKey("setIsDecreasing"))
+      errorsList.add(messages.get("error"));
   }
 }

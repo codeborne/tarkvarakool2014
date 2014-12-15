@@ -28,9 +28,10 @@ public class Metric {
   private String commentOnTargetLevel;
   private String infoSource;
   private String institutionToReport;
-  private Boolean isPublic = false;
+  private Boolean isPublic;
   @Column(nullable = false)
   private Double orderNumber;
+  private Boolean isDecreasing;
 
   private String engName;
   private String engUnit;
@@ -144,6 +145,9 @@ public class Metric {
     return engPublicDescription;
   }
 
+  public boolean getIsDecreasing() {
+    return isDecreasing;
+  }
 
   public String getEngUnit() {
     return engUnit;
@@ -248,6 +252,11 @@ public class Metric {
   public void setEngTargetLevelComment(String engTargetLevelComment) {
     this.engTargetLevelComment = engTargetLevelComment;
   }
+
+  public void setIsDecreasing(boolean isDecreasing) {
+    this.isDecreasing = isDecreasing;
+  }
+
 
   public boolean hasValueForYear(int year){
     return getValues().get(year) != null;

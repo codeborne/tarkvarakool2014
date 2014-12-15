@@ -30,7 +30,9 @@ public class MetricDeletingTest extends UITest {
 
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "", "", "", 0.0, "", 0.0, "", "", "", 1.0, true));
+    Metric metric = new Metric(goal, "Some metric", "", "", "", 0.0, "", 0.0, "", "", "", 1.0, true);
+    metric.setIsDecreasing(false);
+    hibernate.save(metric);
 
   }
 
@@ -52,9 +54,15 @@ public class MetricDeletingTest extends UITest {
 
   @Test
   public void testSuccessfullyDeleteMetricWhenThereAreSeveralMetrics() throws Exception {
-    hibernate.save(new Metric(goal, "zzz", "USD", "", "xdfghj", 70.0, "",40.0, "", "", "", 2.0, true));
-    hibernate.save(new Metric(goal, "another metric", "", "", "", 7.0, "",4.0, "", "", "", -5.0, true));
-    hibernate.save(new Metric(goal, "bbb", "", "", "xdfghj", 70.0, "",40.0, "", "", "", 0.0, true));
+    Metric metric1 = new Metric(goal, "zzz", "USD", "", "xdfghj", 70.0, "", 40.0, "", "", "", 2.0, true);
+    metric1.setIsDecreasing(false);
+    hibernate.save(metric1);
+    Metric metric2 = new Metric(goal, "another metric", "", "", "", 7.0, "", 4.0, "", "", "", -5.0, true);
+    metric2.setIsDecreasing(false);
+    hibernate.save(metric2);
+    Metric metric3 = new Metric(goal, "bbb", "", "", "xdfghj", 70.0, "", 40.0, "", "", "", 0.0, true);
+    metric3.setIsDecreasing(false);
+    hibernate.save(metric3);
     open("/admin/goals/home");
 
 

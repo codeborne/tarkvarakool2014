@@ -32,10 +32,18 @@ public class MetricsOrderTest extends UITest {
     $("#submit").click();
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric1", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "mno", "pqr", -5.5, true));
-    hibernate.save(new Metric(goal, "Some metric4", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true));
-    hibernate.save(new Metric(goal, "Some metric3", "", "", "", 0.0, "", 0.0, "", "", "", 0.0, true));
-    hibernate.save(new Metric(goal, "Some metric2", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "mno", "pqr", -1.5, true));
+    Metric metric1 = new Metric(goal, "Some metric1", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "mno", "pqr", -5.5, true);
+    metric1.setIsDecreasing(false);
+    hibernate.save(metric1);
+    Metric metric2 = new Metric(goal, "Some metric4", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true);
+    metric2.setIsDecreasing(false);
+    hibernate.save(metric2);
+    Metric metric3 = new Metric(goal, "Some metric3", "", "", "", 0.0, "", 0.0, "", "", "", 0.0, true);
+    metric3.setIsDecreasing(false);
+    hibernate.save(metric3);
+    Metric metric4 = new Metric(goal, "Some metric2", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "mno", "pqr", -1.5, true);
+    metric4.setIsDecreasing(false);
+    hibernate.save(metric4);
   }
 
   @After

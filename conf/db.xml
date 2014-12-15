@@ -184,4 +184,11 @@
     <modifyDataType tableName="metric" columnName="privateDescription" newDataType="VARCHAR(1000)"/>
     <modifyDataType tableName="metric" columnName="engPublicDescription" newDataType="VARCHAR(1000)"/>
   </changeSet>
+
+  <changeSet id="16" author="Tarkvarakool">
+    <addColumn tableName="metric">
+      <column name="isDecreasing" type="boolean" defaultValueBoolean="false">
+      </column>
+    </addColumn>
+  </changeSet>
 </databaseChangeLog>

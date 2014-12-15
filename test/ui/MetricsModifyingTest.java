@@ -29,8 +29,12 @@ public class MetricsModifyingTest extends UITest {
     $("#submit").click();
 
     hibernate.save(goal);
-    hibernate.save(new Metric(goal, "Some metric", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "http://", "pqr", -5.5, false));
-    hibernate.save(new Metric(goal, "another metric", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true));
+    Metric metric1 = new Metric(goal, "Some metric", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "http://", "pqr", -5.5, false);
+    metric1.setIsDecreasing(false);
+    hibernate.save(metric1);
+    Metric metric2 = new Metric(goal, "another metric", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true);
+    metric2.setIsDecreasing(false);
+    hibernate.save(metric2);
 
     open("/admin/goals/home");
 

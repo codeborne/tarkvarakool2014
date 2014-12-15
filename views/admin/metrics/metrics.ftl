@@ -37,6 +37,7 @@
             <input type="hidden" name="infoSource" value="${metric.infoSource}">
             <input type="hidden" name="institutionToReport" value="${metric.institutionToReport}">
             <input type="hidden" name="isPublic" value="${metric.isPublic?c}">
+            <input type="hidden" name="isDecreasing" value="${metric.isDecreasing?c}">
             <input type="hidden" name="csrfToken" value="${session.getAttribute("csrfToken")}">
           </form>
         </td>
@@ -137,6 +138,11 @@
             </span>
                 <textarea rows="2" cols="200" class="value form-control" name="infoSource" placeholder="<@m'infoSource'/>" maxlength="1000" style="display: none;">${metric.infoSource}</textarea>
               </div>
+            </li>
+            <li>
+              <span class="labelOnlyShownWhenModifying"  style="display: none;"><@m'decreasingValue'/>: </span>
+              <span class="value isDecreasing"><#if metric.isDecreasing><@m'decreasing'/><#else><@m'increasing'/></#if></span>
+              <input class="value isDecreasing"  style="display: none;" type="checkbox" name="isDecreasing" value="true" <#if metric.isDecreasing==true>checked</#if>>
             </li>
           </ul>
         </td>
@@ -261,6 +267,11 @@
         <span class="addLabel"><@m'public'/>: </span>
         <input class="value" type="checkbox" name="isPublic" value="true">
       </li>
+      <li>
+        <span class="addLabel"><@m'decreasingValue'/>: </span>
+        <input class="value isDecreasing" type="checkbox" name="isDecreasing" value="true">
+      </li>
+
     </ul>
   </td>
   <td id="goalSaveButtonTd">
