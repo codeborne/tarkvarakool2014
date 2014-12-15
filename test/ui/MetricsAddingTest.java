@@ -98,6 +98,7 @@ public class MetricsAddingTest extends UITest {
     $(".addMetric").$(By.name("commentOnTargetLevel")).setValue("iejoja");
     $(".addMetric").$(By.name("infoSource")).setValue("http://");
     $(".addMetric").$(By.name("institutionToReport")).setValue("koht");
+    $(".addMetric").$(By.name("isDecreasing")).setSelected(true);
 
     $(".saveGoalButton").click();
 
@@ -116,6 +117,7 @@ public class MetricsAddingTest extends UITest {
     row.$(".infoSource").$(".glyphicon-new-window").shouldBe(visible);
     row.$(".infoSource").$("a").shouldBe(visible);
     row.$(".institutionToReport").shouldHave(text("koht"));
+    row.$(".isDecreasing").shouldHave(text("Kahanev"));
   }
 
   @Test

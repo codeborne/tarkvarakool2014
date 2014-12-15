@@ -30,7 +30,7 @@ public class MetricsModifyingTest extends UITest {
 
     hibernate.save(goal);
     Metric metric1 = new Metric(goal, "Some metric", "%", "abc", "def", 10.0, "ghi", 10.0, "jkl", "http://", "pqr", -5.5, false);
-    metric1.setIsDecreasing(false);
+    metric1.setIsDecreasing(true);
     hibernate.save(metric1);
     Metric metric2 = new Metric(goal, "another metric", "", "", "", 0.0, "", 0.0, "", "", "", 5.0, true);
     metric2.setIsDecreasing(false);
@@ -66,12 +66,15 @@ public class MetricsModifyingTest extends UITest {
     $$(".metricContent").get(0).$(By.name("commentOnTargetLevel")).shouldHave(value("jkl"));
     $$(".metricContent").get(0).$(By.name("infoSource")).shouldHave(value("http://"));
     $$(".metricContent").get(0).$(By.name("institutionToReport")).shouldHave(value("pqr"));
+    $$(".metricContent").get(0).$(By.name("isDecreasing")).isSelected();
 
+    $$(".metricContent").get(0).$(By.name("isDecreasing")).setSelected(false);
     $$(".metricContent").get(0).$(By.name("name")).setValue("Metric changed");
     $$(".metricContent").get(0).$(By.name("unit")).setValue("EUR");
     $$(".metricContent").get(0).$(By.name("startLevel")).setValue("23,5");
     $$(".metricContent").get(0).$(By.name("targetLevel")).setValue("103,5");
     $$(".metricContent").get(0).$(By.name("infoSource")).setValue("source");
+
 
     $(".saveGoalButton").click();
 
@@ -82,6 +85,7 @@ public class MetricsModifyingTest extends UITest {
     assertEquals("103,5", $$("tr.metric").get(0).$(".targetLevel").getText());
 
     $$("tr.metric").get(0).$(".infoSource").$("a").shouldNotBe(visible);
+    $$("tr.metric").get(0).$(".isDecreasing").shouldHave(text("Kasvav"));
 
     $("#userViewButton").click();
     $$("tr.metric").get(0).$(".name").shouldNotHave(text("Metric changed"));
