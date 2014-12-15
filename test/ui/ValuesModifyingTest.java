@@ -195,4 +195,28 @@ public class ValuesModifyingTest extends UITest {
     $$(".goal").get(0).$$(".metric").get(0).$$("td").get(4).$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("greenValue"));
     $$(".goal").get(0).$$(".metric").get(0).$$("td").get(4).$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("redValue"));
   }
+
+  @Test
+  public void measuredValueHaveCorrectColorWhenMetricIsDecreasing() throws Exception {
+    metric.getValues().put(2014, new BigDecimal(12));
+    metric.getForecasts().put(2014, new BigDecimal(30));
+    metric.getValues().put(2015, new BigDecimal(80));
+    metric.getForecasts().put(2015, new BigDecimal(10));
+    metric.getValues().put(2018, new BigDecimal(75));
+    metric.getForecasts().put(2018, new BigDecimal(75));
+    metric.getValues().put(2016, new BigDecimal(75));
+    metric.setIsDecreasing(true);
+    hibernate.update(metric);
+    hibernate.flush();
+
+    open("/admin/values/value");
+
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(2).$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(3).$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("redValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(6).$$("div.measured").get(0).$$("span.value").get(0).shouldHave(cssClass("greenValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(4).$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("greenValue"));
+    $$(".goal").get(0).$$(".metric").get(0).$$("td").get(4).$$("div.measured").get(0).$$("span.value").get(0).shouldNotHave(cssClass("redValue"));
+  }
+
+
 }
