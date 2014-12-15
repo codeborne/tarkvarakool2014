@@ -82,6 +82,7 @@ public class HomeViewValuesTest extends UITest {
     metric.getForecasts().put(2018, new BigDecimal(18));
 
     metric.getForecasts().put(2020, new BigDecimal(15));
+    metric.setIsDecreasing(false);
 
     hibernate.save(metric);
     hibernate.flush();

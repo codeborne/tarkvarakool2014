@@ -17,21 +17,21 @@
             thisObject.parent().children('span.value').text(data.value);
 
             var changedValue = parseFloat(data.value);
-            if (data.comparableValue.trim() != "") {
+            if (data.comparableValue.trim() != "" && data.isDecreasing != null) {
               var comparableValue2 = parseFloat(data.comparableValue);
-              if (isForecast && comparableValue2 >= changedValue) {
+              if (isForecast && ((comparableValue2 >= changedValue && !data.isDecreasing) || (comparableValue2 <= changedValue && data.isDecreasing))) {
                 thisObject.parent().parent().children('div.measured').children('span.value').removeClass("redValue");
                 thisObject.parent().parent().children('div.measured').children('span.value').addClass("greenValue");
               }
-              else if (isForecast && comparableValue2 < changedValue) {
+              else if (isForecast && ((comparableValue2 < changedValue && !data.isDecreasing) || (comparableValue2 > changedValue && data.isDecreasing))) {
                 thisObject.parent().parent().children('div.measured').children('span.value').removeClass("greenValue");
                 thisObject.parent().parent().children('div.measured').children('span.value').addClass("redValue");
               }
-              else if (!isForecast && changedValue >= comparableValue2) {
+              else if (!isForecast && ((changedValue >= comparableValue2 && !data.isDecreasing) || (changedValue <= comparableValue2 && data.isDecreasing))) {
                 thisObject.parent().children('span.value').removeClass("redValue");
                 thisObject.parent().children('span.value').addClass("greenValue");
               }
-              else if (!isForecast && changedValue < comparableValue2) {
+              else if (!isForecast && ((changedValue < comparableValue2 && !data.isDecreasing) || (changedValue > comparableValue2 && data.isDecreasing))) {
                 thisObject.parent().children('span.value').removeClass("greenValue");
                 thisObject.parent().children('span.value').addClass("redValue");
               }
@@ -130,9 +130,9 @@
               <div class="measured">
                 <span title="<@m'modify'/>" onclick="showInputHideIconAndValue($(this));"
                       <#if metric.values.get(year)?has_content>
-                        <#if (metric.forecasts.get(year)?has_content && metric.values.get(year)>=metric.forecasts.get(year))>
+                        <#if (metric.forecasts.get(year)?has_content && ((metric.values.get(year)>=metric.forecasts.get(year) && !metric.isDecreasing)||(metric.values.get(year)<=metric.forecasts.get(year) && metric.isDecreasing)))>
                     class="value hand-pointer greenValue"
-                <#elseif (metric.forecasts.get(year)?has_content && metric.values.get(year)<metric.forecasts.get(year))>
+                <#elseif (metric.forecasts.get(year)?has_content &&((metric.values.get(year)<metric.forecasts.get(year) && !metric.isDecreasing)||(metric.values.get(year)>metric.forecasts.get(year) && metric.isDecreasing)))>
                     class="value hand-pointer redValue"
                     <#else>class="value hand-pointer" </#if>
                       <#else>

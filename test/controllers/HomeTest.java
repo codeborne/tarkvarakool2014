@@ -27,6 +27,7 @@ public class HomeTest extends ControllerTest<Home>{
     metric.getForecasts().put(2018, new BigDecimal(18));
     metric.getForecasts().put(2019, new BigDecimal(19));
     metric.getForecasts().put(2020, new BigDecimal(20));
+    metric.setIsDecreasing(false);
   }
 
   @Test

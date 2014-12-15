@@ -32,8 +32,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.value = "777";
     controller.isForecast = false;
 
+    Metric metric = new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true);
+    metric.setIsDecreasing(false);
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
-      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
+      metric));
 
     assertJson(controller.post());
 
@@ -42,7 +44,7 @@ public class ModifyTest extends ControllerTest<Modify> {
 
     assertEquals(new BigDecimal(777), savedMetric.getValues().get(controller.year));
     assertTrue(savedMetric.getForecasts().isEmpty());
-    assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"\"}", controller.jsonResponse);
+    assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"\",\"isDecreasing\":false}", controller.jsonResponse);
 
     verify(hibernate).update(savedMetric);
   }
@@ -56,13 +58,14 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.isForecast = false;
     controller = spy (controller);
     Metric metric = new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true);
+    metric.setIsDecreasing(false);
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
       metric));
 
     when(controller.getComparableValue(metric)).thenReturn(new BigDecimal(12));
     assertJson(controller.post());
 
-    assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"12\"}", controller.jsonResponse);
+    assertEquals("{\"errorsList\":[],\"value\":\"777\",\"comparableValue\":\"12\",\"isDecreasing\":false}", controller.jsonResponse);
 
   }
 
@@ -74,8 +77,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.value = "777";
     controller.isForecast = true;
 
+    Metric metric = new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true);
+    metric.setIsDecreasing(false);
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
-      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
+      metric));
 
     assertJson(controller.post());
 
@@ -96,8 +101,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.value = null;
     controller.isForecast = false;
 
+    Metric metric = new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true);
+    metric.setIsDecreasing(false);
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
-      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
+      metric));
 
     assertJson(controller.post());
 
@@ -118,8 +125,10 @@ public class ModifyTest extends ControllerTest<Modify> {
     controller.value = null;
     controller.isForecast = true;
 
+    Metric metric = new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true);
+    metric.setIsDecreasing(false);
     when(hibernate.createCriteria(Metric.class).add(any(Criterion.class)).createCriteria(anyString()).add(any(Criterion.class)).list()).thenReturn(asList(
-      new Metric(new Goal("some goal", 1000), "Some metric", "", "", "", 777.0, "", 55.0, "", "", "abc", 1.0, true)));
+      metric));
 
     assertJson(controller.post());
 

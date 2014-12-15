@@ -40,7 +40,8 @@ public class Home extends UserAwareController {
   public Boolean isMetricPerformancePositive(Metric metric){
     for(int year = maximumYear; year>=minimumYear; year--){
       if(metric.getValues().get(year)!= null && metric.getForecasts().get(year)!=null){
-        if(metric.getValues().get(year).compareTo(metric.getForecasts().get(year))>=0){
+        if((metric.getValues().get(year).compareTo(metric.getForecasts().get(year))>=0 && !metric.getIsDecreasing()) ||
+          metric.getValues().get(year).compareTo(metric.getForecasts().get(year))<=0 && metric.getIsDecreasing()){
           return true;
         }
         else {

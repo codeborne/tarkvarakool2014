@@ -41,9 +41,9 @@
                   <#list minimumYear..maximumYear as year>
                     <td class="values">
               <span <#if (metric.forecasts.get(year)?has_content && metric.values.get(year)?has_content)>
-                                      <#if  (metric.values.get(year)>=metric.forecasts.get(year))>
+                                      <#if  ((metric.values.get(year)>=metric.forecasts.get(year) && !metric.isDecreasing)||(metric.values.get(year)<=metric.forecasts.get(year) && metric.isDecreasing))>
                                   class="value greenValue"
-                              <#elseif (metric.values.get(year)<metric.forecasts.get(year))>
+                              <#elseif ((metric.values.get(year)<metric.forecasts.get(year) && !metric.isDecreasing)||(metric.values.get(year)>metric.forecasts.get(year) && metric.isDecreasing))>
                                   class="value redValue"</#if> <#else> class="value"</#if>>
                 <#if (metric.values.get(year)?c)?has_content>${((metric.values.get(year)))}
                 <#elseif (currentYear>year)>N/A

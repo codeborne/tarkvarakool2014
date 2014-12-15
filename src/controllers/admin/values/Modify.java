@@ -24,6 +24,7 @@ public class Modify extends UserAwareController {
   public String jsonResponse;
   public BigDecimal comparableValue;
   public Set<String> errorsList = new HashSet<>();
+  public Boolean isDecreasing;
 
   protected BigDecimal valueAsNumber;
 
@@ -31,11 +32,13 @@ public class Modify extends UserAwareController {
     public Set<String> errorsList;
     public String value;
     public String comparableValue;
+    public Boolean isDecreasing;
 
-    private JsonResponse(Set<String> errorsList, String value, String comparableValue) {
+    private JsonResponse(Set<String> errorsList, String value, String comparableValue, Boolean isDecreasing) {
       this.errorsList = errorsList;
       this.value = value;
       this.comparableValue = comparableValue;
+      this.isDecreasing = isDecreasing;
     }
   }
 
@@ -52,6 +55,7 @@ public class Modify extends UserAwareController {
       if (metricList.size()==1) {
         Metric metric = (Metric) metricList.get(0);
         comparableValue = getComparableValue(metric);
+        isDecreasing = metric.getIsDecreasing();
         hibernate.update(metric);
         hibernate.flush();
       } else {
@@ -62,7 +66,7 @@ public class Modify extends UserAwareController {
     String returnValue = valueAsNumber == null ? "" : valueAsNumber.toString().replace(".", ",");
 
     jsonResponse = new Gson().toJson(new JsonResponse(errorsList, returnValue,
-      comparableValue == null ? "" : comparableValue.toString()));
+      comparableValue == null ? "" : comparableValue.toString(), isDecreasing));
     return json();
   }
 

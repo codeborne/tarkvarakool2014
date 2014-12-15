@@ -31,7 +31,7 @@ public class ValuesModifyingTest extends UITest {
 
     $("#submit").click();
 
-
+    metric.setIsDecreasing(false);
     hibernate.save(goal);
 
     hibernate.save(metric);
