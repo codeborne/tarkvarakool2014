@@ -47,13 +47,7 @@ public abstract class AbstractMetricChart extends UserAwareController {
   }
 
   String createForecastsRowByYear(int year) {
-    BigDecimal value;
-    if(year == MINIMUM_YEAR && metric.getForecasts().get(MINIMUM_YEAR) == null){
-      value = new BigDecimal(0);
-    }
-    else {
-      value = metric.getForecasts().get(year);
-    }
+    BigDecimal value = metric.getForecasts().get(year)== null ? new BigDecimal(0) : metric.getForecasts().get(year);
     return "[" + "\"" + year + "\"," +value+", \"\"]";
   }
 

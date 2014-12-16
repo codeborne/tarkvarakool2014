@@ -63,8 +63,8 @@ public class AbstractMetricChartTest extends ControllerTest<AbstractMetricChartT
       "[\"2015 (30%)\",30,\"2015 Prognoos: - Tulemus: 30%\"], [\"2016 (35%)\",35,\"2016 Prognoos: - Tulemus: 35%\"], " +
       "[\"2017\",0,\"2017 Prognoos: - Tulemus: -\"], [\"2018\",0,\"2018 Prognoos: - Tulemus: -\"], " +
       "[\"2019\",0,\"2019 Prognoos: - Tulemus: -\"], [\"2020\",0,\"2020 Prognoos: - Tulemus: -\"]], " +
-      "[[\"%\",\"mõõdik\",\"null\"], [\"2014\",0, \"\"], [\"2015\",null, \"\"], [\"2016\",null, \"\"], " +
-      "[\"2017\",null, \"\"], [\"2018\",null, \"\"], [\"2019\",null, \"\"], [\"2020\",null, \"\"]]]",controller.jsonResponse);
+      "[[\"%\",\"mõõdik\",\"null\"], [\"2014\",0, \"\"], [\"2015\",0, \"\"], [\"2016\",0, \"\"], " +
+      "[\"2017\",0, \"\"], [\"2018\",0, \"\"], [\"2019\",0, \"\"], [\"2020\",0, \"\"]]]",controller.jsonResponse);
   }
 
 
