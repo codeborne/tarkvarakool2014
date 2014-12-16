@@ -20,6 +20,7 @@ public abstract class AbstractMetricChart extends UserAwareController {
     List<String> valuesRow = new ArrayList<>();
     List<String> forecastsRow = new ArrayList<>();
 
+
     List<String> header = createHeader();
     valuesRow.add(new Gson().toJson(header));
     forecastsRow.add(new Gson().toJson(header));
@@ -36,14 +37,13 @@ public abstract class AbstractMetricChart extends UserAwareController {
   }
 
   String createValuesRowByYear(int year) {
-    BigDecimal value;
-    if(year == MINIMUM_YEAR && metric.getValues().get(MINIMUM_YEAR) == null || metric.getValues().get(year) ==null){
-      value = new BigDecimal(0);
-    }
-    else {
-      value = metric.getValues().get(year);
-    }
-    return "[" + "\"" + year +"\"," +value+"]";
+    BigDecimal value = metric.getValues().get(year)== null ? new BigDecimal(0) : metric.getValues().get(year);
+    String forecast = metric.getForecasts().get(year)==null ?"-":metric.getForecasts().get(year).toString()+metric.getUnitDependingOnLanguage(getLanguage());
+    String measured = metric.getValues().get(year)==null ?"-":metric.getValues().get(year).toString()+metric.getUnitDependingOnLanguage(getLanguage());
+    String tooltip = year +" "+ messages.get("forecast")+": "+forecast +
+      " "+messages.get("measuredValue")+": "+measured;
+    String annotation = metric.getValues().get(year)== null ?"":" (" + value + metric.getUnitDependingOnLanguage(getLanguage()) + ")";
+    return "[" + "\"" + year + annotation + "\"," + value + ",\"" + tooltip + "\"]";
   }
 
   String createForecastsRowByYear(int year) {
@@ -54,7 +54,7 @@ public abstract class AbstractMetricChart extends UserAwareController {
     else {
       value = metric.getForecasts().get(year);
     }
-    return "[" + "\"" + year + "\"," +value+"]";
+    return "[" + "\"" + year + "\"," +value+", \"\"]";
   }
 
 
@@ -67,6 +67,7 @@ public abstract class AbstractMetricChart extends UserAwareController {
       header.add(metric.getUnitDependingOnLanguage(getLanguage()));
     }
     header.add(metric.getMetricNameDependingOnLanguage(getLanguage()));
+      header.add("null");
     return header;
   }
 }

@@ -43,7 +43,7 @@
       async: false,
       data: {metricId: $("input").val(), csrfToken: csrfToken, isMeasuredData: true}
     }).responseText;
-
+    console.log(jsonData);
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
 
     var oldData = google.visualization.arrayToDataTable(data1.pop());
@@ -51,7 +51,8 @@
 
     var options = {
 //      enableInteractivity: false,
-      hAxis: {title: "<@m'year'/>"},
+      hAxis: {title: "<@m'year'/>", slantedText:true},
+
       vAxis: {title: oldData.getColumnLabel(0) , minValue: 0.0, viewWindow: {  min: 0.0  }},
       legend: { position: 'none'},
       colors:['#3498db'],
@@ -60,6 +61,10 @@
 
     var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
     var diffData = chart.computeDiff(oldData, newData);
+
+    diffData.setColumnProperty(4, "role", 'tooltip');
+    diffData.removeColumn(3);
+console.log(diffData);
     chart.draw(diffData, options);
 
   }
