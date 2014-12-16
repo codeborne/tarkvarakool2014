@@ -37,13 +37,13 @@ public abstract class AbstractMetricChart extends UserAwareController {
 
   String createValuesRowByYear(int year) {
     BigDecimal value;
-    if(year == MINIMUM_YEAR && metric.getValues().get(MINIMUM_YEAR) == null){
+    if(year == MINIMUM_YEAR && metric.getValues().get(MINIMUM_YEAR) == null || metric.getValues().get(year) ==null){
       value = new BigDecimal(0);
     }
     else {
       value = metric.getValues().get(year);
     }
-    return "[" + "\"" + year + "\"," +value+"]";
+    return "[" + "\"" + year +"\"," +value+"]";
   }
 
   String createForecastsRowByYear(int year) {

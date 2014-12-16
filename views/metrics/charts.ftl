@@ -8,9 +8,24 @@
     <div class="goal">
       <div class="panel-heading panel-heading-chart">
         <h4 class="name printMetricName line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
+        <div class="line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></div>
       </div>
     </div>
     <div class="panel-body" id="chart">
+    </div>
+    <div class="chartLegend" style="background-color: white; padding-left: 20px;">
+      <table class="legendTable">
+
+              <tr>
+                <td><div class="legendRow" id="legendBox" style="background-color: #cccccc;"></div></td>
+                <td><span class="legendMetricName"><@m'forecast'/></span></td>
+              </tr>
+
+              <tr>
+                <td><div class="legendRow" id="legendBox" style="background-color:#3498db;"></div></td>
+                <td><span class="legendMetricName"><@m'measuredValue'/></span></td>
+              </tr>
+      </table>
     </div>
   </div>
 
@@ -35,20 +50,18 @@
     var newData = google.visualization.arrayToDataTable(data1.pop());
 
     var options = {
-      enableInteractivity: false,
+//      enableInteractivity: false,
       hAxis: {title: "<@m'year'/>"},
       vAxis: {title: oldData.getColumnLabel(0) , minValue: 0.0, viewWindow: {  min: 0.0  }},
       legend: { position: 'none'},
-//      colors:['#FF0000'],
-      diff: { newData: { widthFactor: 0.6 }, oldData:{color:'#999999'} }
+      colors:['#3498db'],
+      diff: { newData: { widthFactor: 0.6 }, oldData:{color:'#cccccc'} }
     };
-
-
 
     var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
     var diffData = chart.computeDiff(oldData, newData);
     chart.draw(diffData, options);
-console.log(diffData);
+
   }
 </script>
 </@html>
