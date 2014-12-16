@@ -64,7 +64,7 @@
     }).responseText;
     var data1 = JSON.parse(jsonData.replace(/&quot;/g, '"'));
     var data = google.visualization.arrayToDataTable(data1);
-
+    console.log(data1);
     vAxisMinValue = 0;
     vAxisMaxValue = 1.2;
     hAxisMinViewValues = data.getValue(0,0)+0.5;

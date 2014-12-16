@@ -50,7 +50,7 @@ public abstract class AbstractChart extends UserAwareController {
       row.add(values);
     }
     jsonResponse = row.toString();
-    System.out.println(jsonResponse);
+
   }
 
   private String createJsonForValuesOfYear(List<Metric> metrics, int year) {
