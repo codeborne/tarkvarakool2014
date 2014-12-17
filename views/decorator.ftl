@@ -37,15 +37,14 @@
             <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
           </div>
         </#if>
+        <a href="/all-data" class="pull-left glyphicon glyphicon-download" title="<@m'downloadAllData'/>"></a>
         <#if loggedInUsername??>
           <a <#if admin?? && loggedInUsername == admin> href="/admin/settings" <#else>
                                                         href="/admin/user/changepassword"</#if>
                                                         class="pull-left glyphicon glyphicon-wrench"
                                                         title="<@m'settings'/>"></a>
 
-          <#if admin?? && loggedInUsername == admin><a href="/admin/all-data"
-                                                        class="pull-left glyphicon glyphicon-download"
-                                                        title="<@m'downloadAllData'/>"></a></#if>
+
 
           <form class="pull-left" action="/admin/logout">
             <span class="greetings"><@m'hello'/>&nbsp; <strong>${loggedInUsername}</strong></span>

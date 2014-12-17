@@ -16,11 +16,11 @@
     <div class="chartLegend" style="background-color: white; padding-left: 20px;">
       <table class="legendTable">
               <tr>
-                <td><div class="legendRow" id="legendBox" style="background-color: #cccccc;"></div></td>
+                <td><div class="legendRow legendBoxForecastValue"  style="background-color: #cccccc;"></div></td>
                 <td><span class="legendMetricName"><@m'forecast'/></span></td>
               </tr>
               <tr>
-                <td><div class="legendRow" id="legendBox" style="background-color:#3498db;"></div></td>
+                <td><div class="legendRow legendBoxMeasuredValue"  style="background-color:#3498db;"></div></td>
                 <td><span class="legendMetricName"><@m'measuredValue'/></span></td>
               </tr>
       </table>

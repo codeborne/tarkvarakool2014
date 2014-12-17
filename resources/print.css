@@ -29,7 +29,7 @@ h4.printMetricName{
 #legendBox_0 {
   border: #1abc9c solid 8px;
 }
-#legendBox_1 {
+#legendBox_1, .legendBoxMeasuredValue {
   border: #3498db solid 8px;
 }
 #legendBox_2 {
@@ -58,4 +58,7 @@ h4.printMetricName{
 }
 #legendBox_10 {
   border: #16a085 solid 8px;
+}
+.legendBoxForecastValue {
+  border: #cccccc solid 8px;
 }
