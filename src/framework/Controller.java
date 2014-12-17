@@ -1,5 +1,8 @@
 package framework;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +44,22 @@ public abstract class Controller extends RequestState {
 
   protected Render render(String template) {
     return new Render(this, template);
+  }
+
+  protected Result attachment(InputStream stream, String contentType, String filename) {
+    return new Stream(stream, contentType, filename);
+  }
+
+  protected Result attachment(String text, Charset charset, String contentType, String filename) {
+    return attachment(new ByteArrayInputStream(text.getBytes(charset)), contentType, filename);
+  }
+
+  protected Result inline(InputStream stream, String contentType) {
+    return new Stream(stream, contentType);
+  }
+
+  protected Result inline(String text, Charset charset, String contentType) {
+    return inline(new ByteArrayInputStream(text.getBytes(charset)), contentType);
   }
 
   @SuppressWarnings("unchecked")
