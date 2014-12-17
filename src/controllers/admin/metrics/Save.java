@@ -1,6 +1,7 @@
 package controllers.admin.metrics;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -28,15 +29,19 @@ public class Save extends UserAwareController {
   public String infoSource;
   public String institutionToReport;
   public Double orderNumber;
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
 
   public Long metricId;
+  @NoBind
   public Goal goal;
   public Boolean isPublic;
   public Boolean isStatusUpdateOnly;
   public Boolean isDecreasing;
 
+  @NoBind
   public Double startLevelAsNumber;
+  @NoBind
   public Double targetLevelAsNumber;
 
   @Override

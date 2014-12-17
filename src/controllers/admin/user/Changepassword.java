@@ -2,6 +2,7 @@ package controllers.admin.user;
 
 import controllers.UserAwareController;
 import controllers.admin.goals.Home;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.User;
@@ -23,6 +24,7 @@ public class Changepassword extends UserAwareController {
   public String oldPassword;
   public String newPasswordFirst;
   public String newPasswordSecond;
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
 
   @Override @Role("admin")

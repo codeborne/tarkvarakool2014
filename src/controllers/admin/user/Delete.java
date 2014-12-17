@@ -1,6 +1,7 @@
 package controllers.admin.user;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.User;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Delete extends UserAwareController {
+  @NoBind
   public List userNames  = new ArrayList<>();
   public String username;
 

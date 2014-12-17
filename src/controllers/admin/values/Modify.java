@@ -2,6 +2,7 @@ package controllers.admin.values;
 
 import com.google.gson.Gson;
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Metric;
@@ -21,11 +22,15 @@ public class Modify extends UserAwareController {
   public Integer year;
   public String value;
   public Boolean isForecast;
+  @NoBind
   public String jsonResponse;
+  @NoBind
   public BigDecimal comparableValue;
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
+  @NoBind
   public Boolean isDecreasing;
-
+  @NoBind
   protected BigDecimal valueAsNumber;
 
   private class JsonResponse {

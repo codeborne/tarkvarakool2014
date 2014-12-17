@@ -1,5 +1,6 @@
 package controllers;
 
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -14,10 +15,15 @@ import static org.hibernate.criterion.Order.asc;
 
 public class Home extends UserAwareController {
 
+  @NoBind
   public List<Goal> goals = new ArrayList<>();
+  @NoBind
   public List<List<List<String>>> infoSourceContentList = new ArrayList<>();
-  public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
-  public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
+  @NoBind
+  public Integer minimumYear = MINIMUM_YEAR;
+  @NoBind
+  public Integer maximumYear = MAXIMUM_YEAR;
+  @NoBind
   public int currentYear;
 
   @Override

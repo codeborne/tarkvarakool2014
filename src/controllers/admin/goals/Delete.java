@@ -9,11 +9,9 @@ import java.util.List;
 
 import static org.hibernate.criterion.Order.asc;
 
-
 public class Delete extends UserAwareController {
 
   public Long id;
-
 
   @Override
   @Role("admin")

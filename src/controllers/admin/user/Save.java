@@ -1,6 +1,7 @@
 package controllers.admin.user;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.User;
@@ -17,10 +18,12 @@ import java.util.Set;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class Save extends UserAwareController {
+  @NoBind
   public List userNames = new ArrayList<>();
   public String username;
   public String passwordFirst;
   public String passwordSecond;
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
 
   @Override

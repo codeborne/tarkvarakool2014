@@ -2,6 +2,7 @@ package controllers.admin.budgets;
 
 import com.google.gson.Gson;
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -16,8 +17,9 @@ public class Modify extends UserAwareController {
   public Long goalId;
   public Integer year;
   public Long yearlyBudget;
+  @NoBind
   public String jsonResponse;
-
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
 
   @Override

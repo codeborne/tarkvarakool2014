@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.gson.Gson;
+import framework.NoBind;
 import model.Goal;
 import model.Metric;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public abstract class AbstractChart extends UserAwareController {
 
   public static final List<String> CHART_COLORS = Arrays.asList("#1abc9c", "#3498db", "#9b59b6", "#34495e", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6", "#d35400", "#2980b9", "#16a085");
-
+  @NoBind
   public List<String> graphColors = CHART_COLORS;
+  @NoBind
   public String jsonResponse;
+  @NoBind
   public List<Goal> goals = new ArrayList<>();
   public Long goalId;
 

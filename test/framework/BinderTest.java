@@ -10,6 +10,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
 import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BinderTest {
   Binder binder = new Binder("dd.MM.yyyy");
@@ -149,6 +150,20 @@ public class BinderTest {
     binder.bindRequestParameters(controller, singletonMap("number", new String[]{"zzz"}));
     assertNull(controller.number);
     assertEquals(NumberFormatException.class, controller.errors.get("number").getClass());
+  }
+
+  @Test
+  public void doesNotBindAnnotatedParameter() throws Exception {
+    class Foo extends Controller{
+      public String foo;
+      @NoBind public String bar;
+    }
+    Foo controller = new Foo();
+    binder.bindRequestParameters(controller, singletonMap("foo", new String[]{"Foo"}));
+    binder.bindRequestParameters(controller, singletonMap("bar", new String[]{"Bar"}));
+    assertEquals("Foo", controller.foo);
+    assertNull(controller.bar);
+
   }
 
   public static Date date(String ddMMyyyy) throws ParseException {

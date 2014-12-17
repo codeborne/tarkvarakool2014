@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.gson.Gson;
+import framework.NoBind;
 import model.Metric;
 
 import java.math.BigDecimal;
@@ -11,8 +12,10 @@ import static java.math.RoundingMode.HALF_UP;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public abstract class AbstractMetricChart extends UserAwareController {
+  @NoBind
   public String jsonResponse;
   public Long metricId;
+  @NoBind
   public Metric metric;
 
 

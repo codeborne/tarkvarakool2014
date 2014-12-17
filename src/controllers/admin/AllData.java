@@ -14,7 +14,7 @@ import static org.hibernate.criterion.Order.asc;
 
 public class AllData extends UserAwareController {
 
-  StringBuilder data = new StringBuilder();
+  private StringBuilder data = new StringBuilder();
 
   @Override @Role("admin")
   public Result get() throws Exception {

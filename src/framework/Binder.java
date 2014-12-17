@@ -24,6 +24,7 @@ public class Binder {
       try {
         Field field = clazz.getField(param.getKey());
         if (field.getDeclaringClass().isAssignableFrom(Controller.class)) continue;
+        if (field.getAnnotation(NoBind.class) != null) continue;
         setFieldValue(controller, field, param.getValue());
       }
       catch (NoSuchFieldException ignore) {

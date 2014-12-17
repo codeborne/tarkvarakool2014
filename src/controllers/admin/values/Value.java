@@ -1,6 +1,7 @@
 package controllers.admin.values;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -8,10 +9,12 @@ import model.Goal;
 import static org.hibernate.criterion.Order.asc;
 
 public class Value extends UserAwareController{
-
+  @NoBind
   public java.util.List<Goal> goals;
-  public Integer minimumYear = UserAwareController.MINIMUM_YEAR;
-  public Integer maximumYear = UserAwareController.MAXIMUM_YEAR;
+  @NoBind
+  public Integer minimumYear = MINIMUM_YEAR;
+  @NoBind
+  public Integer maximumYear = MAXIMUM_YEAR;
 
   @Override
   @Role("admin")

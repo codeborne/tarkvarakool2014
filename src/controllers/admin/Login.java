@@ -2,6 +2,7 @@ package controllers.admin;
 
 import controllers.UserAwareController;
 import controllers.admin.goals.Home;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.User;
@@ -20,6 +21,7 @@ public class Login extends UserAwareController {
 
   public String username;
   public String password;
+  @NoBind
   public String error;
 
   @Override @Role("anonymous")

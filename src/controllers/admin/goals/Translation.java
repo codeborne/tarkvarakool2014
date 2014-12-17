@@ -1,6 +1,7 @@
 package controllers.admin.goals;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -15,7 +16,9 @@ public class Translation extends UserAwareController {
   public Long goalId;
   public String engName;
   public String engComment;
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
+  @NoBind
   public Goal goal;
 
 

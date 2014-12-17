@@ -1,6 +1,7 @@
 package controllers.admin.goals;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -12,11 +13,15 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.hibernate.criterion.Order.asc;
 
 public class Home extends UserAwareController {
+  @NoBind
   public java.util.List<Goal> goals = new ArrayList<>();
   public Long id;
   public Integer sequenceNumber;
+  @NoBind
   public Set<String> errorsList = new HashSet<>();
+  @NoBind
   public String message;
+  @NoBind
   public boolean[] isEverythingTranslated;
 
   @Override

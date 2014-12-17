@@ -1,6 +1,7 @@
 package controllers.admin.metrics;
 
 import controllers.UserAwareController;
+import framework.NoBind;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -12,9 +13,12 @@ import java.util.Set;
 
 public class Metrics extends UserAwareController {
   public Long goalId;
+  @NoBind
   public Goal goal;
   public Long metricId;
+  @NoBind
   public List<List<String>> infoSourceContentList = new ArrayList<>();
+  @NoBind
   public Set<Metric> metrics;
 
   @Override
