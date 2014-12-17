@@ -1,6 +1,5 @@
-package controllers.admin;
+package controllers;
 
-import controllers.UserAwareController;
 import framework.Result;
 import framework.Role;
 import model.Goal;
@@ -8,7 +7,6 @@ import model.Metric;
 
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Set;
 
 import static org.hibernate.criterion.Order.asc;
 
@@ -16,14 +14,14 @@ public class AllData extends UserAwareController {
 
   private StringBuilder data = new StringBuilder();
 
-  @Override @Role("admin")
+  @Override @Role("anonymous")
   public Result get() throws Exception {
 
     data.append("Nimetus,Algtase,2014,2015,2016,2017,2018,2019,2020,Sihttase,Ühik,Kirjeldus,Allikas,Kuhu\r\n");
     List<Goal> goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
     for (Goal goal:goals){
       createGoalRow(goal);
-      Set<Metric> metrics = goal.getMetrics();
+      List<Metric> metrics = goal.getPublicMetrics();
       for (Metric metric:metrics){
         createMetricsValuesRow(metric);
         createMetricsForecastsRow(metric);
