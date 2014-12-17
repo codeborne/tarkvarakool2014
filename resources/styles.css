@@ -244,6 +244,17 @@ padding-bottom: 20px;
   color: #6f6d65;
 }
 
+.progress{
+  width:40%;
+  height: 10px;
+  margin-bottom: 0;
+  margin-top: 20px;
+  background-color: #E6E6E6;
+}
+
+.progress-bar{
+  background-color: #006699;
+}
 
 .table > thead > tr > th {
   border-bottom: 1px solid #DDD;
