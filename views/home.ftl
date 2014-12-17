@@ -24,6 +24,10 @@
             <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>
             <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
             <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
+            <div class="progress">
+             <div class="progress-bar" role="progressbar" style="width: 60%;"></div>
+              <span class="sr-only">% Complete</span>
+              </div>
           </div>
           <div class="panel-body">
 
