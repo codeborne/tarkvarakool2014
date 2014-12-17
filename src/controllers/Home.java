@@ -43,9 +43,9 @@ public class Home extends UserAwareController {
     return render();
   }
 
-  public long getBudgetShareSpentToDate(Goal goal) {
+  public long getBudgetShareSpent(Goal goal) {
     double budgetShareSpentToDate =0;
-    for (int year = MINIMUM_YEAR; year<=currentYear; year++){
+    for (int year = MINIMUM_YEAR; year<=MAXIMUM_YEAR; year++){
       if(goal.getYearlyBudgets().get(year)!=null) {
         budgetShareSpentToDate = budgetShareSpentToDate + goal.getYearlyBudgets().get(year).doubleValue();
       }

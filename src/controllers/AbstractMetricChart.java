@@ -42,11 +42,13 @@ public abstract class AbstractMetricChart extends UserAwareController {
 
   String createValuesRowByYear(int year) {
     BigDecimal value = metric.getValues().get(year)== null ? new BigDecimal(0) : roundValue(metric.getValues().get(year));
-    String forecast = metric.getForecasts().get(year)==null ?"-":roundValue(metric.getForecasts().get(year)).toString()+metric.getUnitDependingOnLanguage(getLanguage());
-    String measured = metric.getValues().get(year)==null ?"-":roundValue(metric.getValues().get(year)).toString()+metric.getUnitDependingOnLanguage(getLanguage());
-    String tooltip = year +" "+ messages.get("forecast")+": "+forecast +
-      " "+messages.get("measuredValue")+": "+measured;
-    String annotation = metric.getValues().get(year)== null ?"":" (" + value + metric.getUnitDependingOnLanguage(getLanguage()) + ")";
+    String forecast = metric.getForecasts().get(year)==null ?"-":roundValue(metric.getForecasts().get(year)).toString();
+    String forecastWithUnit = metric.getForecasts().get(year)==null ?"-":roundValue(metric.getForecasts().get(year)).toString()+" "+metric.getUnitDependingOnLanguage(getLanguage());
+    String measured = metric.getValues().get(year)==null ?"-":roundValue(metric.getValues().get(year)).toString();
+    String measuredWithUnit = metric.getValues().get(year)==null ?"-":roundValue(metric.getValues().get(year)).toString()+metric.getUnitDependingOnLanguage(getLanguage());
+    String tooltip = year +" "+ messages.get("forecast")+": "+forecastWithUnit +
+      " "+messages.get("measuredValue")+": "+measuredWithUnit;
+    String annotation =" ("+ forecast + " / " + measured +")";
     return "[" + "\"" + year + annotation + "\"," + value + ",\"" + tooltip + "\"]";
   }
 

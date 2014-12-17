@@ -25,9 +25,9 @@
             <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
             <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
 
-            <div class="progress">
-             <div class="progress-bar" role="progressbar" style="width: ${getBudgetShareSpentToDate(goal)}%;"></div>
-              <span class="sr-only">% Complete</span>
+            <div class="progress" title="<@m'budgetSpent'/>">
+             <div class="progress-bar" role="progressbar" style="width: ${getBudgetShareSpent(goal)}%;"></div>
+              <span class="sr-only">${getBudgetShareSpent(goal)}%</span>
               </div>
           </div>
           <div class="panel-body">
