@@ -64,7 +64,7 @@
     <div class="container">
     <table class="toprow">
           <tr>
-            <td><a href='${homeUrl}'><img src="/images/logo.png" class="logo"></a></td>
+            <td><a href='${homeUrl}'><#if language == 'et'><img src="/images/logo.png" class="logo"><#elseif language == 'en'><img src="/images/logo_eng.png" class="logo_eng"></#if></a></td>
             <td class="title"><@m'title'/></td>
             <td>
               <div class="btn-group button-menu-inner">
