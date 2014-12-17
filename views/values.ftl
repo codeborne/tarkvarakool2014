@@ -9,11 +9,13 @@
             <input type="hidden" value="${goal.id?c}" name="goalId">
             <button type="submit" class="chart-button btn btn-default btn-sm">
               <span class="glyphicon glyphicon-stats" title="<@m'viewGoalChart'/>">
+                <span class="sr-only">"<@m'viewGoalChart'/>"</span>
             </button>
           </form>
           <a href="/home#${goal.id}">
             <button class="values-view-button btn btn-default btn-sm">
               <span class="glyphicon glyphicon-home" title="<@m'goToGoal'/>"></span>
+              <span class="sr-only">"<@m'goToGoal'/>"</span>
             </button>
           </a>
           <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>

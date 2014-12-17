@@ -10,12 +10,14 @@
               <input type="hidden" value="${goal.id?c}" name="goalId">
               <button type="submit" class="chart-button btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-stats" title="<@m'viewGoalChart'/>"></span>
+                <span class="sr-only">"<@m'viewGoalChart'/>"</span>
               </button>
             </form>
 
             <a href="/values#${goal.id}">
               <button class="values-view-button btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-th-list" title="<@m'viewGoalResults'/>"></span>
+                <span class="sr-only">"<@m'viewGoalResults'/>"</span>
                </button>
             </a>
 
@@ -90,7 +92,7 @@
                           <#list infosource as infoItem>
                             <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
                               <span class="line-break"> <a href="${infoItem}" target="_blank"><span
-                                class="glyphicon glyphicon-new-window" title="Link"></span></a>&nbsp;</span>
+                                class="glyphicon glyphicon-new-window" title="Link"></span><span class="sr-only"><@m'infoSource'/>Link</span></a>&nbsp;</span>
                             <#else><span class="line-break">${infoItem}&nbsp;</span>
                             </#if>
                           </#list>
@@ -109,6 +111,7 @@
                               <button class="small-chart-button" type="submit" class="btn btn-default btn-sm"
                                       title="<@m'viewChart'/>">
                                 <span class="glyphicon glyphicon-stats"></span>
+                                <span class="sr-only">"<@m'viewChart'/>"</span>
                               </button>
                             </form>
                           </div>
