@@ -101,7 +101,7 @@
   <form action="/admin/charts">
     <input type="hidden" value="${goal.id?c}" name="goalId">
     <button class="chart-button" type="submit" class="btn btn-default btn-sm">
-      <span class="glyphicon glyphicon-stats" title="<@m'viewChart'/>"></span><span><br><@m'chart'/></span>
+      <span class="glyphicon glyphicon-stats" title="<@m'viewGoalChart'/>"></span><span><br><@m'chart'/></span>
     </button>
   </form>
   <#if goal_index ==0>

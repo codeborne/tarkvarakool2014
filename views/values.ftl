@@ -8,7 +8,7 @@
           <form action="/charts">
             <input type="hidden" value="${goal.id?c}" name="goalId">
             <button type="submit" class="chart-button btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-stats" title="<@m'viewChart'/>">
+              <span class="glyphicon glyphicon-stats" title="<@m'viewGoalChart'/>">
             </button>
           </form>
           <a href="/home#${goal.id}">
