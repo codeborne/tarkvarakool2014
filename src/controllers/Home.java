@@ -43,6 +43,18 @@ public class Home extends UserAwareController {
     return render();
   }
 
+  public long getBudgetShareSpentToDate(Goal goal) {
+    double budgetShareSpentToDate =0;
+    for (int year = MINIMUM_YEAR; year<=currentYear; year++){
+      if(goal.getYearlyBudgets().get(year)!=null) {
+        budgetShareSpentToDate = budgetShareSpentToDate + goal.getYearlyBudgets().get(year).doubleValue();
+      }
+    }
+
+    return Math.round(budgetShareSpentToDate*100/goal.getBudget().doubleValue());
+  }
+
+
   public Boolean isMetricPerformancePositive(Metric metric){
     for(int year = maximumYear; year>=minimumYear; year--){
       if(metric.getValues().get(year)!= null && metric.getForecasts().get(year)!=null){
