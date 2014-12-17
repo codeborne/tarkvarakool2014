@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.math.RoundingMode.HALF_UP;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public abstract class AbstractMetricChart extends UserAwareController {
@@ -37,13 +38,20 @@ public abstract class AbstractMetricChart extends UserAwareController {
   }
 
   String createValuesRowByYear(int year) {
-    BigDecimal value = metric.getValues().get(year)== null ? new BigDecimal(0) : metric.getValues().get(year);
-    String forecast = metric.getForecasts().get(year)==null ?"-":metric.getForecasts().get(year).toString()+metric.getUnitDependingOnLanguage(getLanguage());
-    String measured = metric.getValues().get(year)==null ?"-":metric.getValues().get(year).toString()+metric.getUnitDependingOnLanguage(getLanguage());
+    BigDecimal value = metric.getValues().get(year)== null ? new BigDecimal(0) : roundValue(metric.getValues().get(year));
+    String forecast = metric.getForecasts().get(year)==null ?"-":roundValue(metric.getForecasts().get(year)).toString()+metric.getUnitDependingOnLanguage(getLanguage());
+    String measured = metric.getValues().get(year)==null ?"-":roundValue(metric.getValues().get(year)).toString()+metric.getUnitDependingOnLanguage(getLanguage());
     String tooltip = year +" "+ messages.get("forecast")+": "+forecast +
       " "+messages.get("measuredValue")+": "+measured;
     String annotation = metric.getValues().get(year)== null ?"":" (" + value + metric.getUnitDependingOnLanguage(getLanguage()) + ")";
     return "[" + "\"" + year + annotation + "\"," + value + ",\"" + tooltip + "\"]";
+  }
+
+  private BigDecimal roundValue(BigDecimal value) {
+    if(value.toString().contains(".0")){
+      value = value.setScale(0, HALF_UP);
+    }
+    return value;
   }
 
   String createForecastsRowByYear(int year) {
