@@ -105,7 +105,7 @@ button:focus {
 a:hover, a:focus{
   text-decoration: none !important;
 }
-.glyphicon-wrench, .glyphicon-wrench:hover{
+.glyphicon-wrench, .glyphicon-wrench:hover, .glyphicon-download, .glyphicon-download:hover{
   font-size: 17px;
   color: #ffcc00;
   text-decoration: none;
