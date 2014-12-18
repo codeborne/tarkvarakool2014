@@ -110,6 +110,7 @@
                              href="#collapse_${goal_index}_${metric_index}" aria-expanded="false"
                              aria-controls="collapse_${goal_index}_${metric_index}" title="<@m'viewValues'/>">
                             <span class="glyphicon glyphicon-th-list"></span>
+                            <span class="sr-only"><@m'viewValues'/></span>
                           </a>
 
                           <div class="action-button">
