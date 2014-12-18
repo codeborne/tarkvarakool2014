@@ -1,7 +1,7 @@
 <@html>
   <#if goals?has_content>
     <#list goals as goal>
-    <a id="${goal.id}" class="anchor"></a>
+    <a id="${goal.id}" class="anchor"><span class="sr-only"></span></a>
       <#list infoSourceContentList as metricInfosource>
         <#if goal_index == metricInfosource_index>
         <div class="panel panel-default goal panel-user">
@@ -10,14 +10,14 @@
               <input type="hidden" value="${goal.id?c}" name="goalId">
               <button type="submit" class="chart-button btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-stats" title="<@m'viewGoalChart'/>"></span>
-                <span class="sr-only">"<@m'viewGoalChart'/>"</span>
+                <span class="sr-only"><@m'viewGoalChart'/></span>
               </button>
             </form>
 
             <a href="/values#${goal.id}">
               <button class="values-view-button btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-th-list" title="<@m'viewGoalResults'/>"></span>
-                <span class="sr-only">"<@m'viewGoalResults'/>"</span>
+                <span class="sr-only"><@m'viewGoalResults'/></span>
                </button>
             </a>
 
@@ -25,10 +25,12 @@
             <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
             <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>
 
+
             <div class="progress" title="<@m'budgetSpent'/>">
              <div class="progress-bar" role="progressbar" style="width: ${getBudgetShareSpent(goal)}%;"></div>
               <span class="sr-only">${getBudgetShareSpent(goal)}%</span>
               </div>
+            <span class="progress-description"><@m'budgetSpent'/> ${getBudgetShareSpent(goal)}%</span>
           </div>
           <div class="panel-body">
 
@@ -97,7 +99,7 @@
                           <#list infosource as infoItem>
                             <#if (infoItem?contains("http://") || infoItem?contains("https://")) >
                               <span class="line-break"> <a href="${infoItem}" target="_blank"><span
-                                class="glyphicon glyphicon-new-window" title="Link"></span><span class="sr-only"><@m'infoSource'/>Link</span></a>&nbsp;</span>
+                                class="glyphicon glyphicon-new-window" title="Link"></span><span class="sr-only"><@m'infoSource'/>Link ${infoItem}</span></a>&nbsp;</span>
                             <#else><span class="line-break">${infoItem}&nbsp;</span>
                             </#if>
                           </#list>
@@ -116,7 +118,7 @@
                               <button class="small-chart-button" type="submit" class="btn btn-default btn-sm"
                                       title="<@m'viewChart'/>">
                                 <span class="glyphicon glyphicon-stats"></span>
-                                <span class="sr-only">"<@m'viewChart'/>"</span>
+                                <span class="sr-only"><@m'viewChart'/></span>
                               </button>
                             </form>
                           </div>

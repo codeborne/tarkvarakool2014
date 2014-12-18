@@ -755,3 +755,7 @@ tr.metric div, .addMetric div {
   top: -150px;
   visibility: hidden;
 }
+
+.progress-description{
+  font-size: 12px;
+}

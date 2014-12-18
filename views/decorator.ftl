@@ -37,7 +37,7 @@
             <a href="/language?locale=et" class="language-button-est<#if language == 'et'> active</#if>">EST</a>
           </div>
         </#if>
-        <a href="/all-data" class="pull-left glyphicon glyphicon-download" title="<@m'downloadAllData'/>"></a>
+        <a href="/all-data" class="pull-left glyphicon glyphicon-download" title="<@m'downloadAllData'/>"><span class="sr-only">"<@m'downloadAllData'/>"</span></a>
         <#if loggedInUsername??>
           <a <#if admin?? && loggedInUsername == admin> href="/admin/settings" <#else>
                                                         href="/admin/user/changepassword"</#if>
