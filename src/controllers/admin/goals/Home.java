@@ -29,10 +29,8 @@ public class Home extends UserAwareController {
   public Result get() {
     message = (String) session.getAttribute("message");
     session.removeAttribute("message");
-
     goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
     isEverythingTranslated = checkTranslationStatus();
-
     return render();
   }
 

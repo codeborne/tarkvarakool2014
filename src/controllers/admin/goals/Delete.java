@@ -10,7 +10,6 @@ import java.util.List;
 import static org.hibernate.criterion.Order.asc;
 
 public class Delete extends UserAwareController {
-
   public Long id;
 
   @Override
@@ -24,7 +23,6 @@ public class Delete extends UserAwareController {
         List<Goal> goals = hibernate.createCriteria(Goal.class).addOrder(asc("sequenceNumber")).list();
         for (Goal goal : goals) {
           Integer sequenceNumber = goal.getSequenceNumber();
-
           if (sequenceNumber > sequenceNumberOfDeletedGoal) {
             goal.setSequenceNumber(sequenceNumber - 1);
             hibernate.update(goal);
@@ -33,7 +31,5 @@ public class Delete extends UserAwareController {
         }
     }
     return redirect(Home.class);
-
   }
-
 }

@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 public class Modify extends UserAwareController {
-
   public Long goalId;
   public Integer year;
   public Long yearlyBudget;
@@ -36,7 +35,6 @@ public class Modify extends UserAwareController {
       } else {
         errorsList.add(messages.get("error"));
       }
-
     }
 
     jsonResponse = new Gson().toJson(errorsList);
@@ -47,14 +45,12 @@ public class Modify extends UserAwareController {
     checkGoalId();
     checkYearlyBudget();
     checkYear();
-
   }
 
   public void checkGoalId() {
     if (errors.containsKey("goalId") || goalId==null)
       errorsList.add(messages.get("error"));
   }
-
 
   public void checkYear() {
     if (errors.containsKey("year") || year==null || year>MAXIMUM_YEAR || year<MINIMUM_YEAR)
