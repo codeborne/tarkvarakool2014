@@ -50,8 +50,13 @@ public class Home extends UserAwareController {
         budgetShareSpentToDate = budgetShareSpentToDate + goal.getYearlyBudgets().get(year).doubleValue();
       }
     }
-
-    return Math.round(budgetShareSpentToDate*100/goal.getBudget().doubleValue());
+    long result = Math.round(budgetShareSpentToDate*100/goal.getBudget().doubleValue());
+    if(result>100){
+      return 100;
+    }
+    else{
+      return result;
+    }
   }
 
 
