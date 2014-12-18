@@ -34,7 +34,6 @@ public class Home extends UserAwareController {
     return render();
   }
 
-
   @Override
   @Role("admin")
   public Result post() {
@@ -45,37 +44,44 @@ public class Home extends UserAwareController {
       sequenceNumber = goals.size();
     }
     if (!previousSequenceNumber.equals(sequenceNumber)) {
-      goalToBeChanged.setSequenceNumber(0);
-      hibernate.update(goalToBeChanged);
-      hibernate.flush();
-
-      if (previousSequenceNumber < sequenceNumber) {
-        for (Goal goal : goals) {
-          Integer currentSequenceNumber = goal.getSequenceNumber();
-          if (currentSequenceNumber <= sequenceNumber && currentSequenceNumber > previousSequenceNumber) {
-            goal.setSequenceNumber(currentSequenceNumber - 1);
-            hibernate.update(goal);
-            hibernate.flush();
-          }
-        }
-      }
-      if (previousSequenceNumber > sequenceNumber) {
-        Collections.reverse(goals);
-        for (Goal goal : goals) {
-          Integer currentSequenceNumber = goal.getSequenceNumber();
-          if (currentSequenceNumber >= sequenceNumber && currentSequenceNumber < previousSequenceNumber) {
-            goal.setSequenceNumber(currentSequenceNumber + 1);
-            hibernate.update(goal);
-            hibernate.flush();
-          }
-        }
-      }
+      setSequenceNumberToZero(goalToBeChanged);
+      reorderOtherGoals(previousSequenceNumber);
       goalToBeChanged.setSequenceNumber(sequenceNumber);
       hibernate.update(goalToBeChanged);
       hibernate.flush();
     }
     isEverythingTranslated = checkTranslationStatus();
     return render();
+  }
+
+  private void setSequenceNumberToZero(Goal goalToBeChanged) {
+    goalToBeChanged.setSequenceNumber(0);
+    hibernate.update(goalToBeChanged);
+    hibernate.flush();
+  }
+
+  private void reorderOtherGoals(Integer previousSequenceNumber) {
+    if (previousSequenceNumber < sequenceNumber) {
+      for (Goal goal : goals) {
+        Integer currentSequenceNumber = goal.getSequenceNumber();
+        if (currentSequenceNumber <= sequenceNumber && currentSequenceNumber > previousSequenceNumber) {
+          goal.setSequenceNumber(currentSequenceNumber - 1);
+          hibernate.update(goal);
+          hibernate.flush();
+        }
+      }
+    }
+    else if (previousSequenceNumber > sequenceNumber) {
+      Collections.reverse(goals);
+      for (Goal goal : goals) {
+        Integer currentSequenceNumber = goal.getSequenceNumber();
+        if (currentSequenceNumber >= sequenceNumber && currentSequenceNumber < previousSequenceNumber) {
+          goal.setSequenceNumber(currentSequenceNumber + 1);
+          hibernate.update(goal);
+          hibernate.flush();
+        }
+      }
+    }
   }
 
   private boolean[] checkTranslationStatus() {
