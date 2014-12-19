@@ -47,7 +47,7 @@
     var newData = google.visualization.arrayToDataTable(data1.pop());
 
     var options = {
-      hAxis: {title: "<@m'year'/>", slantedText:true},
+      hAxis: {title: "<@m'year'/>"},
       vAxis: {title: oldData.getColumnLabel(0) , minValue: 0.0, viewWindow: {  min: 0.0  }},
       legend: { position: 'none'},
       colors:['#3498db'],

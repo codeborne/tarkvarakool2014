@@ -2,7 +2,7 @@
 <#setting number_format=",##0.##">
 <#macro html values_active=false>
 <!DOCTYPE html>
-<html>
+<html lang="${language}">
 <head>
   <title><@m'title'/></title>
   <link rel="shortcut icon" href="/favicon.png"/>
