@@ -752,7 +752,7 @@ tr.metric div, .addMetric div {
 .anchor{
   display: block;
   position: relative;
-  top: -150px;
+  top: -200px;
   visibility: hidden;
 }
 

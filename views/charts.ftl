@@ -7,6 +7,12 @@
     <div class="panel panel-default panel-chart">
       <div class="goal">
         <div class="panel-heading panel-heading-chart">
+          <a href="/home#${goal.id}">
+            <button class="values-view-button btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-home" title="<@m'goToGoal'/>"></span>
+              <span class="sr-only">"<@m'goToGoal'/>"</span>
+            </button>
+          </a>
           <h4 class="name line-break"><#if language == 'et'>${goal.name}<#elseif language == 'en'><#if goal.engName??>${goal.engName}<#else><i>${goal.name}</i></#if></#if></h4>
           <div class="line-break"><#if language == 'et'>${goal.comment!""}<#elseif language == 'en'><#if goal.engComment??>${goal.engComment}<#else><i>${goal.comment!""}</i></#if></#if></div>
           <h4 class="budget"><@m'budget'/> ${goal.budget} €</h4>

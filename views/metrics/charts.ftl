@@ -7,6 +7,12 @@
   <div class="panel panel-default panel-chart">
     <div class="goal">
       <div class="panel-heading panel-heading-chart">
+        <a href="/home#${metric.name}">
+          <button class="values-view-button btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-home" title="<@m'goToGoal'/>"></span>
+            <span class="sr-only">"<@m'goToGoal'/>"</span>
+          </button>
+        </a>
         <h4 class="name printMetricName line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if></h4>
         <div class="line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></div>
       </div>
