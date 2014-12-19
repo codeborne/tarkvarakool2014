@@ -7,7 +7,7 @@
   <div class="panel panel-default panel-chart">
     <div class="goal">
       <div class="panel-heading panel-heading-chart">
-        <a href="/home#${metric.name}">
+        <a href="/home#${metric.name?replace(" ", "_")}">
           <button class="values-view-button btn btn-default btn-sm">
             <span class="glyphicon glyphicon-home" title="<@m'goToMetric'/>"></span>
             <span class="sr-only">"<@m'goToMetric'/>"</span>

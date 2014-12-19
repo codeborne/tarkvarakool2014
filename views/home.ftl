@@ -51,7 +51,7 @@
                     <#if metric_index == infosource_index>
                       <#if metric.isPublic == true>
                       <tr class="metric" role="tab" id="heading_${goal_index}_${metric_index}">
-                        <td class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if><a id="${metric.name}" class="anchor"><span class="sr-only"></span></a></td>
+                        <td class="name line-break"><#if language == 'et'>${metric.name}<#elseif language == 'en'><#if metric.engName??>${metric.engName}<#else><i>${metric.name}</i></#if></#if><a id="${metric.name?replace(" ", "_")}" class="anchor"><span class="sr-only"></span></a></td>
                         <td
                           class="userViewPublicDescription line-break"><#if language == 'et'>${metric.publicDescription!""}<#elseif language == 'en'><#if metric.engPublicDescription??>${metric.engPublicDescription}<#else><i>${metric.publicDescription!""}</i></#if></#if></td>
                         <td class="startLevel">
