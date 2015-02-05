@@ -1,0 +1,32 @@
+
+Eeldused: 
+1) java sdk 1.8 olemasolu. Kontrollida saab: 
+# javac -version
+
+2) ant 1.9+ olemasolu. Kontrollida saab:
+# ant -version
+
+
+Lähtekoodi laadimine GitHub-ist:
+# git clone https://github.com/codeborne/tarkvarakool2014.git 
+
+Vaikimisi laaditakse kataloogi tarkvarakool2014. Kui on soov muud nime kasutada, siis saab  eelmise käsu lõppu panna kataloogi nime.
+
+# cd tarkvarakool2014
+
+Konfiguratsioon
+ - tuleb enne kompileerimist teha 
+ - võib vahele jätta kui vaikimisi seaded sobivad
+
+* andmebaasi failide nimi ja asukoht. Hetkel “./moodikud”. Andmebaasi mootorina on kasutusel H2 (h2database.com). H2 hoiab andmeid ketta peal failides. Vaikimisi on need failid rakenduse  juurkataloogis ja nimedega, mis algab “moodikud”. See on seadistatud failis conf/db.properties, parameetri hibernate.connection.url väärtusega. 
+
+* logi failide nimi ja asukoht. Hetkel logs/general.log. Saab seadistada failist conf/log4j2.xml. Igal öösel nimetatakse eelmise päeva logi ümber kujule logs/general.log.yyyyMMdd
+
+Kompileerimine:
+# ant clean compile
+
+Nüüd on rakendus valmis käivitamiseks. Port, millel server kuulab, on seadistatav käivitamisel käsureast. Käivitada saab nii:
+# java -cp classes:lib/* Launcher 11001
+(antud juhul on port 11001)
+
+On olemas ka lihtne init.sh skript, mida saab kasutada rakenduse teenuseks registreerimisel ja automaatseks käivitamiseks. Seal saab määrata porti ja soovi korral muuta, kuhu suunatakse ümber stdout ja stderr. 
