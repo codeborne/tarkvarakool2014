@@ -26,7 +26,7 @@ Kompileerimine:
 # ant clean compile
 
 Nüüd on rakendus valmis käivitamiseks. Port, millel server kuulab, on seadistatav käivitamisel käsureast. Käivitada saab nii:
-# java -cp classes:lib/* Launcher 11001
+# java -cp classes:lib/* framework.Launcher 11001
 (antud juhul on port 11001)
 
 On olemas ka lihtne init.sh skript, mida saab kasutada rakenduse teenuseks registreerimisel ja automaatseks käivitamiseks. Seal saab määrata porti ja soovi korral muuta, kuhu suunatakse ümber stdout ja stderr. 
