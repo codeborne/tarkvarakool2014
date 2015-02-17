@@ -1,12 +1,6 @@
 
 
 
-response objekt igast kontrollerist - content type, redirect, etc.
-
 guice service injection
-
-vähem urli maagiat (hiljem saab lisada)
-
-security lisada CSRF, XSS
 
 apache mod_security?
