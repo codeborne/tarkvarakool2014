@@ -20,7 +20,7 @@ start () {
   if [ "$PS" = "" ]
   then
     echo starting moodikud
-    su xp -c "$EXEC"
+    su tarkvarakool -c "$EXEC"
   else 
     echo already running
   fi
