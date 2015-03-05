@@ -1,7 +1,7 @@
-# moodikud auto-start
+# tarkvarakool-moodikud auto-start
 #
 ### BEGIN INIT INFO
-# Provides:          moodikud
+# Provides:          tarkvarakool-moodikud
 # Required-Start:    $network
 # Required-Stop:     
 # Default-Start:     2 3 4 5
@@ -9,36 +9,38 @@
 # Description:       Infoühiskonna mõõdikud (Tarkvarakool)
 ### END INIT INFO
 
+APP_NAME=tarkvarakool-moodikud
+
 cd `dirname $(readlink -f $0)`
 
 PID=`cat server.pid`
 PS=`ps -p $PID | grep $PID | awk '{ print $1 }' | head -1`
 
-EXEC="java -cp classes:lib/* framework.Launcher 11001 >> moodikud.out 2>> moodikud.err &"
+EXEC="java -cp classes:lib/* framework.Launcher 11001 >> $APP_NAME.out 2>> $APP_NAME.err &"
 
 start () {
   if [ "$PS" = "" ]
   then
-    echo starting moodikud
+    echo starting $APP_NAME
     su tarkvarakool -c "$EXEC"
   else 
-    echo already running
+    echo $APP_NAME already running
   fi
 }
 
 stop () {
   if [ "$PS" != "" ]
   then
-    echo stopping moodikud
+    echo stopping $APP_NAME
     kill $PID
     while [ "$PS" != "" ] 
     do
       sleep 1
       PS=`ps -p $PID | grep $PID | awk '{ print $1 }' | head -1`
     done
-    echo moodikud stopped
+    echo $APP_NAME stopped
   else 
-    echo moodikud not running
+    echo $APP_NAME not running
   fi
 }
 
@@ -52,9 +54,9 @@ stop)
 status)
   if [ "$PS" = "" ]
   then
-    echo moodikud not running
+    echo $APP_NAME not running
   else 
-    echo moodikud running
+    echo $APP_NAME running
   fi
   ;;
 restart)
